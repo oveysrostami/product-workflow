@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "approvalId": "design-v1.5-requester-approval",
+  "approvalId": "design-v1.8-requester-approval",
   "requestId": "workflow-design-2026-09-28",
   "gate": "framework-adoption",
-  "baselineId": "workflow-kit-v1.5",
+  "baselineId": "workflow-kit-v1.8",
   "manifestPath": "design-manifest.json",
-  "manifestSha256": "e1905c643d6b309f7043c096f276a161dfb39b2b3aea3d7e29e1e52c05cbd064",
+  "manifestSha256": "79c52d7a70281931bbbaa9fc199445bb2a01fe7a6da56e165665a57e0a4fd263",
   "status": "pending",
   "requiredRoles": [
     "requester"
   ],
   "requesterReference": "درخواست‌کنندهٔ طراحی در همین گفت‌وگو، ۲۰۲۶-۰۹-۲۸",
   "decisions": [],
-  "supersedes": "design-v1.4-requester-approval",
-  "changeAuthorizationReference": "کاربر پس از بررسی پروژه، استقلال مجموعه و نگه‌داری همه نیازمندی‌ها داخل همین مخزن را خواست و صریحاً دستور اصلاح، commit و push داد. این دستور مجوز اصلاح و انتشار Git است؛ تصویب کامل نسخه جدا ثبت می‌شود."
+  "supersedes": "design-v1.7-requester-approval",
+  "changeAuthorizationReference": "کاربر تکمیل مسیر محصول، QA و فنی با پرسش‌وپاسخ AI، تأیید انسانی، handover و برگشت برای اصلاح، تا انتشار مستندات modules و آمادگی پیاده‌سازی را خواست؛ تصویب کل نسخه جداست."
 }

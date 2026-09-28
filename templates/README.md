@@ -4,13 +4,15 @@
 
 قواعد مصاحبه، routing، عمق اسناد و تأیید محصول در [راهنمای مستقل محصول](../docs/09-product-authoring.md) تعریف شده‌اند. برای شروع به مخزن نمونه نیاز نیست؛ ورودی فنی فقط هنگام کار روی مخزن کدِ هدف معرفی می‌شود.
 
+[چرخهٔ مستندسازی](../docs/11-documentation-cycle.md) پرسش‌وپاسخ QA/فنی، برگشت به تیم مالک، تأیید و تحویل را کامل می‌کند. فنی از T10/T11 و technical/interview.md برای ثبت تصمیم‌ها استفاده می‌کند؛ پاسخ‌های مصاحبه در بستهٔ نهایی review می‌شوند.
+
 ## شروع دستی
 
 1. ابتدا [تیم و پرونده را انتخاب کنید](../workflows/00-team-entry.md). فقط برای نیاز تازه `requests/<request-id>/` بسازید؛ request، tracking، decisions، applicability و traceability را از shared بردارید و یک کارت از board-card.json در requests/board.json اضافه کنید. انتخاب QA/فنی پروندهٔ موجود را ادامه می‌دهد.
 2. مصاحبه اگر سؤال لازم است؛ impact اگر baseline تغییر می‌کند؛ review، manifest، approval و receipt به ازای هر تحویل. این‌ها تاریخچه append-only دارند.
 3. برای محصول contract، عملیات/UC و acceptance را تکمیل کنید؛ flows/data متناسب. product handover از قالب کامل shared ساخته شود.
-4. QA plan/scenarios/coverage را تکمیل و پس از approval تحویل فنی دهید. execution فقط پس از candidate پر می‌شود.
-5. فنی ابتدا impact-map و cross-module-flows را می‌سازد؛ برای هر ماژول متأثر change-spec و test-mapping در `technical/modules/<slug>/` می‌گذارد. اسناد canonical Backend همراه index/hash مرجع طراحی کامل می‌مانند. قالب‌های module/domain، operation و data برای تکمیل همان اسناد canonical هستند.
+4. QA پس از دریافت محصول، گفت‌وگوی Q07/Q08 و پاسخ‌ها یا دلیل کفایت را در qa/interview.md ثبت می‌کند؛ plan/scenarios/coverage و handover را تکمیل و پس از approval تحویل فنی می‌دهد. execution فقط پس از candidate پر می‌شود.
+5. فنی ابتدا impact-map و cross-module-flows را می‌سازد؛ برای هر ماژول متأثر change-spec و test-mapping در `technical/modules/<slug>/` می‌گذارد. snapshot کامل ماژول و plan از [قالب‌های کتابخانه](modules/README.md) در بستهٔ درخواست آماده می‌شود؛ پس از G-T، T09 نسخهٔ جاری modules/ را منتشر می‌کند. قالب‌های module/domain، operation و data برای تکمیل طراحی کامل هستند و قواعد Backend همچنان رعایت می‌شوند.
 6. توسعه taskهای هر ماژول را در `development/modules/<slug>/tasks/` و task مشترک با مسئول معلوم را در `development/cross-module-tasks/` می‌گیرد. review و QA هر دو سطح ماژول و کل درخواست را پوشش می‌دهند. release صرفاً در صورت scope انتشار.
 
 ## فهرست قالب‌ها
@@ -22,6 +24,7 @@
 | [request](shared/request.md) | مسئله، stakeholder، نقش، scope و routing |
 | [decisions](shared/decisions.md) | منشأ تصمیم و موارد باز |
 | [interview](shared/interview.md) | متن batch و پاسخ، بدون تکرار سؤال |
+| [گفت‌وگوی QA/فنی](shared/team-interview.md) | در qa/interview.md یا technical/interview.md؛ سؤال، پاسخ واقعی، تصمیم و موارد باز طبق چرخهٔ مستندسازی |
 | [applicability](shared/applicability.md) | مدارک لازم/نامرتبط با دلیل |
 | [change-impact](shared/change-impact.md) | affected IDs و stale approval/evidence |
 | [review](shared/review.md) | یافته با شاهد و مسیر اصلاح |

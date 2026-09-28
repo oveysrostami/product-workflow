@@ -1,6 +1,6 @@
 # طراحی فنی مطابق Backend
 
-فنی طراحی قابل پیاده‌سازی و قابل آزمون می‌سازد. رفتار محصول و oracle QA ورودی ثابت‌اند؛ feasibility یا تغییر observable به owner درست برمی‌گردد.
+دریافت محصول و QA مصوب، گفت‌وگوی فنی با AI و طراحی مطابق Backend؛ پس از G-T، انتشار modules در T09 و تحویل آمادهٔ پیاده‌سازی در T08.
 
 > کارت‌ها از [graph.json](graph.json) تولید می‌شوند. توقف، انتظار و retry مشترک در [قرارداد node](00-node-contract.md) اعمال می‌شود.
 
@@ -14,6 +14,9 @@ flowchart TD
     T06["T06 · AI · review طراحی ماژول‌ها و کل درخواست"]
     T07["T07 · Human · تصویب طرح و دامنهٔ اجرا"]
     T08["T08 · AI · تحویل بستهٔ اجرایی"]
+    T09["T09 · AI · انتشار وضعیت مصوب ماژول‌ها"]
+    T10["T10 · AI · پرسش‌های تصمیم فنی"]
+    T11["T11 · Human · پاسخ انسان فنی"]
     C01["C01 · ادامه در مسیر مربوط"]
     D01["D01 · ادامه در مسیر مربوط"]
     HOLD["HOLD · ادامه در مسیر مربوط"]
@@ -23,11 +26,17 @@ flowchart TD
     T01 -->|"handover QA ناقص"| Q06
     T02 -->|"زمینه روشن"| T03
     T02 -->|"تعارض رفتار یا scope"| C01
+    T02 -->|"تصمیم فنی مؤثر نیازمند گفت‌وگو با انسان"| T10
+    T02 -->|"نقص QA با رفتار محصول ثابت"| C01
     T03 -->|"مدل روشن"| T04
     T03 -->|"مالکیت محصول نامشخص"| C01
+    T03 -->|"تصمیم فنی مؤثر نیازمند گفت‌وگو با انسان"| T10
+    T03 -->|"نقص QA با رفتار محصول ثابت"| C01
     T04 -->|"تمام بسته‌های ماژولی و طراحی مشترک آماده‌اند"| T05
     T04 -->|"انتخاب فنی معنای محصول را تغییر می‌دهد"| C01
     T04 -->|"واحد فعلی نوشته شده و target بعدی باقی است"| T04
+    T04 -->|"تصمیم فنی مؤثر نیازمند گفت‌وگو با انسان"| T10
+    T04 -->|"نقص QA با رفتار محصول ثابت"| C01
     T05 -->|"قابل آزمون"| T06
     T05 -->|"طرح فاقد seam/observable evidence"| T04
     T05 -->|"نقص برنامه QA بدون تغییر رفتار"| Q03
@@ -35,10 +44,23 @@ flowchart TD
     T06 -->|"تعارض نیاز"| C01
     T06 -->|"همه reviewهای targetها و review کل درخواست آماده‌اند"| T07
     T06 -->|"review واحد فعلی ثبت شده و review target یا جمع‌بندی کل باقی است"| T06
-    T07 -->|"طرح تأیید شد؛ تحویل مستندات در scope است"| T08
+    T06 -->|"تصمیم فنی مؤثر نیازمند گفت‌وگو با انسان"| T10
+    T06 -->|"نقص QA با رفتار محصول ثابت"| C01
+    T07 -->|"طرح تأیید شد؛ تحویل مستندات در scope است"| T09
     T07 -->|"اصلاح طرح"| T04
     T08 -->|"بسته آماده و اختیار صریح پیاده‌سازی scope معتبر است"| D01
     T08 -->|"مستندات تحویل شد؛ scope فعلی مستندسازی است یا اختیار پیاده‌سازی نداریم"| HOLD
+    T09 -->|"ماژول فعلی منتشر شده و ماژول بعدی باقی است"| T09
+    T09 -->|"تمام ماژول‌های متأثر منتشر و کنترل شدند"| T08
+    T09 -->|"نسخهٔ base یا ورودی مصوب تغییر کرده است"| T02
+    T10 -->|"پاسخ انسانی فنی لازم است"| T11
+    T10 -->|"اطلاعات کافی است؛ ادامه مدل با تصمیم‌های موجود"| T03
+    T10 -->|"پایان مصاحبه؛ جمع‌بندی پیش‌نویس و موارد باز"| T04
+    T10 -->|"نیاز به اصلاح محصول یا QA"| C01
+    T11 -->|"پاسخ جزئی یا clarification فنی باقی است"| T10
+    T11 -->|"تصمیم‌های لازم روشن است"| T03
+    T11 -->|"پایان مصاحبه؛ جمع‌بندی با موارد باز"| T04
+    T11 -->|"پاسخ مستلزم اصلاح محصول یا QA است"| C01
 ```
 
 <a id="t01"></a>
@@ -66,23 +88,25 @@ flowchart TD
 
 **ورودی:** P/Q baseline، Backend AGENTS/handbook/authority و source revision
 
-**کار دقیق:** doctor و explain مسیرهای هدف را بخوان/اجرا و workflow اصلی Backend را انتخاب کن. owner/host/POM/policy/config/tests را trace کن. implemented/optional/reference/unavailable را تفکیک؛ platform gap را task لازم بدان. topology جدید را از انسان فنی بگیر، نه از probe. technical/impact-map.md را با IMPACT-ID برای همه ownerهای متأثر بساز: direct، dependent، compatibility-only، شاهد اثر، نیاز به کد و مسئول فنی. source/caller/consumer/config را برای اثر غیرمستقیم بررسی کن. host/platform را component target جدا و موارد unaffected را با دلیل ثبت کن. checkout هدف ورودی معرفی‌شدهٔ همان پرونده است؛ هیچ مسیر نصب همسایه فرض نشود. قرارداد داخلی docs/05-backend-binding.md و قالب‌های فنی همین مخزن راهنمای طراحی‌اند؛ انطباق با کد واقعی فقط از checkout فعلی سنجیده شود.
+**کار دقیق:** doctor و explain مسیرهای هدف را بخوان/اجرا و workflow اصلی Backend را انتخاب کن. owner/host/POM/policy/config/tests را trace کن. implemented/optional/reference/unavailable را تفکیک؛ platform gap را task لازم بدان. topology جدید را از انسان فنی بگیر، نه از probe. technical/impact-map.md را با IMPACT-ID برای همه ownerهای متأثر بساز: direct، dependent، compatibility-only، شاهد اثر، نیاز به کد و مسئول فنی. source/caller/consumer/config را برای اثر غیرمستقیم بررسی کن. host/platform را component target جدا و موارد unaffected را با دلیل ثبت کن. checkout هدف ورودی معرفی‌شدهٔ همان پرونده است؛ هیچ مسیر نصب همسایه فرض نشود. قرارداد داخلی docs/05-backend-binding.md و قالب‌های فنی همین مخزن راهنمای طراحی‌اند؛ انطباق با کد واقعی فقط از checkout فعلی سنجیده شود. مشخصات repository، مسیر checkout، revision و مسیر AGENTS/قواعد هدف را فقط در technical/index.md همین پرونده ثبت کن؛ request.md محصول فقط خواندنی است. نسخهٔ جاری و digest ماژول از modules/<slug>/current.json و تفاوت طرح مصوب با کد همان revision را ثبت کن؛ ماژول تازه baseRevision=null دارد. طبق docs/11-documentation-cycle.md، ابهام‌های مؤثر معماری/محیط و پاسخ‌های قبلی را در technical/interview.md ثبت کن؛ اگر پاسخ تازه لازم نیست دلیل کفایت را ثبت کن.
 
-**خروجی:** technical/index، discovery، capability/gap و rule binding impact-map، index بستهٔ هر ماژول و فهرست EDGE-ID وابستگی‌ها.
+**خروجی:** technical/index، discovery، capability/gap و rule binding impact-map، index بستهٔ هر ماژول و فهرست EDGE-ID وابستگی‌ها. technical/interview.md با ابهام‌ها و منابع یا دلیل کفایت.
 
-**شرط پایان:** مسیرهای واقعی و baseline معماری ثبت شده؛ drift به requirement تبدیل نشده. هیچ ماژول یا component مشمول بدون نوع اثر و owner پاسخ‌گو نمانده؛ unknown به‌جای unaffected ثبت نمی‌شود.
+**شرط پایان:** مسیرهای واقعی و baseline معماری ثبت شده؛ drift به requirement تبدیل نشده. هیچ ماژول یا component مشمول بدون نوع اثر و owner پاسخ‌گو نمانده؛ unknown به‌جای unaffected ثبت نمی‌شود. ابهام تصمیم فنی می‌تواند به T10 برود؛ نبود شاهد فنی همچنان blocked است.
 
 | نتیجه | node بعدی |
 |---|---|
 | زمینه روشن | [T03](04-technical.md#t03) |
 | تعارض رفتار یا scope | [C01](07-change-and-bug.md#c01) |
+| تصمیم فنی مؤثر نیازمند گفت‌وگو با انسان | [T10](04-technical.md#t10) |
+| نقص QA با رفتار محصول ثابت | [C01](07-change-and-bug.md#c01) |
 
 <a id="t03"></a>
 ## T03 — مدل، مالکیت و قرارداد اولیه
 
 **مجری:** AI — Technical designer
 
-**ورودی:** discovery، vocabulary، product rules و QA risks
+**ورودی:** discovery، vocabulary، product rules و QA risks؛ تصمیم‌های technical/interview.md
 
 **کار دقیق:** module/context map، aggregate/invariant یا read-store، public/private boundary و سه graph را طراحی کن. مدل مفهومی محصول را مستقیماً جدول/aggregate نکن. input/output/error و trust boundary پیش از کد مشخص شوند. ساختار technical/modules/<slug>/ را برای ماژول‌های impact-map مشخص و cross-module-flows.md را برای جریان و قراردادهای مشترک تهیه کن. هر owner مدل canonical خودش را دارد؛ delta درخواست در change-spec ثبت می‌شود.
 
@@ -94,6 +118,8 @@ flowchart TD
 |---|---|
 | مدل روشن | [T04](04-technical.md#t04) |
 | مالکیت محصول نامشخص | [C01](07-change-and-bug.md#c01) |
+| تصمیم فنی مؤثر نیازمند گفت‌وگو با انسان | [T10](04-technical.md#t10) |
+| نقص QA با رفتار محصول ثابت | [C01](07-change-and-bug.md#c01) |
 
 <a id="t04"></a>
 ## T04 — طراحی تغییر هر ماژول و برنامهٔ مشترک
@@ -102,9 +128,9 @@ flowchart TD
 
 **ورودی:** مدل، QA scenarios، Backend rules و applicability
 
-**کار دقیق:** برای هر operation DTO presence/null/bounds، execute/context، auth، sequence و failure، Work/receipt/audit/Outbox، unknown/reconcile بنویس. data/migration، communication/provider، recording، host/role/config/observability را فقط در صورت نیاز تکمیل کن. نام فایل/port/test و plan slice را تعیین کن. انتخاب‌های نیازمند اختیار انسانی را برای T07 آماده کن. handover همان مرحله را نیز پیش از review به‌صورت draft کامل بنویس تا همراه بقیه اسناد در manifest نامزد تأیید باشد. برای هر target یک workUnit با change-spec و test-mapping بساز. طراحی تفصیلی به اسناد canonical Backend ارجاع نسخه‌دار دارد. target بدون تغییر کد بستهٔ تحلیل سازگاری و task تست می‌گیرد. implementation-plan کل در technical/، ترتیب dependency و مشخصات taskهای آینده با مسئول و مسیر مقصد را تعیین می‌کند؛ ایجاد فایل task در development/ با تیم توسعه در D01 است. آخرین واحد، طراحی integration و handover کل را جمع‌بندی می‌کند.
+**کار دقیق:** برای هر operation DTO presence/null/bounds، execute/context، auth، sequence و failure، Work/receipt/audit/Outbox، unknown/reconcile بنویس. data/migration، communication/provider، recording، host/role/config/observability را فقط در صورت نیاز تکمیل کن. نام فایل/port/test و plan slice را تعیین کن. انتخاب‌های نیازمند اختیار انسانی را برای T07 آماده کن. handover همان مرحله را نیز پیش از review به‌صورت draft کامل بنویس تا همراه بقیه اسناد در manifest نامزد تأیید باشد. برای هر target یک workUnit با change-spec و test-mapping بساز. برای هر ماژول در snapshot/ همان بسته، وضعیت کامل تجمعی پس از delta و snapshot-plan با baseRevision، observedImplementation و hash فایل‌ها تهیه کن؛ templates/modules و docs/10-module-library.md مبنا هستند. تمام RULE/AC/QAهای مصوب و قسمت‌های بدون تغییر توضیح داده شوند؛ modules/ جاری تا G-T فقط خواندنی است. قواعد و revision اسناد Backend حفظ شوند. target بدون تغییر کد بستهٔ تحلیل سازگاری و task تست می‌گیرد. implementation-plan کل در technical/، ترتیب dependency و مشخصات taskهای آینده با مسئول و مسیر مقصد را تعیین می‌کند؛ ایجاد فایل task در development/ با تیم توسعه در D01 است. آخرین واحد، طراحی integration و handover کل را جمع‌بندی می‌کند. پاسخ‌های معتبر مصاحبه را در طراحی اعمال کن؛ پایان مصاحبه با سؤال باز فقط پیش‌نویس و owner/شرط ادامه می‌سازد و G-T را آماده نمی‌کند. در handover پیش از G-T فقط revisionId، مسیر مقصد و hash plan/فایل‌های snapshot را ثبت کن؛ digest wrapper انتشار و نتیجه T09 بعد از G-T در journal تحویل قرار می‌گیرند.
 
-**خروجی:** اسناد technical canonical و implementation/test mapping plan technical/modules/<slug>/change-spec.md و test-mapping.md برای همه ماژول‌ها؛ بستهٔ components در صورت اثر host/platform.
+**خروجی:** اسناد technical canonical و implementation/test mapping plan technical/modules/<slug>/change-spec.md و test-mapping.md برای همه ماژول‌ها؛ بستهٔ components در صورت اثر host/platform.؛ snapshot کامل و snapshot-plan هر ماژول در بستهٔ درخواست، بدون تغییر وضعیت جاری modules/
 
 **شرط پایان:** هر QA scenario مسیر اثبات دارد؛ component غایب، پنهان یا stub-success فرض نشده.
 
@@ -113,6 +139,8 @@ flowchart TD
 | تمام بسته‌های ماژولی و طراحی مشترک آماده‌اند | [T05](04-technical.md#t05) |
 | انتخاب فنی معنای محصول را تغییر می‌دهد | [C01](07-change-and-bug.md#c01) |
 | واحد فعلی نوشته شده و target بعدی باقی است | [T04](04-technical.md#t04) |
+| تصمیم فنی مؤثر نیازمند گفت‌وگو با انسان | [T10](04-technical.md#t10) |
+| نقص QA با رفتار محصول ثابت | [C01](07-change-and-bug.md#c01) |
 
 <a id="t05"></a>
 ## T05 — بازبینی قابلیت آزمون
@@ -140,7 +168,7 @@ flowchart TD
 
 **ورودی:** تمام technical docs، Backend rules، P/Q baseline و testability
 
-**کار دقیق:** POM/import/SQL و call/event/recovery graph را بررسی کن. owner-local transaction، replay auth، privacy، migration، failure و capability gaps را بسنج. canonical location و عدم وجود دو نسخه مرجع editable را کنترل کن. ابتدا هر target را در workUnit مستقل review کن، سپس قراردادهای مشترک و consistency کل درخواست را بسنج. یافتهٔ edge به producer و consumer و QA مشترک متصل شود؛ manifest T شامل تمام بسته‌های ماژولی و طرح مشترک است.
+**کار دقیق:** POM/import/SQL و call/event/recovery graph را بررسی کن. owner-local transaction، replay auth، privacy، migration، failure و capability gaps را بسنج. canonical location و عدم وجود دو نسخه مرجع editable را کنترل کن. ابتدا هر target را در workUnit مستقل review کن، سپس قراردادهای مشترک و consistency کل درخواست را بسنج. یافتهٔ edge به producer و consumer و QA مشترک متصل شود؛ manifest T شامل تمام بسته‌های ماژولی و طرح مشترک است. snapshot کامل هر ماژول و baseRevision و منشأ رفتارهای بدون تغییر نیز review شوند؛ manifest T باید plan و تک‌تک bytes snapshotها را freeze کند. wrapper انتشار پس از G-T ساخته می‌شود و داخل manifest T نیست. تصمیم‌ها و موارد باز technical/interview.md نیز بررسی و همان نسخه در manifest T freeze شود؛ پاسخ مصاحبه جانشین G-T نیست.
 
 **خروجی:** review فنی، ADRهای لازم و manifest immutable T candidate شامل handover توسعه
 
@@ -152,6 +180,8 @@ flowchart TD
 | تعارض نیاز | [C01](07-change-and-bug.md#c01) |
 | همه reviewهای targetها و review کل درخواست آماده‌اند | [T07](04-technical.md#t07) |
 | review واحد فعلی ثبت شده و review target یا جمع‌بندی کل باقی است | [T06](04-technical.md#t06) |
+| تصمیم فنی مؤثر نیازمند گفت‌وگو با انسان | [T10](04-technical.md#t10) |
+| نقص QA با رفتار محصول ثابت | [C01](07-change-and-bug.md#c01) |
 
 <a id="t07"></a>
 ## T07 — تصویب طرح و دامنهٔ اجرا
@@ -160,7 +190,7 @@ flowchart TD
 
 **ورودی:** طرح کامل، review، testability، gap، هزینه/ریسک و T manifest
 
-**کار دقیق:** طراحی و ترتیب sliceها را approve کن؛ انتخاب topology/profile و prerequisiteهای واقعی را مشخص کن. تأیید طراحی را از اختیار پیاده‌سازی جدا ثبت کن. برای درخواست مستندات، نبود اختیار پیاده‌سازی مانع تصویب طرح نیست؛ اجرای کد فقط با دستور صریح scope در request یا تصمیم جدا مجاز است. تأیید سند به‌تنهایی مجوز اجرا یا deploy نیست. رأی مسئول فنی هر target و رأی نهایی Tech lead برای کل درخواست روی همان manifest ثبت شوند؛ یک انسان منصوب می‌تواند چند نقش را پوشش دهد. G-T با local-ready چند ماژول و dependency باز عبور نمی‌کند.
+**کار دقیق:** طراحی و ترتیب sliceها را approve کن؛ انتخاب topology/profile و prerequisiteهای واقعی را مشخص کن. تأیید طراحی را از اختیار پیاده‌سازی جدا ثبت کن. برای درخواست مستندات، نبود اختیار پیاده‌سازی مانع تصویب طرح نیست؛ اجرای کد فقط با دستور صریح scope در request یا تصمیم جدا مجاز است. تأیید سند به‌تنهایی مجوز اجرا یا deploy نیست. رأی مسئول فنی هر target و رأی نهایی Tech lead برای کل درخواست روی همان manifest ثبت شوند؛ یک انسان منصوب می‌تواند چند نقش را پوشش دهد. G-T با local-ready چند ماژول و dependency باز عبور نمی‌کند. رأی همان manifest شامل snapshotهای کامل ماژول‌هاست؛ approval نسخه یا scope متفاوت برای انتشار قابل استفاده نیست.
 
 **خروجی:** G-T approval و وضعیت مستقل اختیار پیاده‌سازی؛ reference دستور فقط در صورت وجود
 
@@ -168,7 +198,7 @@ flowchart TD
 
 | نتیجه | node بعدی |
 |---|---|
-| طرح تأیید شد؛ تحویل مستندات در scope است | [T08](04-technical.md#t08) |
+| طرح تأیید شد؛ تحویل مستندات در scope است | [T09](04-technical.md#t09) |
 | اصلاح طرح | [T04](04-technical.md#t04) |
 
 <a id="t08"></a>
@@ -176,15 +206,74 @@ flowchart TD
 
 **مجری:** AI — Coordinator
 
-**ورودی:** G-T، technical canonical docs، P/Q و plan
+**ورودی:** G-T، technical canonical docs، P/Q و plan، نسخه‌های منتشرشده در T09 و رکورد تطبیق digest هر ماژول
 
-**کار دقیق:** manifest T و handover توسعه را بساز؛ read order، مسیر فایل‌ها، task dependency، دستورهای verification، خطرهای migration و خروجی review را مشخص کن. هیچ unresolved blocker به developer واگذار نشود. handover و manifest باید همان bytes ارائه‌شده پیش از approval باشند؛ در این node محتوای بسته تغییر نمی‌کند و فقط دسترسی/receipt/journal آماده می‌شود. هر اصلاح محتوا به review و approval نسخه تازه برمی‌گردد. handover واحد، فهرست بسته‌های ماژولی، ترتیب taskهای وابسته، reviewer/مسئول هر target و مسئول integration را نشان می‌دهد؛ تحویل اداری جداگانه برای تک‌تک ماژول‌ها اجباری نیست. tracking و برد را به «مستندات فنی آماده» به‌روز کن. برای scope مستندسازی، پایان همین تحویل را ثبت و ادامهٔ توسعه را HOLD با resumeNode=D01 و شرط دستور صریح پیاده‌سازی نگه دار؛ G-T به‌تنهایی آن دستور نیست.
+**کار دقیق:** manifest T و handover توسعهٔ از پیش مصوب را کنترل کن؛ read order، مسیر فایل‌ها، task dependency، دستورهای verification، خطرهای migration و خروجی review را در بسته تطبیق بده. هیچ unresolved blocker به developer واگذار نشود. handover و manifest باید همان bytes ارائه‌شده پیش از approval باشند؛ در این node محتوای بسته تغییر نمی‌کند و فقط دسترسی/receipt/journal آماده می‌شود. هر اصلاح محتوا به review و approval نسخه تازه برمی‌گردد. handover واحد، فهرست بسته‌های ماژولی، ترتیب taskهای وابسته، reviewer/مسئول هر target و مسئول integration را نشان می‌دهد؛ تحویل اداری جداگانه برای تک‌تک ماژول‌ها اجباری نیست. tracking و برد را به «مستندات فنی آماده» به‌روز کن. برای scope مستندسازی، پایان همین تحویل را ثبت و ادامهٔ توسعه را HOLD با resumeNode=D01 و شرط دستور صریح پیاده‌سازی نگه دار؛ G-T به‌تنهایی آن دستور نیست. پیش از تحویل، انتشار همه ماژول‌های impact-map از T09 و digest نسخه‌های جاری را کنترل و فقط ارجاع آن‌ها را در رکورد تحویل ثبت کن؛ محتوای handover مصوب را بازنویسی نکن.
 
-**خروجی:** technical/handover، task packet و baseline T با parent P/Q
+**خروجی:** رکورد تحویل در journal با manifest/digest و approval T، ارجاع handover و task plan ثابت و revision/digest منتشرشدهٔ تمام ماژول‌ها؛ کارت مستندات فنی آماده
 
-**شرط پایان:** بسته برای agent بعدی بدون تکیه بر حافظهٔ گفت‌وگو کافی است.
+**شرط پایان:** G-P/G-Q/G-T همان scope معتبر، همه ماژول‌های متأثر در T09 منتشر و readback شده، handover قابل دسترسی و blocker مؤثر صفر است؛ بسته برای پیاده‌سازی آماده و اختیار اجرا جدا ثبت شده است.
 
 | نتیجه | node بعدی |
 |---|---|
 | بسته آماده و اختیار صریح پیاده‌سازی scope معتبر است | [D01](05-implementation.md#d01) |
 | مستندات تحویل شد؛ scope فعلی مستندسازی است یا اختیار پیاده‌سازی نداریم | HOLD |
+
+<a id="t09"></a>
+## T09 — انتشار وضعیت مصوب ماژول‌ها
+
+**مجری:** AI — Technical publisher؛ تیم فعال فنی
+
+**ورودی:** G-T معتبر، manifest فنی و snapshot-plan/bytes مصوب هر ماژول، نسخهٔ base و writeScope/journal فنی
+
+**کار دقیق:** طبق docs/10-module-library.md، snapshot کامل مصوب هر ماژول را بدون تغییر معنا در modules/<slug>/revisions/<revision-id>/ منتشر کن. scripts/publish_module.py ابتدا preview و سپس در scope همان workUnit با --apply اجرا شود. baseRevision، hash تمام فایل‌ها و نقش/تصمیم ثبت‌شده بررسی شوند؛ revision قبلی immutable است و retry همان digest بی‌اثر. pointer و ورودی ماژول پس از بررسی کامل نسخه نوشته شوند. وضعیت اجرای مشاهده‌شده از evidence طراحی حفظ شود؛ G-T کد اجراشده یا deploy نیست. تا انتشار همه ماژول‌ها nextNode همین T09 است؛ metadata اجرای بعدی در implementation/ مستقل ثبت می‌شود. Coordinator فقط journal/tracking را از خروجی واقعی ثبت می‌کند و snapshot را نمی‌نویسد.
+
+**خروجی:** نسخه‌های immutable ماژول‌ها، current.json و README ورودی، رکورد انتشار فنی با source G-T/digest و وضعیت هر workUnit
+
+**شرط پایان:** همه snapshotها به همان bytes مصوب متصل، baseها منطبق و ماژول‌ها برای خواندن مستقل آماده‌اند؛ کتابخانه با طرح اجرایی یا استقرار اشتباه نشده است.
+
+| نتیجه | node بعدی |
+|---|---|
+| ماژول فعلی منتشر شده و ماژول بعدی باقی است | [T09](04-technical.md#t09) |
+| تمام ماژول‌های متأثر منتشر و کنترل شدند | [T08](04-technical.md#t08) |
+| نسخهٔ base یا ورودی مصوب تغییر کرده است | [T02](04-technical.md#t02) |
+
+<a id="t10"></a>
+## T10 — پرسش‌های تصمیم فنی
+
+**مجری:** AI — Technical interviewer
+
+**ورودی:** P/Q معتبر، کشف Backend، طرح موجود و technical/interview.md
+
+**کار دقیق:** طبق docs/11-documentation-cycle.md، فقط تصمیم فنی حل‌نشدهٔ مؤثر را با گزینه‌ها، اثر بر قرارداد/سازگاری/عملیات، پیشنهاد و دلیل بپرس؛ حداکثر پنج سؤال در هر پیام. پاسخ‌های قبلی و شاهد کد را حفظ کن. موضوع رفتار محصول یا انتظار/پوشش QA به C01 برود؛ برای سهولت اجرا معنا را عوض نکن. انتظار پاسخ و resumeNode=T11 در journal ثبت شود.
+
+**خروجی:** technical/interview.md با batch سؤال، پیشنهادها و موارد باز
+
+**شرط پایان:** سؤال و صاحب اختیار مشخص است، یا دلیل کفایت/پایان ثبت شده.
+
+| نتیجه | node بعدی |
+|---|---|
+| پاسخ انسانی فنی لازم است | [T11](04-technical.md#t11) |
+| اطلاعات کافی است؛ ادامه مدل با تصمیم‌های موجود | [T03](04-technical.md#t03) |
+| پایان مصاحبه؛ جمع‌بندی پیش‌نویس و موارد باز | [T04](04-technical.md#t04) |
+| نیاز به اصلاح محصول یا QA | [C01](07-change-and-bug.md#c01) |
+
+<a id="t11"></a>
+## T11 — پاسخ انسان فنی
+
+**مجری:** Human — Tech lead یا مسئول فنی منصوب؛ owner عملیاتی برای انتخاب خودش
+
+**ورودی:** سؤال‌های باز T10، گزینه‌ها و منابع همان نسخه
+
+**کار دقیق:** پاسخ واقعی و حدود اختیار هر تصمیم را ثبت کن؛ AI ثبت‌کننده در technical/interview.md است. پاسخ جزئی همان batch را باز نگه می‌دارد. تصمیم روشن به مدل/طرح اعمال شود؛ فقط بخش متأثر بازنگری شود. تغییر رفتار محصول یا انتظار QA با پاسخ فنی مصوب نمی‌شود و به C01 برمی‌گردد. پاسخ مصاحبه مجوز کدنویسی یا رأی G-T نیست.
+
+**خروجی:** پاسخ‌های فنی با مرجع انسانی، تصمیم/فرض جدا، اثر و موارد باز
+
+**شرط پایان:** پاسخ یا پایان صریح ثبت شده؛ برای انتخاب عملیاتی صاحب اختیار معلوم است.
+
+| نتیجه | node بعدی |
+|---|---|
+| پاسخ جزئی یا clarification فنی باقی است | [T10](04-technical.md#t10) |
+| تصمیم‌های لازم روشن است | [T03](04-technical.md#t03) |
+| پایان مصاحبه؛ جمع‌بندی با موارد باز | [T04](04-technical.md#t04) |
+| پاسخ مستلزم اصلاح محصول یا QA است | [C01](07-change-and-bug.md#c01) |

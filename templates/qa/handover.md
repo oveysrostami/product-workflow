@@ -4,7 +4,7 @@
 
 از [قالب کامل handover](../shared/handover.md) استفاده و آن را در پرونده تکمیل کنید. فیلدهای زیر برای این مرحله الزامی‌اند:
 
-- بسته و parent baselineهای دقیق با manifest/digest و approval خارج manifest.
+- شناسه/مسیر manifest همین بسته؛ parent baselineهای دقیق با digest؛ digest خود manifest و approval در رکوردهای بیرون بسته.
 - risk، scenario/oracle، coverage، fixture و fault/clock، entry/exit criteria.
 - read order و لینک canonical هر سند؛ در پرونده لینک‌ها نسبت به محل جدید بازنویسی شوند.
 - انتظار از فنی، owner مسئول دریافت و معیار پذیرش ورودی.

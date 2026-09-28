@@ -10,14 +10,17 @@ requests/<request-id>/
   traceability.csv            # RULE → UC → AC → QA → TECH → TASK → EVIDENCE
   product/                    # رفتار محصول و handover به QA
   qa/                         # strategy، سناریو، coverage و handover به فنی
+    interview.md              # سؤال، پاسخ و تصمیم QA یا دلیل کفایت اطلاعات
   technical/
     index.md                  # فهرست ماژول‌ها و مراجع دقیق Backend
+    interview.md              # سؤال، پاسخ و تصمیم فنی یا دلیل کفایت اطلاعات
     impact-map.md             # نوع و علت اثر درخواست بر هر ماژول
     cross-module-flows.md     # قراردادها، جریان‌ها و شکست‌های بین ماژول‌ها
     implementation-plan.md    # ترتیب sliceها و dependencyهای کل درخواست
     modules/<module-slug>/
       change-spec.md          # تغییرات همین درخواست روی این ماژول
       test-mapping.md         # QA → طراحی → task → evidence این ماژول
+      snapshot/               # نسخهٔ کامل نامزد و plan؛ منتشرشدن فقط پس از G-T
     components/<component-id>/ # فقط اگر host/platform هم متأثر باشد
     handover.md               # تحویل یکپارچه با فهرست بسته‌های ماژولی
   development/
@@ -32,7 +35,7 @@ requests/<request-id>/
   changes/                    # تغییر scope، نسخه یا defect مرتبط
 ```
 
-برای backend مستند فنی owner در `backend/modules/<owner>/docs/` مرجع نهایی است؛ `technical/index.md` فهرست بسته‌های ماژولی و reference نسخه‌های Backend را دارد. `change-spec.md` هر ماژول delta همین درخواست و دلیل تغییر را نگه می‌دارد؛ متن کامل طراحی canonical را دوباره کپی نمی‌کند. در مرحلهٔ طراحی، draftها می‌توانند در همان branch مستندات Backend باشند. اگر دسترسی نوشتن نیست، candidate در پرونده با مقصد دقیق آماده می‌شود؛ T06 پیش از تحویل canonical location را مشخص می‌کند و دو نسخهٔ editable مرجع نمی‌ماند.
+آخرین طرح کامل مصوب هر ماژول در `modules/<slug>/revisions/<revision-id>/` همین مخزن است؛ `current.json` نسخهٔ جاری را مشخص می‌کند. در هر درخواست change-spec فقط delta است و `technical/modules/<slug>/snapshot/` وضعیت کامل پیشنهادی را دارد؛ این candidate تا G-T جاری نمی‌شود. T09 همان bytes مصوب را منتشر و T08 تحویل می‌دهد. اسناد کنار کد Backend و وضعیت پیاده‌سازی با revision/evidence خودشان شناخته می‌شوند؛ [قرارداد کتابخانه](10-module-library.md) رابطهٔ مرجع طراحی، شاهد کد و مالکیت را تعیین می‌کند.
 
 [برد JSON مشترک](../requests/board.json) تنها محل وضعیت جاری کارت‌هاست؛ [قالب کارت](../templates/shared/board-card.json) و [قرارداد فیلدها](07-board-json.md) نحوهٔ نگهداری را تعیین می‌کنند. tracking فقط تاریخچه است. board، tracking، journal، approval و receipt فایل‌های کنترلی بیرون manifest محتوای تحویلی هستند تا حرکت کارت hash بسته را تغییر ندهد؛ نسخه و علت هر حرکت در تاریخچه محفوظ می‌ماند.
 
@@ -44,11 +47,13 @@ requests/<request-id>/
 |---|---|---|
 | مشترک | کارت در board.json، request، tracking، decisions، applicability، traceability، manifest، approval و receipt مرحله | interview اگر سؤال، impact اگر تغییر، finding اگر review نقص دارد |
 | محصول | contract، شرح مستقل UC/operation، acceptance، handover | flows برای lifecycle/شاخه، data برای داده، تعاملات برای وابستگی؛ N/A صریح در applicability |
-| QA | plan، scenarioهای دارای oracle، coverage، handover | performance/security/recovery/migration برای ریسک موجود؛ UI در صورت وجود کلاینت |
-| فنی | index، impact-map، cross-module-flows، بسته change-spec/test-mapping هر ماژول متأثر، implementation plan و handover؛ ارجاع به module/context و operation/DTO canonical | domain، data/migration، communication/message، recording، deployment/ADR متناسب با اثر |
+| QA | interview با پاسخ‌ها یا دلیل کفایت، plan، scenarioهای دارای oracle، coverage، handover | performance/security/recovery/migration برای ریسک موجود؛ UI در صورت وجود کلاینت |
+| فنی | index، impact-map، cross-module-flows، بسته change-spec/test-mapping هر ماژول متأثر، implementation plan و handover؛ snapshot کامل تجمعی هر ماژول و plan نسخهٔ انتشار؛ ارجاع به قواعد و revision Backend | domain، data/migration، communication/message، recording، deployment/ADR متناسب با اثر |
 | توسعه | taskهای ماژولی و task مشترک دارای مسئول در صورت نیاز، execution evidence، review ماژول و کل درخواست، delivery و receipt | bug record، release/rollback در scope انتشار |
 
 «نامرتبط» برای موضوع است، نه رفع الزام با فایل کوتاه. یک query بدون state به aggregate مصنوعی نیاز ندارد، اما authorization، DTO، bounded query و failure لازم دارد. اسناد کوچک را می‌توان در فایل واحد با section و ID مستقل نوشت؛ handover و approval همیشه مستقل و قابل پیدا کردن‌اند.
+
+بستهٔ فنی نیز technical/interview.md با تصمیم‌های گفت‌وگو یا دلیل کفایت اطلاعات دارد؛ مصاحبه‌ها با [قالب تیمی](../templates/shared/team-interview.md) و طبق [چرخهٔ مستندسازی](11-documentation-cycle.md) تکمیل و در manifest همان تیم freeze می‌شوند.
 
 ## تفکیک محصول از فنی
 

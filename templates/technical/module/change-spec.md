@@ -12,11 +12,11 @@
 
 ## delta و محل حقیقت
 
-| TECH-ID | موضوع تغییر | وضع قبلی → طرح جدید | قاعده/سناریو | سند canonical Backend با revision/hash/section | فایل/لایه متأثر |
+| TECH-ID | موضوع تغییر | وضع قبلی → طرح جدید | قاعده/سناریو | snapshot کامل ماژول و قاعدهٔ Backend با revision/hash/section | فایل/لایه متأثر |
 |---|---|---|---|---|---|
 | {{...}} | {{domain/usecase/DTO/data/migration/security/event/config}} | {{...}} | {{...}} | {{...}} | {{...}} |
 
-جزئیات کامل operation/DTO/data/delivery در اسناد canonical همان owner تکمیل می‌شود؛ این پرونده delta و دلیل و ارجاع را نگه می‌دارد. یک clause دو نسخه editable ندارد. اگر draft موقت اینجا تولید شد، T06 انتقال/انتخاب مرجع را پیش از freeze قطعی کند.
+جزئیات کامل operation/DTO/data/delivery و قسمت‌های بدون تغییر در snapshot/ همین بسته تکمیل می‌شوند؛ این فایل delta و دلیل را نگه می‌دارد. baseRevision از modules/<slug>/current.json است. snapshot-plan و همهٔ bytes در T06 freeze، در T07 تصویب و در T09 منتشر می‌شوند؛ تا G-T هیچ فایل جاری modules/ تغییر نمی‌کند. اختلاف معنایی با قواعد/اسناد Backend باید پیش از approval حل شود.
 
 ## وابستگی و consumerها
 

@@ -140,9 +140,9 @@ flowchart TD
 
 **ورودی:** G-D، candidate، reports و docs
 
-**کار دقیق:** delivery record بنویس: چه تغییر کرد، چرا، evidence، residual، migration/runbook، وضعیت دقیق ready-to-merge/merged/deployed با شاهد. manifest نهایی و read order گیرنده را ثبت کن.
+**کار دقیق:** delivery record بنویس: چه تغییر کرد، چرا، evidence، residual، migration/runbook، وضعیت دقیق ready-to-merge/merged/deployed با شاهد. manifest نهایی و read order گیرنده را ثبت کن. Coordinator از G-D و evidence همان candidate، رکورد implementation/observations هر ماژول و pointer کنترل اجرای آن را ثبت می‌کند؛ designRevision/digest صریح است و snapshot طرح یا وضعیت deployed بدون شاهد تغییر نمی‌کند.
 
-**خروجی:** development/delivery و final manifest خلاصهٔ تحویل هر ماژول و تحقق جریان مشترک؛ target بدون تغییر کد با evidence سازگاری.
+**خروجی:** development/delivery و final manifest خلاصهٔ تحویل هر ماژول و تحقق جریان مشترک؛ target بدون تغییر کد با evidence سازگاری.؛ metadata اجرای واقعی در modules/<slug>/implementation/ طبق docs/10-module-library.md
 
 **شرط پایان:** هر ادعا شاهد دارد و next owner/عمل مشخص است.
 

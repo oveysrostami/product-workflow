@@ -165,9 +165,9 @@ flowchart TD
 
 **ورودی:** G-P معتبر، product bundle و منابع
 
-**کار دقیق:** manifest را freeze و handover مستقل تهیه کن: scope، read order، rule/UC/AC، dependency، out-of-scope و انتظار از QA. approval بیرون manifest بماند. دسترسی QA را فراهم کن؛ ارسال بیرونی خودکار نیست. handover و manifest باید همان bytes ارائه‌شده پیش از approval باشند؛ در این node محتوای بسته تغییر نمی‌کند و فقط دسترسی/receipt/journal آماده می‌شود. هر اصلاح محتوا به review و approval نسخه تازه برمی‌گردد. پس از کنترل آمادگی، tracking و برد را به صف آمادهٔ QA به‌روز کن؛ nextNode=Q01 است. تا انتخاب/دریافت واقعی تیم بعد منتظر بمان؛ انتقال کارت دریافت انسانی نیست.
+**کار دقیق:** manifest و handover از پیش منجمد و تأییدشده را کنترل کن: scope، read order، rule/UC/AC، dependency، out-of-scope و انتظار از QA. approval بیرون manifest بماند. دسترسی QA را فراهم کن؛ ارسال بیرونی خودکار نیست. handover و manifest باید همان bytes ارائه‌شده پیش از approval باشند؛ در این node محتوای بسته تغییر نمی‌کند و فقط دسترسی/receipt/journal آماده می‌شود. هر اصلاح محتوا به review و approval نسخه تازه برمی‌گردد. پس از کنترل آمادگی، tracking و برد را به صف آمادهٔ QA به‌روز کن؛ nextNode=Q01 است. تا انتخاب/دریافت واقعی تیم بعد منتظر بمان؛ انتقال کارت دریافت انسانی نیست.
 
-**خروجی:** product/handover.md، baseline P، approval ref و receipt pending
+**خروجی:** رکورد تحویل و ارجاع product/handover.md و baseline P ثابت، approval ref و receipt pending
 
 **شرط پایان:** hashها معتبر و بسته برای گیرنده قابل خواندن است.
 

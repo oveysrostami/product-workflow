@@ -148,7 +148,7 @@ flowchart TD
 
 **ورودی:** recovery evidence و scope آسیب
 
-**کار دقیق:** انتشار را failed/recovered/blocked دقیق ثبت؛ incident و اقدام بعدی را با owner تحویل بده. تحویل پیاده‌سازی قبلی را موفقیت production معرفی نکن.
+**کار دقیق:** انتشار را failed/recovered/blocked دقیق ثبت؛ incident و اقدام بعدی را با owner تحویل بده. تحویل پیاده‌سازی قبلی را موفقیت production معرفی نکن. فقط با receipt و evidence واقعی، Coordinator observation انتشار در implementation/ همان ماژول ثبت می‌کند؛ طرح مصوب تغییر نمی‌کند.
 
 **خروجی:** incident handover و reopen/bug reference
 

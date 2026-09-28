@@ -1,0 +1,11 @@
+{
+  "baselineId": "workflow-kit-v1.5",
+  "gitCommit": "2281e86d3d84d82cd4270fdb935ac0f714433bd0",
+  "repository": "https://github.com/oveysrostami/product-workflow",
+  "manifestPath": "records/design-manifest.json",
+  "manifestSha256": "e1905c643d6b309f7043c096f276a161dfb39b2b3aea3d7e29e1e52c05cbd064",
+  "approvalPath": "records/design-approval.json",
+  "approvalSha256": "7a079d828032fcd4588aad403cc22d81c1de2a21ba76bd7bd7c218d20b53995d",
+  "approvalStatus": "pending",
+  "note": "Exact v1.5 files and pending approval remain in this Git commit before the operational-board and checkout-location fixes."
+}

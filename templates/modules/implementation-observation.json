@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "observationId": "{{unique-observation-id}}",
+  "moduleId": "{{module-slug}}",
+  "designRevisionId": "{{approved-design-revision}}",
+  "designManifestSha256": "{{sha256}}",
+  "status": "unknown",
+  "sourceRevision": null,
+  "candidateManifestPath": null,
+  "decisionReferences": [],
+  "evidence": [],
+  "at": null,
+  "limitation": "{{علت وضعیت و محدودیت شواهد؛ هیچ approval یا اجرا اختراع نشود}}"
+}

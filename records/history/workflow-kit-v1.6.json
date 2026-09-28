@@ -1,0 +1,9 @@
+{
+  "baselineId": "workflow-kit-v1.6",
+  "archivePath": "records/history/workflow-kit-v1.6.zip",
+  "archiveSha256": "4b792f17c42a1955338a93212d1fe35e1bab9b4ff9a8c38262804251e9931e9b",
+  "manifestSha256": "79dbc922674eeb29c13959e0f0e6b90283862b05a199e710f97873be504ad75e",
+  "approvalSha256": "37730887ec40c8e3aee9ce165cc8db51fd8f4d445a54bdafa1bf6ccf44757758",
+  "approvalStatus": "pending",
+  "note": "Preserves the exact uncommitted v1.6 kit and pending approval before adding the module library."
+}

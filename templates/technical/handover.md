@@ -4,8 +4,9 @@
 
 از [قالب کامل handover](../shared/handover.md) استفاده و آن را در پرونده تکمیل کنید. فیلدهای زیر برای این مرحله الزامی‌اند:
 
-- بسته و parent baselineهای دقیق با manifest/digest و approval خارج manifest.
-- canonical Backend specs، task dependency، file/layer map، commands و migration/recovery.
+- شناسه/مسیر manifest همین بسته؛ parent baselineهای دقیق با digest؛ digest خود manifest و approval در رکوردهای بیرون بسته.
+- revisionId و مسیر مقصد modules/، hash plan و فایل‌های snapshot هر ماژول، قواعد و revision Backend، task dependency، file/layer map، commands و migration/recovery.
+- نتیجه و digest wrapper انتشار T09 پس از G-T فقط در journal تحویل T08 ثبت می‌شود؛ افزودن آن به این handover مصوب چرخهٔ hash و تغییر bytes ایجاد می‌کند.
 - read order و لینک canonical هر سند؛ در پرونده لینک‌ها نسبت به محل جدید بازنویسی شوند.
 - انتظار از توسعه‌دهنده AI، owner مسئول دریافت و معیار پذیرش ورودی.
 - open itemها با اثر و owner؛ blocker جاری نباید زیر عبارت «بعداً» پنهان شود.

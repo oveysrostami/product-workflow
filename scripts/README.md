@@ -27,8 +27,20 @@ python3 scripts/check_mermaid.py --mmdc /path/to/mmdc --browser /path/to/chromiu
 
 برد عملیاتی در [board.json](../requests/board.json) است. validator ساختار columns/cards، یکتایی requestId، فیلدها و مقادیر وضعیت/تیم/node، وجود مسیرهای ارجاعی و پیش‌نیازهای ساختاری ستون آماده را نیز بررسی می‌کند. این بررسی به‌تنهایی اعتبار gate یا hash پروندهٔ واقعی را اثبات نمی‌کند.
 
+فایل‌های عملیاتی `requests/` و `modules/` به‌جز راهنماهای ثابت README همان مسیرها بیرون manifest طراحی و فهرست منابع ثابت مجموعه‌اند؛ validator ثبت آن‌ها در این دو بسته را رد می‌کند. برای آزمون regression جدایی وضعیت جاری از طراحی و حفظ کنترل کارت نامعتبر و hash اسناد ثابت اجرا کنید:
+
+```sh
+python3 -m unittest discover -s scripts -p 'test_*.py'
+```
+
+این آزمون‌ها در کپی موقت اجرا می‌شوند و برد واقعی را تغییر نمی‌دهند.
+
 محدودیت [مالکیت تیمی فایل‌ها](../docs/08-team-file-ownership.md) با بررسی scope و diff توسط agent/reviewer اعمال می‌شود؛ validator فعلی sandbox یا کنترل دسترسی فایل نیست و از pass آن رعایت همهٔ writeها استنتاج نمی‌شود.
 
 ## بررسی استقلال مجموعه
 
 تمام لینک‌های محلی باید داخل همین مخزن resolve شوند؛ لینک به فایل خارج مخزن حتی اگر روی دستگاه نویسنده وجود داشته باشد، خطاست. clone یا کپی مستقل مجموعه نیز باید با `python3 scripts/validate.py` و `python3 scripts/render_workflows.py --check` موفق باشد. مسیر checkout کد هدف فقط ورودی اجرای پرونده است و در متن به‌عنوان دستور/مرجع نسبی هدف معرفی می‌شود، نه لینک ثابت به دایرکتوری همسایه.
+
+## انتشار و بررسی snapshot ماژول
+
+[قرارداد کتابخانه](../docs/10-module-library.md) و [راهنمای modules](../modules/README.md) مبنا هستند. scripts/publish_module.py با plan/manifest/approval پیش‌فرض فقط preview می‌کند؛ --apply تنها در writeScope فنی T09 و با G-T معتبر اجرا می‌شود. این ابزار engine یا تصمیم‌گیر gate نیست. validator نسخه‌ها، digest و اتصال bytes به G-T را می‌سنجد؛ اعتبار معنایی snapshot و authority انسان با review/gate است. آزمون‌های regression، انتشار/preview/retry، حفظ تاریخچه، pending approval، تغییر bytes و base منقضی را نیز پوشش می‌دهند.

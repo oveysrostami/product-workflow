@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "moduleId": "{{module-slug}}",
+  "revisionId": "{{immutable-revision-id}}",
+  "baseRevision": null,
+  "observedImplementation": {
+    "status": "unknown",
+    "sourceRevision": null,
+    "limitation": "{{دلیل وضعیت نامشخص یا محدودیت شاهد}}"
+  },
+  "artifacts": [
+    {
+      "path": "README.md",
+      "sha256": "{{sha256}}"
+    }
+  ]
+}

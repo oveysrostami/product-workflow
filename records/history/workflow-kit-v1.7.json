@@ -1,0 +1,9 @@
+{
+  "baselineId": "workflow-kit-v1.7",
+  "archivePath": "records/history/workflow-kit-v1.7.zip",
+  "archiveSha256": "c23f0e460912e006cac75a643276b1bf664f81e369eb3e621db9c102863282fa",
+  "manifestSha256": "c8fb3ec120b2ca09738776b7c11baf32a89265cc91dbeee9b25499c975cc1bd5",
+  "approvalSha256": "a91df593c06d39b94c43b8d60efa9570db0122c81cce2ce3bfb2ea1a4f5b7904",
+  "approvalStatus": "pending",
+  "note": "Preserves the exact v1.7 module library kit before completing QA and technical dialogue and the documentation handover boundary."
+}

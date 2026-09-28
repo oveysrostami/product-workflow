@@ -8,6 +8,8 @@
 
 **approval** نتیجهٔ تصمیم انسان روی digest دقیق manifest است. **receipt** یعنی دریافت‌کننده همان نسخه را باز کرده و ورودی کافی را پذیرفته است؛ این دو یکی نیستند. تغییر فایل، حتی نگارشی، hash تازه می‌دهد. برای تغییر صرفاً نگارشی review کوتاه و تأیید نسخهٔ تازه کافی است؛ مصاحبهٔ کامل تکرار نمی‌شود. تاریخچهٔ approval قبلی پاک یا بازنویسی نمی‌شود.
 
+handover جزو artifacts مصوب است؛ بنابراین digest manifest خودش یا نتیجهٔ approval/انتشار آینده را داخل آن نمی‌نویسیم. handover شناسه و مسیر manifest و parentهای معلوم را دارد؛ digest نهایی، تصمیم و receipt در رکوردهای بیرون manifest ثبت می‌شوند. در تحویل فنی، نتیجه و digest انتشار T09 در journal تحویل T08 است؛ دست‌کاری handover مصوب برای افزودن این اطلاعات مجاز نیست.
+
 ## وضعیت‌های پرونده
 
 | وضعیت | معنی | گذار مجاز |
@@ -16,10 +18,10 @@
 | product-draft | مصاحبه/نگارش رفتار | product-review، waiting-human |
 | product-review | review نسخهٔ محصول | product-draft، product-approved |
 | product-approved | G-P پاس؛ QA باید دریافت کند | qa-design |
-| qa-design | سناریو و پوشش در حال تدوین | qa-approved، product-draft |
+| qa-design | گفت‌وگوی QA، سناریو و پوشش در حال تدوین | qa-approved، product-draft، waiting-human |
 | qa-approved | G-Q پاس؛ فنی باید دریافت کند | technical-design |
-| technical-design | مدل، قرارداد و اجرای آزمون طراحی می‌شود | technical-approved، qa-design، product-draft |
-| technical-approved | G-T پاس؛ مستندات فنی آماده است؛ اختیار اجرای کد جداست | implementing فقط با دستور صریح scope؛ در غیر این صورت پایان scope مستندسازی و HOLD ادامهٔ توسعه |
+| technical-design | گفت‌وگوی فنی، مدل، قرارداد و برنامهٔ آزمون طراحی می‌شود | technical-approved، qa-design، product-draft، waiting-human |
+| technical-approved | G-T پاس؛ انتشار T09 و تحویل T08 باید تکمیل شوند | پس از T09/T08، implementing فقط با دستور صریح scope؛ در غیر این صورت پایان مستندسازی و HOLD ادامهٔ توسعه |
 | implementing | sliceها با تست ساخته می‌شوند | verifying، technical-design |
 | verifying | review کد و اجرای QA روی candidate | implementing، accepted، change-analysis |
 | accepted | G-D پاس؛ تحویل ثبت شده | closed یا release-pending |
@@ -37,7 +39,8 @@ stateDiagram-v2
     intake --> product
     product --> qa: G_P
     qa --> technical: G_Q
-    technical --> technicalReady: G_T
+    technical --> technicalApproved: G_T
+    technicalApproved --> technicalReady: T09_and_T08
     technicalReady --> implementation: explicit_implementation_scope
     implementation --> verification
     verification --> accepted: G_D
@@ -64,7 +67,8 @@ stateDiagram-v2
 | qa-design | QA: در حال تدوین و بازبینی | QA |
 | qa-approved و Q06 کامل، nextNode=T01 | آمادهٔ فنی | فنی؛ receipt هنوز pending |
 | technical-design | فنی: در حال تدوین و بازبینی | فنی؛ review لازم QA با نقش خودش انجام می‌شود |
-| technical-approved و T08 کامل | مستندات فنی آماده | صاحب اقدام بعدی طبق scope؛ بدون اختیار، توسعه شروع نمی‌شود |
+| technical-approved و T09/T08 ناتمام | فنی: در حال تکمیل انتشار/تحویل | فنی برای T09 و Coordinator برای کنترل تحویل T08؛ هنوز آمادهٔ پیاده‌سازی نیست |
+| technical-approved و T09/T08 کامل | مستندات فنی آماده | صاحب اقدام بعدی طبق scope؛ بدون اختیار، توسعه شروع نمی‌شود |
 | اصلاحیهٔ باز | برگشتی برای اصلاح، با ذکر تیم مقصد | صاحب علت؛ state مرحلهٔ مقصد و resumeNode نیز ثبت می‌شوند |
 | waiting-human / blocked / paused | منتظر پاسخ / مسدود / متوقف | نقش صاحب رفع علت؛ state قبلی و resumeNode حفظ می‌شوند |
 | bug-triage / change-analysis | بخش باگ/اصلاحیهٔ همان تیم با ذکر node | از نقش B/C node جاری تعیین می‌شود؛ gate کوتاه باگ حذف نمی‌شود |
@@ -96,6 +100,6 @@ Coordinator در change-impact، مجموعهٔ IDهای متأثر، dependents
 
 ## تغییر اثر ماژولی
 
-افزودن/حذف ماژول یا تغییر contract edge در impact-map، یک تغییر scope فنی قابل ردیابی است. C01 هم producer و هم consumer و integration/end-to-end مربوط را باز می‌کند؛ ادعای unaffected بودن نیاز به شاهد دارد. approval و evidence ماژول‌های مستقل تنها با دلیل اثرناپذیری معتبر می‌مانند. یک manifest T در سطح درخواست، impact-map و تمام بسته‌های ماژولی و اسناد canonical اشاره‌شده را به نسخهٔ دقیق وصل می‌کند؛ رأی‌های ماژولی روی همین manifest ثبت می‌شوند.
+افزودن/حذف ماژول یا تغییر contract edge در impact-map، یک تغییر scope فنی قابل ردیابی است. C01 هم producer و هم consumer و integration/end-to-end مربوط را باز می‌کند؛ ادعای unaffected بودن نیاز به شاهد دارد. approval و evidence ماژول‌های مستقل تنها با دلیل اثرناپذیری معتبر می‌مانند. یک manifest T در سطح درخواست، impact-map، تمام بسته‌های ماژولی، snapshot-plan و bytes کامل snapshotهای پیشنهادی را به نسخهٔ دقیق وصل می‌کند؛ رأی‌های ماژولی روی همین manifest ثبت می‌شوند.
 
 journal nodeهای تکرارشونده `workUnit` شامل نوع/شناسه target و slice/task دارد؛ مثلاً دو اجرای D03 برای دو owner، دو workUnit متفاوت‌اند. attempt برای retry همان workUnit است. writer فایل مشترک request و host از writer ماژول‌ها جدا و مشخص است؛ این تفکیک به‌خودی‌خود اجرای موازی agentها را مجاز نمی‌کند.

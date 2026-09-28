@@ -3,9 +3,13 @@
 > قالب است؛ `{{...}}` را با تصمیم و شاهد واقعیِ غیرحساس جایگزین کنید. وجود این فایل به معنی approval یا اجرای تست نیست.
 
 - request / Tech lead / P-Q baseline و digest: {{...}}
+- مخزن Backend هدف / مسیر checkout / مسیر AGENTS و قواعد هدف: {{...}}
 - Backend revision، adopted edition/profile، local decisions: {{...}}
 - workflow اصلی Backend و workflowهای وابسته: {{...}}
 - discovery commandها و نتیجه واقعی doctor/explain: {{...}}
+- گفت‌وگوی فنی: technical/interview.md با پاسخ‌های T10/T11 یا دلیل کفایت اطلاعات؛ انتخاب‌های باز و صاحب اختیار: {{...}}
+
+این اطلاعات در T02 توسط تیم فنی در `technical/index.md` همین پرونده ثبت می‌شوند؛ `request.md` محصول فقط خواندنی است.
 
 ## بسته‌های ماژولی و جریان مشترک
 
@@ -19,11 +23,13 @@
 
 ## مرجع canonical
 
-| TECH-ID | موضوع | مسیر نهایی در Backend | revision/hash | draft در این پرونده یا canonical | rule/QA مرتبط |
+| TECH-ID | موضوع | snapshot نامزد و مسیر انتشار در modules/ | base revision/hash | قواعد و revision Backend | rule/QA مرتبط |
 |---|---|---|---|---|---|
 | {{TECH-01}} | {{...}} | {{modules/owner/docs/...}} | {{...}} | {{...}} | {{...}} |
 
 در زمان freeze دو فایل editable مرجع برای یک تصمیم وجود نداشته باشد. قالب‌های Backend شامل module-spec، context-map، domain-model، use-case-spec، dto-contract، communication-contract، recording-policy، acceptance-record و ADR در مخزن کدِ هدف، در صورت وجود و پس از معرفی مسیر/revision در این index، بررسی می‌شوند. [قالب‌های فنی همین مجموعه](../README.md) تمام بخش‌های لازم طراحی و تحویل workflow را دارند؛ AGENTS و قواعد هدف هنگام کار روی همان کد نیز رعایت می‌شوند.
+
+هر ماژول snapshot کامل در `technical/modules/<slug>/snapshot/` دارد؛ snapshot-plan و تمام فایل‌ها در manifest T freeze می‌شوند. بعد از G-T، T09 نسخهٔ مصوب را در modules/ منتشر می‌کند. [قرارداد کتابخانه](../../docs/10-module-library.md) و [قالب snapshot](../modules/README.md) مبنا هستند.
 
 ## قابلیت لازم در برابر موجود
 

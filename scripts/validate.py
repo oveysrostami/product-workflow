@@ -8,12 +8,17 @@ import sys
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
 from render_workflows import documents
+from publish_module import digest, local, read, reading_entry, verify_revision
 ROOT = Path(__file__).resolve().parents[1]
 errors = []
 stats = {'markdownFiles': 0, 'localLinks': 0, 'diagrams': 0, 'nodes': 0, 'walkthroughs': 0}
 
 def fail(message):
     errors.append(message)
+
+def is_operational_state_file(path):
+    return any(path.is_relative_to((ROOT/name).resolve()) and path != (ROOT/name/'README.md').resolve()
+               for name in ('requests', 'modules'))
 
 def check_graph():
     g = json.loads((ROOT/'workflows/graph.json').read_text())
@@ -135,7 +140,9 @@ def check_design_baseline():
     manifest = json.loads(path.read_text())
     for item in manifest['artifacts']:
         file = (ROOT/item['path']).resolve()
-        if not file.is_relative_to(ROOT) or not file.is_file():
+        if is_operational_state_file(file):
+            fail('Operational file in design baseline: '+item['path'])
+        elif not file.is_relative_to(ROOT) or not file.is_file():
             fail('Invalid design baseline path: '+item['path'])
         elif hashlib.sha256(file.read_bytes()).hexdigest() != item['sha256']:
             fail('Design baseline changed: '+item['path'])
@@ -149,12 +156,62 @@ def check_source_inventory():
     for item in inventory['files']:
         name = item['path']
         path = (ROOT/name).resolve()
-        if item.get('repository') != 'product-workflow' or name in seen or not path.is_relative_to(ROOT.resolve()) or not path.is_file():
+        if is_operational_state_file(path):
+            fail('Operational file in local source inventory: '+name)
+        elif item.get('repository') != 'product-workflow' or name in seen or not path.is_relative_to(ROOT.resolve()) or not path.is_file():
             fail('Invalid local source inventory entry: '+name)
         elif hashlib.sha256(path.read_bytes()).hexdigest() != item['sha256']:
             fail('Local source inventory changed: '+name)
         seen.add(name)
     stats['localSourceFiles'] = len(seen)
+
+def check_module_library():
+    count = 0
+    for module in sorted((ROOT/'modules').iterdir()):
+        if not module.is_dir():
+            continue
+        try:
+            pointer = read(local(module, 'current.json'))
+            if set(pointer) != {'moduleId', 'revisionId', 'manifestSha256'} or pointer['moduleId'] != module.name:
+                raise ValueError('Invalid current module pointer')
+            if not re.fullmatch(r'[a-z0-9][a-z0-9-]*', pointer['revisionId']):
+                raise ValueError('Invalid current revision id')
+            folder = module/'revisions'/pointer['revisionId']
+            if digest(local(folder, 'manifest.json')) != pointer['manifestSha256']:
+                raise ValueError('Module pointer digest mismatch')
+            for revision in sorted((module/'revisions').iterdir()):
+                if revision.is_dir() and not revision.name.startswith('.'):
+                    verify_revision(ROOT, revision)
+            if local(module, 'README.md').read_text() != reading_entry(module.name, pointer['revisionId']):
+                raise ValueError('Module reading entry and current pointer disagree')
+            implementation = module/'implementation'
+            if implementation.exists():
+                state = read(local(implementation, 'current.json'))
+                record_path = local(implementation, 'observations/'+state['observationId']+'.json')
+                if digest(record_path) != state['sha256']:
+                    raise ValueError('Implementation pointer digest mismatch')
+                record = read(record_path)
+                design_id = record['designRevisionId']
+                if not re.fullmatch(r'[a-z0-9][a-z0-9-]*', design_id) or record['moduleId'] != module.name or record['observationId'] != state['observationId']:
+                    raise ValueError('Implementation record belongs to another module or revision')
+                design = local(module, 'revisions/'+design_id+'/manifest.json')
+                if digest(design) != record['designManifestSha256']:
+                    raise ValueError('Implementation evidence is bound to a different design digest')
+                if record['status'] not in {'unknown', 'not-implemented', 'in-progress', 'verified-candidate', 'accepted', 'released'} or not record['limitation']:
+                    raise ValueError('Invalid implementation status or missing limitation')
+                if record['status'] != 'unknown' and not record['sourceRevision']:
+                    raise ValueError('Implementation status has no source revision')
+                if record['status'] in {'verified-candidate', 'accepted', 'released'}:
+                    local(ROOT, record['candidateManifestPath'])
+                    if not record['evidence'] or not record['decisionReferences']:
+                        raise ValueError('Implementation verdict has no evidence or decisions')
+                for evidence in record['evidence']:
+                    if digest(local(ROOT, evidence['path'])) != evidence['sha256']:
+                        raise ValueError('Implementation evidence changed')
+            count += 1
+        except (ValueError, KeyError, TypeError, OSError) as exc:
+            fail('Invalid module '+module.name+': '+str(exc))
+    stats['publishedModules'] = count
 
 def check_board():
     """Structural checks only; this does not certify a card's approvals or readiness."""
@@ -249,10 +306,10 @@ def check_board():
 
 def main():
     try:
-        check_graph();check_markdown();check_json_and_templates();check_board();check_source_inventory();check_design_baseline()
+        check_graph();check_markdown();check_json_and_templates();check_board();check_module_library();check_source_inventory();check_design_baseline()
     except (KeyError,ValueError,OSError) as exc:
         fail(str(exc))
-    print(json.dumps({'status':'failed' if errors else 'passed','checks':stats,'errors':errors,'scope':'repository-local links/anchors, graph, generated cards, walkthrough edges, JSON/CSV syntax, board card structure/references, local source inventory and design baseline hashes; Mermaid must be checked separately'},ensure_ascii=False,indent=2))
+    print(json.dumps({'status':'failed' if errors else 'passed','checks':stats,'errors':errors,'scope':'repository-local links/anchors, graph, generated cards, walkthrough edges, JSON/CSV syntax, board card structure/references, module publication sources/digests, local source inventory and design baseline hashes; Mermaid must be checked separately'},ensure_ascii=False,indent=2))
     return 1 if errors else 0
 
 if __name__ == '__main__':

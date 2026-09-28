@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "baselineId": "workflow-kit-v1.5",
-  "version": "1.5",
+  "baselineId": "workflow-kit-v1.8",
+  "version": "1.8",
   "requestId": "workflow-design-2026-09-28",
   "status": "ready-for-requester-review",
   "snapshotDate": "2026-09-28",
-  "supersedes": "workflow-kit-v1.4",
-  "history": "records/history/workflow-kit-v1.4.json",
+  "supersedes": "workflow-kit-v1.7",
+  "history": "records/history/workflow-kit-v1.7.json",
   "artifacts": [
     {
       "path": ".gitignore",
@@ -14,11 +14,11 @@
     },
     {
       "path": "AGENTS.md",
-      "sha256": "464869c2a01e682ecbf205d5f1457ed344d29b9a9ddc7c09dcbd10d886a4c97c"
+      "sha256": "1fc129c3563f9024b5685f6a6470ceda628c6a5bda3dd988df855897aee43005"
     },
     {
       "path": "README.md",
-      "sha256": "00b12fa9b4c80361a3a2030c3397bbc025d89c2835005dc4e2740509de856861"
+      "sha256": "9634904a5ce638a79f68d387a18f81f308379366c66cd2e418a0fd5dc43eaa2e"
     },
     {
       "path": "docs/01-principles-and-roles.md",
@@ -26,35 +26,43 @@
     },
     {
       "path": "docs/02-state-and-versioning.md",
-      "sha256": "d4e3b35076cc6e8d201069a367e8cccabb1b0a767525d27b804a0938c39e69cf"
+      "sha256": "46a9a3365a9e9b57efee4635e58f8b5ee2248abfe936ba4c002a0c673aa2dedf"
     },
     {
       "path": "docs/03-artifact-map.md",
-      "sha256": "de4550ed6a42fff62014a473cd15fc3bd5615752d1c8436fcdbf300604aa4330"
+      "sha256": "1eea2c9b87b5ea77dc1274917667125fa74e3eef545435cd7f0da328ad1ef4c4"
     },
     {
       "path": "docs/04-gates.md",
-      "sha256": "32e554d530b967c7054eb15e04545d2149b8308850a7117b442ecd82e2813db0"
+      "sha256": "41fe2ec7f1e0c410ddf69c19b4ed3db80e6f1be9655d859d74bfdea9d57c0d57"
     },
     {
       "path": "docs/05-backend-binding.md",
-      "sha256": "1ebcc955901473dbb34a2dd0b314ae39d43bc2717b1ac48e808e968de848d24b"
+      "sha256": "e984a243e40c55490bc81cfb0a8e272812afabcd829b9ae32ed5f67ae581927e"
     },
     {
       "path": "docs/06-adoption.md",
-      "sha256": "111e3cf4ef886ed89f874b2c78c17e7778ca89c6172db126faa2f13b6d59b992"
+      "sha256": "1c89796290babfbe6a66d6c8adf5379275b0aa71a3b274318462c8ca68329991"
     },
     {
       "path": "docs/07-board-json.md",
-      "sha256": "a41904725ae24ca5d7ccb9c64930af375c2b5dfec9c4a3e7b556d041f9fd61fb"
+      "sha256": "f9cb71d08cbe1cfbe71a133923f57a915f863f050ce40c074f09a28c609cd0f0"
     },
     {
       "path": "docs/08-team-file-ownership.md",
-      "sha256": "cac1cd7fddb2f8226298137415799b430745845f7ab372859bde98ca35622bed"
+      "sha256": "790d0ad7db90bf66995d2cb9eb6c33cd9808ed3d26ef7caf1179dc4b879dce6f"
     },
     {
       "path": "docs/09-product-authoring.md",
       "sha256": "4df2e3bcd268d3f351048ba264f714bb503727d184aa0ffb487b7b083dca855f"
+    },
+    {
+      "path": "docs/10-module-library.md",
+      "sha256": "a926cbadb718904aba7eb7587aa781cff82edb8967652ae229c2e66ab159a3d4"
+    },
+    {
+      "path": "docs/11-documentation-cycle.md",
+      "sha256": "f5cff6a92b2b15b06317d29f70b449acb40871381e0ba02e13b70966071c15cc"
     },
     {
       "path": "examples/module-impact.md",
@@ -94,7 +102,7 @@
     },
     {
       "path": "examples/otp-issue/technical/modules/otp/change-spec.md",
-      "sha256": "d893498db2ccc39c5fb9caf52c2b1e20cee0f8693f703d1e3d8aacc920d5e546"
+      "sha256": "010090426370b5ab87c76207a6763bd46cf48d70a0ad66a1faafe4c406add11d"
     },
     {
       "path": "examples/otp-issue/technical/modules/otp/test-mapping.md",
@@ -106,15 +114,19 @@
     },
     {
       "path": "examples/team-entry.md",
-      "sha256": "c25da5451cde1a2d714be9703f0e7f6fba730965a393ae0a6afaa797c938c375"
+      "sha256": "7de7594822e2f5f2b4df7339e78909c4cec8044b3409024376a3f0758e10fdbc"
+    },
+    {
+      "path": "modules/README.md",
+      "sha256": "17540c394b305b29034ebf67d3e209ed2324d6bc6753d790d09b4a2263d8b5d9"
     },
     {
       "path": "records/checks.json",
-      "sha256": "3e333e5312bc6f7af80092175e5f5b4643fbcb2179ec243a7d8f64aa521b4f93"
+      "sha256": "5c1f37c82edc10e08eeae2c7f0114d381897c4870dfd2b92426dd4b9bfbf0b15"
     },
     {
       "path": "records/design-review.md",
-      "sha256": "503d5047820c987d820c9868ec28f0e627e924af8a5cbe57d18bfd08fa62ac3f"
+      "sha256": "431532df0b08ec7aa0bf7f04fa34d4251a434c2bfc7f5664d4ff1a9debf5392c"
     },
     {
       "path": "records/history/workflow-kit-v1.1.json",
@@ -145,6 +157,26 @@
       "sha256": "f8527e4ba84210b8c6485121c67def4a3e7ccb14441b0e47140a832a357eeca2"
     },
     {
+      "path": "records/history/workflow-kit-v1.5.json",
+      "sha256": "be95906785294b03129781722553f944f20b98d8e48b6fde163c6b630c7dcdf9"
+    },
+    {
+      "path": "records/history/workflow-kit-v1.6.json",
+      "sha256": "4f7ebbd100e4cf389da75c8e4df72a1b5e6bcea41e770e916c19ddb1bb32ed8d"
+    },
+    {
+      "path": "records/history/workflow-kit-v1.6.zip",
+      "sha256": "4b792f17c42a1955338a93212d1fe35e1bab9b4ff9a8c38262804251e9931e9b"
+    },
+    {
+      "path": "records/history/workflow-kit-v1.7.json",
+      "sha256": "1e6929a2c237122f636f41da54789c3e60c079010cf92ce9f3c40d9502df5494"
+    },
+    {
+      "path": "records/history/workflow-kit-v1.7.zip",
+      "sha256": "c23f0e460912e006cac75a643276b1bf664f81e369eb3e621db9c102863282fa"
+    },
+    {
       "path": "records/history/workflow-kit-v1.json",
       "sha256": "c3ecc5c7c3967d7c05f58cae6def9003c2bf56cbb0fae0f1efc54768c8903728"
     },
@@ -154,23 +186,19 @@
     },
     {
       "path": "records/mermaid-evidence.json",
-      "sha256": "2b92badf4c3a41ad5918070b4982bb837ea0ed2dd9ad0ce5778ea3ede9a68198"
+      "sha256": "2e46299e84af7c17cff6ac6e0ada07bd7fa4ed4440c3a7bd6db7ef316e19e985"
     },
     {
       "path": "records/validation.md",
-      "sha256": "4aa9d1280683b203f040d178faee42519f1f9f2e500ddd8dd50b7deda0556233"
+      "sha256": "d08987d6b51d7db0ec74b276c6713216614800583ee475bc1db897fa63485f9b"
     },
     {
       "path": "requests/README.md",
       "sha256": "8564180f74c58a926f52e3bf8fd0d21e1fb4bd2a7c36764d2eacba66ad8d714c"
     },
     {
-      "path": "requests/board.json",
-      "sha256": "c82197a6e3d770988d186cd76a2b65d5cdf18afe9b07e5b1e7d8121d35b6a911"
-    },
-    {
       "path": "research/source-inventory.json",
-      "sha256": "e76aa47e8bcc5556cbc6ade68767d88abc7f6cb419a145036a1169a3bfde30c1"
+      "sha256": "edd1b6c655e964e52092beeb846bf7b680863a81732d2d2d5a525c46db794c23"
     },
     {
       "path": "research/source-review.md",
@@ -178,23 +206,31 @@
     },
     {
       "path": "scripts/README.md",
-      "sha256": "bca174485be3d9f1ef730c0c4961235fb7119d114a2839bd40dd680a2063ed83"
+      "sha256": "c3a945f0efe02c2cce698da12b622f2c7917d662cfb75d5d5843d1c5138f2084"
     },
     {
       "path": "scripts/check_mermaid.py",
       "sha256": "7c6d08d53a14f52a92ae7f7007700580328af312e6fc67200a2b7297bdce5f24"
     },
     {
+      "path": "scripts/publish_module.py",
+      "sha256": "b8618f29a95ab228f58522ab0dd04dbbc7ab4f288640368ae5c74aeaa0079465"
+    },
+    {
       "path": "scripts/render_workflows.py",
       "sha256": "5a98468df95b18716b6544875c6ceabea849ab97c194f9f33a6024d3f1a47279"
     },
     {
+      "path": "scripts/test_validate.py",
+      "sha256": "d66d6dd0bae47cf6f687822325abf08baaa6cdb1a82410619f192f2091f5ff25"
+    },
+    {
       "path": "scripts/validate.py",
-      "sha256": "a7a245bea87a0602a63a4cd6057937f9c31417742021e8f262f0fa4ec3eef203"
+      "sha256": "03a6742e24b2610cbebebbca5b6ba3f03d7255ead8225625999550524aa23d31"
     },
     {
       "path": "templates/README.md",
-      "sha256": "5247e582c1106bd279ced46999359e0ec68c050cf8e8f528538218f8173b1012"
+      "sha256": "6af7b5e6e0174edc1f7a12f133ef52cdf25d86dfd7722fa2bb2e6ec9537e02b6"
     },
     {
       "path": "templates/development/delivery.md",
@@ -207,6 +243,18 @@
     {
       "path": "templates/development/task.md",
       "sha256": "91e4515fc4d849d8a9f270a5d9c22ced440a2c412ba0f78477e2c3f1c4be5849"
+    },
+    {
+      "path": "templates/modules/README.md",
+      "sha256": "0544c49fbf9163354c13c6d70f5503e50a99ac1499b7f3485f77bfe4d5537f4b"
+    },
+    {
+      "path": "templates/modules/implementation-observation.json",
+      "sha256": "534cc73099afb6ec3cdb1806ec05b173a22b207d24a9a5f40c636d10b7fa3843"
+    },
+    {
+      "path": "templates/modules/snapshot-plan.json",
+      "sha256": "de2dc34cf0d214af07eb02c676cec901408baae637741ac31ca305b492b48b7a"
     },
     {
       "path": "templates/product/acceptance.md",
@@ -222,7 +270,7 @@
     },
     {
       "path": "templates/product/handover.md",
-      "sha256": "198c4ca9a23beb740c10a83cd6f544c39e18df67554c42ca680ecd690f2b8f10"
+      "sha256": "0c93cd2ebf19699747687a510ef6a0a2f4ad81107d3b7bb77963fd6838895c4a"
     },
     {
       "path": "templates/product/operations-and-use-cases.md",
@@ -242,11 +290,11 @@
     },
     {
       "path": "templates/qa/handover.md",
-      "sha256": "828dd969eb10735f578b97f8b125edc1a83c7407a90c8afb3abf8276d350b877"
+      "sha256": "0ea17745b96a6d45a08b3e4dfb12d1478316795febb1b15eea109f39fc61eaff"
     },
     {
       "path": "templates/qa/plan.md",
-      "sha256": "edad74fd41c1d204c4aae960334b2481d1e0be0797c05f8c0bcb69c87f74f0db"
+      "sha256": "690f1e0d8418dcb6c8d17e6603c72989195923382746426aefe93fffb33b3660"
     },
     {
       "path": "templates/qa/scenarios.md",
@@ -274,7 +322,7 @@
     },
     {
       "path": "templates/shared/handover.md",
-      "sha256": "0001011a98e1807f1623c522706dcb9c0d253f40799a04b65d7cdd2239940249"
+      "sha256": "9dba2905cec4d63eb0545c10b176af9939ff7998e79eaa514e5a8c04317bbefd"
     },
     {
       "path": "templates/shared/interview.md",
@@ -301,6 +349,10 @@
       "sha256": "e0a21ea052c2f903daa58d5ec4514c0943c812c52e72feafdfe9c00f51188b4c"
     },
     {
+      "path": "templates/shared/team-interview.md",
+      "sha256": "858cfbde06e71aca80d361605e6912210b214e23ae5d9d6a0e46c0a150c74c23"
+    },
+    {
       "path": "templates/shared/traceability.csv",
       "sha256": "21baac1ad89220252ad25b939963174c5ad09261df477e01a7bc44c0c37ae597"
     },
@@ -322,7 +374,7 @@
     },
     {
       "path": "templates/technical/handover.md",
-      "sha256": "01b93dd0c7976259b15ffeb38ebbaa9ff6f666093e194516e18f946f84bea72a"
+      "sha256": "c1d58f853d19904d686aefddc4b1f47d3c0648e3b918fdde17627dca924ca085"
     },
     {
       "path": "templates/technical/impact-map.md",
@@ -334,7 +386,7 @@
     },
     {
       "path": "templates/technical/index.md",
-      "sha256": "b11d3e93cacd92d4c93f0acafb7755638f8a7e28220d773fcb556c0264208151"
+      "sha256": "52859c440b2080e7b94b3bb3e51f1d056ffedef9c50d752f12da35217ff6d13b"
     },
     {
       "path": "templates/technical/module-and-domain.md",
@@ -342,7 +394,7 @@
     },
     {
       "path": "templates/technical/module/change-spec.md",
-      "sha256": "91ef02e7a20fd4d661dad7a8c217d98d3a59283ee320c105ea7aa7a3ddef472a"
+      "sha256": "ff594d19363ee00e8f69984451706f397386064369e48b8bada6eecf045b1a42"
     },
     {
       "path": "templates/technical/module/test-mapping.md",
@@ -358,11 +410,11 @@
     },
     {
       "path": "workflows/00-node-contract.md",
-      "sha256": "262f84b7b85e4cafee82f85c8bc66469ca580a1541e104b252d863ab3f1177b5"
+      "sha256": "e98affc60cb66ffa077dbb121a8aacb65c4bdf0c522ed93299c5f214356aab9a"
     },
     {
       "path": "workflows/00-team-entry.md",
-      "sha256": "61a4a608bff98a9b6615b228b8fb0f4a31f0ef71d7b5b7a641ac86966fe4f079"
+      "sha256": "a68b1d493700e094359e24f21928c5b882483f1b7ce43d135404620a7d530056"
     },
     {
       "path": "workflows/01-intake.md",
@@ -370,15 +422,15 @@
     },
     {
       "path": "workflows/02-product.md",
-      "sha256": "8e3d7862b58dc4e0def982304c10c9ff5eac89f269f75e8a4679331e73600abc"
+      "sha256": "699256a6b46663d7d3bf6bde6082167ecaac5224accb6ab0fe9f247abc866fe0"
     },
     {
       "path": "workflows/03-qa.md",
-      "sha256": "5a8f7ab7a9fc98ce3a21dafb5d35fd9266df85c9cc76262e5698c6101a7ad7fb"
+      "sha256": "e586f39f858a842dd6184217dc5d9521d1de2852f07ec8dbf63f63cba741ec05"
     },
     {
       "path": "workflows/04-technical.md",
-      "sha256": "a78246e64616a4faf92fcae1f3729fd983843a1f111717e2e1c94b1f605121e9"
+      "sha256": "5646311dd60a7387bc63c8d45663ff7d4a469d78553ecb741c61bbbc8cd2a250"
     },
     {
       "path": "workflows/05-implementation.md",
@@ -386,25 +438,25 @@
     },
     {
       "path": "workflows/06-review-and-acceptance.md",
-      "sha256": "c255e7b8e0fa39760d972638aac60859e2cffff930b86a4462ecd1a9aedf7464"
+      "sha256": "411a98383dbb534b6b18784125b42873e30d5a8bd2266b66a2a6e50ac6ebe18b"
     },
     {
       "path": "workflows/07-change-and-bug.md",
-      "sha256": "167d130a9dcd640e5ac1be9506b2d64a3e63af5f112b6eef0e44d02f5f181574"
+      "sha256": "fb3d84246c533751739746e615d723c05ae3ab1e66ab8d1dd589b4feb79c9aa7"
     },
     {
       "path": "workflows/08-release.md",
-      "sha256": "8c1369f8f5067e734286cb8462e72d2f9623839482e4ca1980fa9a2ce3849024"
+      "sha256": "84bf9bbcb793e84257490d5591b1ada64f9c31e3123765f6940dcad098b93096"
     },
     {
       "path": "workflows/README.md",
-      "sha256": "4f728d4ca342081312297243e4775fddc32042a3c84ded5d03a396bef8588d43"
+      "sha256": "cbe39275175108258c2c8d94ab445f05f393e5dfc4a2964c5b83579c5285d7ba"
     },
     {
       "path": "workflows/graph.json",
-      "sha256": "4c30c54aeefa0f3dc3c06c1af878ed8f40b954f6a42488ea8921e023840c6b17"
+      "sha256": "4a1b3e379d0ce28539a624f3b8e5bace53108b0c6bb929b9c5d22f13464072c0"
     }
   ],
   "openBlockers": [],
-  "pendingHumanDecision": "The standalone documentation correction and Git publication were explicitly requested; approval of the full v1.5 kit remains pending."
+  "pendingHumanDecision": "The requester authorized the module library after G-T and selected separate implementation evidence; approval of the full v1.7 kit remains pending."
 }

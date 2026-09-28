@@ -1,22 +1,16 @@
 {
-  "schemaVersion": 1,
-  "date": "2026-09-28",
   "status": "passed",
   "count": 15,
-  "tool": "@mermaid-js/mermaid-cli",
-  "version": "12.0.0",
-  "renderer": "headless Google Chrome",
-  "nodeVersion": "26.5.0",
   "sourceDiagrams": [
     {
       "path": "README.md",
       "diagram": 1,
-      "sha256": "35f9001aa6d02f9a0256d8b7a8c99fc84399110c84a7ffe513dc8c7a6fe24d12"
+      "sha256": "6ea8f3924ae77f0ab96129a221bd68794651849af24412ad2b9c8079e4eb0d53"
     },
     {
       "path": "docs/02-state-and-versioning.md",
       "diagram": 1,
-      "sha256": "353daaea4677e5da260bae8b1b73260a5c2d331c08dba475d4caf6b957a524f2"
+      "sha256": "db3fb68c558266f96e2e283d37ef5f72a638395a25d2fe91660e141ef17ef936"
     },
     {
       "path": "examples/otp-issue/product.md",
@@ -41,7 +35,7 @@
     {
       "path": "workflows/00-team-entry.md",
       "diagram": 1,
-      "sha256": "fee8d774fc951c2a95128f348c9711038924f9768726335ae95204e5aefd2715"
+      "sha256": "602761670a5b20eaf76c1b96c15ca668be3a44036783fa00eac2b7b9a4abdc61"
     },
     {
       "path": "workflows/01-intake.md",
@@ -56,12 +50,12 @@
     {
       "path": "workflows/03-qa.md",
       "diagram": 1,
-      "sha256": "6cd1380767bd4f86b6fa02d0a77c336a337b121482a49dc6b0b49bb2200234b3"
+      "sha256": "f00ef845792e06bd3d4d9c0f0a9fa2bca5ccdafa408a8ac0bbd8821d32ec5ca9"
     },
     {
       "path": "workflows/04-technical.md",
       "diagram": 1,
-      "sha256": "c4152d75a976dc068555b6495f05b7640251d0b0f92f6ae040dacb656659c4b0"
+      "sha256": "4681cba313bd2c5d695f47a99900957f50d66dd2016ecd1c9446f406d4718323"
     },
     {
       "path": "workflows/05-implementation.md",
@@ -85,17 +79,23 @@
     }
   ],
   "command": [
-    "/tmp/product-workflow-mermaid-20260928/node_modules/.bin/mmdc",
+    "/tmp/product-workflow-mermaid-v1.7-AtUord/node_modules/.bin/mmdc",
     "-i",
-    "/private/tmp/product-workflow-mermaid-20260928/v1.5-render/all-diagrams.md",
+    "/private/tmp/product-workflow-mermaid-v1.8-render/all-diagrams.md",
     "-o",
-    "/private/tmp/product-workflow-mermaid-20260928/v1.5-render/rendered.md",
+    "/private/tmp/product-workflow-mermaid-v1.8-render/rendered.md",
     "-p",
-    "/private/tmp/product-workflow-mermaid-20260928/v1.5-render/puppeteer.json",
+    "/private/tmp/product-workflow-mermaid-v1.8-render/puppeteer.json",
     "-e",
     "svg"
   ],
-  "stdout": "Found 15 mermaid charts in Markdown input\n ✅ ./rendered-5.svg\n ✅ ./rendered-6.svg\n ✅ ./rendered-7.svg\n ✅ ./rendered-8.svg\n ✅ ./rendered-9.svg\n ✅ ./rendered-4.svg\n ✅ ./rendered-11.svg\n ✅ ./rendered-12.svg\n ✅ ./rendered-13.svg\n ✅ ./rendered-14.svg\n ✅ ./rendered-15.svg\n ✅ ./rendered-10.svg\n ✅ ./rendered-3.svg\n ✅ ./rendered-2.svg\n ✅ ./rendered-1.svg\n ✅ /private/tmp/product-workflow-mermaid-20260928/v1.5-render/rendered.md\n",
+  "stdout": "Found 15 mermaid charts in Markdown input\n ✅ ./rendered-5.svg\n ✅ ./rendered-4.svg\n ✅ ./rendered-7.svg\n ✅ ./rendered-3.svg\n ✅ ./rendered-2.svg\n ✅ ./rendered-1.svg\n ✅ ./rendered-6.svg\n ✅ ./rendered-12.svg\n ✅ ./rendered-8.svg\n ✅ ./rendered-9.svg\n ✅ ./rendered-15.svg\n ✅ ./rendered-10.svg\n ✅ ./rendered-11.svg\n ✅ ./rendered-14.svg\n ✅ ./rendered-13.svg\n ✅ /private/tmp/product-workflow-mermaid-v1.8-render/rendered.md\n",
   "stderr": "",
+  "schemaVersion": 1,
+  "date": "2026-09-28",
+  "tool": "@mermaid-js/mermaid-cli",
+  "version": "12.0.0",
+  "renderer": "headless Google Chrome",
+  "nodeVersion": "22.22.0",
   "scope": "All current Mermaid blocks parsed and rendered to SVG; no claim of visual inspection of every diagram."
 }

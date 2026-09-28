@@ -12,6 +12,9 @@
 | qa/، شامل سناریو، coverage، plan و execution | QA | فقط خواندن؛ فنی test-mapping خودش را می‌نویسد و توسعه evidence خودش را می‌دهد |
 | technical/ و اسناد طراحی canonical معرفی‌شده در index | فنی | فقط خواندن؛ کدزن برای اصلاح طراحی به فنی بازمی‌گرداند |
 | development/ و مسیرهای کد/تستِ صریحاً مجاز در task و Backend | توسعه، پس از اختیار پیاده‌سازی | فنی مشخصات task را در implementation-plan می‌نویسد؛ فایل task اجرایی را توسعه می‌سازد |
+| modules/<slug>/README.md، current.json و revisions/ در ریشهٔ مجموعه | فنی؛ انتشار bytes مصوب فقط در T09 پس از G-T | سایر تیم‌ها فقط خواندن/یافته؛ نگارش candidate در technical/ همان درخواست |
+| modules/<slug>/implementation/ در ریشهٔ مجموعه | Coordinator؛ فقط metadata و evidence واقعی اجرای کد | تغییر معنا یا طرح ماژول مجاز نیست؛ رکوردهای observation append-only |
+| modules/README.md در ریشهٔ مجموعه | نگهداری workflow | راهنمای ثابت کتابخانه، نه وضعیت ماژول واقعی |
 | فایل‌های release/runbook عملیاتی خارج مالکیت‌های بالا | تیم انتشار، فقط با scope و مسیر صریح | مالکیت فنیِ سند طراحی با نیاز به انتشار عوض نمی‌شود |
 | requests/board.json در ریشه؛ tracking.md، applicability.md، traceability.csv، baselines/، approvals/، receipts/، reviews/، runs/ و changes/ | هماهنگ‌کنندهٔ workflow؛ ثبت کنترل و ارجاع | خروجی و بازخورد تیم‌ها ورودی ثبت است؛ این محل مجوز ویرایش محتوای product/qa/technical/development نیست |
 | AGENTS.md، docs/، workflows/، templates/، scripts/، records/ و examples/ در ریشهٔ مجموعه | نگهداری workflow با درخواست صریح تغییر همین مجموعه | تیم پرونده برای عبور از محدودیت، قواعد و قالب‌های عمومی را تغییر نمی‌دهد |

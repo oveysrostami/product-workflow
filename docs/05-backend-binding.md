@@ -4,7 +4,7 @@
 
 ## انتخاب مخزن کد هدف
 
-در T01/T02 مسیر checkout، repository، revision، دستور AGENTS و محل قواعد کدِ هدف در request/technical-index ثبت می‌شوند. محل نصب ثابت یا checkout همسایه فرض نمی‌شود. مسیرهای کد و commandهای زیر نسبت به همان checkout معرفی‌شده‌اند؛ در این پروژه اجرا نمی‌شوند. اگر ابزار یا قابلیت نمونه در هدف وجود ندارد، فنی معادل واقعی یا prerequisite را مشخص می‌کند؛ غیبت آن با نتیجهٔ ساختگی پوشانده نمی‌شود. طراحی اولیه می‌تواند با قالب‌های محلی آماده شود؛ تأیید انطباق با کد و اجرای تغییر نیاز به ورودی واقعی همان مخزن دارد.
+در T01 ورودی مخزن هدف دریافت و در T02 مسیر checkout، repository، revision، مسیر `AGENTS.md` و محل قواعد کدِ هدف توسط تیم فنی در `requests/<request-id>/technical/index.md` ثبت می‌شوند. [قالب index فنی](../templates/technical/index.md) محل این اطلاعات است؛ `request.md` متعلق به محصول است و تیم فنی آن را ویرایش نمی‌کند. محل نصب ثابت یا checkout همسایه فرض نمی‌شود. مسیرهای کد و commandهای زیر نسبت به همان checkout معرفی‌شده‌اند؛ در این پروژه اجرا نمی‌شوند. اگر ابزار یا قابلیت نمونه در هدف وجود ندارد، فنی معادل واقعی یا prerequisite را مشخص می‌کند؛ غیبت آن با نتیجهٔ ساختگی پوشانده نمی‌شود. طراحی اولیه می‌تواند با قالب‌های محلی آماده شود؛ تأیید انطباق با کد و اجرای تغییر نیاز به ورودی واقعی همان مخزن دارد.
 
 ## adapter نمونه و محدودهٔ کاربرد
 
@@ -95,6 +95,6 @@ syntax را با ابزار جاری تطبیق دهید؛ بعضی نمونه�
 
 ## اتصال بستهٔ ماژولی درخواست به کد
 
-`technical/impact-map.md` نام ownerهای واقعی و caller/consumerهای متأثر را به شواهد checkout وصل می‌کند. `technical/modules/<owner>/change-spec.md` فقط delta و reference دقیق به `backend/modules/<owner>/docs/` است؛ تغییر قرارداد عمومی باید test-mapping producer و consumer و cross-module-flows را به‌روز کند. باگ/refactor هم impact-map دارند، حتی اگر فقط یک ردیف لازم باشد.
+`technical/impact-map.md` نام ownerهای واقعی و caller/consumerهای متأثر را به شواهد checkout وصل می‌کند. `technical/modules/<owner>/change-spec.md` delta همین درخواست را نگه می‌دارد؛ snapshot کامل نامزد در همان بسته آماده و فقط پس از G-T در modules/ منتشر می‌شود. revision اسناد `backend/modules/<owner>/docs/` شاهد قواعد و وضعیت کد است؛ تغییر قرارداد عمومی باید test-mapping producer و consumer و cross-module-flows را به‌روز کند. باگ/refactor هم impact-map دارند، حتی اگر فقط یک ردیف لازم باشد.
 
 مسیر taskهای توسعه `development/modules/<owner>/tasks/<task-id>.md` است. migration و contract producer پیش‌نیاز task consumer هستند فقط وقتی dependency واقعی چنین اقتضا کند؛ ترتیب از graph مصوب تعیین می‌شود. تغییر مشترک host/platform با component target و task دارای مسئول مشخص ثبت می‌شود. gate هر ماژول و سپس candidate کل درخواست طبق همان verification policy بررسی می‌شوند.

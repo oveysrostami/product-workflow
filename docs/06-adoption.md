@@ -36,4 +36,4 @@ refactor بدون تغییر رفتار می‌تواند به baseline محصو
 
 ## ورود پرونده‌های قبلی به ساختار ماژولی
 
-هنگام ویرایش پروندهٔ فنی موجود، ابتدا impact-map را از ownerها و referenceهای فعلی استخراج کنید. متن canonical Backend جابه‌جا یا کپی نمی‌شود؛ در modules هر target فقط change-spec و test-mapping ساخته می‌شود. scenario مشترک همان ID قبلی را نگه می‌دارد و scope/targetها به coverage اضافه می‌شوند. تغییر صرف محل/ارجاع، تصمیم محصول تازه نیست؛ نسخهٔ بسته و approvalهای متأثر باید به‌روز شوند.
+هنگام ویرایش پروندهٔ فنی موجود، ابتدا impact-map را از ownerها و referenceهای فعلی استخراج کنید. اسناد کد Backend در این مجموعه جابه‌جا نمی‌شوند؛ در technical/modules هر target، change-spec و test-mapping و snapshot کامل نامزد از منابع نسخه‌دار تهیه می‌شوند. انتشار وضعیت جاری در modules/ فقط پس از G-T و T09 طبق [قرارداد کتابخانه](10-module-library.md) است. scenario مشترک همان ID قبلی را نگه می‌دارد و scope/targetها به coverage اضافه می‌شوند. تغییر صرف محل/ارجاع، تصمیم محصول تازه نیست؛ نسخهٔ بسته و approvalهای متأثر باید به‌روز شوند.
