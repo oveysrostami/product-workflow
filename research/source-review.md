@@ -1,46 +1,36 @@
-# بررسی منابع و دلیل طراحی
+# منابع داخلی و پوشش نیازمندی‌های workflow
 
-تاریخ snapshot: ۲۰۲۶-۰۹-۲۸. مقصد `product-qa-tech-workflow` در آغاز خالی بود. این درخواست **طراحی فرآیند و قالب‌ها** است؛ تغییر رفتار هیچ ماژول محصول یا پیاده‌سازی Backend در scope آن نیست.
+نسخهٔ جاری مستقل است: تمام قواعد لازم برای اجرای مراحل محصول، QA، طراحی فنی، کنترل وضعیت و تحویل در همین مخزن آمده‌اند. [فهرست منابع داخلی](source-inventory.json) مسیر نسبی و hash فایل‌های فعال همین پروژه را نگه می‌دارد؛ وجود checkout دیگری پیش‌نیاز خواندن یا بررسی مجموعه نیست.
 
-## دامنهٔ بررسی و حدود ادعا
+## محل هر نیازمندی
 
-[فهرست منابع](source-inventory.json) شامل **۲۷۵ فایل متنی** است: ۹۲ فایل Product-Doc و ۱۸۳ فایل Backend، شامل تمام Markdownهای قابل دسترسی و JSONهای مصاحبه/قالب/سیاست مرتبط. برای همهٔ این فایل‌ها مسیر، hash، اندازه، تعداد خط و ساختار عنوان‌ها ثبت شد. این inventory با مطالعهٔ معنایی یکسان نیست.
+| نیاز | مرجع داخلی و خروجی |
+|---|---|
+| انتخاب تیم و پرونده | [ورودی تیم](../workflows/00-team-entry.md) و [برد JSON](../requests/board.json)؛ انتخاب تیم، نمایش صف معتبر و دریافت واقعی |
+| دریافت ایده، routing و تغییر رفتار | [راهنمای محصول](../docs/09-product-authoring.md) و [I nodeها](../workflows/01-intake.md)؛ پروندهٔ واحد، گفتهٔ کاربر دربارهٔ پیاده‌سازی و revision/درخواست مستقل |
+| مصاحبه و ثبت تصمیم | [مصاحبه](../templates/shared/interview.md)، [decisions](../templates/shared/decisions.md) و [P nodeها](../workflows/02-product.md)؛ سؤال مؤثر، پاسخ جزئی، موارد باز و منبع تصمیم |
+| قرارداد و عمق محصول | [قالب قرارداد](../templates/product/contract.md)، [جریان و داده](../templates/product/flows-and-data.md)، [عملیات/UC](../templates/product/operations-and-use-cases.md)، [پذیرش](../templates/product/acceptance.md) |
+| QA مستقل | [Q nodeها](../workflows/03-qa.md) و [قالب‌ها](../templates/README.md)؛ plan/scenarios/coverage و oracle، regression و evidence اجرا |
+| طراحی فنی قابل آزمون | [T nodeها](../workflows/04-technical.md)، [ساختار اسناد](../docs/03-artifact-map.md) و [اتصال مخزن کد هدف](../docs/05-backend-binding.md)؛ impact-map، بستهٔ هر ماژول، جریان مشترک و برنامهٔ اجرا |
+| توسعه، review و تحویل | [D nodeها](../workflows/05-implementation.md)، [V nodeها](../workflows/06-review-and-acceptance.md) و [release](../workflows/08-release.md)؛ task، evidence واقعی و اختیار اجرای scope |
+| approval، receipt و ابطال نسخه | [نسخه و وضعیت](../docs/02-state-and-versioning.md)، [gateها](../docs/04-gates.md) و [قرارداد node](../workflows/00-node-contract.md) |
+| برگشت، باگ و اصلاح هدفمند | [C/B nodeها](../workflows/07-change-and-bug.md) و [tracking](../templates/shared/tracking.md)؛ علت، تیم/نسخهٔ مقصد و بستن با دریافت معتبر |
+| مرز نوشتن تیم‌ها | [مالکیت فایل‌ها](../docs/08-team-file-ownership.md)؛ فایل تیم دیگر فقط خواندنی و اصلاح با تیم مالک |
 
-مطالعهٔ عمیق برای طراحی فرآیند بر AGENTSها، workflowهای Product-Doc و تصمیم‌های قبلی، قالب‌ها، قرارداد/پذیرش و نمودارهای OTP، وضعیت و ابهام‌های Account/Notification/Inquiry، handbook و authority/development/verification Backend، قالب‌های فنی و workflowهای agent متمرکز بود. snapshot معماری، profile/binding، مثال‌ها و اسناد ownerها از طریق فهرست و نقاط مرتبط با قرارداد، ownership و evidence بررسی شدند؛ این کار ممیزی خط‌به‌خط همهٔ کدها، همهٔ رفتارهای محصول یا گواهی runtime conformance نیست.
+## مثال‌ها و حدودشان
 
-ساختار واقعی با `pom.xml` ریشه و application-host، policy suiteها، script wrapperها و نمونهٔ مسیر `CompleteTask.execute` تطبیق داده شد. هیچ build، تست Backend یا استقرار اجرا نشده است؛ verification این تحویل مربوط به مجموعهٔ مستندات جدید است.
+[مثال مستقل صدور و replay](../examples/otp-issue/README.md) قرارداد محلی، شش پذیرش، QA و candidate فنی دارد. شناسه‌های DEMO-P/AC/QA در همین مثال تعریف و ردیابی می‌شوند؛ هیچ قاعده‌ای برای فهم آن از مخزن بیرونی خوانده نمی‌شود. مثال slice آموزشی است و approval، کد اجراشده یا سیاست یک محصول واقعی را ادعا نمی‌کند.
 
-- Backend revision: `bd0eef6821df0e700fea9bb541b731dc61fe4371`
-- Product-Doc revision: `8808962ba709e7e7d657ac95be54e3be8132cc5f`
-- هر دو مخزن در بررسی اولیه تغییر ثبت‌نشده نداشتند؛ هیچ‌کدام توسط این کار ویرایش نشدند.
+[نمونهٔ چندماژولی](../examples/module-impact.md) و [سناریوهای تیم/برگشت](../examples/team-entry.md) اثر direct/dependent/compatibility-only، ادامه از checkpoint و مرز تیم را پوشش می‌دهند.
 
-## ماژول‌های محصول بررسی‌شده و علت
+## مخزن کد به‌عنوان ورودی اجرا
 
-| ماژول | علت ارتباط با طراحی workflow | نتیجهٔ طراحی، نه تصمیم جدید محصول |
-|---|---|---|
-| [OTP](../../product-doc/modules/otp/README.md) | نمونهٔ نسبتاً کامل جریان، داده، UC و پذیرش | کیفیت شرح حفظ؛ قالب جدید محصول را از مکانیزم فنی جدا می‌کند |
-| [Account](../../product-doc/modules/account/open-questions.md) | چند stakeholder/ماژول، مرز Profile، KYC و جریان مرورگر باز | open item و owner و blocking scope لازم است؛ «ثبت‌شده» معادل approved نیست |
-| [Notification](../../product-doc/modules/notification/00-product-contract.md) | stateهای پذیرش/انتظار/ارسال/تحویل، provider و logging | QA باید oracle هر حالت و عدم تکرار اثر برای تکمیل log را بسنجد |
-| [Inquiry](../../product-doc/modules/inquiry/README.md) | چند نوع/provider، mapping، immediate/deferred و تصمیم‌های باز | template ارتباط و داده منعطف؛ event از وجود history یا async استنتاج نشود |
+workflow مستقل است؛ اجرای تغییر واقعی همچنان به checkout کدِ هدف و قواعد فعلی آن نیاز دارد. این ورودی در T01/T02 برای همان درخواست معرفی می‌شود؛ نام و محل نصب ثابت ندارد. adapter نمونهٔ [Backend](../docs/05-backend-binding.md) قواعد و commandهای نمونه را در همین پروژه توضیح می‌دهد؛ در هدف متفاوت، مسئول فنی نسخه، ابزار و قابلیت‌های واقعی را بررسی و ثبت می‌کند.
 
-## یافته‌های اصلی و پاسخ در نسخهٔ جدید
+ورود قرارداد قبلی نیز [اختیاری](../docs/06-adoption.md) است. کاربر فایل یا snapshot قابل دسترسی معرفی می‌کند؛ شروع درخواست تازه با قالب‌های داخلی انجام می‌شود.
 
-| مشاهدهٔ مستند | شاهد | اثر | پاسخ طراحی |
-|---|---|---|---|
-| مسیر عمومی قدیمی محصول→فنی→پیاده‌سازی است | [README Product-Doc](../../product-doc/README.md) | QA مستقل و تحویل رسمی آن دیده نشده | Q01–Q06، G-Q و handover QA |
-| workflowها انتهای فاز محصول را می‌بندند | [ساخت ماژول](../../product-doc/workflows/new-module-documentation.md) | مسئولیت و خروجی مراحل بعد به agent واگذار می‌شود | T/D/V nodeهای دقیق با input/output/gate |
-| عنوان‌های دیتابیس/Entity/algorithm/endpoint و جزئیات مکانیزمی کنار قرارداد محصول هستند | [داده OTP](../../product-doc/modules/otp/04-database-architecture.md)، [UC OTP](../../product-doc/modules/otp/09-use-cases.md) | خطر تبدیل پیشنهاد تکنیکی به الزام و رفتار پنهان در ضمیمه | contract مرجع رفتار؛ مفاهیم داده در محصول، schema/lock/receipt در فنی؛ source mapping |
-| هر بازخورد انسان به مصاحبه‌گر بازمی‌گردد | [ساخت ماژول](../../product-doc/workflows/new-module-documentation.md)، [تغییر](../../product-doc/workflows/existing-module-change.md) | تکرار مصاحبه حتی برای اصلاح نگارش محتمل است | C01 تفکیک نوع feedback و بازگشت هدفمند |
-| سه subagent دائمی برای محصول مقرر شده‌اند | [ساخت ماژول](../../product-doc/workflows/new-module-documentation.md) | وابستگی روش اجرا به امکانات ابزار و هزینهٔ ثابت | نقش‌های روشن و review مستقل حفظ؛ مدل اجرای نقش قابل انتخاب، پیشنهاد نیازمند تصویب این نسخه |
-| approval جدا و hash اسناد وجود دارد | [approval قدیمی](../../product-doc/templates/approval/README.md) | پایهٔ خوبی برای snapshot است، اما QA/فنی/اجرای کد را پوشش نمی‌دهد | manifest مستقل، approval/receipt جدا، invalidation وابستگی و candidate-bound evidence |
-| تصمیم‌های routing صریح قبلی وجود دارند | [WD-01 تا WD-15](../../product-doc/workflows/workflow-design-decisions.md) | نباید گفتهٔ کاربر درباره پیاده‌سازی را مشروط به audit کد کرد | قواعد routing حفظ؛ بررسی کد فقط در فنی |
-| گزارش باگ روشن مسیر کوتاه و دریافت فنی دارد | [باگ](../../product-doc/workflows/bug-report.md) | نباید با مصاحبهٔ کامل یا ادعای fixed اشتباه شود | B01–B08 با QA regression و continuation به T/D/V |
-| core از reference جداست | [POM](../../backend/pom.xml)، [authority](../../backend/_doc/15-authority-and-traceability.md) | کپی مثال می‌تواند dependency/product scope اشتباه بسازد | T02 capability matrix و ثبت host/owner صریح |
-| قواعد و ابزار Backend موجود و نسبتاً دقیق‌اند | [AGENTS](../../backend/AGENTS.md)، [catalog](../../backend/_agent-doc/README.md) | workflow جدید نباید authority فنی دوم بسازد | binding به اسناد canonical و commands موجود |
-| اجرای تست با evidence و skip محدود است | [verification](../../backend/_doc/12-verification-and-operations.md)، [policy](../../backend/scripts/ci/policy/verification.v1.json) | exit صفر یا فایل test دلیل readiness نیست | D05 و V02 با report واقعی و fresh؛ release جدا |
+## تاریخچه و بررسی
 
-## تصمیم‌های پیشنهادی این طراحی
+نسخه‌های پیشین در Git و بسته‌های history حفظ شده‌اند تا منشأ تغییرها از بین نرود. فایل‌های آرشیوی ورودی اجرا یا مرجع الزامی نسخهٔ جاری نیستند. فهرست جاری فقط فایل‌های محلی فعال را شامل می‌شود؛ self-inventory و خروجی‌های متغیر validation/manifest از آن بیرون‌اند تا وابستگی دوری ایجاد نشود.
 
-فایل‌ساختار، شناسه‌های node و gate، انتخاب role به‌جای الزام تعداد subagent، سیاست دو چرخهٔ تکراری برای escalation و شکل JSON/CSV انتخاب‌های طراحی این نسخه‌اند؛ تصمیم‌های قبلیِ تأییدشدهٔ سازمان معرفی نشده‌اند. خواستهٔ مستقیم این نوبت ترتیب محصول→QA→فنی→AI developer→review و تعریف nodeبهnode است.
-
-ادعای «نبود تعارض» برای کل منابع قدیمی نداریم. مثلاً جزئیات OTP support docها باید هنگام مهاجرت با contract اصلی تطبیق داده شود؛ boilerplate drift و ابزارهای آینده همواره با authority/status فعلی خوانده شوند. ورود هر ماژول واقعی طبق [adoption](../docs/06-adoption.md) بازبینی و تأیید خودش را لازم دارد.
+checker مقصد لینک‌های محلی را به داخل این مخزن محدود و hash منابع جاری را بررسی می‌کند. [گزارش validation](../records/validation.md) اجرای واقعی بررسی را ثبت می‌کند؛ استقلال clone با کپی مجموعه به محیطی بدون مخزن همسایه آزموده می‌شود. این بررسی اجرای Backend یا تصویب انسانی پرونده‌ای واقعی نیست.

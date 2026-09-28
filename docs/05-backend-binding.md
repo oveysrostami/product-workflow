@@ -1,27 +1,31 @@
 # اتصال فرآیند به boilerplate موجود
 
-مرجع این نگاشت checkout بررسی‌شده در [گزارش منابع](../research/source-review.md) است. در شروع هر اجرای واقعی، revision و قواعد جاری دوباره خوانده می‌شوند. این صفحه راهنماست و authority موازی با [AGENTS Backend](../../backend/AGENTS.md) نمی‌سازد.
+این صفحه قرارداد داخلی اتصال به مخزن کد هدف و یک adapter نمونه برای ساختار بررسی‌شدهٔ Backend است. برای استفاده از workflow و قالب‌ها نیازی به checkout همسایه نیست. در شروع هر اجرای واقعی، revision و قواعد جاری دوباره خوانده می‌شوند. این صفحه راهنماست و authority موازی با `AGENTS.md` (AGENTS Backend) نمی‌سازد.
 
-## یافتهٔ ساختاری
+## انتخاب مخزن کد هدف
 
-[reactor](../../backend/pom.xml) پیش‌فرض شامل `platform/kernel`، `contracts`، `runtime`، `adapters-spring`، `testing` و `application-host` است. نمونه‌های Access/Tasks/Activity و fixtureهای DeliveryProbe/WorkflowProbe در profile جدا `reference-examples` هستند. Java 25، Spring Boot 4.1.1، wrapper Maven 3.9.11 و PostgreSQL 18 baseline checkout است؛ تصمیم ارتقا در scope این طراحی نیست.
+در T01/T02 مسیر checkout، repository، revision، دستور AGENTS و محل قواعد کدِ هدف در request/technical-index ثبت می‌شوند. محل نصب ثابت یا checkout همسایه فرض نمی‌شود. مسیرهای کد و commandهای زیر نسبت به همان checkout معرفی‌شده‌اند؛ در این پروژه اجرا نمی‌شوند. اگر ابزار یا قابلیت نمونه در هدف وجود ندارد، فنی معادل واقعی یا prerequisite را مشخص می‌کند؛ غیبت آن با نتیجهٔ ساختگی پوشانده نمی‌شود. طراحی اولیه می‌تواند با قالب‌های محلی آماده شود؛ تأیید انطباق با کد و اجرای تغییر نیاز به ورودی واقعی همان مخزن دارد.
 
-هسته host محصول/IAM/datasource/worker آمادهٔ همهٔ نیازها نیست. [وضعیت authority و drift](../../backend/_doc/15-authority-and-traceability.md) بین implemented، optional، reference، acceptance-only و unavailable فرق می‌گذارد. scheduler/control-agent و operationهای CLIِ compose‌نشده را آماده معرفی نکنید. نیاز محصول به قابلیت غایب باید task واقعی با evidence داشته باشد.
+## adapter نمونه و محدودهٔ کاربرد
+
+`pom.xml` (reactor) پیش‌فرض شامل `platform/kernel`، `contracts`، `runtime`، `adapters-spring`، `testing` و `application-host` است. نمونه‌های Access/Tasks/Activity و fixtureهای DeliveryProbe/WorkflowProbe در profile جدا `reference-examples` هستند. Java 25، Spring Boot 4.1.1، wrapper Maven 3.9.11 و PostgreSQL 18 baseline نمونهٔ بررسی‌شده است، نه انتخاب الزامی هر پروژه؛ تصمیم ارتقا در scope این طراحی نیست.
+
+هسته host محصول/IAM/datasource/worker آمادهٔ همهٔ نیازها نیست. `_doc/15-authority-and-traceability.md` (وضعیت authority و drift) بین implemented، optional، reference، acceptance-only و unavailable فرق می‌گذارد. scheduler/control-agent و operationهای CLIِ compose‌نشده را آماده معرفی نکنید. نیاز محصول به قابلیت غایب باید task واقعی با evidence داشته باشد.
 
 ## خروجی طراحی و مکان پیاده‌سازی
 
-| موضوع | سند مرجع Backend | خروجی لازم فنی/توسعه |
+| موضوع | مرجع اختیاری در adapter نمونهٔ هدف | خروجی لازم فنی/توسعه |
 |---|---|---|
-| owner و context | [معماری](../../backend/_doc/01-architecture.md)، [module workflow](../../backend/_doc/02-module-workflow.md) | `modules/<owner>/docs/MODULE.md`، `CONTEXT_MAP.md`، vocabulary و responsibility |
-| Domain | [Domain](../../backend/_doc/03-domain.md) | `DOMAIN_MODEL.md`؛ invariant، factory/restore، transition؛ Java خالص |
-| Application و DTO | [Application](../../backend/_doc/04-application.md)، [DTO](../../backend/_doc/05-dto-and-mapping.md) | spec هر operation، typed execute input/result، failure، trusted context و ports |
-| Persistence | [Persistence](../../backend/_doc/06-persistence.md) | schema owner، JPA entity جدا و mapper؛ Work/transaction، version، receipt، audit و migration |
-| Ingress/API | [Presentation](../../backend/_doc/07-presentation.md)، [Security](../../backend/_doc/10-security.md) | owner-local presentation، OpenAPI گروه audience برای هر BFF یا internal و تست route/spec |
-| ارتباط | [Communication](../../backend/_doc/08-module-communication.md) | public versioned contracts، Application port و Infrastructure ACL؛ call/event/recovery graph |
-| پیام/job/provider | [Delivery](../../backend/_doc/09-events-and-workflows.md) | Outbox/Inbox، checkpoint، retry، unknown/reconcile، compensation و schedule off |
-| ثبت و کنترل | [Observability](../../backend/_doc/11-observability.md) | required audit اتمی جدا از diagnostics، allowlist/redaction، bounded metrics و owner |
-| کیفیت و شواهد | [Verification](../../backend/_doc/12-verification-and-operations.md)، [Clean code](../../backend/_doc/13-clean-code.md) | focused tests، suites واقعی، graph review، skip/limitation و acceptance record |
-| policy و ابزار | [Agent workflow](../../backend/_doc/17-ai-agent-workflow.md) | catalog، work record، doctor/explain/scaffold/verify و policyهای جاری |
+| owner و context | `_doc/01-architecture.md` (معماری)، `_doc/02-module-workflow.md` (module workflow) | `modules/<owner>/docs/MODULE.md`، `CONTEXT_MAP.md`، vocabulary و responsibility |
+| Domain | `_doc/03-domain.md` (Domain) | `DOMAIN_MODEL.md`؛ invariant، factory/restore، transition؛ Java خالص |
+| Application و DTO | `_doc/04-application.md` (Application)، `_doc/05-dto-and-mapping.md` (DTO) | spec هر operation، typed execute input/result، failure، trusted context و ports |
+| Persistence | `_doc/06-persistence.md` (Persistence) | schema owner، JPA entity جدا و mapper؛ Work/transaction، version، receipt، audit و migration |
+| Ingress/API | `_doc/07-presentation.md` (Presentation)، `_doc/10-security.md` (Security) | owner-local presentation، OpenAPI گروه audience برای هر BFF یا internal و تست route/spec |
+| ارتباط | `_doc/08-module-communication.md` (Communication) | public versioned contracts، Application port و Infrastructure ACL؛ call/event/recovery graph |
+| پیام/job/provider | `_doc/09-events-and-workflows.md` (Delivery) | Outbox/Inbox، checkpoint، retry، unknown/reconcile، compensation و schedule off |
+| ثبت و کنترل | `_doc/11-observability.md` (Observability) | required audit اتمی جدا از diagnostics، allowlist/redaction، bounded metrics و owner |
+| کیفیت و شواهد | `_doc/12-verification-and-operations.md` (Verification)، `_doc/13-clean-code.md` (Clean code) | focused tests، suites واقعی، graph review، skip/limitation و acceptance record |
+| policy و ابزار | `_doc/17-ai-agent-workflow.md` (Agent workflow) | catalog، work record، doctor/explain/scaffold/verify و policyهای جاری |
 
 ساختار production جدید:
 
@@ -85,7 +89,7 @@ syntax را با ابزار جاری تطبیق دهید؛ بعضی نمونه�
 | performance claim | workload/hardware/threshold مصوب، نرخ واقعی، error count و p95؛ عدد نمونه baseline محصول نیست |
 | release | verify full و شواهد current-run artifact/commit؛ prerequisiteهای واقعی sink/provider طبق policy جاری |
 
-[verification policy](../../backend/scripts/ci/policy/verification.v1.json) و [راهنمای اجرا](../../backend/_doc/12-verification-and-operations.md) تعیین‌کننده‌اند. `verify --changed` جای PostgreSQL acceptance یا full release نیست. suite غیرفعال، صفر تست یا skip اجباری pass محسوب نمی‌شود. برای انتشار عمومی، requirements ویژهٔ Sentry و ledger provenance همان Backend نیز برقرارند؛ این مجموعه آن‌ها را سبک نمی‌کند.
+`scripts/ci/policy/verification.v1.json` (verification policy) و `_doc/12-verification-and-operations.md` (راهنمای اجرا) تعیین‌کننده‌اند. `verify --changed` جای PostgreSQL acceptance یا full release نیست. suite غیرفعال، صفر تست یا skip اجباری pass محسوب نمی‌شود. برای انتشار عمومی، requirements ویژهٔ Sentry و ledger provenance همان Backend نیز برقرارند؛ این مجموعه آن‌ها را سبک نمی‌کند.
 
 برای هر اجرای تست: command، source revision و dirty/diff hash، environment غیرحساس، زمان، test/fail/error/skip count، report و digest را نگه دارید. گزارش قدیمی پس از تغییر کد current نیست. شواهد graphها و POM/import/SQL علاوه بر ArchUnit بررسی می‌شوند.
 

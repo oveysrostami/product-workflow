@@ -9,7 +9,7 @@ python3 scripts/render_workflows.py --check
 python3 scripts/validate.py
 ```
 
-`validate.py` وجود لینک و anchor، ساختار و یکتایی nodeها، مقصد edgeها، reachable بودن، امکان رسیدن به terminal، برابری کارت‌ها با graph، مسیرهای تمرینی OTP و انتخاب تیم، fenceها و syntax JSON/CSV را بررسی می‌کند. semantic correctness یا approval واقعی را ثابت نمی‌کند.
+`validate.py` وجود لینک و anchor داخل همین مخزن، ساختار و یکتایی nodeها، مقصد edgeها، reachable بودن، امکان رسیدن به terminal، برابری کارت‌ها با graph، مسیرهای تمرینی OTP و انتخاب تیم، fenceها و syntax JSON/CSV و hash فهرست منابع محلی را بررسی می‌کند. semantic correctness یا approval واقعی را ثابت نمی‌کند.
 
 برای ویرایش nodeها، `workflows/graph.json` را تغییر دهید و سپس `python3 scripts/render_workflows.py` را اجرا کنید. کارت‌های Markdown generated هستند؛ متن آن‌ها در review انسانی خوانده می‌شود. سایر Markdownها دستی ویرایش می‌شوند.
 
@@ -28,3 +28,7 @@ python3 scripts/check_mermaid.py --mmdc /path/to/mmdc --browser /path/to/chromiu
 برد عملیاتی در [board.json](../requests/board.json) است. validator ساختار columns/cards، یکتایی requestId، فیلدها و مقادیر وضعیت/تیم/node، وجود مسیرهای ارجاعی و پیش‌نیازهای ساختاری ستون آماده را نیز بررسی می‌کند. این بررسی به‌تنهایی اعتبار gate یا hash پروندهٔ واقعی را اثبات نمی‌کند.
 
 محدودیت [مالکیت تیمی فایل‌ها](../docs/08-team-file-ownership.md) با بررسی scope و diff توسط agent/reviewer اعمال می‌شود؛ validator فعلی sandbox یا کنترل دسترسی فایل نیست و از pass آن رعایت همهٔ writeها استنتاج نمی‌شود.
+
+## بررسی استقلال مجموعه
+
+تمام لینک‌های محلی باید داخل همین مخزن resolve شوند؛ لینک به فایل خارج مخزن حتی اگر روی دستگاه نویسنده وجود داشته باشد، خطاست. clone یا کپی مستقل مجموعه نیز باید با `python3 scripts/validate.py` و `python3 scripts/render_workflows.py --check` موفق باشد. مسیر checkout کد هدف فقط ورودی اجرای پرونده است و در متن به‌عنوان دستور/مرجع نسبی هدف معرفی می‌شود، نه لینک ثابت به دایرکتوری همسایه.

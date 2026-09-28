@@ -66,7 +66,7 @@ flowchart TD
 
 **ورودی:** P/Q baseline، Backend AGENTS/handbook/authority و source revision
 
-**کار دقیق:** doctor و explain مسیرهای هدف را بخوان/اجرا و workflow اصلی Backend را انتخاب کن. owner/host/POM/policy/config/tests را trace کن. implemented/optional/reference/unavailable را تفکیک؛ platform gap را task لازم بدان. topology جدید را از انسان فنی بگیر، نه از probe. technical/impact-map.md را با IMPACT-ID برای همه ownerهای متأثر بساز: direct، dependent، compatibility-only، شاهد اثر، نیاز به کد و مسئول فنی. source/caller/consumer/config را برای اثر غیرمستقیم بررسی کن. host/platform را component target جدا و موارد unaffected را با دلیل ثبت کن.
+**کار دقیق:** doctor و explain مسیرهای هدف را بخوان/اجرا و workflow اصلی Backend را انتخاب کن. owner/host/POM/policy/config/tests را trace کن. implemented/optional/reference/unavailable را تفکیک؛ platform gap را task لازم بدان. topology جدید را از انسان فنی بگیر، نه از probe. technical/impact-map.md را با IMPACT-ID برای همه ownerهای متأثر بساز: direct، dependent، compatibility-only، شاهد اثر، نیاز به کد و مسئول فنی. source/caller/consumer/config را برای اثر غیرمستقیم بررسی کن. host/platform را component target جدا و موارد unaffected را با دلیل ثبت کن. checkout هدف ورودی معرفی‌شدهٔ همان پرونده است؛ هیچ مسیر نصب همسایه فرض نشود. قرارداد داخلی docs/05-backend-binding.md و قالب‌های فنی همین مخزن راهنمای طراحی‌اند؛ انطباق با کد واقعی فقط از checkout فعلی سنجیده شود.
 
 **خروجی:** technical/index، discovery، capability/gap و rule binding impact-map، index بستهٔ هر ماژول و فهرست EDGE-ID وابستگی‌ها.
 

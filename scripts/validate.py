@@ -94,7 +94,9 @@ def check_markdown():
                 continue
             resolved = (path.parent/unquote(u.path)).resolve() if u.path else path
             stats['localLinks'] += 1
-            if not resolved.exists():
+            if not resolved.is_relative_to(ROOT.resolve()):
+                fail(f'Link outside this repository {path.relative_to(ROOT)}: {target}')
+            elif not resolved.exists():
                 fail(f'Broken link {path.relative_to(ROOT)}: {target}')
             elif u.fragment and resolved.is_file() and resolved.suffix == '.md':
                 text = resolved.read_text()
@@ -140,6 +142,19 @@ def check_design_baseline():
     approval = json.loads((ROOT/'records/design-approval.json').read_text())
     if approval.get('manifestSha256') != hashlib.sha256(path.read_bytes()).hexdigest():
         fail('Design approval references a different manifest digest')
+
+def check_source_inventory():
+    inventory = json.loads((ROOT/'research/source-inventory.json').read_text())
+    seen = set()
+    for item in inventory['files']:
+        name = item['path']
+        path = (ROOT/name).resolve()
+        if item.get('repository') != 'product-workflow' or name in seen or not path.is_relative_to(ROOT.resolve()) or not path.is_file():
+            fail('Invalid local source inventory entry: '+name)
+        elif hashlib.sha256(path.read_bytes()).hexdigest() != item['sha256']:
+            fail('Local source inventory changed: '+name)
+        seen.add(name)
+    stats['localSourceFiles'] = len(seen)
 
 def check_board():
     """Structural checks only; this does not certify a card's approvals or readiness."""
@@ -234,10 +249,10 @@ def check_board():
 
 def main():
     try:
-        check_graph();check_markdown();check_json_and_templates();check_board();check_design_baseline()
+        check_graph();check_markdown();check_json_and_templates();check_board();check_source_inventory();check_design_baseline()
     except (KeyError,ValueError,OSError) as exc:
         fail(str(exc))
-    print(json.dumps({'status':'failed' if errors else 'passed','checks':stats,'errors':errors,'scope':'links, anchors, graph, generated cards, walkthrough edges, syntax of JSON/CSV, board card structure/references and design baseline hashes; Mermaid must be checked separately'},ensure_ascii=False,indent=2))
+    print(json.dumps({'status':'failed' if errors else 'passed','checks':stats,'errors':errors,'scope':'repository-local links/anchors, graph, generated cards, walkthrough edges, JSON/CSV syntax, board card structure/references, local source inventory and design baseline hashes; Mermaid must be checked separately'},ensure_ascii=False,indent=2))
     return 1 if errors else 0
 
 if __name__ == '__main__':

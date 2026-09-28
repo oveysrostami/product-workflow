@@ -23,7 +23,7 @@
 |---|---|---|---|---|---|
 | {{TECH-01}} | {{...}} | {{modules/owner/docs/...}} | {{...}} | {{...}} | {{...}} |
 
-در زمان freeze دو فایل editable مرجع برای یک تصمیم وجود نداشته باشد. قالب‌های Backend شامل module-spec، context-map، domain-model، use-case-spec، dto-contract، communication-contract، recording-policy، acceptance-record و ADR در [_doc/templates](../../../backend/_doc/templates/README.md) هستند. این فرم‌ها اطلاعات handover را به آن قراردادها وصل می‌کنند، جایگزین قواعد دقیق آن‌ها نیستند.
+در زمان freeze دو فایل editable مرجع برای یک تصمیم وجود نداشته باشد. قالب‌های Backend شامل module-spec، context-map، domain-model، use-case-spec، dto-contract، communication-contract، recording-policy، acceptance-record و ADR در مخزن کدِ هدف، در صورت وجود و پس از معرفی مسیر/revision در این index، بررسی می‌شوند. [قالب‌های فنی همین مجموعه](../README.md) تمام بخش‌های لازم طراحی و تحویل workflow را دارند؛ AGENTS و قواعد هدف هنگام کار روی همان کد نیز رعایت می‌شوند.
 
 ## قابلیت لازم در برابر موجود
 

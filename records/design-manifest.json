@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "baselineId": "workflow-kit-v1.4",
-  "version": "1.4",
+  "baselineId": "workflow-kit-v1.5",
+  "version": "1.5",
   "requestId": "workflow-design-2026-09-28",
   "status": "ready-for-requester-review",
   "snapshotDate": "2026-09-28",
-  "supersedes": "workflow-kit-v1.3",
-  "history": "records/history/workflow-kit-v1.3.json",
+  "supersedes": "workflow-kit-v1.4",
+  "history": "records/history/workflow-kit-v1.4.json",
   "artifacts": [
     {
       "path": ".gitignore",
@@ -14,11 +14,11 @@
     },
     {
       "path": "AGENTS.md",
-      "sha256": "6d50bfeb48b69a5b32b89a12cc102c42cb1e20d77ffe80ae038b07c83e3d5505"
+      "sha256": "464869c2a01e682ecbf205d5f1457ed344d29b9a9ddc7c09dcbd10d886a4c97c"
     },
     {
       "path": "README.md",
-      "sha256": "2fa6de6beb44530dcf5eb4dccbbed32106c0a22b9ce4879108f3191b86e4a748"
+      "sha256": "00b12fa9b4c80361a3a2030c3397bbc025d89c2835005dc4e2740509de856861"
     },
     {
       "path": "docs/01-principles-and-roles.md",
@@ -38,11 +38,11 @@
     },
     {
       "path": "docs/05-backend-binding.md",
-      "sha256": "31a7f004a6141a087dfca0a23e2042ade0d45c2d210766cbb83bf43f76d751f5"
+      "sha256": "1ebcc955901473dbb34a2dd0b314ae39d43bc2717b1ac48e808e968de848d24b"
     },
     {
       "path": "docs/06-adoption.md",
-      "sha256": "4d85e8f98a502dd77983925ce7e42e1da937adc430db65b36d46264ddc46a7ba"
+      "sha256": "111e3cf4ef886ed89f874b2c78c17e7778ca89c6172db126faa2f13b6d59b992"
     },
     {
       "path": "docs/07-board-json.md",
@@ -53,24 +53,32 @@
       "sha256": "cac1cd7fddb2f8226298137415799b430745845f7ab372859bde98ca35622bed"
     },
     {
+      "path": "docs/09-product-authoring.md",
+      "sha256": "4df2e3bcd268d3f351048ba264f714bb503727d184aa0ffb487b7b083dca855f"
+    },
+    {
       "path": "examples/module-impact.md",
       "sha256": "04d6c6c7857a29f9906ecdcd27ee29332728fc00286e394bd2adaa0fede4d062"
     },
     {
       "path": "examples/otp-issue/README.md",
-      "sha256": "1afbee4c3543306345ff9523e4bbe474ee34bef4ed44093993e7ba264873ec4e"
+      "sha256": "e312b8f89098127b27f66e2e05fa99425a49bc7518b43bec0bbd2cabd5d1db47"
+    },
+    {
+      "path": "examples/otp-issue/acceptance.md",
+      "sha256": "d745b4ec583431a2d868dee8fc18c2c59e9030739b254f8125b23677ff65914c"
     },
     {
       "path": "examples/otp-issue/handover.md",
-      "sha256": "8db8ab5daa4c641ae4a25482b21c064a010b832f10b265abf349c737d1b7075d"
+      "sha256": "62c6834f38e500b39c2f38a9cc2464ca78862348a572813cc001e592005c3589"
     },
     {
       "path": "examples/otp-issue/product.md",
-      "sha256": "57d65cc96181407e9dc3bd5a82a235b358d80183900671ffb080e1f11e810e26"
+      "sha256": "ebeb3e1c869fca55122b368902fce098ea2bc8cfbb803174790555392b6e6b58"
     },
     {
       "path": "examples/otp-issue/qa.md",
-      "sha256": "c2dd31b7dfae7fad5fb06a850d08acf336b5230254ffd7251abf5aee70560942"
+      "sha256": "a1b40eae7ec9d4ecf755e2c6720bc4dd81307c5a5243f3556e30f4c314394536"
     },
     {
       "path": "examples/otp-issue/technical/cross-module-flows.md",
@@ -78,7 +86,7 @@
     },
     {
       "path": "examples/otp-issue/technical/impact-map.md",
-      "sha256": "b9e9d00656b7825609b6f20456d9f13c95f4e04e890f7a4b440a59ef8bdb6c3b"
+      "sha256": "00810716bae0e6853c68d1086855a4d1ef8b39e6c77aef19c214ff2d986c1c7c"
     },
     {
       "path": "examples/otp-issue/technical/index.md",
@@ -86,7 +94,7 @@
     },
     {
       "path": "examples/otp-issue/technical/modules/otp/change-spec.md",
-      "sha256": "e4600f5cf4b14b39dfb024047abecde113c3c335783f8087fef66e1ac337cc79"
+      "sha256": "d893498db2ccc39c5fb9caf52c2b1e20cee0f8693f703d1e3d8aacc920d5e546"
     },
     {
       "path": "examples/otp-issue/technical/modules/otp/test-mapping.md",
@@ -102,11 +110,11 @@
     },
     {
       "path": "records/checks.json",
-      "sha256": "6b89502a739a62c993c2d5c3beeb82bd794ea1adcfc52dcf9429a53fe7c5184a"
+      "sha256": "3e333e5312bc6f7af80092175e5f5b4643fbcb2179ec243a7d8f64aa521b4f93"
     },
     {
       "path": "records/design-review.md",
-      "sha256": "8e9862351e7b9a36e6430f0c9f8eda9978055ff0f4536597ae92e863ccba1340"
+      "sha256": "503d5047820c987d820c9868ec28f0e627e924af8a5cbe57d18bfd08fa62ac3f"
     },
     {
       "path": "records/history/workflow-kit-v1.1.json",
@@ -133,6 +141,10 @@
       "sha256": "72970451281085898aa7ae939a73b91e5f8d476fd23f45316268ef5e935de49a"
     },
     {
+      "path": "records/history/workflow-kit-v1.4.json",
+      "sha256": "f8527e4ba84210b8c6485121c67def4a3e7ccb14441b0e47140a832a357eeca2"
+    },
+    {
       "path": "records/history/workflow-kit-v1.json",
       "sha256": "c3ecc5c7c3967d7c05f58cae6def9003c2bf56cbb0fae0f1efc54768c8903728"
     },
@@ -142,11 +154,11 @@
     },
     {
       "path": "records/mermaid-evidence.json",
-      "sha256": "8215dbe7dbba839bd39ab71d997ff41d680b415c9772273e4c79299e42f5c441"
+      "sha256": "2b92badf4c3a41ad5918070b4982bb837ea0ed2dd9ad0ce5778ea3ede9a68198"
     },
     {
       "path": "records/validation.md",
-      "sha256": "1a28c5c5ee2420cebcf993387bfc7723f793e8561dc1254f935c6c0fbeb64ec6"
+      "sha256": "4aa9d1280683b203f040d178faee42519f1f9f2e500ddd8dd50b7deda0556233"
     },
     {
       "path": "requests/README.md",
@@ -158,15 +170,15 @@
     },
     {
       "path": "research/source-inventory.json",
-      "sha256": "6790b589e5326ac36dbe190fba772af5b17823b7bcf3b298d43eb12560d25fdb"
+      "sha256": "e76aa47e8bcc5556cbc6ade68767d88abc7f6cb419a145036a1169a3bfde30c1"
     },
     {
       "path": "research/source-review.md",
-      "sha256": "5b8a72e52591f96482240a5d7bc2e7d075591c10643725ebe8b9e178e24a42da"
+      "sha256": "73dff3a51190b2292b89ccecbd00c6ecfcd3a7ae32946a7e8cb1b6628c6ffb0f"
     },
     {
       "path": "scripts/README.md",
-      "sha256": "31a25116027647d724b1d2f995c802d50fad789719782664c7d803e9e7b0dfcc"
+      "sha256": "bca174485be3d9f1ef730c0c4961235fb7119d114a2839bd40dd680a2063ed83"
     },
     {
       "path": "scripts/check_mermaid.py",
@@ -178,11 +190,11 @@
     },
     {
       "path": "scripts/validate.py",
-      "sha256": "1f127794cbddd96ac53711e2421a537310f34090bd1367cfcf9c0790aa37c7f6"
+      "sha256": "a7a245bea87a0602a63a4cd6057937f9c31417742021e8f262f0fa4ec3eef203"
     },
     {
       "path": "templates/README.md",
-      "sha256": "bac72cb103019e00b37c1a14617d585e0023a451be78063631740afd5771cece"
+      "sha256": "5247e582c1106bd279ced46999359e0ec68c050cf8e8f528538218f8173b1012"
     },
     {
       "path": "templates/development/delivery.md",
@@ -322,7 +334,7 @@
     },
     {
       "path": "templates/technical/index.md",
-      "sha256": "cd8951a4f0c785ab01d227c6fbead621f03bb1a39d239fcd65336be84c82b94e"
+      "sha256": "b11d3e93cacd92d4c93f0acafb7755638f8a7e28220d773fcb556c0264208151"
     },
     {
       "path": "templates/technical/module-and-domain.md",
@@ -350,15 +362,15 @@
     },
     {
       "path": "workflows/00-team-entry.md",
-      "sha256": "f83ba6915502d3189eef82482988bfab1bfb7fca3bb3d995336906f9d4692099"
+      "sha256": "61a4a608bff98a9b6615b228b8fb0f4a31f0ef71d7b5b7a641ac86966fe4f079"
     },
     {
       "path": "workflows/01-intake.md",
-      "sha256": "1100d14b6d9cf3e77089ab0a4fd52cb2d53d529e1962797e854a9463f22d6bf5"
+      "sha256": "812e9d3c44b1de1402142cb64c98efa4a5191ac326a1e91de8ab6d8229fe5367"
     },
     {
       "path": "workflows/02-product.md",
-      "sha256": "5786b8c8a703906bbeddbf4b5400d0f1debe330464016a66cf29676e7c97237c"
+      "sha256": "8e3d7862b58dc4e0def982304c10c9ff5eac89f269f75e8a4679331e73600abc"
     },
     {
       "path": "workflows/03-qa.md",
@@ -366,7 +378,7 @@
     },
     {
       "path": "workflows/04-technical.md",
-      "sha256": "073849e83447f58f28c354800ccb2ecf6dfa2e9f29863563f3d25e4c322f2022"
+      "sha256": "a78246e64616a4faf92fcae1f3729fd983843a1f111717e2e1c94b1f605121e9"
     },
     {
       "path": "workflows/05-implementation.md",
@@ -390,9 +402,9 @@
     },
     {
       "path": "workflows/graph.json",
-      "sha256": "7e286042dd75dd2be3f59cfc7b00742d0770f3a4eb1c85a4729519f3de10ba64"
+      "sha256": "4c30c54aeefa0f3dc3c06c1af878ed8f40b954f6a42488ea8921e023840c6b17"
     }
   ],
   "openBlockers": [],
-  "pendingHumanDecision": "The cross-team write prohibition was explicitly requested; approval of the full v1.4 implementation details remains pending."
+  "pendingHumanDecision": "The standalone documentation correction and Git publication were explicitly requested; approval of the full v1.5 kit remains pending."
 }

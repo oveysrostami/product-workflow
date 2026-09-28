@@ -1,0 +1,9 @@
+{
+  "baselineId": "workflow-kit-v1.4",
+  "gitCommit": "318b40e6a82e24cbe33d44a71ff52781426f1400",
+  "repository": "https://github.com/oveysrostami/product-workflow",
+  "manifestPath": "records/design-manifest.json",
+  "manifestSha256": "a5a5ba851cce2ae5395f88e8956bc6867632ebd16eca178bde30de60bcc3dbac",
+  "approvalStatus": "pending",
+  "note": "Exact v1.4 files remain in the immutable Git commit before the standalone documentation correction."
+}
