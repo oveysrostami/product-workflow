@@ -1,0 +1,8 @@
+{
+  "baselineId": "workflow-kit-v1.2",
+  "manifestSha256": "9495f4b37cb660fb9fc46784ee8fe360fdccb94392e5f90f3ae3e8a386ac8243",
+  "approvalStatus": "pending",
+  "archive": "workflow-kit-v1.2.zip",
+  "archiveSha256": "a04076f5ff259b0924e88289f5f31bebabf031054424e1518b126167b8a8e707",
+  "note": "Exact v1.2 bytes preserved before requester-requested JSON board revision."
+}

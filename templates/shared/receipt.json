@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "{{unique-id}}",
+  "handoverId": "{{handover-id}}",
+  "baselineId": "{{baseline-id}}",
+  "manifestSha256": "{{sha256}}",
+  "recipient": {
+    "identity": "{{human-or-agent}}",
+    "role": "{{role}}"
+  },
+  "status": "pending",
+  "decisionReference": null,
+  "receivedAt": null,
+  "rejectionReasons": []
+}

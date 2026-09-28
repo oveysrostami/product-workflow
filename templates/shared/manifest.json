@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "baselineId": "{{baseline-id}}",
+  "requestId": "{{request-id}}",
+  "stage": "{{product|qa|technical|delivery}}",
+  "parents": [
+    {
+      "baselineId": "{{parent-or-remove}}",
+      "manifestSha256": "{{sha256}}"
+    }
+  ],
+  "artifacts": [
+    {
+      "repository": "{{repo-id}}",
+      "path": "{{relative-path}}",
+      "revision": "{{commit-or-snapshot-id}}",
+      "sha256": "{{sha256}}",
+      "role": "{{canonical|evidence|reference}}"
+    }
+  ],
+  "openBlockers": []
+}

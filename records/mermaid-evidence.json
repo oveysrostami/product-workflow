@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-09-28",
+  "status": "passed",
+  "count": 14,
+  "tool": "@mermaid-js/mermaid-cli",
+  "version": "12.0.0",
+  "renderer": "headless Google Chrome",
+  "nodeVersion": "26.5.0",
+  "sourceDiagrams": [
+    {
+      "path": "README.md",
+      "diagram": 1,
+      "sha256": "35f9001aa6d02f9a0256d8b7a8c99fc84399110c84a7ffe513dc8c7a6fe24d12"
+    },
+    {
+      "path": "docs/02-state-and-versioning.md",
+      "diagram": 1,
+      "sha256": "353daaea4677e5da260bae8b1b73260a5c2d331c08dba475d4caf6b957a524f2"
+    },
+    {
+      "path": "examples/otp-issue/product.md",
+      "diagram": 1,
+      "sha256": "891febfc3f8e1cd7f23a3c770d008d4c469155c81b81a13cdf2bc7aba540bcb8"
+    },
+    {
+      "path": "examples/otp-issue/technical/modules/otp/change-spec.md",
+      "diagram": 1,
+      "sha256": "f6db1cf13d41f014dcebca2beb595a1777592d648b78e312ffbbff65b25acc35"
+    },
+    {
+      "path": "templates/product/flows-and-data.md",
+      "diagram": 1,
+      "sha256": "de1bad33d41e5bbc447b2fdb1a7b282a702b884cc2a41d33177ecb14968c4e87"
+    },
+    {
+      "path": "workflows/00-team-entry.md",
+      "diagram": 1,
+      "sha256": "fee8d774fc951c2a95128f348c9711038924f9768726335ae95204e5aefd2715"
+    },
+    {
+      "path": "workflows/01-intake.md",
+      "diagram": 1,
+      "sha256": "d7ea15a45b984a004e73cba5f0f07348e8e29c674d084ee4df8df0f5e2b41dc9"
+    },
+    {
+      "path": "workflows/02-product.md",
+      "diagram": 1,
+      "sha256": "4ea012bc7ef0f37d2c415f7c941e3426155d7024859db23f2fbc56a50b72e930"
+    },
+    {
+      "path": "workflows/03-qa.md",
+      "diagram": 1,
+      "sha256": "6cd1380767bd4f86b6fa02d0a77c336a337b121482a49dc6b0b49bb2200234b3"
+    },
+    {
+      "path": "workflows/04-technical.md",
+      "diagram": 1,
+      "sha256": "c4152d75a976dc068555b6495f05b7640251d0b0f92f6ae040dacb656659c4b0"
+    },
+    {
+      "path": "workflows/05-implementation.md",
+      "diagram": 1,
+      "sha256": "f33f8ea1a7f6ed79d921edf1a3f8aecd180b19caf188cbf68a97242058823bb1"
+    },
+    {
+      "path": "workflows/06-review-and-acceptance.md",
+      "diagram": 1,
+      "sha256": "706e19ee55e2c473529f340469993fa58bd168f8064d0ca55511ab2cdd9e50ad"
+    },
+    {
+      "path": "workflows/07-change-and-bug.md",
+      "diagram": 1,
+      "sha256": "545cd0dcd16b6e89b33d49774c37f1a7b3038809cddc75308f4737218dbd206d"
+    },
+    {
+      "path": "workflows/08-release.md",
+      "diagram": 1,
+      "sha256": "b92a3caf92935533ce30cd2bf13bef5eb82e33864339fceab3a04c204b637629"
+    }
+  ],
+  "command": [
+    "/tmp/product-workflow-mermaid-20260928/node_modules/.bin/mmdc",
+    "-i",
+    "/private/tmp/product-workflow-mermaid-20260928/v1.4-render/all-diagrams.md",
+    "-o",
+    "/private/tmp/product-workflow-mermaid-20260928/v1.4-render/rendered.md",
+    "-p",
+    "/private/tmp/product-workflow-mermaid-20260928/v1.4-render/puppeteer.json",
+    "-e",
+    "svg"
+  ],
+  "stdout": "Found 14 mermaid charts in Markdown input\n ✅ ./rendered-5.svg\n ✅ ./rendered-6.svg\n ✅ ./rendered-7.svg\n ✅ ./rendered-4.svg\n ✅ ./rendered-9.svg\n ✅ ./rendered-10.svg\n ✅ ./rendered-11.svg\n ✅ ./rendered-12.svg\n ✅ ./rendered-8.svg\n ✅ ./rendered-3.svg\n ✅ ./rendered-14.svg\n ✅ ./rendered-1.svg\n ✅ ./rendered-2.svg\n ✅ ./rendered-13.svg\n ✅ /private/tmp/product-workflow-mermaid-20260928/v1.4-render/rendered.md\n",
+  "stderr": "",
+  "scope": "All current Mermaid blocks parsed and rendered to SVG; no claim of visual inspection of every diagram."
+}

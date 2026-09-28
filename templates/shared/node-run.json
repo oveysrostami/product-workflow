@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "requestId": "{{request-id}}",
+  "nodeId": "I01",
+  "attempt": 1,
+  "executor": {
+    "type": "AI",
+    "role": "Coordinator",
+    "identity": "{{session-or-person}}",
+    "team": "{{product|qa|tech|development|review|release|coordination}}"
+  },
+  "inputBaselines": [],
+  "status": "pending",
+  "startedAt": null,
+  "endedAt": null,
+  "outputs": [],
+  "evidence": [],
+  "decisionReference": null,
+  "blocker": null,
+  "resumeNode": null,
+  "nextNode": null,
+  "workUnit": {
+    "targetType": "{{request|module|host|platform}}",
+    "targetId": "{{target-id}}",
+    "sliceId": "{{slice-or-null}}",
+    "taskId": "{{task-or-null}}"
+  },
+  "writeScope": {
+    "allowedPaths": [],
+    "ownershipReference": null,
+    "reviewedOutputPaths": [],
+    "outOfScopeChanges": []
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "columns": [
+    {
+      "id": "product-draft",
+      "title": "محصول: نیاز / در حال تدوین"
+    },
+    {
+      "id": "product-review",
+      "title": "محصول: بازبینی و تأیید"
+    },
+    {
+      "id": "ready-qa",
+      "title": "آمادهٔ QA"
+    },
+    {
+      "id": "qa-design",
+      "title": "QA: تدوین و بازبینی"
+    },
+    {
+      "id": "ready-tech",
+      "title": "آمادهٔ فنی"
+    },
+    {
+      "id": "technical-design",
+      "title": "فنی: تدوین و بازبینی"
+    },
+    {
+      "id": "technical-ready",
+      "title": "مستندات فنی آماده"
+    },
+    {
+      "id": "returned",
+      "title": "برگشتی برای اصلاح"
+    },
+    {
+      "id": "waiting",
+      "title": "منتظر پاسخ / مسدود / متوقف"
+    },
+    {
+      "id": "downstream",
+      "title": "توسعه / تحویل / بسته‌شده"
+    }
+  ],
+  "cards": []
+}

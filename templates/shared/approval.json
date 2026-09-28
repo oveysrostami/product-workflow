@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "approvalId": "{{unique-id}}",
+  "requestId": "{{request-id}}",
+  "gate": "{{G-P|G-Q|G-T|G-D|G-R}}",
+  "baselineId": "{{baseline-id}}",
+  "manifestPath": "{{path}}",
+  "manifestSha256": "{{sha256}}",
+  "status": "pending",
+  "requiredRoles": [
+    "{{role}}"
+  ],
+  "decisions": [],
+  "supersedes": null
+}

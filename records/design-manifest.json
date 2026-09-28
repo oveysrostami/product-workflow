@@ -1,0 +1,398 @@
+{
+  "schemaVersion": 1,
+  "baselineId": "workflow-kit-v1.4",
+  "version": "1.4",
+  "requestId": "workflow-design-2026-09-28",
+  "status": "ready-for-requester-review",
+  "snapshotDate": "2026-09-28",
+  "supersedes": "workflow-kit-v1.3",
+  "history": "records/history/workflow-kit-v1.3.json",
+  "artifacts": [
+    {
+      "path": ".gitignore",
+      "sha256": "862263fa1f46c20f0d1e4dac5ffcc75abd55c08211b2c3864c5f8764b9d87793"
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "6d50bfeb48b69a5b32b89a12cc102c42cb1e20d77ffe80ae038b07c83e3d5505"
+    },
+    {
+      "path": "README.md",
+      "sha256": "2fa6de6beb44530dcf5eb4dccbbed32106c0a22b9ce4879108f3191b86e4a748"
+    },
+    {
+      "path": "docs/01-principles-and-roles.md",
+      "sha256": "c4114effcfbc74416c5ec8bb60dc53d8e4b634eab3bc9d77a3f6b0a999f55045"
+    },
+    {
+      "path": "docs/02-state-and-versioning.md",
+      "sha256": "d4e3b35076cc6e8d201069a367e8cccabb1b0a767525d27b804a0938c39e69cf"
+    },
+    {
+      "path": "docs/03-artifact-map.md",
+      "sha256": "de4550ed6a42fff62014a473cd15fc3bd5615752d1c8436fcdbf300604aa4330"
+    },
+    {
+      "path": "docs/04-gates.md",
+      "sha256": "32e554d530b967c7054eb15e04545d2149b8308850a7117b442ecd82e2813db0"
+    },
+    {
+      "path": "docs/05-backend-binding.md",
+      "sha256": "31a7f004a6141a087dfca0a23e2042ade0d45c2d210766cbb83bf43f76d751f5"
+    },
+    {
+      "path": "docs/06-adoption.md",
+      "sha256": "4d85e8f98a502dd77983925ce7e42e1da937adc430db65b36d46264ddc46a7ba"
+    },
+    {
+      "path": "docs/07-board-json.md",
+      "sha256": "a41904725ae24ca5d7ccb9c64930af375c2b5dfec9c4a3e7b556d041f9fd61fb"
+    },
+    {
+      "path": "docs/08-team-file-ownership.md",
+      "sha256": "cac1cd7fddb2f8226298137415799b430745845f7ab372859bde98ca35622bed"
+    },
+    {
+      "path": "examples/module-impact.md",
+      "sha256": "04d6c6c7857a29f9906ecdcd27ee29332728fc00286e394bd2adaa0fede4d062"
+    },
+    {
+      "path": "examples/otp-issue/README.md",
+      "sha256": "1afbee4c3543306345ff9523e4bbe474ee34bef4ed44093993e7ba264873ec4e"
+    },
+    {
+      "path": "examples/otp-issue/handover.md",
+      "sha256": "8db8ab5daa4c641ae4a25482b21c064a010b832f10b265abf349c737d1b7075d"
+    },
+    {
+      "path": "examples/otp-issue/product.md",
+      "sha256": "57d65cc96181407e9dc3bd5a82a235b358d80183900671ffb080e1f11e810e26"
+    },
+    {
+      "path": "examples/otp-issue/qa.md",
+      "sha256": "c2dd31b7dfae7fad5fb06a850d08acf336b5230254ffd7251abf5aee70560942"
+    },
+    {
+      "path": "examples/otp-issue/technical/cross-module-flows.md",
+      "sha256": "5acd0f3767f2802da8554836d33cb14d86e934bf436b1c8335b37a376e812687"
+    },
+    {
+      "path": "examples/otp-issue/technical/impact-map.md",
+      "sha256": "b9e9d00656b7825609b6f20456d9f13c95f4e04e890f7a4b440a59ef8bdb6c3b"
+    },
+    {
+      "path": "examples/otp-issue/technical/index.md",
+      "sha256": "fb173679e23aea522d8b62d9d57a1d1d0aaf966937f25aaf3520d2c2fe1c1119"
+    },
+    {
+      "path": "examples/otp-issue/technical/modules/otp/change-spec.md",
+      "sha256": "e4600f5cf4b14b39dfb024047abecde113c3c335783f8087fef66e1ac337cc79"
+    },
+    {
+      "path": "examples/otp-issue/technical/modules/otp/test-mapping.md",
+      "sha256": "29d82f780d0c95d9371754dced62664b8306fa575c1787f21cfccf113dc3f9b3"
+    },
+    {
+      "path": "examples/otp-issue/walkthroughs.md",
+      "sha256": "e181182949ba38965c50835ebe3d3386dfe18a4b12e6eccf37c877929f5c7891"
+    },
+    {
+      "path": "examples/team-entry.md",
+      "sha256": "c25da5451cde1a2d714be9703f0e7f6fba730965a393ae0a6afaa797c938c375"
+    },
+    {
+      "path": "records/checks.json",
+      "sha256": "6b89502a739a62c993c2d5c3beeb82bd794ea1adcfc52dcf9429a53fe7c5184a"
+    },
+    {
+      "path": "records/design-review.md",
+      "sha256": "8e9862351e7b9a36e6430f0c9f8eda9978055ff0f4536597ae92e863ccba1340"
+    },
+    {
+      "path": "records/history/workflow-kit-v1.1.json",
+      "sha256": "da35a05eb9686708d8982c476e148cb67d2183f278f1ba69a2dc32af3b1ee50e"
+    },
+    {
+      "path": "records/history/workflow-kit-v1.1.zip",
+      "sha256": "2b4698dd135ac587e2cd2a426c36bcd4af9a2e6e6c03fa8d3c91771e19fed88b"
+    },
+    {
+      "path": "records/history/workflow-kit-v1.2.json",
+      "sha256": "a5d4429ed90109d4165f74a138049d0057a7ff24698e2fad4648b3a21dd6cef7"
+    },
+    {
+      "path": "records/history/workflow-kit-v1.2.zip",
+      "sha256": "a04076f5ff259b0924e88289f5f31bebabf031054424e1518b126167b8a8e707"
+    },
+    {
+      "path": "records/history/workflow-kit-v1.3.json",
+      "sha256": "db0b98324ecb20b0dee41b5b77d8e24f2d12c7f270ddb3ac7faa57b8a71f3ea7"
+    },
+    {
+      "path": "records/history/workflow-kit-v1.3.zip",
+      "sha256": "72970451281085898aa7ae939a73b91e5f8d476fd23f45316268ef5e935de49a"
+    },
+    {
+      "path": "records/history/workflow-kit-v1.json",
+      "sha256": "c3ecc5c7c3967d7c05f58cae6def9003c2bf56cbb0fae0f1efc54768c8903728"
+    },
+    {
+      "path": "records/history/workflow-kit-v1.zip",
+      "sha256": "325cbda93e904c8fb9abb3cd01f72a9c666544d48ee24898457215c82b130bfc"
+    },
+    {
+      "path": "records/mermaid-evidence.json",
+      "sha256": "8215dbe7dbba839bd39ab71d997ff41d680b415c9772273e4c79299e42f5c441"
+    },
+    {
+      "path": "records/validation.md",
+      "sha256": "1a28c5c5ee2420cebcf993387bfc7723f793e8561dc1254f935c6c0fbeb64ec6"
+    },
+    {
+      "path": "requests/README.md",
+      "sha256": "8564180f74c58a926f52e3bf8fd0d21e1fb4bd2a7c36764d2eacba66ad8d714c"
+    },
+    {
+      "path": "requests/board.json",
+      "sha256": "c82197a6e3d770988d186cd76a2b65d5cdf18afe9b07e5b1e7d8121d35b6a911"
+    },
+    {
+      "path": "research/source-inventory.json",
+      "sha256": "6790b589e5326ac36dbe190fba772af5b17823b7bcf3b298d43eb12560d25fdb"
+    },
+    {
+      "path": "research/source-review.md",
+      "sha256": "5b8a72e52591f96482240a5d7bc2e7d075591c10643725ebe8b9e178e24a42da"
+    },
+    {
+      "path": "scripts/README.md",
+      "sha256": "31a25116027647d724b1d2f995c802d50fad789719782664c7d803e9e7b0dfcc"
+    },
+    {
+      "path": "scripts/check_mermaid.py",
+      "sha256": "7c6d08d53a14f52a92ae7f7007700580328af312e6fc67200a2b7297bdce5f24"
+    },
+    {
+      "path": "scripts/render_workflows.py",
+      "sha256": "5a98468df95b18716b6544875c6ceabea849ab97c194f9f33a6024d3f1a47279"
+    },
+    {
+      "path": "scripts/validate.py",
+      "sha256": "1f127794cbddd96ac53711e2421a537310f34090bd1367cfcf9c0790aa37c7f6"
+    },
+    {
+      "path": "templates/README.md",
+      "sha256": "bac72cb103019e00b37c1a14617d585e0023a451be78063631740afd5771cece"
+    },
+    {
+      "path": "templates/development/delivery.md",
+      "sha256": "becf5f3d331c6bceaa3808c98e717e4e139bda804a73036255bb2d1618044fa2"
+    },
+    {
+      "path": "templates/development/release.md",
+      "sha256": "e025fd5f9a77a0e58e36cbe4c060f9bdc4167425bed15091cddd4e3eda6316ed"
+    },
+    {
+      "path": "templates/development/task.md",
+      "sha256": "91e4515fc4d849d8a9f270a5d9c22ced440a2c412ba0f78477e2c3f1c4be5849"
+    },
+    {
+      "path": "templates/product/acceptance.md",
+      "sha256": "b2d07a5d6938e1175af160b96f150c428653580686340363550a7fd7e9329e1b"
+    },
+    {
+      "path": "templates/product/contract.md",
+      "sha256": "f0889539d9eb44958a83a82023ccc2b1054f432b2872bf4351e70b45f15cf80c"
+    },
+    {
+      "path": "templates/product/flows-and-data.md",
+      "sha256": "48ed5cdda08c32c97c0cbb7cc93962fbe1e84f02299c7fc1551d01d45536dac7"
+    },
+    {
+      "path": "templates/product/handover.md",
+      "sha256": "198c4ca9a23beb740c10a83cd6f544c39e18df67554c42ca680ecd690f2b8f10"
+    },
+    {
+      "path": "templates/product/operations-and-use-cases.md",
+      "sha256": "3906441bb1b0c0083449f785e2db4d41b8ebefde0e92c0e6d09cc39d6e4d2e90"
+    },
+    {
+      "path": "templates/qa/bug.md",
+      "sha256": "b961f53fd79f3c13ef8e51e5f07b6fbf640ea26e006be5a3cb3df0dab88c94ff"
+    },
+    {
+      "path": "templates/qa/coverage.md",
+      "sha256": "7936fb03deed1e2e246a9f0b9aa3cf22f96a82a4ca258749274c328d8d82e90c"
+    },
+    {
+      "path": "templates/qa/execution.md",
+      "sha256": "9a4171b74e76f3aec43f029522014089e25bd81b74a83bfb47bc82587214abe8"
+    },
+    {
+      "path": "templates/qa/handover.md",
+      "sha256": "828dd969eb10735f578b97f8b125edc1a83c7407a90c8afb3abf8276d350b877"
+    },
+    {
+      "path": "templates/qa/plan.md",
+      "sha256": "edad74fd41c1d204c4aae960334b2481d1e0be0797c05f8c0bcb69c87f74f0db"
+    },
+    {
+      "path": "templates/qa/scenarios.md",
+      "sha256": "46be7cca4dcc2b96f426bf91a85c5ee942decc767f356a9e1391f8b0dd953811"
+    },
+    {
+      "path": "templates/shared/applicability.md",
+      "sha256": "b28efc08b8fcfe718a96d683f6b1fac639895b1d3b21eba1a37a44ebf880b53f"
+    },
+    {
+      "path": "templates/shared/approval.json",
+      "sha256": "4b2cfbf37a87a8f6c57d67d6582276935811c6d998fdc5c4ce2d257715010d7e"
+    },
+    {
+      "path": "templates/shared/board-card.json",
+      "sha256": "a9f62bbe78eaedf72677012df9aac018574e8d7a1e718f317ce4a3ad056cc44d"
+    },
+    {
+      "path": "templates/shared/change-impact.md",
+      "sha256": "3808c8cd203081b5b0aaba35b7e621c5b8115527e97e7f40da1462e7fcfc9d39"
+    },
+    {
+      "path": "templates/shared/decisions.md",
+      "sha256": "92c73b3eb81e069f7fafac0002eed7bd377b8b5c6a4023e9dcf7380bc6dceede"
+    },
+    {
+      "path": "templates/shared/handover.md",
+      "sha256": "0001011a98e1807f1623c522706dcb9c0d253f40799a04b65d7cdd2239940249"
+    },
+    {
+      "path": "templates/shared/interview.md",
+      "sha256": "b441ccbb4ea099b35d6f734f9770b7e7a61118dedeeade336e42988feb6159db"
+    },
+    {
+      "path": "templates/shared/manifest.json",
+      "sha256": "cfb1461662bcd2aca7c65c18dd79cc921b9e6267c563b71b70df5c4306beef2d"
+    },
+    {
+      "path": "templates/shared/node-run.json",
+      "sha256": "092bf25697dc663dee2d36cda419e11674b45354ee940502faef081c8e5095eb"
+    },
+    {
+      "path": "templates/shared/receipt.json",
+      "sha256": "64e8bf5db4cdab3300a350b11aa7e4a35c448539ea1f27f184b74637b3a6eb14"
+    },
+    {
+      "path": "templates/shared/request.md",
+      "sha256": "83b3e2b250056a59c0c331b72af09223b6314114ad52be11686b9a85c8d7d787"
+    },
+    {
+      "path": "templates/shared/review.md",
+      "sha256": "e0a21ea052c2f903daa58d5ec4514c0943c812c52e72feafdfe9c00f51188b4c"
+    },
+    {
+      "path": "templates/shared/traceability.csv",
+      "sha256": "21baac1ad89220252ad25b939963174c5ad09261df477e01a7bc44c0c37ae597"
+    },
+    {
+      "path": "templates/shared/tracking.md",
+      "sha256": "77e67aba8025f931962ae3401ac6ef6124c443a75e5caf189825e9f094ba56ff"
+    },
+    {
+      "path": "templates/technical/communication-and-delivery.md",
+      "sha256": "ddbeb928222bbb419ce90ae29594a998de2a74ec5303f7ba0fd6615b860d0f39"
+    },
+    {
+      "path": "templates/technical/cross-module-flows.md",
+      "sha256": "e6d4e95c310bc900c6a436845005dad30d25e3e5e72689c43381ed1fad71274a"
+    },
+    {
+      "path": "templates/technical/data-and-migration.md",
+      "sha256": "6dc111dd0dfd89b49ef5dce6c69a9ceb9d79f70b676bbe6c5a43428fe29c9531"
+    },
+    {
+      "path": "templates/technical/handover.md",
+      "sha256": "01b93dd0c7976259b15ffeb38ebbaa9ff6f666093e194516e18f946f84bea72a"
+    },
+    {
+      "path": "templates/technical/impact-map.md",
+      "sha256": "074e4621033282ca3094275e31dda7025e5e359551bbb70a702c5e574aa91c70"
+    },
+    {
+      "path": "templates/technical/implementation-plan.md",
+      "sha256": "901ad9162dd5a54ba1a2255b0e3a291f15e961ef8a990bbceb7cccc187b2d28e"
+    },
+    {
+      "path": "templates/technical/index.md",
+      "sha256": "cd8951a4f0c785ab01d227c6fbead621f03bb1a39d239fcd65336be84c82b94e"
+    },
+    {
+      "path": "templates/technical/module-and-domain.md",
+      "sha256": "423ea03eb92828e30970970f15cd9baf13fbe70403ac3c92b6fc17a8319d920c"
+    },
+    {
+      "path": "templates/technical/module/change-spec.md",
+      "sha256": "91ef02e7a20fd4d661dad7a8c217d98d3a59283ee320c105ea7aa7a3ddef472a"
+    },
+    {
+      "path": "templates/technical/module/test-mapping.md",
+      "sha256": "4b3cac8e2bcc395cdc240c224eae17a4770375e76313247e30da98f725404b43"
+    },
+    {
+      "path": "templates/technical/operation.md",
+      "sha256": "e9f2c6bafb24be12c727676cc09f492abfdb4499caed234320d2bf25a7d63105"
+    },
+    {
+      "path": "templates/technical/runtime-and-recording.md",
+      "sha256": "e914ad648fd31d916d4001e2c2337dd67764acf7108229b45a3f3c2a6303f99e"
+    },
+    {
+      "path": "workflows/00-node-contract.md",
+      "sha256": "262f84b7b85e4cafee82f85c8bc66469ca580a1541e104b252d863ab3f1177b5"
+    },
+    {
+      "path": "workflows/00-team-entry.md",
+      "sha256": "f83ba6915502d3189eef82482988bfab1bfb7fca3bb3d995336906f9d4692099"
+    },
+    {
+      "path": "workflows/01-intake.md",
+      "sha256": "1100d14b6d9cf3e77089ab0a4fd52cb2d53d529e1962797e854a9463f22d6bf5"
+    },
+    {
+      "path": "workflows/02-product.md",
+      "sha256": "5786b8c8a703906bbeddbf4b5400d0f1debe330464016a66cf29676e7c97237c"
+    },
+    {
+      "path": "workflows/03-qa.md",
+      "sha256": "5a8f7ab7a9fc98ce3a21dafb5d35fd9266df85c9cc76262e5698c6101a7ad7fb"
+    },
+    {
+      "path": "workflows/04-technical.md",
+      "sha256": "073849e83447f58f28c354800ccb2ecf6dfa2e9f29863563f3d25e4c322f2022"
+    },
+    {
+      "path": "workflows/05-implementation.md",
+      "sha256": "546cd5e0b8712bfae01084caa408802733cc60501cc2877e60e488037163ada7"
+    },
+    {
+      "path": "workflows/06-review-and-acceptance.md",
+      "sha256": "c255e7b8e0fa39760d972638aac60859e2cffff930b86a4462ecd1a9aedf7464"
+    },
+    {
+      "path": "workflows/07-change-and-bug.md",
+      "sha256": "167d130a9dcd640e5ac1be9506b2d64a3e63af5f112b6eef0e44d02f5f181574"
+    },
+    {
+      "path": "workflows/08-release.md",
+      "sha256": "8c1369f8f5067e734286cb8462e72d2f9623839482e4ca1980fa9a2ce3849024"
+    },
+    {
+      "path": "workflows/README.md",
+      "sha256": "4f728d4ca342081312297243e4775fddc32042a3c84ded5d03a396bef8588d43"
+    },
+    {
+      "path": "workflows/graph.json",
+      "sha256": "7e286042dd75dd2be3f59cfc7b00742d0770f3a4eb1c85a4729519f3de10ba64"
+    }
+  ],
+  "openBlockers": [],
+  "pendingHumanDecision": "The cross-team write prohibition was explicitly requested; approval of the full v1.4 implementation details remains pending."
+}

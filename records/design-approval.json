@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "approvalId": "design-v1.4-requester-approval",
+  "requestId": "workflow-design-2026-09-28",
+  "gate": "framework-adoption",
+  "baselineId": "workflow-kit-v1.4",
+  "manifestPath": "design-manifest.json",
+  "manifestSha256": "a5a5ba851cce2ae5395f88e8956bc6867632ebd16eca178bde30de60bcc3dbac",
+  "status": "pending",
+  "requiredRoles": [
+    "requester"
+  ],
+  "requesterReference": "درخواست‌کنندهٔ طراحی در همین گفت‌وگو، ۲۰۲۶-۰۹-۲۸",
+  "decisions": [],
+  "supersedes": "design-v1.3-requester-approval",
+  "changeAuthorizationReference": "دستور صریح کاربر در همین گفت‌وگو: «agent یک تیم اجازه تغییر یا ویرایش هیچ کدوم از فایل‌های تیم دیگری رو نداره». اصل محدودیت تأییدشده است؛ approval کل جزئیات نسخهٔ تازه همچنان جداست."
+}

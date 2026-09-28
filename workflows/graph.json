@@ -1,0 +1,1314 @@
+{
+  "schemaVersion": 1,
+  "entry": "I01",
+  "terminals": {
+    "END": "پایان scope با نتیجه مشخص؛ لزوماً deployed نیست",
+    "HOLD": "توقف قابل ادامه با owner و resumeNode"
+  },
+  "workflows": [
+    {
+      "id": "01-intake",
+      "title": "ورود درخواست و تشخیص مسیر",
+      "description": "ورودی درخواست تازه پس از انتخاب تیم محصول و دریافت شرح آزاد است. QA و فنی برای پرونده‌های موجود از صف تیم خود وارد Q01/T01 یا checkpoint می‌شوند. درخواست چندماژولی یک پرونده و مالکیت روشن دارد؛ تشخیص AI تأیید محصول نیست.",
+      "nodes": [
+        {
+          "id": "I01",
+          "title": "ثبت مسئله و زمینه",
+          "actor": "AI",
+          "role": "Coordinator",
+          "inputs": "تیم محصول انتخاب‌شده و شرح موجود کاربر، پیوند اسناد/نمونه‌ها و دسترسی read-only مخازن",
+          "action": "شرح را پالایش و ثبت کن؛ outcome، actor، درد فعلی و non-goal را خلاصه کن. شرحی را که وجود دارد دوباره نخواه. دادهٔ حساس را حذف و دلیل redaction را ثبت کن. اگر شرحی وجود ندارد ابتدا بپرس «نیازت را بگو؛ چه کاری باید انجام دهیم؟». این node برای درخواست تازه است؛ پروندهٔ انتخاب‌شده از صف را دوباره ثبت نکن.",
+          "outputs": "request.md با request-id، source references و خلاصهٔ قابل اصلاح",
+          "done": "درخواست خام و برداشت AI جدا و قابل ردیابی‌اند.",
+          "transitions": [
+            {
+              "condition": "شرح کافی برای تشخیص اولیه",
+              "target": "I02"
+            }
+          ]
+        },
+        {
+          "id": "I02",
+          "title": "طبقه‌بندی و فهرست اثر",
+          "actor": "AI",
+          "role": "Coordinator",
+          "inputs": "request و قراردادهای موجود ماژول‌های محتمل",
+          "action": "نوع اصلی new/feature/change/bug/technical-only را تعیین کن؛ همهٔ ماژول‌های متأثر و دلیل هرکدام را بنویس. برای routing محصول گفتهٔ کاربر دربارهٔ ادغام را کافی بدان؛ در نبود آن سؤال مستقیم را برای I03 ثبت کن.",
+          "outputs": "routing و جدول module/behavior/implementation-statement/source فهرست اولیهٔ اثر ماژولی؛ نقشهٔ فنی نهایی در T02 ساخته می‌شود.",
+          "done": "مسیر اصلی و اثرهای فرعی مشخص؛ unknownها با سؤال معین‌اند.",
+          "transitions": [
+            {
+              "condition": "تشخیص اولیه آماده",
+              "target": "I03"
+            }
+          ]
+        },
+        {
+          "id": "I03",
+          "title": "تعیین مسئول و رفع ابهام ورود",
+          "actor": "Human",
+          "role": "درخواست‌کننده با نمایندهٔ محصول",
+          "inputs": "خلاصهٔ I02، نقش‌های لازم و فقط ابهام‌های مؤثر ورود",
+          "action": "مسئول Product، QA، Tech و درخواست‌کننده را تعیین یا به مرجع انتصاب موجود ارجاع بده. اگر وضعیت پیاده‌سازی گفته نشده، همان رفتار را مشخص کن. تعارض routing را اصلاح کن؛ اطلاعات قبلی تکرار نمی‌شود. مسئول فنی ماژول‌ها می‌تواند در T02 پیشنهاد و پیش از G-T توسط Tech lead تعیین شود؛ برای نام‌گذاری زودهنگام ماژول فنی سؤال محصول نساز. نقش‌های هنوز منصوب‌نشده را با وضعیت نامشخص ثبت کن؛ تعیین QA/Tech آینده مانع نگارش محصول نیست، ولی پیش از node/gate انسانی مربوط باید انتساب واقعی کامل شود.",
+          "outputs": "تصمیم/انتصاب دارای مرجع و scope؛ unresolvedها با owner",
+          "done": "درخواست‌کننده و مسئول فعلی محصول با مرجع مشخص‌اند و مسیر ادامه معلوم است؛ انتصاب نقش‌های مراحل آینده در صورت نامشخص‌بودن، پیش‌نیاز باز همان مرحله می‌ماند.",
+          "transitions": [
+            {
+              "condition": "اطلاعات ورود کامل",
+              "target": "I04"
+            },
+            {
+              "condition": "اصلاح ماهیت درخواست",
+              "target": "I02"
+            }
+          ]
+        },
+        {
+          "id": "I04",
+          "title": "ساخت پرونده و اندازهٔ بسته",
+          "actor": "AI",
+          "role": "Coordinator",
+          "inputs": "routing پذیرفته‌شده، نقش‌ها و منابع",
+          "action": "از قالب‌های مرتبط پرونده بساز؛ scope کوچک قابل پذیرش و applicability با دلیل تعیین کن. technical-only فقط با baseline محصول/QA معتبر و impact بدون تغییر observable مجاز است.",
+          "outputs": "applicability.md، index منابع، journal آغاز و مسیر انتخابی کارت JSON با وضعیت و تیم مسئول در requests/board.json؛ tracking.md با سابقهٔ آغاز.",
+          "done": "هر سند لازم owner و مقصد دارد؛ هیچ baseline قدیمی overwrite نشده.",
+          "transitions": [
+            {
+              "condition": "ماژول/قابلیت تازه یا draft بدون baseline",
+              "target": "P01"
+            },
+            {
+              "condition": "تغییر قرارداد یا baseline موجود",
+              "target": "C01"
+            },
+            {
+              "condition": "باگ گزارش‌شده",
+              "target": "B01"
+            },
+            {
+              "condition": "صرفاً فنی با baseline معتبر و رفتار ثابت",
+              "target": "T01"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "02-product",
+      "title": "جمع‌آوری نیاز، مصاحبه و قرارداد محصول",
+      "description": "Product نیاز stakeholderها را به AI می‌دهد؛ پیشنهاد AI تا پاسخ صریح تصمیم نیست. کیفیت شرح جریان و پذیرش مهم‌تر از تعداد فایل است.",
+      "nodes": [
+        {
+          "id": "P01",
+          "title": "ترکیب نیاز stakeholderها",
+          "actor": "AI",
+          "role": "Product interviewer با ورودی Product owner",
+          "inputs": "request، نیازهای جمع‌آوری‌شده، قراردادها و تصمیم‌های قبلی",
+          "action": "منبع، هدف و محدودیت هر stakeholder را ثبت کن؛ اشتراک و تعارض را مشخص کن. stakeholder غایب را با نظر AI پر نکن. Product owner مسئول جمع‌آوری پاسخ آن منبع است.",
+          "outputs": "stakeholder matrix، glossary اولیه، تصمیم روشن/پیشنهاد/باز",
+          "done": "هر نیاز منبع دارد و تعارض‌ها owner انسانی دارند.",
+          "transitions": [
+            {
+              "condition": "نیازها دسته‌بندی شدند",
+              "target": "P02"
+            }
+          ]
+        },
+        {
+          "id": "P02",
+          "title": "انتخاب ابهام و ساخت batch",
+          "actor": "AI",
+          "role": "Product interviewer",
+          "inputs": "decisions، پاسخ‌های قبلی، draft و open items",
+          "action": "فقط ابهام مؤثر بر scope فعلی انتخاب کن. اگر سؤال بی‌پاسخ از batch قبلی هست، فقط همان شماره‌ها؛ وگرنه تا پنج سؤال با چهار گزینهٔ واقعی و پنجم پیشنهاد شما، توصیه و دلیل. اگر مورد مسدودکننده نیست سؤال تازه نساز.",
+          "outputs": "یک پیام کامل سؤال‌ها یا readiness note؛ ثبت متن در interview.md",
+          "done": "گزینه‌ها مستقل، سؤال تک‌تصمیمی و توصیه از تصمیم جداست.",
+          "transitions": [
+            {
+              "condition": "پاسخ انسانی لازم",
+              "target": "P03"
+            },
+            {
+              "condition": "اطلاعات کافی یا پایان مصاحبه درخواست شده",
+              "target": "P04"
+            }
+          ]
+        },
+        {
+          "id": "P03",
+          "title": "پاسخ و حل تعارض محصول",
+          "actor": "Human",
+          "role": "درخواست‌کننده / Product owner در حدود نقش",
+          "inputs": "همان batch کامل و منبع تعارض",
+          "action": "پاسخ شماره‌ای یا آزاد بده؛ می‌توانی فقط برخی را پاسخ دهی یا مصاحبه را متوقف کنی. تصمیم متعارض را صریح اصلاح کن. AI متن پالایش‌شده و برداشت را ثبت می‌کند و تصمیم قبلی را superseded می‌کند، نه حذف.",
+          "outputs": "پاسخ خام امن، decision references و وضعیت هر سؤال",
+          "done": "هیچ سؤال بی‌پاسخ با توصیه AI پر نشده؛ تأیید نهایی همچنان با درخواست‌کننده است.",
+          "transitions": [
+            {
+              "condition": "پاسخ جزئی یا ابهام مؤثر باقی است",
+              "target": "P02"
+            },
+            {
+              "condition": "کافی یا توقف مصاحبه",
+              "target": "P04"
+            }
+          ]
+        },
+        {
+          "id": "P04",
+          "title": "نگارش رفتار و پذیرش",
+          "actor": "AI",
+          "role": "Product writer",
+          "inputs": "تصمیم‌های معتبر و open items، قالب product",
+          "action": "contract اصلی را بنویس و ruleها را به جریان/UC/operation/AC وصل کن. lifecycle، خطا، تکرار، رقابت، داده/دسترسی/عمر و وابستگی را با نمودار واقعی توضیح بده. جزئیات SQL/قفل به candidate فنی می‌روند. بخش روشن را کامل کن حتی اگر شاخهٔ دیگری باز است. handover همان مرحله را نیز پیش از review به‌صورت draft کامل بنویس تا همراه بقیه اسناد در manifest نامزد تأیید باشد. فقط فایل‌های محصول را بنویس؛ پیشنهاد فنی صرفاً در یادداشت همان محصول ثبت و برای فنی ارجاع شود. دادهٔ traceability را به Coordinator بده تا فایل مشترک را ثبت کند.",
+          "outputs": "product contract، flows/data/operations لازم، AC، traceability",
+          "done": "هر رفتار الزام‌آور در قرارداد اصلی دیده می‌شود؛ در ضمیمه قاعدهٔ پنهان نیست.",
+          "transitions": [
+            {
+              "condition": "نسخه قابل بازبینی",
+              "target": "P05"
+            }
+          ]
+        },
+        {
+          "id": "P05",
+          "title": "بازبینی مستقل نیاز و سند",
+          "actor": "AI",
+          "role": "Reviewer مستقل یا reviewer انسانی جایگزین",
+          "inputs": "درخواست و مصاحبه، تمام اسناد product، منابع و scope",
+          "action": "هر rule را به پاسخ/قرارداد معتبر وصل کن؛ ناسازگاری عدد/زمان/مالکیت و رفتار مخفی در ضمیمه را پیدا کن. عمق را با OTP مقایسه کن، نه قوانینش را. یافته با محل، شاهد، اثر و owner بده.",
+          "outputs": "review product با blocker/major/minor و مقصد اصلاح",
+          "done": "همهٔ یافته‌های مسدودکننده بسته یا صریح برای تصمیم ارجاع شده‌اند.",
+          "transitions": [
+            {
+              "condition": "شکاف تصمیم محصول",
+              "target": "P02"
+            },
+            {
+              "condition": "نقص نگارش با اطلاعات موجود",
+              "target": "P04"
+            },
+            {
+              "condition": "آماده بررسی ساختاری",
+              "target": "P06"
+            }
+          ]
+        },
+        {
+          "id": "P06",
+          "title": "بررسی لینک، نمودار و پوشش",
+          "actor": "Tool",
+          "role": "Check runner با تفسیر Coordinator",
+          "inputs": "نسخهٔ ثابت draft محصول و traceability",
+          "action": "لینک‌های محلی، syntax Mermaid، IDهای تکراری/بی‌مرجع، placeholder در سند نهایی و وجود خروجی لازم را بررسی کن؛ معنای نمودار و تعارض با متن جدا review شود. نام ابزار/نسخه/نتیجه را ثبت کن.",
+          "outputs": "validation report و manifest immutable candidate شامل handover محصول؛ approval بیرون manifest",
+          "done": "خطای ساختاری صفر؛ open item مؤثر پنهان نشده و validation ادعای approval ندارد.",
+          "transitions": [
+            {
+              "condition": "نقص سند",
+              "target": "P04"
+            },
+            {
+              "condition": "نسخه قابل ارائه",
+              "target": "P07"
+            }
+          ]
+        },
+        {
+          "id": "P07",
+          "title": "تأیید نسخهٔ محصول",
+          "actor": "Human",
+          "role": "همان درخواست‌کننده",
+          "inputs": "قرارداد اصلی، خلاصه تصمیم و موارد باز، review، manifest candidate",
+          "action": "نسخهٔ مشخص را approve یا با دلیل رد کن؛ کاهش scope باید صریح باشد. open item مؤثر در scope مانع approve است. AI فقط پاسخ و مرجع انسانی را در approval جدا ثبت می‌کند.",
+          "outputs": "G-P approval مرتبط با digest manifest یا feedback",
+          "done": "تصمیم صریح همان درخواست‌کننده روی همان bytes وجود دارد.",
+          "transitions": [
+            {
+              "condition": "تأیید G-P",
+              "target": "P08"
+            },
+            {
+              "condition": "اصلاح متن بدون تصمیم تازه",
+              "target": "P04"
+            },
+            {
+              "condition": "نیاز به تصمیم/تغییر رفتار",
+              "target": "P02"
+            }
+          ]
+        },
+        {
+          "id": "P08",
+          "title": "تحویل محصول به QA",
+          "actor": "AI",
+          "role": "Coordinator",
+          "inputs": "G-P معتبر، product bundle و منابع",
+          "action": "manifest را freeze و handover مستقل تهیه کن: scope، read order، rule/UC/AC، dependency، out-of-scope و انتظار از QA. approval بیرون manifest بماند. دسترسی QA را فراهم کن؛ ارسال بیرونی خودکار نیست. handover و manifest باید همان bytes ارائه‌شده پیش از approval باشند؛ در این node محتوای بسته تغییر نمی‌کند و فقط دسترسی/receipt/journal آماده می‌شود. هر اصلاح محتوا به review و approval نسخه تازه برمی‌گردد. پس از کنترل آمادگی، tracking و برد را به صف آمادهٔ QA به‌روز کن؛ nextNode=Q01 است. تا انتخاب/دریافت واقعی تیم بعد منتظر بمان؛ انتقال کارت دریافت انسانی نیست.",
+          "outputs": "product/handover.md، baseline P، approval ref و receipt pending",
+          "done": "hashها معتبر و بسته برای گیرنده قابل خواندن است.",
+          "transitions": [
+            {
+              "condition": "بسته تحویل آماده",
+              "target": "Q01"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "03-qa",
+      "title": "طراحی QA پیش از طراحی فنی",
+      "description": "QA سناریو، oracle و ریسک را از محصول استخراج می‌کند. در این مرحله آزمون اجرایی تولید یا pass گزارش نمی‌شود؛ جزئیات ابزار در فنی تعیین خواهد شد.",
+      "nodes": [
+        {
+          "id": "Q01",
+          "title": "پذیرش دریافت محصول",
+          "actor": "Human",
+          "role": "QA owner",
+          "inputs": "handover محصول، G-P و manifest",
+          "action": "همان bytes و scope را باز کن؛ مسئولیت تحلیل QA را بپذیر. دریافت را با baseline ثبت کن؛ اگر فایل/تأیید غایب است دلیل بازگشت بده. پرونده باید قبلاً توسط کاربر از صف تیم انتخاب شده باشد؛ پیش از دریافت اعتبار نسخه‌ها را دوباره بررسی کن. اگر receipt معتبر همین نسخه از قبل ثبت شده، طبق checkpoint ادامه بده. پس از دریافت، حرکت را در tracking ثبت و وضعیت در حال کار و تیم مسئول را فقط در کارت board.json به‌روز کن.",
+          "outputs": "receipt محصول→QA",
+          "done": "دریافت نسخه معتبر و انتساب QA روشن است.",
+          "transitions": [
+            {
+              "condition": "دریافت پذیرفته شد",
+              "target": "Q02"
+            },
+            {
+              "condition": "بسته یا دسترسی ناقص",
+              "target": "P08"
+            }
+          ]
+        },
+        {
+          "id": "Q02",
+          "title": "تحلیل ریسک و راهبرد آزمون",
+          "actor": "AI",
+          "role": "QA analyst",
+          "inputs": "product baseline، UC/AC و محدودیت‌های محیط",
+          "action": "هر قاعده و transition را به کلاس‌های موفق، منفی، حد، نقش، تکرار، concurrency، uncertainty و recovery بررسی کن. risk و priority را از هم جدا کن. oracle نامعلوم gap محصول است؛ نیاز جدید نساز.",
+          "outputs": "qa/plan.md و risk/applicability matrix",
+          "done": "ریسک‌های واقعی و N/A مستدل؛ test type و oracle owner تعیین شده‌اند.",
+          "transitions": [
+            {
+              "condition": "راهبرد روشن",
+              "target": "Q03"
+            },
+            {
+              "condition": "رفتار یا oracle محصول نامعلوم",
+              "target": "C01"
+            }
+          ]
+        },
+        {
+          "id": "Q03",
+          "title": "سناریو و دادهٔ آزمون مستقل",
+          "actor": "AI",
+          "role": "QA analyst",
+          "inputs": "plan، محصول و پذیرش‌های مبنا",
+          "action": "برای هر سناریو Given/When/Then، precondition، actor، دادهٔ ساختگی، ترتیب/زمان/هم‌زمانی، نتیجه و عدم‌اثر ممنوع، observable evidence و cleanup بنویس. ACها را گسترش بده؛ به ساختار کدی که هنوز طراحی نشده وابسته نکن. handover همان مرحله را نیز پیش از review به‌صورت draft کامل بنویس تا همراه بقیه اسناد در manifest نامزد تأیید باشد. برای هر QA-ID، scope ماژولی، integration یا end-to-end و ماژول‌های محتمل را ثبت کن. سناریوی مشترک تک‌مرجع باشد؛ انتساب فنی دقیق در T05 تکمیل می‌شود. فقط فایل‌های QA نوشته شوند؛ نگاشت مشترک traceability توسط Coordinator از خروجی QA ثبت شود.",
+          "outputs": "qa/scenarios.md، coverage و traceability",
+          "done": "هر AC در scope پوشش دارد؛ expected result قابل سنجش و دارای source است.",
+          "transitions": [
+            {
+              "condition": "سناریوها آماده",
+              "target": "Q04"
+            }
+          ]
+        },
+        {
+          "id": "Q04",
+          "title": "چالش پوشش و oracle",
+          "actor": "AI",
+          "role": "QA reviewer مستقل یا reviewer انسانی",
+          "inputs": "plan/scenarios، قرارداد محصول و coverage",
+          "action": "یک بار از rule به scenario و یک بار از scenario به source بررسی کن. false positive، تست صرفاً happy-path، زمان/مرز نامعین و omitted failure را پیدا کن. performance/security claim بی‌معیار رد شود.",
+          "outputs": "QA review، gap list و پوشش هر risk؛ manifest immutable Q candidate شامل handover پس از رفع یافته‌ها",
+          "done": "هیچ oracle ساختگی، AC بی‌پوشش یا critical risk بی‌تصمیم نمانده.",
+          "transitions": [
+            {
+              "condition": "نقص سناریو",
+              "target": "Q03"
+            },
+            {
+              "condition": "نیازمند تصمیم محصول",
+              "target": "C01"
+            },
+            {
+              "condition": "آماده تأیید QA",
+              "target": "Q05"
+            }
+          ]
+        },
+        {
+          "id": "Q05",
+          "title": "تأیید طراحی QA",
+          "actor": "Human",
+          "role": "QA owner",
+          "inputs": "نسخه سناریو و coverage، review و manifest Q candidate",
+          "action": "scope، اولویت، oracle، environment نیازمند تهیه و شرط entry/exit execution را تصویب کن. حالت همه تست‌ها not-run است؛ پذیرش برنامه، pass آزمون نیست.",
+          "outputs": "G-Q approval با baseline محصول مرتبط",
+          "done": "QA owner کیفیت برنامه را پذیرفته و blocker oracle باقی نیست.",
+          "transitions": [
+            {
+              "condition": "تأیید G-Q",
+              "target": "Q06"
+            },
+            {
+              "condition": "اصلاح QA",
+              "target": "Q03"
+            }
+          ]
+        },
+        {
+          "id": "Q06",
+          "title": "تحویل QA به فنی",
+          "actor": "AI",
+          "role": "Coordinator",
+          "inputs": "G-P و G-Q معتبر، plan/scenarios",
+          "action": "بستهٔ QA را freeze؛ read order، بحرانی‌ها، نیاز fixture/clock/fault injection و نتایج ممنوع را در handover بنویس. از فنی testability و mapping بخواه، نه تغییر oracle. handover و manifest باید همان bytes ارائه‌شده پیش از approval باشند؛ در این node محتوای بسته تغییر نمی‌کند و فقط دسترسی/receipt/journal آماده می‌شود. هر اصلاح محتوا به review و approval نسخه تازه برمی‌گردد. پس از کنترل آمادگی، tracking و برد را به صف آمادهٔ فنی به‌روز کن؛ nextNode=T01 است. تا انتخاب/دریافت واقعی تیم بعد منتظر بمان؛ انتقال کارت دریافت انسانی نیست.",
+          "outputs": "qa/handover.md و baseline Q با parent P سناریوهای ماژولی و سرتاسری با QA-ID یکتا و targetهای محتمل.",
+          "done": "نسخه‌های محصول و QA منطبق و دریافت فنی pending است.",
+          "transitions": [
+            {
+              "condition": "بسته آماده",
+              "target": "T01"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "04-technical",
+      "title": "طراحی فنی مطابق Backend",
+      "description": "فنی طراحی قابل پیاده‌سازی و قابل آزمون می‌سازد. رفتار محصول و oracle QA ورودی ثابت‌اند؛ feasibility یا تغییر observable به owner درست برمی‌گردد.",
+      "nodes": [
+        {
+          "id": "T01",
+          "title": "دریافت بسته توسط فنی",
+          "actor": "Human",
+          "role": "Tech lead",
+          "inputs": "product/QA handover و approvalهای معتبر یا baseline ارجاع‌شده technical-only",
+          "action": "نسخه‌ها، scope، ownerهای متأثر و مسئول طراحی را تأیید دریافت کن. برای کار فنی صرف، evidence عدم تغییر رفتار و baseline QA را بررسی کن. پرونده باید قبلاً توسط کاربر از صف تیم انتخاب شده باشد؛ پیش از دریافت اعتبار نسخه‌ها را دوباره بررسی کن. اگر receipt معتبر همین نسخه از قبل ثبت شده، طبق checkpoint ادامه بده. پس از دریافت، حرکت را در tracking ثبت و وضعیت در حال کار و تیم مسئول را فقط در کارت board.json به‌روز کن.",
+          "outputs": "receipt QA→Tech و مسئول طراحی",
+          "done": "دسترسی و مسئولیت پذیرفته و دو baseline معتبرند.",
+          "transitions": [
+            {
+              "condition": "دریافت پذیرفته",
+              "target": "T02"
+            },
+            {
+              "condition": "handover QA ناقص",
+              "target": "Q06"
+            }
+          ]
+        },
+        {
+          "id": "T02",
+          "title": "کشف فنی و نقشهٔ اثر ماژولی",
+          "actor": "AI",
+          "role": "Technical designer",
+          "inputs": "P/Q baseline، Backend AGENTS/handbook/authority و source revision",
+          "action": "doctor و explain مسیرهای هدف را بخوان/اجرا و workflow اصلی Backend را انتخاب کن. owner/host/POM/policy/config/tests را trace کن. implemented/optional/reference/unavailable را تفکیک؛ platform gap را task لازم بدان. topology جدید را از انسان فنی بگیر، نه از probe. technical/impact-map.md را با IMPACT-ID برای همه ownerهای متأثر بساز: direct، dependent، compatibility-only، شاهد اثر، نیاز به کد و مسئول فنی. source/caller/consumer/config را برای اثر غیرمستقیم بررسی کن. host/platform را component target جدا و موارد unaffected را با دلیل ثبت کن.",
+          "outputs": "technical/index، discovery، capability/gap و rule binding impact-map، index بستهٔ هر ماژول و فهرست EDGE-ID وابستگی‌ها.",
+          "done": "مسیرهای واقعی و baseline معماری ثبت شده؛ drift به requirement تبدیل نشده. هیچ ماژول یا component مشمول بدون نوع اثر و owner پاسخ‌گو نمانده؛ unknown به‌جای unaffected ثبت نمی‌شود.",
+          "transitions": [
+            {
+              "condition": "زمینه روشن",
+              "target": "T03"
+            },
+            {
+              "condition": "تعارض رفتار یا scope",
+              "target": "C01"
+            }
+          ]
+        },
+        {
+          "id": "T03",
+          "title": "مدل، مالکیت و قرارداد اولیه",
+          "actor": "AI",
+          "role": "Technical designer",
+          "inputs": "discovery، vocabulary، product rules و QA risks",
+          "action": "module/context map، aggregate/invariant یا read-store، public/private boundary و سه graph را طراحی کن. مدل مفهومی محصول را مستقیماً جدول/aggregate نکن. input/output/error و trust boundary پیش از کد مشخص شوند. ساختار technical/modules/<slug>/ را برای ماژول‌های impact-map مشخص و cross-module-flows.md را برای جریان و قراردادهای مشترک تهیه کن. هر owner مدل canonical خودش را دارد؛ delta درخواست در change-spec ثبت می‌شود.",
+          "outputs": "module/context/domain candidate و فهرست TECH operationها",
+          "done": "مالک هر invariant/commit/داده روشن و boundary بی‌دلیل مشترک نشده.",
+          "transitions": [
+            {
+              "condition": "مدل روشن",
+              "target": "T04"
+            },
+            {
+              "condition": "مالکیت محصول نامشخص",
+              "target": "C01"
+            }
+          ]
+        },
+        {
+          "id": "T04",
+          "title": "طراحی تغییر هر ماژول و برنامهٔ مشترک",
+          "actor": "AI",
+          "role": "Technical designer",
+          "inputs": "مدل، QA scenarios، Backend rules و applicability",
+          "action": "برای هر operation DTO presence/null/bounds، execute/context، auth، sequence و failure، Work/receipt/audit/Outbox، unknown/reconcile بنویس. data/migration، communication/provider، recording، host/role/config/observability را فقط در صورت نیاز تکمیل کن. نام فایل/port/test و plan slice را تعیین کن. انتخاب‌های نیازمند اختیار انسانی را برای T07 آماده کن. handover همان مرحله را نیز پیش از review به‌صورت draft کامل بنویس تا همراه بقیه اسناد در manifest نامزد تأیید باشد. برای هر target یک workUnit با change-spec و test-mapping بساز. طراحی تفصیلی به اسناد canonical Backend ارجاع نسخه‌دار دارد. target بدون تغییر کد بستهٔ تحلیل سازگاری و task تست می‌گیرد. implementation-plan کل در technical/، ترتیب dependency و مشخصات taskهای آینده با مسئول و مسیر مقصد را تعیین می‌کند؛ ایجاد فایل task در development/ با تیم توسعه در D01 است. آخرین واحد، طراحی integration و handover کل را جمع‌بندی می‌کند.",
+          "outputs": "اسناد technical canonical و implementation/test mapping plan technical/modules/<slug>/change-spec.md و test-mapping.md برای همه ماژول‌ها؛ بستهٔ components در صورت اثر host/platform.",
+          "done": "هر QA scenario مسیر اثبات دارد؛ component غایب، پنهان یا stub-success فرض نشده.",
+          "transitions": [
+            {
+              "condition": "تمام بسته‌های ماژولی و طراحی مشترک آماده‌اند",
+              "target": "T05"
+            },
+            {
+              "condition": "انتخاب فنی معنای محصول را تغییر می‌دهد",
+              "target": "C01"
+            },
+            {
+              "condition": "واحد فعلی نوشته شده و target بعدی باقی است",
+              "target": "T04"
+            }
+          ]
+        },
+        {
+          "id": "T05",
+          "title": "بازبینی قابلیت آزمون",
+          "actor": "Human",
+          "role": "QA owner با تحلیل QA agent",
+          "inputs": "طرح فنی و mapping QA→suite→fixture/evidence",
+          "action": "بررسی کن clock، fault، concurrency و oracle قابل مشاهده‌اند؛ unit fake را با durability واقعی اشتباه نکن. افزودن scenario فنی با source backend-rule مجاز است؛ انتظار محصول عوض نشود. همه test-mappingهای ماژولی و targetهای compatibility-only را با impact-map تطبیق بده؛ integration/end-to-end هر EDGE/FLOW باید oracle، مسئول execution و candidate مشترک داشته باشد. انتساب فنی QA-IDهای مشترک را بدون کپی oracle نهایی کن. تیم QA فقط تحلیل و یافتهٔ خودش را ارائه می‌دهد؛ Coordinator رکورد review را ثبت می‌کند و هر اصلاح فایل technical/test-mapping با تیم فنی در T04 است. ثبت نتیجهٔ QA، مجوز ویرایش سند فنی یا تغییر خودکار تیم agent نیست.",
+          "outputs": "testability review و تأیید mapping یا gap مشخص",
+          "done": "همه سناریوهای لازم محل اجرا، fixture، owner و خروجی سنجش دارند.",
+          "transitions": [
+            {
+              "condition": "قابل آزمون",
+              "target": "T06"
+            },
+            {
+              "condition": "طرح فاقد seam/observable evidence",
+              "target": "T04"
+            },
+            {
+              "condition": "نقص برنامه QA بدون تغییر رفتار",
+              "target": "Q03"
+            }
+          ]
+        },
+        {
+          "id": "T06",
+          "title": "review طراحی ماژول‌ها و کل درخواست",
+          "actor": "AI",
+          "role": "Technical reviewer مستقل یا reviewer انسانی",
+          "inputs": "تمام technical docs، Backend rules، P/Q baseline و testability",
+          "action": "POM/import/SQL و call/event/recovery graph را بررسی کن. owner-local transaction، replay auth، privacy، migration، failure و capability gaps را بسنج. canonical location و عدم وجود دو نسخه مرجع editable را کنترل کن. ابتدا هر target را در workUnit مستقل review کن، سپس قراردادهای مشترک و consistency کل درخواست را بسنج. یافتهٔ edge به producer و consumer و QA مشترک متصل شود؛ manifest T شامل تمام بسته‌های ماژولی و طرح مشترک است.",
+          "outputs": "review فنی، ADRهای لازم و manifest immutable T candidate شامل handover توسعه",
+          "done": "تمام blocking findingها بسته و انحراف بی‌ADR/اختیار باقی نیست.",
+          "transitions": [
+            {
+              "condition": "اصلاح طراحی",
+              "target": "T04"
+            },
+            {
+              "condition": "تعارض نیاز",
+              "target": "C01"
+            },
+            {
+              "condition": "همه reviewهای targetها و review کل درخواست آماده‌اند",
+              "target": "T07"
+            },
+            {
+              "condition": "review واحد فعلی ثبت شده و review target یا جمع‌بندی کل باقی است",
+              "target": "T06"
+            }
+          ]
+        },
+        {
+          "id": "T07",
+          "title": "تصویب طرح و دامنهٔ اجرا",
+          "actor": "Human",
+          "role": "Tech lead و مسئولان فنی ماژول‌های متأثر؛ owner زیرساخت برای انتخاب عملیاتی",
+          "inputs": "طرح کامل، review، testability، gap، هزینه/ریسک و T manifest",
+          "action": "طراحی و ترتیب sliceها را approve کن؛ انتخاب topology/profile و prerequisiteهای واقعی را مشخص کن. تأیید طراحی را از اختیار پیاده‌سازی جدا ثبت کن. برای درخواست مستندات، نبود اختیار پیاده‌سازی مانع تصویب طرح نیست؛ اجرای کد فقط با دستور صریح scope در request یا تصمیم جدا مجاز است. تأیید سند به‌تنهایی مجوز اجرا یا deploy نیست. رأی مسئول فنی هر target و رأی نهایی Tech lead برای کل درخواست روی همان manifest ثبت شوند؛ یک انسان منصوب می‌تواند چند نقش را پوشش دهد. G-T با local-ready چند ماژول و dependency باز عبور نمی‌کند.",
+          "outputs": "G-T approval و وضعیت مستقل اختیار پیاده‌سازی؛ reference دستور فقط در صورت وجود",
+          "done": "G-P/G-Q معتبر، QA testability پذیرفته و تصمیم اجرایی لازم روشن است.",
+          "transitions": [
+            {
+              "condition": "طرح تأیید شد؛ تحویل مستندات در scope است",
+              "target": "T08"
+            },
+            {
+              "condition": "اصلاح طرح",
+              "target": "T04"
+            }
+          ]
+        },
+        {
+          "id": "T08",
+          "title": "تحویل بستهٔ اجرایی",
+          "actor": "AI",
+          "role": "Coordinator",
+          "inputs": "G-T، technical canonical docs، P/Q و plan",
+          "action": "manifest T و handover توسعه را بساز؛ read order، مسیر فایل‌ها، task dependency، دستورهای verification، خطرهای migration و خروجی review را مشخص کن. هیچ unresolved blocker به developer واگذار نشود. handover و manifest باید همان bytes ارائه‌شده پیش از approval باشند؛ در این node محتوای بسته تغییر نمی‌کند و فقط دسترسی/receipt/journal آماده می‌شود. هر اصلاح محتوا به review و approval نسخه تازه برمی‌گردد. handover واحد، فهرست بسته‌های ماژولی، ترتیب taskهای وابسته، reviewer/مسئول هر target و مسئول integration را نشان می‌دهد؛ تحویل اداری جداگانه برای تک‌تک ماژول‌ها اجباری نیست. tracking و برد را به «مستندات فنی آماده» به‌روز کن. برای scope مستندسازی، پایان همین تحویل را ثبت و ادامهٔ توسعه را HOLD با resumeNode=D01 و شرط دستور صریح پیاده‌سازی نگه دار؛ G-T به‌تنهایی آن دستور نیست.",
+          "outputs": "technical/handover، task packet و baseline T با parent P/Q",
+          "done": "بسته برای agent بعدی بدون تکیه بر حافظهٔ گفت‌وگو کافی است.",
+          "transitions": [
+            {
+              "condition": "بسته آماده و اختیار صریح پیاده‌سازی scope معتبر است",
+              "target": "D01"
+            },
+            {
+              "condition": "مستندات تحویل شد؛ scope فعلی مستندسازی است یا اختیار پیاده‌سازی نداریم",
+              "target": "HOLD"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "05-implementation",
+      "title": "اجرای AI توسعه‌دهنده",
+      "description": "یک vertical slice کوچک را کامل کن و سپس slice بعدی را بساز. تست هر لایه همراه همان لایه است؛ هیچ مرحله‌ای تضمین‌های لازم را به بعد از تحویل موکول نمی‌کند.",
+      "nodes": [
+        {
+          "id": "D01",
+          "title": "دریافت task ماژولی و preflight",
+          "actor": "AI",
+          "role": "Developer",
+          "inputs": "بسته T معتبر، مجوز scope، revision هدف و Backend AGENTS",
+          "action": "receipt agent را ثبت؛ hashها و وضعیت checkout/تغییرهای کاربر را بررسی کن. doctor/explain و workflow مناسب؛ work record بساز. dry-run scaffold لازم را بررسی و در scope apply کن. profile جدید بدون review انسانی apply نمی‌شود. task آمادهٔ بعدی را از implementation-plan بردار؛ targetId، IMPACT-ID، workUnit و prerequisites را ثبت کن. برای همان baseline معتبر، preflight بدون تغییر بی‌دلیل تکرار نمی‌شود؛ تغییر input دوباره بررسی می‌خواهد. هر task مشترک allowed paths و یک مسئول مشخص دارد. تیم توسعه فایل task اجرایی را در development/ از مشخصات implementation-plan مصوب می‌سازد؛ برنامهٔ فنی و اسناد محصول/QA فقط خواندنی‌اند. قبل از ابزار یا scaffold، writeScope و مالکیت همهٔ خروجی‌ها بررسی شوند.",
+          "outputs": "development/task، branch/snapshot ref، work record و preflight",
+          "done": "input تازه و writer مشخص؛ هیچ تغییر موجودی گم نشده و gateها معتبرند.",
+          "transitions": [
+            {
+              "condition": "آماده ساخت slice",
+              "target": "D02"
+            },
+            {
+              "condition": "طرح با واقعیت checkout ناسازگار",
+              "target": "T02"
+            }
+          ]
+        },
+        {
+          "id": "D02",
+          "title": "Domain و Application با تست",
+          "actor": "AI",
+          "role": "Developer",
+          "inputs": "task و spec همان slice، QA mapping",
+          "action": "قراردادها، pure domain/value/factory/restore و use case execute/ports/auth/outcome را بساز. deterministic tests برای success/rejection/no partial mutation/denial بنویس. query بدون Domain gate را با دلیل N/A ثبت کن. اگر task صرفاً سنجش سازگاری است، نبود کار Domain/Application را با دلیل ثبت کن؛ به‌خاطر داشتن پوشهٔ ماژول کد مصنوعی تولید نکن.",
+          "outputs": "کد و focused tests لایه‌های خالص، task progress",
+          "done": "behavior مطابق TECH و rule؛ framework/IO وارد هسته نشده.",
+          "transitions": [
+            {
+              "condition": "لایه‌های خالص آماده",
+              "target": "D03"
+            },
+            {
+              "condition": "ابهام/تغییر انتظار محصول",
+              "target": "C01"
+            }
+          ]
+        },
+        {
+          "id": "D03",
+          "title": "adapter، persistence و durability",
+          "actor": "AI",
+          "role": "Developer",
+          "inputs": "ports، data/delivery/integration specs و QA recovery scenarios",
+          "action": "JPA/mapper/Work، migration افزایشی، receipt/audit/Outbox/Inbox و provider ACL لازم را پیاده کن. network خارج transaction؛ real-store tests برای atomicity/concurrency/unknown اجرا کن. component نامرتبط نساز. برای task بدون adapter/storage change، این لایه با دلیل N/A است؛ تست موجودِ لازم طبق test-mapping همچنان اجرا می‌شود.",
+          "outputs": "adapter و migrations/test evidence مربوط با موارد blocked صریح",
+          "done": "مسیر storage/delivery قابل اثبات است؛ mock جای real-store نگرفته.",
+          "transitions": [
+            {
+              "condition": "adapterهای لازم آماده",
+              "target": "D04"
+            },
+            {
+              "condition": "نیاز به اصلاح طرح",
+              "target": "T04"
+            }
+          ]
+        },
+        {
+          "id": "D04",
+          "title": "Presentation و composition",
+          "actor": "AI",
+          "role": "Developer",
+          "inputs": "input/error/API و host/config specs",
+          "action": "entrypoint owner-local و mapping دقیق، trusted context، OpenAPI audience و route/spec tests بساز. Maven/policy/exports/wiring/feature-off و startup validation را ثبت و تست کن. host فقط wiring؛ ownerهای نمونه را تصادفی فعال نکن. wiring مشترک فقط در task مالک آن و با dependency معلوم تغییر می‌کند؛ task ماژولی نباید فایل مشترک متعلق به writer دیگر را بی‌هماهنگی ویرایش کند. لایهٔ نامتأثر با دلیل N/A ثبت شود.",
+          "outputs": "کد ingress/composition و boundary tests، یادداشت اجرای متعلق به توسعه؛ درخواست اصلاح اسناد طراحی به تیم فنی",
+          "done": "هر route و capability واقعی contract و registration و تست دارد.",
+          "transitions": [
+            {
+              "condition": "slice کامل شد",
+              "target": "D05"
+            },
+            {
+              "condition": "wiring/host طراحی نشده",
+              "target": "T04"
+            }
+          ]
+        },
+        {
+          "id": "D05",
+          "title": "verification مطابق اثر تغییر",
+          "actor": "Tool",
+          "role": "Check runner زیر مسئولیت Developer",
+          "inputs": "diff واقعی، QA/TECH mapping و policy suites",
+          "action": "focused checks سپس verify changed و suiteهای واقعی لازم را اجرا کن؛ command، revision/dirty/hash، environment، count/fail/error/skip و report ثبت کن. full در scope release/تغییرهای لازم طبق Backend اجرا می‌شود. prerequisite غایب blocked است. ابتدا evidence همان target/task را ثبت کن. پس از آمادگی targetهای لازم، suiteهای integration/end-to-end مشترک روی candidate واحد اجرا شوند. موفقیت محلی به‌تنهایی شرط D06 نیست.",
+          "outputs": "evidence اجرا با scope و freshness",
+          "done": "تمام تست‌های لازم این slice واقعاً اجرا و pass؛ skip/صفر تست پنهان نیست.",
+          "transitions": [
+            {
+              "condition": "شکست Domain/Application",
+              "target": "D02"
+            },
+            {
+              "condition": "شکست storage/delivery",
+              "target": "D03"
+            },
+            {
+              "condition": "شکست ingress/wiring",
+              "target": "D04"
+            },
+            {
+              "condition": "واحد فعلی سبز و task ماژولی یا slice بعدی باقی است",
+              "target": "D01"
+            },
+            {
+              "condition": "همه taskها و آزمون‌های مشترک لازم آماده review",
+              "target": "D06"
+            },
+            {
+              "condition": "taskها تمام و اجرای آزمون مشترک لازم باقی است",
+              "target": "D05"
+            }
+          ]
+        },
+        {
+          "id": "D06",
+          "title": "آماده‌کردن candidate برای review",
+          "actor": "AI",
+          "role": "Developer",
+          "inputs": "کد و docs نهایی، evidence و taskهای تکمیل‌شده",
+          "action": "candidate revision/diff digest را ثابت کن؛ coverage QA→test/evidence و acceptance record، PR/delivery draft، محدودیت و migration/recovery را آماده کن. review package را از ورودی‌های منجمد بساز. impact-map و سناریوهای QA فقط با reference نسخه‌دار استفاده شوند؛ تغییر لازم به تیم مالک برگردد و در بستهٔ توسعه بازنویسی نشود.",
+          "outputs": "candidate manifest و review packet؛ ادعای merged/deployed ندارد جدول آمادگی ماژول‌ها، evidence مشترک و impact-map نهایی به همان candidate.",
+          "done": "evidence به همین candidate متصل و همه taskهای scope تعیین تکلیف‌اند.",
+          "transitions": [
+            {
+              "condition": "بسته قابل review",
+              "target": "V01"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "06-review-and-acceptance",
+      "title": "review، اجرای QA و تحویل",
+      "description": "review مستقل پیش از پذیرش نهایی است. کد و شواهد بعد از تغییر باید دوباره متناسب بررسی شوند. نبود یافتهٔ AI جای پذیرش QA/فنی/محصول نیست.",
+      "nodes": [
+        {
+          "id": "V01",
+          "title": "review مستقل ماژول‌ها و جریان کامل",
+          "actor": "AI",
+          "role": "Code reviewer مستقل یا reviewer انسانی",
+          "inputs": "candidate، P/Q/T، diff، Backend rules و reports",
+          "action": "به ترتیب invariant/contract، Domain، Application، adapter، entrypoint/composition و recovery review کن. POM/import/SQL و graphها را ببین؛ evidence freshness را بسنج. finding با خط/شاهد/اثر و مسیر برگشت بده. workUnit review هر target را جدا ثبت کن و پس از آن review request را برای قراردادها، wiring، ترتیب migration/rollout و outcome سرتاسری انجام بده. جمع local-readyها بدون review کل کافی نیست.",
+          "outputs": "code review report مستقل و وضعیت هر finding",
+          "done": "blocker صفر؛ self-review مستقل معرفی نشده؛ نبود تست لازم یافته است.",
+          "transitions": [
+            {
+              "condition": "نقص کد",
+              "target": "D02"
+            },
+            {
+              "condition": "نقص طراحی",
+              "target": "T04"
+            },
+            {
+              "condition": "تعارض محصول",
+              "target": "C01"
+            },
+            {
+              "condition": "تمام reviewهای ماژولی و review درخواست پذیرفته‌اند",
+              "target": "V02"
+            },
+            {
+              "condition": "review واحد فعلی ثبت شده و review بعدی باقی است",
+              "target": "V01"
+            }
+          ]
+        },
+        {
+          "id": "V02",
+          "title": "اجرای مستقل سناریوهای QA",
+          "actor": "AI",
+          "role": "QA executor با ابزار و نظارت QA owner",
+          "inputs": "candidate ثابت، سناریوهای G-Q و test mapping، environment آماده",
+          "action": "برنامه QA را اجرا یا report معتبر همان candidate را مستقلاً بررسی کن؛ exploratory/دستی لازم را به QA owner بسپار. pass/fail/blocked/not-run را جدا ثبت؛ mismatch را defect با actual/expected/source کن. گزارش باید نتیجهٔ QAهای module و integration و end-to-end لازم را از هم جدا کند و targetها و IMPACT/EDGE/FLOW و candidate مشترک را برای هر evidence نشان دهد.",
+          "outputs": "qa execution report و defectها؛ counts و artifact references",
+          "done": "هر سناریوی لازم status و evidence/علت دارد؛ نتیجه اختراع نشده.",
+          "transitions": [
+            {
+              "condition": "نتیجه اجرای کامل آماده تصمیم",
+              "target": "V03"
+            },
+            {
+              "condition": "defect مشاهده شد",
+              "target": "B04"
+            }
+          ]
+        },
+        {
+          "id": "V03",
+          "title": "حکم کیفیت QA",
+          "actor": "Human",
+          "role": "QA owner",
+          "inputs": "execution، coverage، defectها و evidence candidate",
+          "action": "پوشش، flaky/skip، critical risk و regression را بررسی کن. blocker یا تست ضروری blocked پذیرش ندارد. minor residual با owner/موعد قابل ثبت است.",
+          "outputs": "QA acceptance همان candidate یا درخواست اصلاح",
+          "done": "QA معیار exit را با شاهد پذیرفته است.",
+          "transitions": [
+            {
+              "condition": "پذیرش QA",
+              "target": "V04"
+            },
+            {
+              "condition": "نقص نیازمند بررسی",
+              "target": "B04"
+            }
+          ]
+        },
+        {
+          "id": "V04",
+          "title": "پذیرش فنی candidate",
+          "actor": "Human",
+          "role": "Tech lead با رأی مسئولان فنی targetهای متأثر",
+          "inputs": "code review، QA verdict، evidence، docs و migration/runbook",
+          "action": "سلامت طراحی/کد، محدودیت runtime، compatibility و recovery را بررسی کن؛ اگر candidate عوض شده approval قبلی کافی نیست. merge مجزا از این رأی است. رأی فنی هر target و جمع‌بندی outcome کل درخواست را روی همان candidate ثبت کن؛ یک فرد با انتساب صریح می‌تواند چند مسئولیت داشته باشد.",
+          "outputs": "technical acceptance candidate",
+          "done": "review مستقل و شواهد لازم معتبرند و blocker فنی صفر است.",
+          "transitions": [
+            {
+              "condition": "پذیرش فنی",
+              "target": "V05"
+            },
+            {
+              "condition": "بازبینی ناکافی",
+              "target": "V01"
+            }
+          ]
+        },
+        {
+          "id": "V05",
+          "title": "پذیرش نتیجهٔ محصول",
+          "actor": "Human",
+          "role": "همان درخواست‌کننده با نمایندهٔ محصول",
+          "inputs": "نمایش نتیجه/شواهد AC، خلاصهٔ scope و محدودیت، رأی QA/فنی",
+          "action": "تحقق رفتار scope را روی همین candidate بپذیر. خواستهٔ تازه change است؛ رفتار خلاف قرارداد defect است. نمونهٔ UI لازم می‌تواند توسط QA ارائه شود؛ فرض وجود frontend نکن.",
+          "outputs": "product acceptance و G-D کامل یا feedback دسته‌بندی‌شده",
+          "done": "پذیرش صریح نتیجهٔ scope؛ هیچ fail ضروری با رضایت مبهم پوشانده نشده.",
+          "transitions": [
+            {
+              "condition": "نتیجه پذیرفته شد",
+              "target": "V06"
+            },
+            {
+              "condition": "خواسته تازه",
+              "target": "C01"
+            },
+            {
+              "condition": "خلاف قرارداد",
+              "target": "B04"
+            }
+          ]
+        },
+        {
+          "id": "V06",
+          "title": "تحویل نهایی پیاده‌سازی",
+          "actor": "AI",
+          "role": "Coordinator",
+          "inputs": "G-D، candidate، reports و docs",
+          "action": "delivery record بنویس: چه تغییر کرد، چرا، evidence، residual، migration/runbook، وضعیت دقیق ready-to-merge/merged/deployed با شاهد. manifest نهایی و read order گیرنده را ثبت کن.",
+          "outputs": "development/delivery و final manifest خلاصهٔ تحویل هر ماژول و تحقق جریان مشترک؛ target بدون تغییر کد با evidence سازگاری.",
+          "done": "هر ادعا شاهد دارد و next owner/عمل مشخص است.",
+          "transitions": [
+            {
+              "condition": "تحویل آماده",
+              "target": "V07"
+            }
+          ]
+        },
+        {
+          "id": "V07",
+          "title": "دریافت تحویل و تعیین پایان scope",
+          "actor": "Human",
+          "role": "مسئول دریافت فنی / درخواست‌کننده",
+          "inputs": "delivery و candidate قابل دسترسی",
+          "action": "دریافت بسته را ثبت کن. اگر scope فقط پیاده‌سازی/review بوده پرونده پایان می‌یابد. اگر انتشار صریحاً خواسته شده، اختیار و target در مسیر R بررسی می‌شود.",
+          "outputs": "delivery receipt و وضعیت accepted/closed یا release-pending",
+          "done": "گیرنده همان نسخه را دریافت کرده؛ پایان محصول با انتشار اشتباه نشده.",
+          "transitions": [
+            {
+              "condition": "پایان scope پیاده‌سازی",
+              "target": "END"
+            },
+            {
+              "condition": "انتشار در scope صریح",
+              "target": "R01"
+            },
+            {
+              "condition": "نقص بسته تحویل",
+              "target": "V06"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "07-change-and-bug",
+      "title": "تغییر، باگ و بازگشت هدفمند",
+      "description": "C nodeها نسخه و scope را مدیریت می‌کنند؛ B nodeها گزارش خلاف قرارداد را. مسیر کوتاه باگ قرارداد محصول را دوباره اختراع نمی‌کند و دریافت فنی با رفع نهایی فرق دارد.",
+      "nodes": [
+        {
+          "id": "C01",
+          "title": "طبقه‌بندی بازخورد و تحلیل اثر",
+          "actor": "AI",
+          "role": "Coordinator با owner مرحلهٔ گزارش‌دهنده",
+          "inputs": "feedback، originNode، baseline و rule/scenario/TECHهای متأثر",
+          "action": "تشخیص بده: typo/نقص سند با تصمیم موجود، gap تصمیم، تغییر خواسته، QA gap، طراحی یا defect. impact و dependent IDs و resumeNode را ثبت کن. برای ادغام‌شده پرونده تغییر؛ وضعیت نامعلوم را از درخواست‌کننده مستقیم بپرس. impact-map ماژولی را هم به‌روز کن؛ تغییر provider contract باید اثر روی consumerها و QA integration/end-to-end را بررسی کند. targetهای unaffected فقط با شاهد معتبر خارج ابطال می‌مانند. اصلاحیه را با مبدأ/مقصد تیم و node، نسخه، دلیل، بخش‌های متأثر، اصلاح مورد انتظار و مرجع گزارش در tracking ثبت کن؛ برد کارت را در برگشتی تیم مقصد نشان دهد و کار وابسته تا رفع علت متوقف بماند. پس از اصلاح، review/approval لازم و دریافت مجدد نسخهٔ معتبر، اصلاحیه با شاهد بسته شود. مقصد اصلاح تیم مالک فایل است؛ Coordinator و تیم گزارش‌دهنده فایل آن تیم را نمی‌نویسند. انتخاب nextNode به‌تنهایی اجازهٔ اجرای نقش نویسندهٔ تیم مقصد نیست.",
+          "outputs": "change-impact با نوع و محدودهٔ ابطال، current/desired و source",
+          "done": "مسئله به صاحب واقعی ارجاع شده؛ هر بازخورد مصاحبه تازه نمی‌سازد.",
+          "transitions": [
+            {
+              "condition": "اصلاح متن محصول با تصمیم موجود",
+              "target": "P04"
+            },
+            {
+              "condition": "نقص QA بدون تغییر رفتار",
+              "target": "Q03"
+            },
+            {
+              "condition": "نقص طرح با رفتار ثابت",
+              "target": "T04"
+            },
+            {
+              "condition": "خلاف قرارداد در اجرا",
+              "target": "B01"
+            },
+            {
+              "condition": "تصمیم/تغییر محصول لازم",
+              "target": "C02"
+            }
+          ]
+        },
+        {
+          "id": "C02",
+          "title": "تصمیم درباره تغییر یا ابهام",
+          "actor": "Human",
+          "role": "درخواست‌کننده؛ Product owner جمع‌بندی می‌کند",
+          "inputs": "current/desired، impact و سؤال مؤثر با قالب مصاحبه برای تغییر رفتار",
+          "action": "رفتار/دامنهٔ تازه را تصمیم بگیر یا تغییر را رد کن. پاسخ مستقیم برای clarification کافی است؛ تغییر رفتار مسیر کامل نگارش/review را دارد. سابقه پاسخ قدیمی حفظ شود.",
+          "outputs": "decision با accepted/rejected و scope؛ نه approval بستهٔ هنوز نوشته‌نشده",
+          "done": "تصمیم رفتاری روشن یا مورد باز با owner؛ رأی فقط تصمیم را می‌بندد.",
+          "transitions": [
+            {
+              "condition": "تغییر پذیرفته یا clarification رفتار کامل شد",
+              "target": "C03"
+            },
+            {
+              "condition": "تغییر رد؛ بازگشت به scope معتبر قبلی",
+              "target": "C04"
+            }
+          ]
+        },
+        {
+          "id": "C03",
+          "title": "نسخه‌سازی و بازکردن بخش متأثر",
+          "actor": "AI",
+          "role": "Coordinator",
+          "inputs": "تصمیم C02 و impact graph",
+          "action": "revision تازه بساز؛ approvals/evidence پایین‌دست متأثر را stale علامت بزن، تاریخچه را نگه دار. بخش‌های مستقل با دلیل unaffected باقی بمانند. rule/UC/AC متأثر را برای نگارش علامت بزن.",
+          "outputs": "baseline candidate جدید، stale list و تصمیم‌های superseded",
+          "done": "هیچ approval روی bytes جدید کپی نشده؛ scope مصوب قبلی محفوظ است.",
+          "transitions": [
+            {
+              "condition": "تصمیم‌های بیشتری لازم",
+              "target": "P02"
+            },
+            {
+              "condition": "اطلاعات برای بازنویسی کافی",
+              "target": "P04"
+            }
+          ]
+        },
+        {
+          "id": "C04",
+          "title": "ادامهٔ scope قبلی پس از رد تغییر",
+          "actor": "AI",
+          "role": "Coordinator",
+          "inputs": "تصمیم رد، originNode و baseline پیشین",
+          "action": "بررسی کن baseline قبلی هنوز معتبر و کار وابسته به تغییر انجام نشده است؛ drafts تغییر ردشده را archived/reference کن، نه مرجع جاری. از مرحلهٔ متوقف‌شده ادامه بده؛ اگر قبلاً تحویل بسته شده بود END.",
+          "outputs": "resume record و baseline معتبر انتخاب‌شده",
+          "done": "scope قبلی واقعاً قابل ادامه؛ ابهام blocker با رد تغییر پنهان نشده.",
+          "transitions": [
+            {
+              "condition": "در محصول",
+              "target": "P04"
+            },
+            {
+              "condition": "در QA",
+              "target": "Q02"
+            },
+            {
+              "condition": "در طراحی",
+              "target": "T02"
+            },
+            {
+              "condition": "در توسعه",
+              "target": "D01"
+            },
+            {
+              "condition": "در پذیرش",
+              "target": "V01"
+            },
+            {
+              "condition": "درخواست قبلی بسته بود",
+              "target": "END"
+            }
+          ]
+        },
+        {
+          "id": "B01",
+          "title": "ثبت و تطبیق گزارش با قرارداد",
+          "actor": "AI",
+          "role": "Coordinator / QA analyst",
+          "inputs": "شرح observed behavior، environment امن و قرارداد مبنا",
+          "action": "actual/expected را جدا و rule/AC را پیدا کن. نبود بازتولید گزارش را حذف نمی‌کند. اگر از V02 آمده، actual evidence را حفظ کن. انتظار تازه change است.",
+          "outputs": "bug report با reported/unconfirmed status و source",
+          "done": "گزارش امن و انتساب انتظار مشخص یا ابهام دقیق معلوم است.",
+          "transitions": [
+            {
+              "condition": "قرارداد روشن؛ گزارش خارجی نیازمند تأیید درخواست‌کننده",
+              "target": "B03"
+            },
+            {
+              "condition": "قرارداد مبهم",
+              "target": "B02"
+            },
+            {
+              "condition": "انتظار متفاوت با قرارداد",
+              "target": "C01"
+            },
+            {
+              "condition": "defect اجرای QA با expected مصوب",
+              "target": "B04"
+            }
+          ]
+        },
+        {
+          "id": "B02",
+          "title": "روشن‌کردن مستقیم انتظار باگ",
+          "actor": "Human",
+          "role": "همان درخواست‌کننده",
+          "inputs": "یک سؤال مستقیم درباره انتظار/مالکیت نامعلوم و گزارش فعلی",
+          "action": "به قاعده موجود یا انتظار روشن ارجاع بده. batch مصاحبهٔ ماژول ساخته نمی‌شود؛ اگر نیاز جدید می‌خواهی آن را change اعلام کن.",
+          "outputs": "clarification با reference",
+          "done": "انتظار از گزارش واقعی جدا و پاسخ دقیق ثبت شده.",
+          "transitions": [
+            {
+              "condition": "قرارداد موجود روشن شد",
+              "target": "B01"
+            },
+            {
+              "condition": "نیاز جدید/تغییر رفتار",
+              "target": "C01"
+            }
+          ]
+        },
+        {
+          "id": "B03",
+          "title": "تأیید گزارش باگ",
+          "actor": "Human",
+          "role": "همان درخواست‌کننده",
+          "inputs": "متن کامل گزارش، rule/AC و manifest bug",
+          "action": "صحت شرح گزارش را روی نسخه مشخص تأیید یا اصلاح کن. این رأی اثبات root cause یا موفقیت fix نیست. بسته باید معنای expectation و ruleهای ارجاع‌شده را برای همین گزارش روشن کند؛ اگر baseline محصول معتبر نیست، قبل ادامه G-P روی قرارداد لازم گرفته شود.",
+          "outputs": "bug approval جدا و وضعیت آماده بررسی فنی",
+          "done": "تأیید صریح گزارش موجود است.",
+          "transitions": [
+            {
+              "condition": "گزارش تأیید شد",
+              "target": "B04"
+            },
+            {
+              "condition": "اصلاح شرح",
+              "target": "B01"
+            }
+          ]
+        },
+        {
+          "id": "B04",
+          "title": "بازتولید و سناریوی regression",
+          "actor": "AI",
+          "role": "QA analyst با ابزار",
+          "inputs": "bug یا failed scenario، candidate و expected مصوب",
+          "action": "بازتولید کنترل‌شده با داده ساختگی را انجام/طراحی کن؛ reproducible/intermittent/not-reproduced ثبت کن. سناریوی regression و دامنه اثر بنویس؛ عدم بازتولید دلیل بی‌اعتباری گزارش نیست. در حین توسعه defect زیرپرونده همان request است.",
+          "outputs": "QA bug packet، regression scenario، observed evidence و severity پیشنهادی",
+          "done": "تیم فنی می‌داند چه چیز معلوم و چه چیز فرض است.",
+          "transitions": [
+            {
+              "condition": "بسته برای بررسی فنی آماده",
+              "target": "B08"
+            },
+            {
+              "condition": "oracle محصول هنوز نامعلوم",
+              "target": "B02"
+            }
+          ]
+        },
+        {
+          "id": "B08",
+          "title": "تأیید بستهٔ regression باگ",
+          "actor": "Human",
+          "role": "QA owner",
+          "inputs": "گزارش B04، oracle قرارداد موجود، regression scenario و manifest delta QA",
+          "action": "پوشش و expected result را برای همین اصلاح تأیید کن. برای defect جاری اگر همان سناریوی قبلاً مصوب بدون تغییر است، مرجع G-Q معتبر را reuse و عدم تغییر را ثبت کن؛ سناریوی تازه یا تغییرکرده رأی نسخه تازه می‌خواهد. مصاحبه محصول لازم نیست مگر رفتار تغییر کند.",
+          "outputs": "G-Q delta approval یا ارجاع معتبر به G-Q موجود؛ گزارش باگ خارجی G-P/report approval خودش را حفظ می‌کند.",
+          "done": "برنامهٔ QA ورودی فنی تأیید معتبر دارد؛ report approval با اثبات fix اشتباه نشده.",
+          "transitions": [
+            {
+              "condition": "QA delta معتبر",
+              "target": "B05"
+            },
+            {
+              "condition": "نقص گزارش یا scenario",
+              "target": "B04"
+            },
+            {
+              "condition": "oracle محصول نامعلوم",
+              "target": "B02"
+            }
+          ]
+        },
+        {
+          "id": "B05",
+          "title": "دریافت فنی گزارش",
+          "actor": "Human",
+          "role": "Tech lead",
+          "inputs": "bug packet، approval خارجی در صورت نیاز و expected baseline",
+          "action": "دریافت همان نسخه و مسئول investigation را ثبت کن؛ برای defect جاری از مسئولیت ازپیش‌ثبت‌شده استفاده شود و جلسه تازه لازم نیست. پایان گردش محصولی باگ اینجاست، نه پایان اصلاح.",
+          "outputs": "technical acknowledgment و investigation owner",
+          "done": "فنی مسئولیت بررسی را پذیرفته است.",
+          "transitions": [
+            {
+              "condition": "دریافت ثبت شد",
+              "target": "B06"
+            },
+            {
+              "condition": "گزارش ناقص",
+              "target": "B04"
+            }
+          ]
+        },
+        {
+          "id": "B06",
+          "title": "تحقیق علت و طرح اصلاح محدود",
+          "actor": "AI",
+          "role": "Technical designer / Developer در نقش investigation",
+          "inputs": "گزارش، regression، Backend bug workflow و source",
+          "action": "source→failure و caller/contract/data impact را trace کن؛ fact را از hypothesis جدا. برای fix، plan و test mapping متناسب تهیه و T02 را برای review delta ادامه بده؛ کد بدون scope/طراحی معتبر تغییر نکند. حتی fix تک‌ماژولی یک impact-map کوچک دارد؛ dependencyهای باگ از بررسی حذف نمی‌شوند.",
+          "outputs": "bug investigation با root cause یا unknown، fix proposal و affected IDs",
+          "done": "نتیجه به شاهد متصل؛ existing design کافی بودن مستدل، نه gate bypass.",
+          "transitions": [
+            {
+              "condition": "اصلاح لازم؛ طراحی delta و تأیید فنی",
+              "target": "T02"
+            },
+            {
+              "condition": "فعلاً نقص ثابت نشده یا رفتار مطابق قرارداد",
+              "target": "B07"
+            },
+            {
+              "condition": "انتظار واقعاً نیازمند تغییر محصول",
+              "target": "C01"
+            }
+          ]
+        },
+        {
+          "id": "B07",
+          "title": "تصمیم درباره گزارش حل‌نشده",
+          "actor": "Human",
+          "role": "QA owner و درخواست‌کننده با Tech lead",
+          "inputs": "investigation، evidence و نتیجهٔ inconclusive/as-designed",
+          "action": "بستن با دلیل، انتظار شاهد بیشتر یا تبدیل به change را تصمیم بگیر. not-reproduced هرگز fixed گزارش نشود. دادهٔ حساس برای شاهد نخواه.",
+          "outputs": "closure/inconclusive decision یا درخواست بررسی مشخص",
+          "done": "وضعیت گزارش صادقانه و owner ادامه روشن است.",
+          "transitions": [
+            {
+              "condition": "بسته‌شدن گزارش بدون ادعای fix",
+              "target": "END"
+            },
+            {
+              "condition": "شاهد بیشتر لازم",
+              "target": "HOLD"
+            },
+            {
+              "condition": "نیاز به تغییر رفتار",
+              "target": "C01"
+            },
+            {
+              "condition": "تحقیق بیشتری با شاهد تازه",
+              "target": "B06"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "08-release",
+      "title": "انتشار و عملیات، در صورت درخواست",
+      "description": "این مسیر فقط پس از تحویل و با اختیار صریح انتشار اجرا می‌شود. آماده‌بودن فنی یا approval اسناد به‌تنهایی اختیار merge/deploy نیست.",
+      "nodes": [
+        {
+          "id": "R01",
+          "title": "آماده‌سازی انتشار قابل review",
+          "actor": "AI",
+          "role": "Developer / Coordinator",
+          "inputs": "G-D، artifact candidate، target و release request",
+          "action": "release plan و migration/expand-backfill-contract، compatibility، backup/restore، flags، smoke، rollback/roll-forward و operator را آماده کن. secret فقط reference. target واقعی و توان host را بررسی کن.",
+          "outputs": "release packet و action list دقیق merge/deploy/rollback",
+          "done": "اثر و اختیار لازم هر action روشن؛ discovery پیش از درخواست اجازه انجام شده.",
+          "transitions": [
+            {
+              "condition": "طرح قابل تصمیم",
+              "target": "R02"
+            }
+          ]
+        },
+        {
+          "id": "R02",
+          "title": "تصمیم و اختیار انتشار",
+          "actor": "Human",
+          "role": "Release owner مجاز",
+          "inputs": "release packet، target و اعمال دقیق",
+          "action": "اختیار merge/deploy و در صورت نیاز rollback محدوده‌دار را تأیید کن؛ اگر قبلاً صریحاً داده شده، همان مرجع معتبر ثبت و دوباره سؤال نشود. prerequisite و پنجره عملیات را تأیید کن.",
+          "outputs": "authorization با target/actions/حدود و reference",
+          "done": "اختیار همان عمل و مقصد موجود؛ سکوت یا G-D جایگزین نیست.",
+          "transitions": [
+            {
+              "condition": "اختیار کامل",
+              "target": "R03"
+            },
+            {
+              "condition": "اصلاح طرح",
+              "target": "R01"
+            },
+            {
+              "condition": "انتشار فعلاً خارج scope؛ تحویل پیاده‌سازی باقی است",
+              "target": "END"
+            }
+          ]
+        },
+        {
+          "id": "R03",
+          "title": "دروازهٔ کامل انتشار",
+          "actor": "Tool",
+          "role": "Release check runner",
+          "inputs": "candidate دقیق، release plan و محیط واقعی لازم",
+          "action": "verify full و تمام الزامات policy release جاری را اجرا؛ current-run reports، artifact/JAR/SBOM و checksum ledger را بررسی کن. بعد merge/rebase تغییر revision نیازمند evidence جدید یا تأیید equivalence مستدل طبق policy است.",
+          "outputs": "release evidence commit-bound",
+          "done": "هیچ report stale، skipped required test یا dirty artifact نامعتبر نیست.",
+          "transitions": [
+            {
+              "condition": "gate کامل پاس",
+              "target": "R04"
+            },
+            {
+              "condition": "نقص پیاده‌سازی",
+              "target": "D02"
+            }
+          ]
+        },
+        {
+          "id": "R04",
+          "title": "اجرای اعمال مجاز انتشار",
+          "actor": "Human",
+          "role": "Operator / agent با اختیار همان operator",
+          "inputs": "authorization معتبر، artifact verify‌شده و runbook",
+          "action": "فقط actionهای مصوب را به ترتیب اجرا؛ migration با principal جدا و serving بدون DDL. نتیجه هر action و readback ثبت؛ timeout اثرنامعلوم را با retry کور جبران نکن. اگر candidate تغییر کرد R03.",
+          "outputs": "deployment/merge record با target، revision و اثر قطعی",
+          "done": "عمل‌ها قابل انتساب و تحقق یا failure آن‌ها مشاهده شده‌اند.",
+          "transitions": [
+            {
+              "condition": "اعمال انجام و آماده smoke",
+              "target": "R05"
+            },
+            {
+              "condition": "revision عوض شد",
+              "target": "R03"
+            },
+            {
+              "condition": "خرابی یا نتیجه نیازمند recovery",
+              "target": "R06"
+            }
+          ]
+        },
+        {
+          "id": "R05",
+          "title": "بررسی پس از انتشار",
+          "actor": "Tool",
+          "role": "QA / عملیات",
+          "inputs": "deployment record و smoke/monitoring plan",
+          "action": "smoke رفتار، migration، health، consumer lag و سیگنال‌های موردنیاز را اجرا؛ نبود metric را صفر خطا ننام. نتیجه و receipt عملیات ثبت شود.",
+          "outputs": "post-release evidence و operational receipt",
+          "done": "شرط خروج release plan پاس و مالک عملیات دریافت کرده است.",
+          "transitions": [
+            {
+              "condition": "انتشار و پذیرش عملیاتی موفق",
+              "target": "END"
+            },
+            {
+              "condition": "خرابی یا مغایرت",
+              "target": "R06"
+            }
+          ]
+        },
+        {
+          "id": "R06",
+          "title": "تصمیم recovery در محدوده اختیار",
+          "actor": "Human",
+          "role": "Release owner / operator",
+          "inputs": "failure evidence، آثار انجام‌شده و rollback/roll-forward plan",
+          "action": "بر اساس وضعیت واقعی، rollback/roll-forward/reconcile مجاز را انتخاب و اجرا یا دستور بده. دادهٔ تغییرکرده با rollback binary لزوماً برنمی‌گردد. اگر اختیار موجود نیست انتظار تصمیم ثبت شود.",
+          "outputs": "recovery decision و execution/readback evidence",
+          "done": "اثر recovery قطعی یا remaining unknown با owner ثبت شده.",
+          "transitions": [
+            {
+              "condition": "وضعیت recovery ثبت شد",
+              "target": "R07"
+            }
+          ]
+        },
+        {
+          "id": "R07",
+          "title": "ثبت رخداد و تحویل ادامه",
+          "actor": "AI",
+          "role": "Coordinator",
+          "inputs": "recovery evidence و scope آسیب",
+          "action": "انتشار را failed/recovered/blocked دقیق ثبت؛ incident و اقدام بعدی را با owner تحویل بده. تحویل پیاده‌سازی قبلی را موفقیت production معرفی نکن.",
+          "outputs": "incident handover و reopen/bug reference",
+          "done": "کارهای باقی‌مانده و نیاز انسان مشخص؛ پرونده release تا پذیرش دوباره موفق نیست.",
+          "transitions": [
+            {
+              "condition": "اصلاح لازم در درخواست مرتبط",
+              "target": "B01"
+            },
+            {
+              "condition": "انتظار تصمیم/زیرساخت",
+              "target": "HOLD"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

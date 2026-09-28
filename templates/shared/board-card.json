@@ -1,0 +1,27 @@
+{
+  "requestId": "{{request-id}}",
+  "title": "{{عنوان پرونده}}",
+  "modules": [],
+  "requestPath": "requests/{{request-id}}/request.md",
+  "trackingPath": "requests/{{request-id}}/tracking.md",
+  "documentPath": null,
+  "columnId": "product-draft",
+  "state": "intake",
+  "team": "product",
+  "ownerReference": null,
+  "action": "start",
+  "currentNode": "I01",
+  "nextNode": null,
+  "resumeNode": null,
+  "scope": "documentation",
+  "authorizationReference": "{{مرجع درخواست واقعی}}",
+  "baselines": {
+    "product": null,
+    "qa": null,
+    "technical": null
+  },
+  "blocker": null,
+  "openReturnIds": [],
+  "lastMovementId": null,
+  "journalPath": null
+}

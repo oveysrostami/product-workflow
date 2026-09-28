@@ -1,0 +1,8 @@
+{
+  "baselineId": "workflow-kit-v1.3",
+  "manifestSha256": "0b04a66ffc939679694f3196d735cafca67aba140f23962396ebfc4581e4bfd6",
+  "approvalStatus": "pending",
+  "archive": "workflow-kit-v1.3.zip",
+  "archiveSha256": "72970451281085898aa7ae939a73b91e5f8d476fd23f45316268ef5e935de49a",
+  "note": "Exact v1.3 preserved before requester-mandated team file ownership restriction."
+}

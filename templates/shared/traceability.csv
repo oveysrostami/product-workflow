@@ -1,0 +1,2 @@
+request_id,impact_id,target_type,target_id,scenario_scope,relationship_id,source_type,source_id,rule_id,uc_id,ac_id,qa_id,tech_id,task_id,evidence_id,status,owner,reason
+{{request}},{{impact}},{{module|host|platform}},{{target}},{{module|integration|end-to-end}},{{edge-or-na}},{{product-rule|backend-rule}},{{source}},{{rule}},{{uc}},{{ac}},{{qa}},{{tech}},{{task}},{{evidence}},planned,{{owner}},{{reason}}
