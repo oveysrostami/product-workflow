@@ -1,0 +1,16 @@
+# مسیر فنی
+
+از ریشهٔ workflow بخوان: `workflows/04-technical.md`، `docs/05-backend-binding.md`، `docs/10-module-library.md`، `docs/11-documentation-cycle.md` و `docs/04-gates.md`. قالب‌ها در `templates/technical/`، `templates/modules/` و قالب مصاحبهٔ تیمی هستند. Backend فقط checkout معرفی‌شدهٔ همان پرونده است؛ AGENTS و قواعد آن را پیش از کار روی آن بخوان.
+
+1. صف فنی شامل پرونده‌های دارای G-P/G-Q معتبر، parent منطبق و handoverهای آماده است. بعد از بررسی candidateها، کاربر پرونده را انتخاب می‌کند. T01 دریافت واقعی همان بسته است؛ انتخاب تنها، receipt نیست.
+2. T02 کد/قواعد و طرح جاری ماژول‌ها را بررسی و مشخصات checkout را در `technical/index.md` ثبت می‌کند. implemented/reference/optional/unavailable را از شاهد جدا کن. `impact-map` اثر مستقیم، وابسته و compatibility-only و مسئول هر target را مشخص می‌کند.
+3. تصمیم فنی مؤثرِ باز به T10/T11 می‌رود؛ سؤال/پاسخ در `technical/interview.md`. حداکثر پنج سؤال با گزینه‌های واقعی و پیامد و پیشنهاد مستدل؛ پاسخ جزئی همان batch را باز نگه می‌دارد. اگر اطلاعات کافی است، دلیل را ثبت کن. تصمیم انسان بر پایهٔ قواعد existing، با رأی G-T بستهٔ نهایی یکی نیست.
+4. T03/T04 مدل و قراردادها، operations، test mapping، طرح اجرای taskها، جریان بین ماژول‌ها و handover را تکمیل می‌کنند. هر ماژول درگیر change-spec، test-mapping و snapshot کامل تجمعی با plan/baseRevision دارد. snapshot در درخواست نوشته می‌شود؛ modules جاری پیش از G-T تغییر نمی‌کند.
+5. T05 بررسی testability با QA؛ T06 review مستقل هر ماژول و کل درخواست. تیم فنی فقط technical/ را اصلاح می‌کند؛ یافتهٔ QA یا تصمیم محصول به C01 و مالک مربوط برمی‌گردد. انتظار محصول برای سهولت اجرا عوض نمی‌شود.
+6. T07 رأی واقعی مسئولان فنی و Tech lead روی manifest شامل handover و تمام snapshotهاست. انتخاب عملیاتی با صاحب اختیار مربوط. approval یا scope نامعتبر را به انتشار تبدیل نکن.
+7. T09: در writeScope فنی، ابزار `scripts/publish_module.py` خود پروژه ابتدا preview و سپس apply می‌شود. bytes مصوب، baseRevision و نسخهٔ جاری را تطبیق بده. conflict به T02 و نسخه/approval تازه برمی‌گردد؛ در retry نسخهٔ قبلی overwrite نمی‌شود.
+8. T08: انتشار همهٔ ماژول‌ها را readback و digestهای واقعی را در journal تحویل ثبت کن؛ handover منجمد بازنویسی نمی‌شود. کارت فقط اکنون «مستندات فنی آماده» است. بدون اختیار اجرای scope، HOLD با resumeNode=D01 پایان این کار است.
+
+با درخواست پایان مصاحبه، T04 پیش‌نویس و موارد باز را جمع‌بندی می‌کند؛ مورد مؤثر باز مانع G-T و انتشار است. پس از قطع جلسه، journal و واقعیت انتشار را قبل از تکرار بخوان.
+
+مستندات modules آخرین طرح تأییدشده را نشان می‌دهند. metadata پیاده‌سازی فقط با evidence واقعی و توسط Coordinator ثبت می‌شود؛ تأیید طرح، اجرای کد یا استقرار نیست. اسناد کنار کد Backend همچنان قرارداد همان مخزن‌اند. این مسیر مجوز تغییر کد یا task اجرایی در development/ نمی‌دهد.

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Product Workflow"
+  short_description: "Run product, QA, and technical documentation workflows"
+  default_prompt: "از $product-workflow برای شروع یا ادامهٔ پروندهٔ محصول، QA یا فنی در این پروژه استفاده کن."
