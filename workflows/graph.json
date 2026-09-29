@@ -17,7 +17,7 @@
           "actor": "AI",
           "role": "Coordinator",
           "inputs": "تیم محصول انتخاب‌شده و شرح موجود کاربر، پیوند اسناد/نمونه‌ها و دسترسی read-only مخازن",
-          "action": "شرح را پالایش و ثبت کن؛ outcome، actor، درد فعلی و non-goal را خلاصه کن. شرحی را که وجود دارد دوباره نخواه. دادهٔ حساس را حذف و دلیل redaction را ثبت کن. اگر شرحی وجود ندارد ابتدا بپرس «نیازت را بگو؛ چه کاری باید انجام دهیم؟». این node برای درخواست تازه است؛ پروندهٔ انتخاب‌شده از صف را دوباره ثبت نکن.",
+          "action": "شرح را پالایش و ثبت کن؛ outcome، actor، درد فعلی و non-goal را خلاصه کن. شرحی را که وجود دارد دوباره نخواه. دادهٔ حساس را حذف و دلیل redaction را ثبت کن. اگر شرحی وجود ندارد ابتدا بپرس «نیازت را بگو؛ چه کاری باید انجام دهیم؟». این node برای درخواست تازه است؛ پروندهٔ انتخاب‌شده از صف را دوباره ثبت نکن. برای ماژول تازه ابتدا تعریف کلی شامل چیست، چه می‌کند، برای چه کسی، هدف و نتیجهٔ مطلوب را از شرح موجود بگیر یا همان بخش نامعلوم را بپرس؛ این تعریف پیش از طراحی پرسش‌نامه است.",
           "outputs": "request.md با request-id، source references و خلاصهٔ قابل اصلاح",
           "done": "درخواست خام و برداشت AI جدا و قابل ردیابی‌اند.",
           "transitions": [
@@ -33,7 +33,7 @@
           "actor": "AI",
           "role": "Coordinator",
           "inputs": "request و قراردادهای موجود ماژول‌های محتمل؛ قواعد routing در docs/09-product-authoring.md همین مخزن",
-          "action": "نوع اصلی new/feature/change/bug/technical-only را تعیین کن؛ همهٔ ماژول‌های متأثر و دلیل هرکدام را بنویس. برای routing محصول گفتهٔ کاربر دربارهٔ ادغام را کافی بدان؛ در نبود آن سؤال مستقیم را برای I03 ثبت کن.",
+          "action": "نوع اصلی new/feature/change/bug/technical-only را تعیین کن؛ همهٔ ماژول‌های متأثر و دلیل هرکدام را بنویس. برای routing محصول گفتهٔ کاربر دربارهٔ ادغام را کافی بدان؛ در نبود آن سؤال مستقیم را برای I03 ثبت کن. نوع feature با داشتن baseline به change تغییر نام نمی‌دهد؛ routing نسخه و نوع نیاز جدا هستند. سهمیه/مسیر پرسش‌نامه طبق docs/13-product-questionnaire.md است؛ change تازه پرسش‌نامهٔ متناسب با دامنه پیش از interview دارد؛ technical-only فقط interview فنی، بدون پرسش‌نامهٔ محصول دارد.",
           "outputs": "routing و جدول module/behavior/implementation-statement/source فهرست اولیهٔ اثر ماژولی؛ نقشهٔ فنی نهایی در T02 ساخته می‌شود.",
           "done": "مسیر اصلی و اثرهای فرعی مشخص؛ unknownها با سؤال معین‌اند.",
           "transitions": [
@@ -96,7 +96,7 @@
     {
       "id": "02-product",
       "title": "جمع‌آوری نیاز، مصاحبه و قرارداد محصول",
-      "description": "Product نیاز stakeholderها را به AI می‌دهد؛ پیشنهاد AI تا پاسخ صریح تصمیم نیست. کیفیت شرح جریان و پذیرش مهم‌تر از تعداد فایل است.",
+      "description": "شرح کلی، پرسش‌نامهٔ کامل ماژول تازه، فیچر یا change، دریافت پاسخ‌ها، سپس interview هدفمند و قرارداد محصول؛ باگ و technical-only فقط interview مربوط دارند.",
       "nodes": [
         {
           "id": "P01",
@@ -104,12 +104,24 @@
           "actor": "AI",
           "role": "Product interviewer با ورودی Product owner",
           "inputs": "request، نیازهای جمع‌آوری‌شده، قراردادها و تصمیم‌های قبلی؛ راهنمای محصول داخلی و قالب‌های product همین مخزن",
-          "action": "منبع، هدف و محدودیت هر stakeholder را ثبت کن؛ اشتراک و تعارض را مشخص کن. stakeholder غایب را با نظر AI پر نکن. Product owner مسئول جمع‌آوری پاسخ آن منبع است.",
+          "action": "منبع، هدف و محدودیت هر stakeholder را ثبت کن؛ اشتراک و تعارض را مشخص کن. stakeholder غایب را با نظر AI پر نکن. Product owner مسئول جمع‌آوری پاسخ آن منبع است. برای new تعریف کلی و برای feature شرح فیچر را کنترل کن؛ قبل از interview مسیر docs/13-product-questionnaire.md را انتخاب کن. پروندهٔ جاری یا اصلاحیه پرسش‌نامهٔ کامل تازه نمی‌گیرد.",
           "outputs": "stakeholder matrix، glossary اولیه، تصمیم روشن/پیشنهاد/باز",
           "done": "هر نیاز منبع دارد و تعارض‌ها owner انسانی دارند.",
           "transitions": [
             {
-              "condition": "نیازها دسته‌بندی شدند",
+              "condition": "درخواست تازهٔ new و تعریف کلی کافی",
+              "target": "P09"
+            },
+            {
+              "condition": "درخواست تازهٔ change؛ اثر و منابع مبنا آماده",
+              "target": "P09"
+            },
+            {
+              "condition": "درخواست تازهٔ feature؛ بررسی اثر مستنداتی لازم",
+              "target": "P11"
+            },
+            {
+              "condition": "سایر مسیرهای محصول یا ادامهٔ معتبر بدون پرسش‌نامهٔ تازه",
               "target": "P02"
             }
           ]
@@ -119,8 +131,8 @@
           "title": "انتخاب ابهام و ساخت batch",
           "actor": "AI",
           "role": "Product interviewer",
-          "inputs": "decisions، پاسخ‌های قبلی، draft و open items",
-          "action": "فقط ابهام مؤثر بر scope فعلی انتخاب کن. اگر سؤال بی‌پاسخ از batch قبلی هست، فقط همان شماره‌ها؛ وگرنه تا پنج سؤال با چهار گزینهٔ واقعی و پنجم پیشنهاد شما، توصیه و دلیل. اگر مورد مسدودکننده نیست سؤال تازه نساز.",
+          "inputs": "decisions، پاسخ‌های قبلی، draft و open items؛ پرسش‌نامهٔ کامل و پاسخ‌های P10 در new/feature/change و question-id/revision/answer-idهای آن",
+          "action": "برای new/feature/change تازه، تکمیل پاسخ‌های پرسش‌نامه طبق docs/13-product-questionnaire.md پیش‌شرط است؛ interview فقط follow-up، تعارض و ابهام باقی‌مانده را می‌پرسد و سؤال پاسخ‌داده‌شده تکرار نمی‌شود. فقط ابهام مؤثر بر scope فعلی انتخاب کن. اگر سؤال بی‌پاسخ از batch قبلی هست، فقط همان شماره‌ها؛ وگرنه تا پنج سؤال با چهار گزینهٔ واقعی و پنجم پیشنهاد شما، توصیه و دلیل. اگر مورد مسدودکننده نیست سؤال تازه نساز.",
           "outputs": "یک پیام کامل سؤال‌ها یا readiness note؛ ثبت متن در interview.md",
           "done": "گزینه‌ها مستقل، سؤال تک‌تصمیمی و توصیه از تصمیم جداست.",
           "transitions": [
@@ -175,8 +187,8 @@
           "title": "بازبینی مستقل نیاز و سند",
           "actor": "AI",
           "role": "Reviewer مستقل یا reviewer انسانی جایگزین",
-          "inputs": "درخواست و مصاحبه، تمام اسناد product، منابع و scope",
-          "action": "هر rule را به پاسخ/قرارداد معتبر وصل کن؛ ناسازگاری عدد/زمان/مالکیت و رفتار مخفی در ضمیمه را پیدا کن. عمق را با OTP مقایسه کن، نه قوانینش را. یافته با محل، شاهد، اثر و owner بده.",
+          "inputs": "درخواست و مصاحبه، تمام اسناد product، منابع و scope؛ پرسش‌نامه و history/پاسخ‌ها و feature-impact در صورت الزام",
+          "action": "هر rule را به پاسخ/قرارداد معتبر وصل کن؛ ناسازگاری عدد/زمان/مالکیت و رفتار مخفی در ضمیمه را پیدا کن. عمق را با OTP مقایسه کن، نه قوانینش را. یافته با محل، شاهد، اثر و owner بده. کامل‌بودن مسیر پرسش‌نامه، سهمیهٔ سؤال مرتبط/متمایز و پاسخ واقعی و اتصال تصمیم به question/answer را بررسی کن؛ count ابزار جای کیفیت سؤال نیست.",
           "outputs": "review product با blocker/major/minor و مقصد اصلاح",
           "done": "همهٔ یافته‌های مسدودکننده بسته یا صریح برای تصمیم ارجاع شده‌اند.",
           "transitions": [
@@ -251,6 +263,70 @@
             {
               "condition": "بسته تحویل آماده",
               "target": "Q01"
+            }
+          ]
+        },
+        {
+          "id": "P09",
+          "title": "طراحی و ذخیرهٔ کل پرسش‌نامهٔ اولیه",
+          "actor": "AI",
+          "role": "Product writer",
+          "inputs": "تعریف کلی، نوع new/feature/change، منابع و در feature گزارش محصولی P11؛ پرسش‌نامه/پاسخ قبلی در صورت revision",
+          "action": "طبق docs/13-product-questionnaire.md و templates/product/questionnaire.json کل مجموعه را پیش از پاسخ‌گیری در product/questionnaire.json ذخیره کن: new حداقل ۵۰ سؤال مرتبط و متمایز در درخواست؛ feature حداقل ۲۰ سؤال مستقل برای هر moduleId فهرست P11 و بیشتر متناسب با اندازه/ریسک تغییر. چهار گزینهٔ A/B/C/D در اولویت؛ long-text با علت وقتی شرح لازم است. سؤال مشترک سهمیهٔ ماژول‌ها را پر نمی‌کند. شناسه/revision، منابع، توصیهٔ جدا از پاسخ و تاریخچه حفظ شوند؛ جواب واقعی قبلی با مرجع ثبت، ولی سؤال تکراری/ساختگی برای سهمیه نساز. همهٔ سؤال‌ها را قابل دسترس به کاربر ارائه کن؛ پنج‌سؤالی interview به اندازهٔ این مجموعه اعمال نمی‌شود. ابزار read-only skill برای کنترل شمارش/ساختار را اجرا کن؛ ابزار معنای سؤال یا هویت پاسخ‌دهنده را اثبات نمی‌کند. change تازه مجموعهٔ کامل و غیرخالی متناسب با رفتار فعلی/مطلوب، scope، سازگاری و پذیرش دارد؛ حداقل عددی جدا تعیین نشده است و سهمیهٔ feature/new به آن تحمیل نمی‌شود.",
+          "outputs": "product/questionnaire.json با کل مجموعهٔ نسخه‌دار، history و پاسخ واقعی قبلی؛ گزارش شمارش/ساختار و ارائهٔ مجموعه به کاربر",
+          "done": "کل مجموعه ذخیره‌شده، حداقل‌ها و قالب معتبرند؛ هیچ پاسخ AI یا وضعیت جاری موازی request ساخته نشده.",
+          "transitions": [
+            {
+              "condition": "مجموعهٔ کامل ذخیره و ارائه شد",
+              "target": "P10"
+            }
+          ]
+        },
+        {
+          "id": "P10",
+          "title": "دریافت پاسخ‌های پرسش‌نامه و checkpoint",
+          "actor": "Human",
+          "role": "درخواست‌کننده / Product owner در حدود نقش",
+          "inputs": "کل مجموعهٔ P09، پاسخ‌های قبلی و شناسه‌های بی‌پاسخ",
+          "action": "پاسخ گزینه‌ای/تشریحی و جزئی بده؛ AI فقط پاسخ واقعی و مرجع را در responses همان product/questionnaire.json ثبت کند. پاسخ تغییرکرده append-only با supersedes، سؤال تغییرکرده با revision/history است. پاسخ unknown مورد باز interview است؛ N/A دلیل/مالک واقعی لازم دارد. تا دریافت همهٔ پاسخ‌های سؤال‌های فعال، waiting-human و resumeNode=P10 ثبت شود؛ ادامه پس از وقفه از همان سؤال‌های بی‌پاسخ است. پیش از P02 ابزار را با --require-answered اجرا کن. پایان زودهنگام فقط پیش‌نویس با موارد باز می‌دهد و سهمیه یا interview کامل اعلام نمی‌شود. در تغییر دامنه، سؤال/پاسخ unaffected حفظ شود و برای feature اثر ماژولی دوباره بررسی شود.",
+          "outputs": "پاسخ‌های واقعی دارای question-id/revision و answer-id/reference در پرسش‌نامه، فهرست بی‌پاسخ/unknown، تصمیم‌های محصول با source و journal ادامه",
+          "done": "پاسخ حدس‌زده نشده؛ گذار به interview فقط پس از پاسخ واقعی همهٔ سؤال‌های فعال است؛ توقف با موارد باز، تکمیل محسوب نمی‌شود.",
+          "transitions": [
+            {
+              "condition": "پاسخ جزئی؛ هنوز سؤال فعال بی‌پاسخ است",
+              "target": "P10"
+            },
+            {
+              "condition": "همهٔ پاسخ‌ها دریافت شد؛ interview باقی‌مانده",
+              "target": "P02"
+            },
+            {
+              "condition": "دامنهٔ feature عوض شد؛ فهرست اثر باید بازخوانی شود",
+              "target": "P11"
+            },
+            {
+              "condition": "دامنهٔ new/change عوض شد؛ مجموعه باید revision شود",
+              "target": "P09"
+            },
+            {
+              "condition": "پایان زودهنگام پرسش‌نامه برای پیش‌نویس با موارد باز",
+              "target": "P04"
+            }
+          ]
+        },
+        {
+          "id": "P11",
+          "title": "بررسی مستنداتی ماژول‌های فیچر با subagent",
+          "actor": "AI",
+          "role": "Product analyst با subagent فقط خواندنی",
+          "inputs": "شرح فیچر و request منتخب، مستندات modules و پرونده‌های مرتبط، منابع معرفی‌شده و حدود دسترسی",
+          "action": "طبق docs/13-product-questionnaire.md یک subagent فقط خواندنی با مسیر واقعی و شرح/مرجع فیچر اجرا کن؛ او تمام اسناد مرتبط، قراردادها، provider/consumer و جریان‌ها را بررسی و تعداد/فهرست ماژول‌های مستقیم، وابسته و سازگاری، شاهد مسیر/بخش/نسخه و اندازهٔ اولیهٔ تغییر هر ماژول را برگرداند. writeScope او خالی است و node، مصاحبه و agent دیگر اجرا نمی‌کند. agent اصلی نتیجه را تطبیق و product/feature-impact.md را از قالب مربوط ثبت و خلاصه را به کاربر ارائه می‌کند. نبود دسترسی یا module نامعلوم را با سؤال/مالک نشان بده؛ فهرست صفر یا unaffected فرضی نساز. گزارش محصولی است؛ technical/impact-map را ننویس و اجرای کد ادعا نکن. ابزار/اختیار subagent غایب، P11 را blocked می‌کند.",
+          "outputs": "product/feature-impact.md شامل فهرست و شمار ماژول‌ها، نوع/اندازهٔ اثر با شاهد، منابع و محدودیت و مرجع subagent؛ پیشنهاد تعداد سؤال حداقل ۲۰ برای هر ماژول",
+          "done": "تحلیل subagent واقعی برگشته، فهرست ماژول‌های درگیر با منابع قابل ردیابی است و ناشناختهٔ مؤثر بر سهمیه باقی نیست.",
+          "transitions": [
+            {
+              "condition": "فهرست مستنداتی برای طراحی مجموعه کامل است",
+              "target": "P09"
             }
           ]
         }
@@ -482,12 +558,12 @@
           "actor": "AI",
           "role": "Technical designer",
           "inputs": "P/Q baseline، Backend AGENTS/handbook/authority و source revision",
-          "action": "doctor و explain مسیرهای هدف را بخوان/اجرا و workflow اصلی Backend را انتخاب کن. owner/host/POM/policy/config/tests را trace کن. implemented/optional/reference/unavailable را تفکیک؛ platform gap را task لازم بدان. topology جدید را از انسان فنی بگیر، نه از probe. technical/impact-map.md را با IMPACT-ID برای همه ownerهای متأثر بساز: direct، dependent، compatibility-only، شاهد اثر، نیاز به کد و مسئول فنی. source/caller/consumer/config را برای اثر غیرمستقیم بررسی کن. host/platform را component target جدا و موارد unaffected را با دلیل ثبت کن. checkout هدف ورودی معرفی‌شدهٔ همان پرونده است؛ هیچ مسیر نصب همسایه فرض نشود. قرارداد داخلی docs/05-backend-binding.md و قالب‌های فنی همین مخزن راهنمای طراحی‌اند؛ انطباق با کد واقعی فقط از checkout فعلی سنجیده شود. مشخصات repository، مسیر checkout، revision و مسیر AGENTS/قواعد هدف را فقط در technical/index.md همین پرونده ثبت کن؛ request.md محصول فقط خواندنی است. نسخهٔ جاری و digest ماژول از modules/<slug>/current.json و تفاوت طرح مصوب با کد همان revision را ثبت کن؛ ماژول تازه baseRevision=null دارد. طبق docs/11-documentation-cycle.md، ابهام‌های مؤثر معماری/محیط و پاسخ‌های قبلی را در technical/interview.md ثبت کن؛ اگر پاسخ تازه لازم نیست دلیل کفایت را ثبت کن.",
+          "action": "doctor و explain مسیرهای هدف را بخوان/اجرا و workflow اصلی Backend را انتخاب کن. owner/host/POM/policy/config/tests را trace کن. implemented/optional/reference/unavailable را تفکیک؛ platform gap را task لازم بدان. topology جدید را از انسان فنی بگیر، نه از probe. technical/impact-map.md را با IMPACT-ID برای همه ownerهای متأثر بساز: direct، dependent، compatibility-only، شاهد اثر، نیاز به کد و مسئول فنی. source/caller/consumer/config را برای اثر غیرمستقیم بررسی کن. host/platform را component target جدا و موارد unaffected را با دلیل ثبت کن. checkout هدف ورودی معرفی‌شدهٔ همان پرونده است؛ هیچ مسیر نصب همسایه فرض نشود. قرارداد داخلی docs/05-backend-binding.md و قالب‌های فنی همین مخزن راهنمای طراحی‌اند؛ انطباق با کد واقعی فقط از checkout فعلی سنجیده شود. مشخصات repository، مسیر checkout، revision و مسیر AGENTS/قواعد هدف را فقط در technical/index.md همین پرونده ثبت کن؛ request.md محصول فقط خواندنی است. نسخهٔ جاری و digest ماژول از modules/<slug>/current.json و تفاوت طرح مصوب با کد همان revision را ثبت کن؛ ماژول تازه baseRevision=null دارد. طبق docs/11-documentation-cycle.md، ابهام‌های مؤثر معماری/محیط و پاسخ‌های قبلی را در technical/interview.md ثبت کن؛ اگر پاسخ تازه لازم نیست دلیل کفایت را ثبت کن. برای technical-only تازه پس از کشف، به interview فنی T10/T11 برو؛ پرسش‌نامهٔ اولیهٔ محصول ندارد. پاسخ/اطلاعات روشن قبلی تکرار و سؤال مصنوعی ساخته نشود؛ کفایت اطلاعات در T10 ثبت می‌شود.",
           "outputs": "technical/index، discovery، capability/gap و rule binding impact-map، index بستهٔ هر ماژول و فهرست EDGE-ID وابستگی‌ها. technical/interview.md با ابهام‌ها و منابع یا دلیل کفایت.",
           "done": "مسیرهای واقعی و baseline معماری ثبت شده؛ drift به requirement تبدیل نشده. هیچ ماژول یا component مشمول بدون نوع اثر و owner پاسخ‌گو نمانده؛ unknown به‌جای unaffected ثبت نمی‌شود. ابهام تصمیم فنی می‌تواند به T10 برود؛ نبود شاهد فنی همچنان blocked است.",
           "transitions": [
             {
-              "condition": "زمینه روشن",
+              "condition": "زمینه روشن؛ غیر از technical-only تازه یا interview قبلاً انجام شده",
               "target": "T03"
             },
             {
@@ -495,7 +571,7 @@
               "target": "C01"
             },
             {
-              "condition": "تصمیم فنی مؤثر نیازمند گفت‌وگو با انسان",
+              "condition": "technical-only تازه یا تصمیم فنی مؤثر نیازمند گفت‌وگو",
               "target": "T10"
             },
             {
@@ -1091,7 +1167,7 @@
           "actor": "Human",
           "role": "درخواست‌کننده؛ Product owner جمع‌بندی می‌کند",
           "inputs": "current/desired، impact و سؤال مؤثر با قالب مصاحبه برای تغییر رفتار",
-          "action": "رفتار/دامنهٔ تازه را تصمیم بگیر یا تغییر را رد کن. پاسخ مستقیم برای clarification کافی است؛ تغییر رفتار مسیر کامل نگارش/review را دارد. سابقه پاسخ قدیمی حفظ شود.",
+          "action": "رفتار/دامنهٔ تازه را تصمیم بگیر یا تغییر را رد کن. پاسخ مستقیم برای clarification کافی است؛ تغییر رفتار مسیر کامل نگارش/review را دارد. سابقه پاسخ قدیمی حفظ شود. برای feature/change تازه، این تصمیم فقط scope/نسخه و اجازهٔ تغییر را روشن می‌کند؛ interview رفتار تا پس از مسیر پرسش‌نامهٔ نوع مربوط انجام نمی‌شود.",
           "outputs": "decision با accepted/rejected و scope؛ نه approval بستهٔ هنوز نوشته‌نشده",
           "done": "تصمیم رفتاری روشن یا مورد باز با owner؛ رأی فقط تصمیم را می‌بندد.",
           "transitions": [
@@ -1116,11 +1192,15 @@
           "done": "هیچ approval روی bytes جدید کپی نشده؛ scope مصوب قبلی محفوظ است.",
           "transitions": [
             {
-              "condition": "تصمیم‌های بیشتری لازم",
+              "condition": "فیچر یا change تازه؛ پرسش‌نامهٔ اولیه پیش از interview لازم است",
+              "target": "P01"
+            },
+            {
+              "condition": "غیر از فیچر/change تازه؛ تصمیم‌های بیشتری لازم",
               "target": "P02"
             },
             {
-              "condition": "اطلاعات برای بازنویسی کافی",
+              "condition": "غیر از فیچر/change تازه؛ اطلاعات برای بازنویسی کافی",
               "target": "P04"
             }
           ]
@@ -1167,16 +1247,16 @@
           "actor": "AI",
           "role": "Coordinator / QA analyst",
           "inputs": "شرح observed behavior، environment امن و قرارداد مبنا",
-          "action": "actual/expected را جدا و rule/AC را پیدا کن. نبود بازتولید گزارش را حذف نمی‌کند. اگر از V02 آمده، actual evidence را حفظ کن. انتظار تازه change است.",
+          "action": "actual/expected را جدا و rule/AC را پیدا کن. نبود بازتولید گزارش را حذف نمی‌کند. اگر از V02 آمده، actual evidence را حفظ کن. انتظار تازه change است. برای درخواست تازهٔ محصول با نوع bug، فقط مصاحبهٔ متمرکز B02 دربارهٔ actual/expected، محیط، مراحل بازتولید، اثر و شاهد امن آماده و متن/پاسخ در interview.md محصول ثبت شود؛ پرسش‌نامهٔ ۵۰/۲۰ ساخته نمی‌شود. حتی با قرارداد روشن، اطلاعات موجود به مصاحبه نسبت داده و سؤال تکراری ساخته نشود؛ اگر پاسخ بیشتری لازم نیست دلیل کفایت مصاحبه ثبت شود. defect داخلی QA با expected مصوب همان مسیر کوتاه قبلی را دارد.",
           "outputs": "bug report با reported/unconfirmed status و source",
           "done": "گزارش امن و انتساب انتظار مشخص یا ابهام دقیق معلوم است.",
           "transitions": [
             {
-              "condition": "قرارداد روشن؛ گزارش خارجی نیازمند تأیید درخواست‌کننده",
+              "condition": "مصاحبهٔ باگ کامل/کفایت ثبت؛ قرارداد روشن و گزارش خارجی",
               "target": "B03"
             },
             {
-              "condition": "قرارداد مبهم",
+              "condition": "مصاحبهٔ باگ پاسخ لازم دارد یا قرارداد مبهم است",
               "target": "B02"
             },
             {
@@ -1191,14 +1271,18 @@
         },
         {
           "id": "B02",
-          "title": "روشن‌کردن مستقیم انتظار باگ",
+          "title": "مصاحبهٔ متمرکز گزارش باگ",
           "actor": "Human",
           "role": "همان درخواست‌کننده",
-          "inputs": "یک سؤال مستقیم درباره انتظار/مالکیت نامعلوم و گزارش فعلی",
-          "action": "به قاعده موجود یا انتظار روشن ارجاع بده. batch مصاحبهٔ ماژول ساخته نمی‌شود؛ اگر نیاز جدید می‌خواهی آن را change اعلام کن.",
-          "outputs": "clarification با reference",
+          "inputs": "سؤال‌های مؤثر گزارش باگ با قالب interview، اطلاعات/پاسخ موجود و قرارداد مبنا؛ پرسش‌نامهٔ حجیم ندارد",
+          "action": "فقط سؤال‌های مؤثر actual/expected، محیط، مراحل بازتولید، اثر و شاهد امن را پاسخ بده؛ AI متن/پاسخ واقعی و مرجع را در interview.md محصول ثبت کند. حداکثر پنج سؤال در batch؛ پاسخ جزئی همان batch را باز نگه می‌دارد و پاسخ قبلی تکرار نمی‌شود. انتظار تازه از defect جدا و به C01 ارجاع می‌شود. مصاحبه تأیید گزارش B03 نیست؛ پایان با ابهام مؤثر، گزارش باز و مانع ادامهٔ وابسته است.",
+          "outputs": "interview.md با سؤال/پاسخ واقعی باگ و clarification دارای مرجع؛ موارد باز با owner",
           "done": "انتظار از گزارش واقعی جدا و پاسخ دقیق ثبت شده.",
           "transitions": [
+            {
+              "condition": "پاسخ جزئی یا ابهام گزارش باقی است",
+              "target": "B02"
+            },
             {
               "condition": "قرارداد موجود روشن شد",
               "target": "B01"

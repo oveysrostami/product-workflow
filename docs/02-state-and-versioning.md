@@ -15,7 +15,7 @@ handover جزو artifacts مصوب است؛ بنابراین digest manifest خ�
 | وضعیت | معنی | گذار مجاز |
 |---|---|---|
 | intake | خواسته دریافت و در حال دسته‌بندی است | product-draft، bug-triage، change-analysis |
-| product-draft | مصاحبه/نگارش رفتار | product-review، waiting-human |
+| product-draft | پرسش‌نامهٔ اولیهٔ نوع مربوط، سپس interview/نگارش رفتار | product-review، waiting-human |
 | product-review | review نسخهٔ محصول | product-draft، product-approved |
 | product-approved | G-P پاس؛ QA باید دریافت کند | qa-design |
 | qa-design | گفت‌وگوی QA، سناریو و پوشش در حال تدوین | qa-approved، product-draft، waiting-human |
@@ -93,6 +93,8 @@ stateDiagram-v2
 Coordinator در change-impact، مجموعهٔ IDهای متأثر، dependents و دلیل unaffectedها را ثبت می‌کند. توسعهٔ مستقل می‌تواند ادامه یابد؛ gate بستهٔ نهایی تا رفع موارد stale عبور نمی‌کند. برای دامنهٔ کاهش‌یافته، scope و manifest تازه همراه تأیید انسانی می‌سازید؛ حذف تست شکست‌خورده راه کاهش scope نیست.
 
 ## وقفه، retry و هم‌زمانی
+
+در P09/P10 پرسش‌نامهٔ اولیه، کل سؤال‌ها و تاریخچهٔ revision/پاسخ در product/questionnaire.json حفظ می‌شوند؛ پاسخ جزئی waiting-human با resumeNode=P10 است. تغییر پاسخ supersedes و تغییر سؤال history/revision تازه دارد؛ پاسخ نسخهٔ قدیمی پاسخ نسخهٔ تازه نیست. در ادامه، [مرور محصول](12-request-onboarding.md) این مجموعه و feature-impact موجود را نیز می‌خواند. [قرارداد پرسش‌نامه](13-product-questionnaire.md) شمارش و انتقال به interview را مشخص می‌کند.
 
 در journal هر node: ورودی و digest، attempt، actor، شروع/پایان، خروجی، نتیجه و next node ثبت می‌شود. پس از قطع جلسه، اول journal و اثر واقعی خوانده می‌شود؛ از تکرار merge، ارسال یا migration به علت timeout خودداری می‌شود. نگارش تکراری روی همان input با diff ادغام می‌شود؛ approval فقط یک بار برای همان decision ثبت می‌شود.
 

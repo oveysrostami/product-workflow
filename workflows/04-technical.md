@@ -24,9 +24,9 @@ flowchart TD
     Q06["Q06 · ادامه در مسیر مربوط"]
     T01 -->|"دریافت پذیرفته"| T02
     T01 -->|"handover QA ناقص"| Q06
-    T02 -->|"زمینه روشن"| T03
+    T02 -->|"زمینه روشن؛ غیر از technical-only تازه یا interview قبلاً انجام شده"| T03
     T02 -->|"تعارض رفتار یا scope"| C01
-    T02 -->|"تصمیم فنی مؤثر نیازمند گفت‌وگو با انسان"| T10
+    T02 -->|"technical-only تازه یا تصمیم فنی مؤثر نیازمند گفت‌وگو"| T10
     T02 -->|"نقص QA با رفتار محصول ثابت"| C01
     T03 -->|"مدل روشن"| T04
     T03 -->|"مالکیت محصول نامشخص"| C01
@@ -88,7 +88,7 @@ flowchart TD
 
 **ورودی:** P/Q baseline، Backend AGENTS/handbook/authority و source revision
 
-**کار دقیق:** doctor و explain مسیرهای هدف را بخوان/اجرا و workflow اصلی Backend را انتخاب کن. owner/host/POM/policy/config/tests را trace کن. implemented/optional/reference/unavailable را تفکیک؛ platform gap را task لازم بدان. topology جدید را از انسان فنی بگیر، نه از probe. technical/impact-map.md را با IMPACT-ID برای همه ownerهای متأثر بساز: direct، dependent، compatibility-only، شاهد اثر، نیاز به کد و مسئول فنی. source/caller/consumer/config را برای اثر غیرمستقیم بررسی کن. host/platform را component target جدا و موارد unaffected را با دلیل ثبت کن. checkout هدف ورودی معرفی‌شدهٔ همان پرونده است؛ هیچ مسیر نصب همسایه فرض نشود. قرارداد داخلی docs/05-backend-binding.md و قالب‌های فنی همین مخزن راهنمای طراحی‌اند؛ انطباق با کد واقعی فقط از checkout فعلی سنجیده شود. مشخصات repository، مسیر checkout، revision و مسیر AGENTS/قواعد هدف را فقط در technical/index.md همین پرونده ثبت کن؛ request.md محصول فقط خواندنی است. نسخهٔ جاری و digest ماژول از modules/<slug>/current.json و تفاوت طرح مصوب با کد همان revision را ثبت کن؛ ماژول تازه baseRevision=null دارد. طبق docs/11-documentation-cycle.md، ابهام‌های مؤثر معماری/محیط و پاسخ‌های قبلی را در technical/interview.md ثبت کن؛ اگر پاسخ تازه لازم نیست دلیل کفایت را ثبت کن.
+**کار دقیق:** doctor و explain مسیرهای هدف را بخوان/اجرا و workflow اصلی Backend را انتخاب کن. owner/host/POM/policy/config/tests را trace کن. implemented/optional/reference/unavailable را تفکیک؛ platform gap را task لازم بدان. topology جدید را از انسان فنی بگیر، نه از probe. technical/impact-map.md را با IMPACT-ID برای همه ownerهای متأثر بساز: direct، dependent، compatibility-only، شاهد اثر، نیاز به کد و مسئول فنی. source/caller/consumer/config را برای اثر غیرمستقیم بررسی کن. host/platform را component target جدا و موارد unaffected را با دلیل ثبت کن. checkout هدف ورودی معرفی‌شدهٔ همان پرونده است؛ هیچ مسیر نصب همسایه فرض نشود. قرارداد داخلی docs/05-backend-binding.md و قالب‌های فنی همین مخزن راهنمای طراحی‌اند؛ انطباق با کد واقعی فقط از checkout فعلی سنجیده شود. مشخصات repository، مسیر checkout، revision و مسیر AGENTS/قواعد هدف را فقط در technical/index.md همین پرونده ثبت کن؛ request.md محصول فقط خواندنی است. نسخهٔ جاری و digest ماژول از modules/<slug>/current.json و تفاوت طرح مصوب با کد همان revision را ثبت کن؛ ماژول تازه baseRevision=null دارد. طبق docs/11-documentation-cycle.md، ابهام‌های مؤثر معماری/محیط و پاسخ‌های قبلی را در technical/interview.md ثبت کن؛ اگر پاسخ تازه لازم نیست دلیل کفایت را ثبت کن. برای technical-only تازه پس از کشف، به interview فنی T10/T11 برو؛ پرسش‌نامهٔ اولیهٔ محصول ندارد. پاسخ/اطلاعات روشن قبلی تکرار و سؤال مصنوعی ساخته نشود؛ کفایت اطلاعات در T10 ثبت می‌شود.
 
 **خروجی:** technical/index، discovery، capability/gap و rule binding impact-map، index بستهٔ هر ماژول و فهرست EDGE-ID وابستگی‌ها. technical/interview.md با ابهام‌ها و منابع یا دلیل کفایت.
 
@@ -96,9 +96,9 @@ flowchart TD
 
 | نتیجه | node بعدی |
 |---|---|
-| زمینه روشن | [T03](04-technical.md#t03) |
+| زمینه روشن؛ غیر از technical-only تازه یا interview قبلاً انجام شده | [T03](04-technical.md#t03) |
 | تعارض رفتار یا scope | [C01](07-change-and-bug.md#c01) |
-| تصمیم فنی مؤثر نیازمند گفت‌وگو با انسان | [T10](04-technical.md#t10) |
+| technical-only تازه یا تصمیم فنی مؤثر نیازمند گفت‌وگو | [T10](04-technical.md#t10) |
 | نقص QA با رفتار محصول ثابت | [C01](07-change-and-bug.md#c01) |
 
 <a id="t03"></a>

@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "approvalId": "design-v1.9-requester-approval",
+  "approvalId": "design-v1.10-requester-approval",
   "requestId": "workflow-design-2026-09-28",
   "gate": "framework-adoption",
-  "baselineId": "workflow-kit-v1.9",
+  "baselineId": "workflow-kit-v1.10",
   "manifestPath": "design-manifest.json",
-  "manifestSha256": "4bc54e426d04ec35869a1ac793109472b78e10ff258b75da1a19b81bbe5dec6c",
+  "manifestSha256": "bfa5430fe933efe824f18888765186286a9cd097047bd15cae8f4aa71636f860",
   "status": "pending",
   "requiredRoles": [
     "requester"
   ],
   "requesterReference": "درخواست‌کنندهٔ طراحی در همین گفت‌وگو، ۲۰۲۶-۰۹-۲۸",
   "decisions": [],
-  "supersedes": "design-v1.8-requester-approval",
-  "changeAuthorizationReference": "درخواست کاربر در ۲۰۲۶-۰۹-۲۹ برای اصلاح skill و فرآیند داخلی: subagent فقط خواندنی برای گزارش ادامهٔ request باز محصول و مطالعهٔ کامل و onboarding درخواست منتخب QA/فنی؛ تصویب کل نسخه جداست."
+  "supersedes": "design-v1.9-requester-approval",
+  "changeAuthorizationReference": "درخواست کاربر در ۲۰۲۶-۰۹-۲۹ برای پرسش‌نامهٔ کامل پیش از interview محصول: حداقل ۵۰ سؤال برای new پس از تعریف، تحلیل مستنداتی feature با subagent و حداقل ۲۰ سؤال برای هر ماژول، ذخیرهٔ مجموعه/پاسخ و ادامه پس از وقفه؛ bug فقط مصاحبه. پاسخ تکمیلی کاربر: change پرسش‌نامه پیش از interview و technical-only فقط interview فنی؛ تصویب کل نسخه جداست."
 }

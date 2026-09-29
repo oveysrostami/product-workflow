@@ -9,7 +9,7 @@
 ## شروع دستی
 
 1. ابتدا [تیم و پرونده را انتخاب کنید](../workflows/00-team-entry.md). فقط برای نیاز تازه `requests/<request-id>/` بسازید؛ request، tracking، decisions، applicability و traceability را از shared بردارید و یک کارت از board-card.json در requests/board.json اضافه کنید. انتخاب QA/فنی پروندهٔ موجود را ادامه می‌دهد.
-2. مصاحبه اگر سؤال لازم است؛ impact اگر baseline تغییر می‌کند؛ review، manifest، approval و receipt به ازای هر تحویل. این‌ها تاریخچه append-only دارند.
+2. قبل از interview، [پرسش‌نامهٔ اولیه](../docs/13-product-questionnaire.md) برای new/feature/change تازه را با قالب مشخص ذخیره و پاسخ‌ها را دریافت کنید؛ feature ابتدا گزارش subagent ماژول‌ها دارد. bug فقط مصاحبهٔ متمرکز دارد؛ change نیز پرسش‌نامه دارد؛ technical-only فقط interview فنی است. impact اگر baseline تغییر می‌کند؛ review، manifest، approval و receipt به ازای هر تحویل؛ تاریخچه حفظ می‌شود.
 3. برای محصول contract، عملیات/UC و acceptance را تکمیل کنید؛ flows/data متناسب. product handover از قالب کامل shared ساخته شود.
 4. QA پس از دریافت محصول، گفت‌وگوی Q07/Q08 و پاسخ‌ها یا دلیل کفایت را در qa/interview.md ثبت می‌کند؛ plan/scenarios/coverage و handover را تکمیل و پس از approval تحویل فنی می‌دهد. execution فقط پس از candidate پر می‌شود.
 5. فنی ابتدا impact-map و cross-module-flows را می‌سازد؛ برای هر ماژول متأثر change-spec و test-mapping در `technical/modules/<slug>/` می‌گذارد. snapshot کامل ماژول و plan از [قالب‌های کتابخانه](modules/README.md) در بستهٔ درخواست آماده می‌شود؛ پس از G-T، T09 نسخهٔ جاری modules/ را منتشر می‌کند. قالب‌های module/domain، operation و data برای تکمیل طراحی کامل هستند و قواعد Backend همچنان رعایت می‌شوند.
@@ -37,7 +37,7 @@
 
 | مرحله | قالب‌ها |
 |---|---|
-| محصول | [contract](product/contract.md)، [flows/data](product/flows-and-data.md)، [operations/UC](product/operations-and-use-cases.md)، [acceptance](product/acceptance.md)، [handover](product/handover.md) |
+| محصول | [پرسش‌نامهٔ اولیه](product/questionnaire.json)، [اثر اولیهٔ فیچر](product/feature-impact.md)، [contract](product/contract.md)، [flows/data](product/flows-and-data.md)، [operations/UC](product/operations-and-use-cases.md)، [acceptance](product/acceptance.md)، [handover](product/handover.md) |
 | QA | [plan](qa/plan.md)، [scenarios](qa/scenarios.md)، [coverage](qa/coverage.md)، [execution](qa/execution.md)، [bug](qa/bug.md)، [handover](qa/handover.md) |
 | فنی | [index](technical/index.md)، [impact-map](technical/impact-map.md)، [cross-module-flows](technical/cross-module-flows.md)، [change-spec ماژول](technical/module/change-spec.md)، [test-mapping ماژول](technical/module/test-mapping.md)، [module/domain](technical/module-and-domain.md)، [operation](technical/operation.md)، [data/migration](technical/data-and-migration.md)، [communication/delivery](technical/communication-and-delivery.md)، [runtime/recording](technical/runtime-and-recording.md)، [implementation plan](technical/implementation-plan.md)، [handover](technical/handover.md) |
 | توسعه | [task](development/task.md)، [delivery](development/delivery.md)، [release](development/release.md)؛ review و execution از قالب مشترک و QA |

@@ -9,6 +9,8 @@ requests/<request-id>/
   applicability.md            # اسناد لازم/نامرتبط با دلیل
   traceability.csv            # RULE → UC → AC → QA → TECH → TASK → EVIDENCE
   product/                    # رفتار محصول و handover به QA
+    questionnaire.json        # کل پرسش‌نامهٔ اولیهٔ new/feature/change، تاریخچه و پاسخ‌های واقعی
+    feature-impact.md         # اثر اولیهٔ مستنداتی فیچر با گزارش subagent؛ نه impact-map فنی
   qa/                         # strategy، سناریو، coverage و handover به فنی
     interview.md              # سؤال، پاسخ و تصمیم QA یا دلیل کفایت اطلاعات
   technical/
@@ -46,7 +48,7 @@ requests/<request-id>/
 | مرحله | همیشه لازم | فقط در صورت ارتباط |
 |---|---|---|
 | مشترک | کارت در board.json، request، tracking، decisions، applicability، traceability، manifest، approval و receipt مرحله | interview اگر سؤال، impact اگر تغییر، finding اگر review نقص دارد |
-| محصول | contract، شرح مستقل UC/operation، acceptance، handover | flows برای lifecycle/شاخه، data برای داده، تعاملات برای وابستگی؛ N/A صریح در applicability |
+| محصول | contract، شرح مستقل UC/operation، acceptance، handover | questionnaire و پاسخ‌ها برای new/feature/change تازه؛ feature-impact برای feature؛ flows/data/تعاملات متناسب؛ N/A صریح در applicability |
 | QA | interview با پاسخ‌ها یا دلیل کفایت، plan، scenarioهای دارای oracle، coverage، handover | performance/security/recovery/migration برای ریسک موجود؛ UI در صورت وجود کلاینت |
 | فنی | index، impact-map، cross-module-flows، بسته change-spec/test-mapping هر ماژول متأثر، implementation plan و handover؛ snapshot کامل تجمعی هر ماژول و plan نسخهٔ انتشار؛ ارجاع به قواعد و revision Backend | domain، data/migration، communication/message، recording، deployment/ADR متناسب با اثر |
 | توسعه | taskهای ماژولی و task مشترک دارای مسئول در صورت نیاز، execution evidence، review ماژول و کل درخواست، delivery و receipt | bug record، release/rollback در scope انتشار |

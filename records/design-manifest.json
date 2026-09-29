@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "baselineId": "workflow-kit-v1.9",
-  "version": "1.9",
+  "baselineId": "workflow-kit-v1.10",
+  "version": "1.10",
   "requestId": "workflow-design-2026-09-28",
   "status": "ready-for-requester-review",
   "snapshotDate": "2026-09-29",
-  "supersedes": "workflow-kit-v1.8",
-  "history": "records/history/workflow-kit-v1.8.json",
+  "supersedes": "workflow-kit-v1.9",
+  "history": "records/history/workflow-kit-v1.9.json",
   "artifacts": [
     {
       "path": ".gitignore",
@@ -14,11 +14,11 @@
     },
     {
       "path": "AGENTS.md",
-      "sha256": "24b0e323aa092911a3ca74017e5cc1279f941213bc67a50f38a49a950e621ddc"
+      "sha256": "e0a2bd86e7351f8da0f895011e6e7d78019567f89846a257605d4fc6e9a770c7"
     },
     {
       "path": "README.md",
-      "sha256": "061ccd0562585edf275090442afd24f222459d0fdd47f6bcdc7bc8cc69fb2730"
+      "sha256": "0cce7dde9834ce78f6b7917ce18b8eeb70ce3121de06d853b36bd75db48fa868"
     },
     {
       "path": "docs/01-principles-and-roles.md",
@@ -26,15 +26,15 @@
     },
     {
       "path": "docs/02-state-and-versioning.md",
-      "sha256": "46a9a3365a9e9b57efee4635e58f8b5ee2248abfe936ba4c002a0c673aa2dedf"
+      "sha256": "84561b36b4738998e241f071af4a01d1d7dd340f632a8812bfe00895b1c62d1a"
     },
     {
       "path": "docs/03-artifact-map.md",
-      "sha256": "1eea2c9b87b5ea77dc1274917667125fa74e3eef545435cd7f0da328ad1ef4c4"
+      "sha256": "898f36222b0a8ea4d41ca1f2869fdaa4906fd63c6480248ec2e46aa19c438ef6"
     },
     {
       "path": "docs/04-gates.md",
-      "sha256": "41fe2ec7f1e0c410ddf69c19b4ed3db80e6f1be9655d859d74bfdea9d57c0d57"
+      "sha256": "84ff05abea045bf42a04c8e19247e52152da2088d1a813c3a17165c29183eeb1"
     },
     {
       "path": "docs/05-backend-binding.md",
@@ -54,7 +54,7 @@
     },
     {
       "path": "docs/09-product-authoring.md",
-      "sha256": "4df2e3bcd268d3f351048ba264f714bb503727d184aa0ffb487b7b083dca855f"
+      "sha256": "8fd7e264d01f0779ea7c8a9ecdc89450d65f0cbace74bdd64488ebb194332bff"
     },
     {
       "path": "docs/10-module-library.md",
@@ -62,11 +62,15 @@
     },
     {
       "path": "docs/11-documentation-cycle.md",
-      "sha256": "101f6265bc28e7c5df594379015c199529d6b9ea3c0fa61a42159590747c375a"
+      "sha256": "c544525a8741120aa575d3340776487b05ca73fbcdc317fc97233497a7b2e031"
     },
     {
       "path": "docs/12-request-onboarding.md",
-      "sha256": "1a186df19ce231267c3bafff93581cd43fadce1e826e86ed5ad14710c7aa2421"
+      "sha256": "ac2a8b580581820ba7ebae0c503ba754135cb87332d90832c9565b0cad78e3cc"
+    },
+    {
+      "path": "docs/13-product-questionnaire.md",
+      "sha256": "46cbf41765064e9c0c479f3c66dbee2e2f2bb1e7c4e094b97aa1b4ecd80d8f6d"
     },
     {
       "path": "examples/module-impact.md",
@@ -114,11 +118,11 @@
     },
     {
       "path": "examples/otp-issue/walkthroughs.md",
-      "sha256": "e181182949ba38965c50835ebe3d3386dfe18a4b12e6eccf37c877929f5c7891"
+      "sha256": "bfb23db926a1d415243007044d752ba4d599d0431d4370f931adea695fdf4e2e"
     },
     {
       "path": "examples/team-entry.md",
-      "sha256": "5a7dc54f86acb82fa478b86923897a63c08f621d450fcaf4656f62a71aa8d0e1"
+      "sha256": "c6287e299fa2b597d3da49e71e991d73d58ff86228b2a6456427e980a94e4566"
     },
     {
       "path": "modules/README.md",
@@ -126,11 +130,11 @@
     },
     {
       "path": "records/checks.json",
-      "sha256": "c48c1e062b02447e885501bb14eb4b08c83b32dde08561e9878abcfbf3bf13c4"
+      "sha256": "47200f1cd7db90467d53c45fa4bc9dc37353bf8eb12ed907f3b9ada784a8db2b"
     },
     {
       "path": "records/design-review.md",
-      "sha256": "2e9601e3a804480d5ee9311aa60eacad769e69501bcf26de5b41558ac5094bd8"
+      "sha256": "669dd260e9a005fe97e7e490909622441fc03bbd4f712dfb8b07a16bbd93e767"
     },
     {
       "path": "records/history/workflow-kit-v1.1.json",
@@ -189,6 +193,14 @@
       "sha256": "d41416683602cd06f891069431d0ca989ba8819dd4e9faff1c2008c3c5b962d6"
     },
     {
+      "path": "records/history/workflow-kit-v1.9.json",
+      "sha256": "b381670aac976aba85ef2fe82b4d70cac0812adb741d9e5e197b132b8964f0cc"
+    },
+    {
+      "path": "records/history/workflow-kit-v1.9.zip",
+      "sha256": "f0d5efc988e9306eca23a1d4d55658eb6e4fef0c91638890cbef9f98e43a072d"
+    },
+    {
       "path": "records/history/workflow-kit-v1.json",
       "sha256": "c3ecc5c7c3967d7c05f58cae6def9003c2bf56cbb0fae0f1efc54768c8903728"
     },
@@ -198,11 +210,11 @@
     },
     {
       "path": "records/mermaid-evidence.json",
-      "sha256": "43b7ca3e8dbeea3dd97c20908d1d436f9647dd45f7ecd9cca179be8b61a931b6"
+      "sha256": "3742e1fc4e1f69cea36b60c1dc8cf10d98c2fff25d8eaa194440af7b2dbcea2a"
     },
     {
       "path": "records/validation.md",
-      "sha256": "9dc734442378fa2660da008d7dd4db198211d0ea1678782a134c465c150cbafb"
+      "sha256": "415d6a1129417755bda39a5351f63389863504ba9835bba3f6439cdcf26aa6e2"
     },
     {
       "path": "requests/README.md",
@@ -210,7 +222,7 @@
     },
     {
       "path": "research/source-inventory.json",
-      "sha256": "926551ad4be6a93b2fd5d4d6847316df3801729e782dcbef4edbabce842c2580"
+      "sha256": "44ac7cb3e354d9cf88fed1d2b5a43fa178d21c8ac2648b045aa2851b61362bc0"
     },
     {
       "path": "research/source-review.md",
@@ -218,7 +230,7 @@
     },
     {
       "path": "scripts/README.md",
-      "sha256": "c96eb7327d145a47f882e828b257febcfb8c4d60ed5e37c72e73c4d30e988250"
+      "sha256": "3536d2aae4da5f6d1b8a2a72e2a370d182c899105cae7f0bd72a8d323fd6e1cc"
     },
     {
       "path": "scripts/check_mermaid.py",
@@ -230,7 +242,7 @@
     },
     {
       "path": "scripts/render_workflows.py",
-      "sha256": "5a98468df95b18716b6544875c6ceabea849ab97c194f9f33a6024d3f1a47279"
+      "sha256": "c910397fed5b3fdf66581c9febd53a9da482e78fff91745559e9abb60068e806"
     },
     {
       "path": "scripts/test_validate.py",
@@ -242,7 +254,7 @@
     },
     {
       "path": "skill/product-workflow/SKILL.md",
-      "sha256": "284f900a181cc39ec4072f897410a36196616580d9641aedfc32a570f0acaba0"
+      "sha256": "166e127e1cf2b122b3108ea8d44262dd43c9dc2f07426c8569631736e58d740a"
     },
     {
       "path": "skill/product-workflow/agents/openai.yaml",
@@ -250,19 +262,27 @@
     },
     {
       "path": "skill/product-workflow/references/onboarding.md",
-      "sha256": "07791d84f7524dc33beec0f4ad5e0b855d180e4a6535ce5a6338e9134e4d4e3e"
+      "sha256": "1a0a9bc9447b7a48fe531677866210029957ede1ba9e3a3d73467a982928aab1"
     },
     {
       "path": "skill/product-workflow/references/product.md",
-      "sha256": "83396e0b88c2ecfe798c7eb62732300e57e79e22ac0ebfbe7d791e14585df836"
+      "sha256": "411bb0310e0c33ec23d53f44a09ac7ca03ee02b835fad8f1c897f6422cb1becb"
     },
     {
       "path": "skill/product-workflow/references/qa.md",
       "sha256": "64a766ced3c33c2802ebb4c828c50cf9ba5996130fb238749360e467cb06afdd"
     },
     {
+      "path": "skill/product-workflow/references/questionnaire.md",
+      "sha256": "bd12ef5278b9c3e5f2ba24e674f8c17f584cfdd79a57523292e6525206e79b68"
+    },
+    {
       "path": "skill/product-workflow/references/tech.md",
-      "sha256": "449c16b9a370623657dcfa4ab62ed7d5405174e2dc20e605cd5c7e75398e2f6e"
+      "sha256": "ecd697c34e181391dac5af3caa5ecc0a51c7538210c893a50be5484884e28183"
+    },
+    {
+      "path": "skill/product-workflow/scripts/check_questionnaire.py",
+      "sha256": "e53117643206622c3a1aae13de607f69b664c0466aee14296bbbb5227e674cfb"
     },
     {
       "path": "skill/product-workflow/scripts/read_queue.py",
@@ -270,7 +290,11 @@
     },
     {
       "path": "skill/product-workflow/scripts/record_progress.py",
-      "sha256": "d023d3180b950373036b03a1685c15fc84e6bd270683fb40fcad00a5af3f41af"
+      "sha256": "ed3661ae64028e7c099cb3ac94310987b005419bec25e5e9f225f11016537a72"
+    },
+    {
+      "path": "skill/product-workflow/scripts/tests/test_questionnaire.py",
+      "sha256": "0d27433b35b8b8a6f5c32b5433ada14040fa12aef834520f3aee7acc10a3d89d"
     },
     {
       "path": "skill/product-workflow/scripts/tests/test_workflow.py",
@@ -278,7 +302,7 @@
     },
     {
       "path": "templates/README.md",
-      "sha256": "6af7b5e6e0174edc1f7a12f133ef52cdf25d86dfd7722fa2bb2e6ec9537e02b6"
+      "sha256": "0646aa2b87e3575ed33614213ce99a926f70c21905495f8f0a9339575bf051e6"
     },
     {
       "path": "templates/development/delivery.md",
@@ -313,6 +337,10 @@
       "sha256": "f0889539d9eb44958a83a82023ccc2b1054f432b2872bf4351e70b45f15cf80c"
     },
     {
+      "path": "templates/product/feature-impact.md",
+      "sha256": "293e1494ae47cdd4ad43bdb0b03eacc5d045c095471f88210d90f4f96dd17f95"
+    },
+    {
       "path": "templates/product/flows-and-data.md",
       "sha256": "48ed5cdda08c32c97c0cbb7cc93962fbe1e84f02299c7fc1551d01d45536dac7"
     },
@@ -323,6 +351,10 @@
     {
       "path": "templates/product/operations-and-use-cases.md",
       "sha256": "3906441bb1b0c0083449f785e2db4d41b8ebefde0e92c0e6d09cc39d6e4d2e90"
+    },
+    {
+      "path": "templates/product/questionnaire.json",
+      "sha256": "1df6b1503ed7aeca187f55e47d64493174d9920611d3af6023d2c8494ecb7cfb"
     },
     {
       "path": "templates/qa/bug.md",
@@ -390,7 +422,7 @@
     },
     {
       "path": "templates/shared/request.md",
-      "sha256": "83b3e2b250056a59c0c331b72af09223b6314114ad52be11686b9a85c8d7d787"
+      "sha256": "bb46b84c0b73f663b22b54cd0d8fb937478438a918561479adefba04d5cbbdc9"
     },
     {
       "path": "templates/shared/review.md",
@@ -462,15 +494,15 @@
     },
     {
       "path": "workflows/00-team-entry.md",
-      "sha256": "17b386031f5fe75c1b2e3085ec085a8d78380f402cbbca354d976cb97352d5c8"
+      "sha256": "71341e204bbc5b0b235d7b180771b73aa616bd99f75a4f2df07affb5dbd2b9ed"
     },
     {
       "path": "workflows/01-intake.md",
-      "sha256": "812e9d3c44b1de1402142cb64c98efa4a5191ac326a1e91de8ab6d8229fe5367"
+      "sha256": "d45738337e0c30b0898f4fc909846310768ff493ee3ffc9cc813f5b230683143"
     },
     {
       "path": "workflows/02-product.md",
-      "sha256": "699256a6b46663d7d3bf6bde6082167ecaac5224accb6ab0fe9f247abc866fe0"
+      "sha256": "91123dfd8b4e9373c47bcbf113e0d597239fad0a11f0c5ec170d3383b17fa9f5"
     },
     {
       "path": "workflows/03-qa.md",
@@ -478,7 +510,7 @@
     },
     {
       "path": "workflows/04-technical.md",
-      "sha256": "1e1d633d5c82694a95b00e962f15ca372610ea037cf26f3ecb4167e2707818cc"
+      "sha256": "f66cd24691014c8cbf678b00a22533a50135ab538997c1133bec2ef9862505f0"
     },
     {
       "path": "workflows/05-implementation.md",
@@ -490,7 +522,7 @@
     },
     {
       "path": "workflows/07-change-and-bug.md",
-      "sha256": "fb3d84246c533751739746e615d723c05ae3ab1e66ab8d1dd589b4feb79c9aa7"
+      "sha256": "5c7572e3e0f33f2565aed742d3f238d29861b0f676da3d5d37830e918553bb8d"
     },
     {
       "path": "workflows/08-release.md",
@@ -498,11 +530,11 @@
     },
     {
       "path": "workflows/README.md",
-      "sha256": "cbe39275175108258c2c8d94ab445f05f393e5dfc4a2964c5b83579c5285d7ba"
+      "sha256": "dfeae78e1c1f8dcb4ff4483d9bee06d30accbc3448ef2a9d2e99a0eed6cc01d9"
     },
     {
       "path": "workflows/graph.json",
-      "sha256": "964fb9a7c745b1b9e249ccce45fc074c6eea1f37cae11bf9d093bc6d778c606c"
+      "sha256": "56ea44b00d0980f61158932093fcd75b00d7a99400d931f3080ec4be6f4efa85"
     }
   ],
   "openBlockers": [],

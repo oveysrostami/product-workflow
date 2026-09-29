@@ -1,0 +1,9 @@
+{
+  "baselineId": "workflow-kit-v1.9",
+  "archivePath": "records/history/workflow-kit-v1.9.zip",
+  "archiveSha256": "f0d5efc988e9306eca23a1d4d55658eb6e4fef0c91638890cbef9f98e43a072d",
+  "manifestSha256": "4bc54e426d04ec35869a1ac793109472b78e10ff258b75da1a19b81bbe5dec6c",
+  "approvalSha256": "dc60f055a06c38b731198c9b8e93df18e7cdcc4c13ba0d1bd5588c7d77fbd868",
+  "approvalStatus": "pending",
+  "note": "Preserves v1.9 before adding durable product questionnaires and documentation-based feature impact analysis."
+}

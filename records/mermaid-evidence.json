@@ -35,7 +35,7 @@
     {
       "path": "workflows/00-team-entry.md",
       "diagram": 1,
-      "sha256": "c538f6dc53db79160c1fd662461cd06cd6c21de269a0d22bba2318fc45311d1a"
+      "sha256": "a4218e6f7d236d8fe5fbb1c721ed0fa4de7c17c68d8f4e1290cdf761880a679e"
     },
     {
       "path": "workflows/01-intake.md",
@@ -45,7 +45,7 @@
     {
       "path": "workflows/02-product.md",
       "diagram": 1,
-      "sha256": "4ea012bc7ef0f37d2c415f7c941e3426155d7024859db23f2fbc56a50b72e930"
+      "sha256": "7fb3826edfcb4da7f4ff5d726ce57b54f9614f1cc2355236ed2bfd7782f39c6a"
     },
     {
       "path": "workflows/03-qa.md",
@@ -55,7 +55,7 @@
     {
       "path": "workflows/04-technical.md",
       "diagram": 1,
-      "sha256": "4681cba313bd2c5d695f47a99900957f50d66dd2016ecd1c9446f406d4718323"
+      "sha256": "1c244132100d9ebd792abb9a8975fdb9c3934d7761c5fe3e6fba752acfc9da94"
     },
     {
       "path": "workflows/05-implementation.md",
@@ -70,7 +70,7 @@
     {
       "path": "workflows/07-change-and-bug.md",
       "diagram": 1,
-      "sha256": "545cd0dcd16b6e89b33d49774c37f1a7b3038809cddc75308f4737218dbd206d"
+      "sha256": "8ec921353f23f54a505f1b1354a9efce52e1e8228d03d016f185b3fd0a0dc1e9"
     },
     {
       "path": "workflows/08-release.md",
@@ -81,15 +81,15 @@
   "command": [
     "/private/tmp/product-workflow-mermaid-20260928/node_modules/.bin/mmdc",
     "-i",
-    "/private/tmp/product-workflow-mermaid-v1.9-render-final/all-diagrams.md",
+    "/private/tmp/product-workflow-mermaid-v1.10-final-render/all-diagrams.md",
     "-o",
-    "/private/tmp/product-workflow-mermaid-v1.9-render-final/rendered.md",
+    "/private/tmp/product-workflow-mermaid-v1.10-final-render/rendered.md",
     "-p",
-    "/private/tmp/product-workflow-mermaid-v1.9-render-final/puppeteer.json",
+    "/private/tmp/product-workflow-mermaid-v1.10-final-render/puppeteer.json",
     "-e",
     "svg"
   ],
-  "stdout": "Found 15 mermaid charts in Markdown input\n ✅ ./rendered-5.svg\n ✅ ./rendered-6.svg\n ✅ ./rendered-7.svg\n ✅ ./rendered-8.svg\n ✅ ./rendered-9.svg\n ✅ ./rendered-10.svg\n ✅ ./rendered-11.svg\n ✅ ./rendered-4.svg\n ✅ ./rendered-13.svg\n ✅ ./rendered-14.svg\n ✅ ./rendered-15.svg\n ✅ ./rendered-12.svg\n ✅ ./rendered-3.svg\n ✅ ./rendered-2.svg\n ✅ ./rendered-1.svg\n ✅ /private/tmp/product-workflow-mermaid-v1.9-render-final/rendered.md\n",
+  "stdout": "Found 15 mermaid charts in Markdown input\n ✅ ./rendered-5.svg\n ✅ ./rendered-6.svg\n ✅ ./rendered-7.svg\n ✅ ./rendered-4.svg\n ✅ ./rendered-9.svg\n ✅ ./rendered-10.svg\n ✅ ./rendered-11.svg\n ✅ ./rendered-3.svg\n ✅ ./rendered-1.svg\n ✅ ./rendered-2.svg\n ✅ ./rendered-8.svg\n ✅ ./rendered-15.svg\n ✅ ./rendered-14.svg\n ✅ ./rendered-13.svg\n ✅ ./rendered-12.svg\n ✅ /private/tmp/product-workflow-mermaid-v1.10-final-render/rendered.md\n",
   "stderr": "",
   "schemaVersion": 1,
   "date": "2026-09-29",

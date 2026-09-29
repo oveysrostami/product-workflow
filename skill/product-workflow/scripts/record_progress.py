@@ -9,6 +9,8 @@ from pathlib import Path
 import sys
 import tempfile
 
+from check_questionnaire import check as check_questionnaire
+
 from read_queue import (concrete, context, digest, find_root, identifier, local,
                         prerequisites, check_modules, read, repositories, require,
                         sha_bytes, validate_card)
@@ -55,6 +57,10 @@ def check_gate(root, card, journal, repo_map):
     if journal['status'] != 'completed':
         return
     node = journal['nodeId']
+    if node == 'P09' and journal['nextNode'] == 'P10':
+        check_questionnaire(root, card['requestId'])
+    if node == 'P10' and journal['nextNode'] == 'P02':
+        check_questionnaire(root, card['requestId'], require_answered=True)
     if node in {'P07', 'P08'} and journal['nextNode'] in {'P08', 'Q01'}:
         prerequisites(root, card, ('product',), repo_map)
     if node in {'Q05', 'Q06'} and journal['nextNode'] in {'Q06', 'T01'}:

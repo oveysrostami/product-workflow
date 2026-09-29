@@ -32,6 +32,8 @@
 
 ## منابع و scope
 
+اسناد اولیهٔ محصول در صورت الزام: `product/questionnaire.json` برای new/feature/change؛ `product/feature-impact.md` برای feature طبق قرارداد پرسش‌نامه. اینجا فقط لینک/علت applicability ثبت شود؛ وضعیت یا شمار پاسخ موازی ساخته نشود.
+
 | منبع | مسیر/مرجع و revision/hash | authoritative یا observed/example | اثر |
 |---|---|---|---|
 | {{...}} | {{...}} | {{...}} | {{...}} |

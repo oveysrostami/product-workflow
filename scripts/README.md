@@ -31,6 +31,15 @@ python3 scripts/check_mermaid.py --mmdc /path/to/mmdc --browser /path/to/chromiu
 python3 -m unittest discover -s skill/product-workflow/scripts/tests -v
 ```
 
+برای پروندهٔ new/feature/change، ابزار read-only [پرسش‌نامه](../skill/product-workflow/scripts/check_questionnaire.py) از داخل skill اجرا می‌شود:
+
+```sh
+python3 skill/product-workflow/scripts/check_questionnaire.py --root WORKFLOW_ROOT --request REQUEST_ID
+python3 skill/product-workflow/scripts/check_questionnaire.py --root WORKFLOW_ROOT --request REQUEST_ID --require-answered
+```
+
+ساختار، حداقل ۵۰ سؤال new یا ۲۰ سؤال به‌ازای هر ماژول feature و مجموعهٔ غیرخالی change متناسب با scope، گزینه‌ها، history و پاسخ revision جاری بررسی می‌شوند؛ record_progress همین بررسی را در گذارهای P09 به P10 و P10 به P02 اعمال می‌کند. ابزار سؤال طراحی نمی‌کند، چیزی نمی‌نویسد و صحت معنایی/هویت منبع را اثبات نمی‌کند. سناریوهای [پرسش‌نامه](../examples/team-entry.md) و [قرارداد](../docs/13-product-questionnaire.md) معیار بررسی انسانی کیفیت/رفتارند.
+
 برد عملیاتی در [board.json](../requests/board.json) است. validator ساختار columns/cards، یکتایی requestId، فیلدها و مقادیر وضعیت/تیم/node، وجود مسیرهای ارجاعی و پیش‌نیازهای ساختاری ستون آماده را نیز بررسی می‌کند. این بررسی به‌تنهایی اعتبار gate یا hash پروندهٔ واقعی را اثبات نمی‌کند.
 
 فایل‌های عملیاتی `requests/` و `modules/` به‌جز راهنماهای ثابت README همان مسیرها بیرون manifest طراحی و فهرست منابع ثابت مجموعه‌اند؛ validator ثبت آن‌ها در این دو بسته را رد می‌کند. برای آزمون regression جدایی وضعیت جاری از طراحی و حفظ کنترل کارت نامعتبر و hash اسناد ثابت اجرا کنید:

@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "requestId": "{{request-id}}",
+  "requestType": "{{new|feature|change}}",
+  "revisionId": "{{questionnaire-revision}}",
+  "definition": {
+    "summary": "{{این ماژول یا فیچر چیست و چه می‌کند؟}}",
+    "purpose": "{{برای چه کسی و با چه هدفی؟}}",
+    "expectedOutcome": "{{نتیجهٔ مطلوب چیست؟}}",
+    "sourceReference": "{{مرجع واقعی شرح کاربر}}"
+  },
+  "impactReference": null,
+  "moduleIds": ["{{شناسهٔ پایدار محصولی ماژول}}"],
+  "questions": [
+    {
+      "id": "QNR-001",
+      "revision": 1,
+      "moduleId": "{{همان module-id یا null برای سؤال مشترک}}",
+      "topic": "{{موضوع مرتبط}}",
+      "kind": "single-choice",
+      "prompt": "{{یک سؤال واقعی متناسب با تعریف و منابع}}",
+      "rationale": "{{دلیل ارتباط و اثر پاسخ؛ برای long-text علت نیاز به شرح}}",
+      "options": [
+        {"id": "A", "text": "{{گزینهٔ اول}}"},
+        {"id": "B", "text": "{{گزینهٔ دوم}}"},
+        {"id": "C", "text": "{{گزینهٔ سوم}}"},
+        {"id": "D", "text": "{{گزینهٔ چهارم}}"}
+      ],
+      "recommendedOptionId": null,
+      "recommendationReason": null,
+      "sourceReferences": ["{{تعریف/سند/بخش مرتبط}}"]
+    }
+  ],
+  "questionHistory": [],
+  "responses": []
+}
