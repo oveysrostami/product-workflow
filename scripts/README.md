@@ -25,6 +25,12 @@ python3 scripts/check_mermaid.py --mmdc /path/to/mmdc --browser /path/to/chromiu
 
 ورودی تیم و برد، قرارداد اجرای انسان/AI روی پرونده‌هاست. برد به‌صورت خودکار توسط سرویس به‌روز نمی‌شود؛ Coordinator هنگام کار آن را با tracking و مدارک تطبیق می‌دهد و جدول صف را از JSON می‌سازد. سناریوهای [انتخاب تیم](../examples/team-entry.md) معیار review رفتارند؛ validator فقط دنباله‌های صریح nodeها را می‌سنجد، نه صلاحیت واقعی صف یا پاسخ انسان.
 
+[مرور و onboarding](../docs/12-request-onboarding.md) نیز پیش از node و مطابق [skill](../skill/product-workflow/SKILL.md) اجرا می‌شود؛ validator، dispatch واقعی subagent یا کامل‌بودن توضیح به کاربر را enforce نمی‌کند. سناریوهای محصول/QA/فنی در مثال ورود معیار بررسی این رفتارند. آزمون‌های موجود ابزارهای صف و ثبت skill، در fixture موقت اجرا می‌شوند:
+
+```sh
+python3 -m unittest discover -s skill/product-workflow/scripts/tests -v
+```
+
 برد عملیاتی در [board.json](../requests/board.json) است. validator ساختار columns/cards، یکتایی requestId، فیلدها و مقادیر وضعیت/تیم/node، وجود مسیرهای ارجاعی و پیش‌نیازهای ساختاری ستون آماده را نیز بررسی می‌کند. این بررسی به‌تنهایی اعتبار gate یا hash پروندهٔ واقعی را اثبات نمی‌کند.
 
 فایل‌های عملیاتی `requests/` و `modules/` به‌جز راهنماهای ثابت README همان مسیرها بیرون manifest طراحی و فهرست منابع ثابت مجموعه‌اند؛ validator ثبت آن‌ها در این دو بسته را رد می‌کند. برای آزمون regression جدایی وضعیت جاری از طراحی و حفظ کنترل کارت نامعتبر و hash اسناد ثابت اجرا کنید:

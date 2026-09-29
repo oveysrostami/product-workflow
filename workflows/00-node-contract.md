@@ -6,6 +6,8 @@
 
 ## پیش و پس از node
 
+در ورود یا ازسرگیری پرونده، [مرور ادامه و onboarding](../docs/12-request-onboarding.md) پس از انتخاب و پیش از node اجرا می‌شود: محصول گزارش subagent فقط خواندنی، QA و فنی توضیح کامل مبتنی بر مطالعهٔ کل اسناد. این کار خروجی محتوایی node یا gate تازه نیست؛ گزارش در گفت‌وگو عرضه می‌شود و checkpoint، receipt و پاسخ‌های قبلی را حفظ می‌کند.
+
 [مالکیت فایل‌ها](../docs/08-team-file-ownership.md) پیش‌شرط هر نوشتن است. تیم فعال و allowedPaths در node-run ثبت می‌شوند؛ actor یا outputs این کارت مجوز نوشتن در تیم دیگر نیست. اگر مقصد اصلاح متعلق به تیم دیگری است، Coordinator فقط ثبت و تحویل را انجام می‌دهد و agent گزارش‌دهنده منتظر تیم مالک می‌ماند. review، دریافت یا تصمیم انسانیِ تیم دیگر، تیم نویسنده را خودکار عوض نمی‌کند.
 
 قبل اجرا، Coordinator اعتبار input baseline، اختیار actor، prerequisite و نبود writer متعارض را کنترل و attempt را در [node-run](../templates/shared/node-run.json) ثبت می‌کند. بعد اجرا، output/ref/digest، نتیجه، evidence و next node را ثبت می‌کند. فقط یکی از transitionهای همان کارت انتخاب می‌شود. نتیجه‌ای که در کارت نیست success فرض نمی‌شود؛ `blocked` با owner و دلیل ثبت می‌شود.

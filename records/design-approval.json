@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "approvalId": "design-v1.8-requester-approval",
+  "approvalId": "design-v1.9-requester-approval",
   "requestId": "workflow-design-2026-09-28",
   "gate": "framework-adoption",
-  "baselineId": "workflow-kit-v1.8",
+  "baselineId": "workflow-kit-v1.9",
   "manifestPath": "design-manifest.json",
-  "manifestSha256": "79c52d7a70281931bbbaa9fc199445bb2a01fe7a6da56e165665a57e0a4fd263",
+  "manifestSha256": "4bc54e426d04ec35869a1ac793109472b78e10ff258b75da1a19b81bbe5dec6c",
   "status": "pending",
   "requiredRoles": [
     "requester"
   ],
   "requesterReference": "درخواست‌کنندهٔ طراحی در همین گفت‌وگو، ۲۰۲۶-۰۹-۲۸",
   "decisions": [],
-  "supersedes": "design-v1.7-requester-approval",
-  "changeAuthorizationReference": "کاربر تکمیل مسیر محصول، QA و فنی با پرسش‌وپاسخ AI، تأیید انسانی، handover و برگشت برای اصلاح، تا انتشار مستندات modules و آمادگی پیاده‌سازی را خواست؛ تصویب کل نسخه جداست."
+  "supersedes": "design-v1.8-requester-approval",
+  "changeAuthorizationReference": "درخواست کاربر در ۲۰۲۶-۰۹-۲۹ برای اصلاح skill و فرآیند داخلی: subagent فقط خواندنی برای گزارش ادامهٔ request باز محصول و مطالعهٔ کامل و onboarding درخواست منتخب QA/فنی؛ تصویب کل نسخه جداست."
 }

@@ -1,0 +1,9 @@
+{
+  "baselineId": "workflow-kit-v1.8",
+  "archivePath": "records/history/workflow-kit-v1.8.zip",
+  "archiveSha256": "d41416683602cd06f891069431d0ca989ba8819dd4e9faff1c2008c3c5b962d6",
+  "manifestSha256": "79c52d7a70281931bbbaa9fc199445bb2a01fe7a6da56e165665a57e0a4fd263",
+  "approvalSha256": "2324186621c144e3682323a1889d45cbd122823a055b12a284cde4b0b493a2be",
+  "approvalStatus": "pending",
+  "note": "Preserves the exact v1.8 kit and bundled skill before adding product continuation analysis and QA/technical request onboarding."
+}

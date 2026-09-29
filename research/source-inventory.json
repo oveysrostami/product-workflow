@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
-  "snapshotDate": "2026-09-28",
+  "snapshotDate": "2026-09-29",
   "scope": "Active sources in this repository only; excludes this inventory and mutable records to avoid self-hashing cycles.",
   "files": [
     {
       "repository": "product-workflow",
       "path": "AGENTS.md",
-      "sha256": "1fc129c3563f9024b5685f6a6470ceda628c6a5bda3dd988df855897aee43005",
-      "bytes": 8563,
-      "lines": 24,
+      "sha256": "24b0e323aa092911a3ca74017e5cc1279f941213bc67a50f38a49a950e621ddc",
+      "bytes": 9399,
+      "lines": 25,
       "headings": [
         "قرارداد agent برای این مجموعه"
       ],
@@ -17,9 +17,9 @@
     {
       "repository": "product-workflow",
       "path": "README.md",
-      "sha256": "9634904a5ce638a79f68d387a18f81f308379366c66cd2e418a0fd5dc43eaa2e",
-      "bytes": 8524,
-      "lines": 70,
+      "sha256": "061ccd0562585edf275090442afd24f222459d0fdd47f6bcdc7bc8cc69fb2730",
+      "bytes": 9311,
+      "lines": 72,
       "headings": [
         "مسیر توسعه از ایده تا تحویل",
         "وضعیت جاری ماژول‌ها",
@@ -147,9 +147,9 @@
     {
       "repository": "product-workflow",
       "path": "docs/08-team-file-ownership.md",
-      "sha256": "790d0ad7db90bf66995d2cb9eb6c33cd9808ed3d26ef7caf1179dc4b879dce6f",
-      "bytes": 8806,
-      "lines": 45,
+      "sha256": "d24dd5d285234b35212e2e6a412072ad840cff959b60fb568d15d49283a3de4d",
+      "bytes": 9154,
+      "lines": 47,
       "headings": [
         "مالکیت فایل‌ها و مرز نوشتن تیم‌ها",
         "مالکیت در هر پرونده",
@@ -177,7 +177,6 @@
     {
       "repository": "product-workflow",
       "path": "docs/10-module-library.md",
-      "inventoryScope": "Local active workflow source; no sibling checkout required.",
       "sha256": "a926cbadb718904aba7eb7587aa781cff82edb8967652ae229c2e66ab159a3d4",
       "bytes": 11948,
       "lines": 82,
@@ -189,22 +188,39 @@
         "همان فرمان با --apply فقط پس از ثبت اختیار نوشتن T09",
         "وضعیت پیاده‌سازی",
         "مالکیت و بستهٔ ثابت workflow"
-      ]
+      ],
+      "inventoryScope": "Local active workflow source; no sibling checkout required."
     },
     {
       "repository": "product-workflow",
       "path": "docs/11-documentation-cycle.md",
-      "inventoryScope": "Local active workflow source; no sibling checkout required.",
-      "sha256": "f5cff6a92b2b15b06317d29f70b449acb40871381e0ba02e13b70966071c15cc",
-      "bytes": 8866,
-      "lines": 45,
+      "sha256": "101f6265bc28e7c5df594379015c199529d6b9ea3c0fa61a42159590747c375a",
+      "bytes": 9424,
+      "lines": 47,
       "headings": [
         "مسیر کامل تا آمادگی پیاده‌سازی",
         "مراحل و خروجی قابل تحویل",
         "پرسش‌وپاسخ QA و فنی",
         "بازگشت و دریافت مجدد",
         "پایان این محدوده"
-      ]
+      ],
+      "inventoryScope": "Local active workflow source; no sibling checkout required."
+    },
+    {
+      "repository": "product-workflow",
+      "path": "docs/12-request-onboarding.md",
+      "sha256": "1a186df19ce231267c3bafff93581cd43fadce1e826e86ed5ad14710c7aa2421",
+      "bytes": 11119,
+      "lines": 57,
+      "headings": [
+        "مرور ادامه و آشنایی با پرونده",
+        "زمان اجرا و مجری",
+        "منابع و کامل‌بودن مطالعه",
+        "گزارش محصول: چه انجام شده و چه باقی است؟",
+        "گزارش QA و فنی: درخواست دقیقاً چیست؟",
+        "مرز اثر و خطا"
+      ],
+      "inventoryScope": "Local active workflow source; no sibling checkout required."
     },
     {
       "repository": "product-workflow",
@@ -351,12 +367,13 @@
     {
       "repository": "product-workflow",
       "path": "examples/team-entry.md",
-      "sha256": "7de7594822e2f5f2b4df7339e78909c4cec8044b3409024376a3f0758e10fdbc",
-      "bytes": 10134,
-      "lines": 64,
+      "sha256": "5a7dc54f86acb82fa478b86923897a63c08f621d450fcaf4656f62a71aa8d0e1",
+      "bytes": 14485,
+      "lines": 85,
       "headings": [
         "سناریوهای بازبینی انتخاب تیم و برد",
         "سناریوهای مرز نوشتن تیم‌ها",
+        "مرور ادامه و onboarding",
         "گفت‌وگو و تکمیل محدودهٔ مستندسازی"
       ],
       "inventoryScope": "Local active workflow source; no sibling checkout required."
@@ -364,13 +381,13 @@
     {
       "repository": "product-workflow",
       "path": "modules/README.md",
-      "inventoryScope": "Local active workflow source; no sibling checkout required.",
       "sha256": "17540c394b305b29034ebf67d3e209ed2324d6bc6753d790d09b4a2263d8b5d9",
       "bytes": 1547,
       "lines": 9,
       "headings": [
         "وضعیت جاری ماژول‌ها"
-      ]
+      ],
+      "inventoryScope": "Local active workflow source; no sibling checkout required."
     },
     {
       "repository": "product-workflow",
@@ -390,9 +407,9 @@
     {
       "repository": "product-workflow",
       "path": "scripts/README.md",
-      "sha256": "c3a945f0efe02c2cce698da12b622f2c7917d662cfb75d5d5843d1c5138f2084",
-      "bytes": 5848,
-      "lines": 46,
+      "sha256": "c96eb7327d145a47f882e828b257febcfb8c4d60ed5e37c72e73c4d30e988250",
+      "bytes": 6448,
+      "lines": 52,
       "headings": [
         "بررسی مستندات",
         "بررسی استقلال مجموعه",
@@ -414,11 +431,11 @@
     {
       "repository": "product-workflow",
       "path": "scripts/publish_module.py",
-      "inventoryScope": "Local active workflow source; no sibling checkout required.",
       "sha256": "b8618f29a95ab228f58522ab0dd04dbbc7ab4f288640368ae5c74aeaa0079465",
       "bytes": 11027,
       "lines": 206,
-      "headings": []
+      "headings": [],
+      "inventoryScope": "Local active workflow source; no sibling checkout required."
     },
     {
       "repository": "product-workflow",
@@ -432,11 +449,11 @@
     {
       "repository": "product-workflow",
       "path": "scripts/test_validate.py",
-      "inventoryScope": "Local active workflow source; no sibling checkout required.",
       "sha256": "d66d6dd0bae47cf6f687822325abf08baaa6cdb1a82410619f192f2091f5ff25",
       "bytes": 11522,
       "lines": 221,
-      "headings": []
+      "headings": [],
+      "inventoryScope": "Local active workflow source; no sibling checkout required."
     },
     {
       "repository": "product-workflow",
@@ -444,6 +461,104 @@
       "sha256": "03a6742e24b2610cbebebbca5b6ba3f03d7255ead8225625999550524aa23d31",
       "bytes": 17786,
       "lines": 316,
+      "headings": [],
+      "inventoryScope": "Local active workflow source; no sibling checkout required."
+    },
+    {
+      "repository": "product-workflow",
+      "path": "skill/product-workflow/SKILL.md",
+      "sha256": "284f900a181cc39ec4072f897410a36196616580d9641aedfc32a570f0acaba0",
+      "bytes": 12997,
+      "lines": 70,
+      "headings": [
+        "اجرای فرآیند محصول، QA و فنی",
+        "پیدا کردن پروژه و شروع",
+        "صف و انتخاب پرونده",
+        "اجرای مرحله و ادامه پس از وقفه",
+        "ثبت کنترل‌شدهٔ پیشرفت",
+        "تحویل و مرز پایان"
+      ],
+      "inventoryScope": "Local active workflow source; no sibling checkout required."
+    },
+    {
+      "repository": "product-workflow",
+      "path": "skill/product-workflow/agents/openai.yaml",
+      "sha256": "8905b7359a624ab4dd2483e3ee331ce0da25e2237a62ea7f013b0cc51aa64625",
+      "bytes": 290,
+      "lines": 4,
+      "headings": [],
+      "inventoryScope": "Local active workflow source; no sibling checkout required."
+    },
+    {
+      "repository": "product-workflow",
+      "path": "skill/product-workflow/references/onboarding.md",
+      "sha256": "07791d84f7524dc33beec0f4ad5e0b855d180e4a6535ce5a6338e9134e4d4e3e",
+      "bytes": 4977,
+      "lines": 26,
+      "headings": [
+        "مرور request پیش از شروع یا ادامه",
+        "محصول: subagent ادامهٔ پرونده",
+        "QA و فنی: onboarding کامل"
+      ],
+      "inventoryScope": "Local active workflow source; no sibling checkout required."
+    },
+    {
+      "repository": "product-workflow",
+      "path": "skill/product-workflow/references/product.md",
+      "sha256": "83396e0b88c2ecfe798c7eb62732300e57e79e22ac0ebfbe7d791e14585df836",
+      "bytes": 3507,
+      "lines": 14,
+      "headings": [
+        "مسیر محصول"
+      ],
+      "inventoryScope": "Local active workflow source; no sibling checkout required."
+    },
+    {
+      "repository": "product-workflow",
+      "path": "skill/product-workflow/references/qa.md",
+      "sha256": "64a766ced3c33c2802ebb4c828c50cf9ba5996130fb238749360e467cb06afdd",
+      "bytes": 3375,
+      "lines": 13,
+      "headings": [
+        "مسیر QA"
+      ],
+      "inventoryScope": "Local active workflow source; no sibling checkout required."
+    },
+    {
+      "repository": "product-workflow",
+      "path": "skill/product-workflow/references/tech.md",
+      "sha256": "449c16b9a370623657dcfa4ab62ed7d5405174e2dc20e605cd5c7e75398e2f6e",
+      "bytes": 4476,
+      "lines": 16,
+      "headings": [
+        "مسیر فنی"
+      ],
+      "inventoryScope": "Local active workflow source; no sibling checkout required."
+    },
+    {
+      "repository": "product-workflow",
+      "path": "skill/product-workflow/scripts/read_queue.py",
+      "sha256": "a71d36dce1317d275f821a1bacd5868867861f7f93d5ca68bce1da8b954a7321",
+      "bytes": 18264,
+      "lines": 298,
+      "headings": [],
+      "inventoryScope": "Local active workflow source; no sibling checkout required."
+    },
+    {
+      "repository": "product-workflow",
+      "path": "skill/product-workflow/scripts/record_progress.py",
+      "sha256": "d023d3180b950373036b03a1685c15fc84e6bd270683fb40fcad00a5af3f41af",
+      "bytes": 18589,
+      "lines": 292,
+      "headings": [],
+      "inventoryScope": "Local active workflow source; no sibling checkout required."
+    },
+    {
+      "repository": "product-workflow",
+      "path": "skill/product-workflow/scripts/tests/test_workflow.py",
+      "sha256": "4ba1cd07fac119f6437f4775690c83a358e25b1d28c59eec1230fa69ab633ceb",
+      "bytes": 15720,
+      "lines": 261,
       "headings": [],
       "inventoryScope": "Local active workflow source; no sibling checkout required."
     },
@@ -512,7 +627,6 @@
     {
       "repository": "product-workflow",
       "path": "templates/modules/README.md",
-      "inventoryScope": "Local active workflow source; no sibling checkout required.",
       "sha256": "0544c49fbf9163354c13c6d70f5503e50a99ac1499b7f3485f77bfe4d5537f4b",
       "bytes": 4704,
       "lines": 62,
@@ -528,25 +642,26 @@
         "آزمون و شواهد",
         "وضعیت پیاده‌سازی و اختلاف با طرح",
         "تاریخچه و ترتیب مطالعه"
-      ]
+      ],
+      "inventoryScope": "Local active workflow source; no sibling checkout required."
     },
     {
       "repository": "product-workflow",
       "path": "templates/modules/implementation-observation.json",
-      "inventoryScope": "Local active workflow source; no sibling checkout required.",
       "sha256": "534cc73099afb6ec3cdb1806ec05b173a22b207d24a9a5f40c636d10b7fa3843",
       "bytes": 466,
       "lines": 14,
-      "headings": []
+      "headings": [],
+      "inventoryScope": "Local active workflow source; no sibling checkout required."
     },
     {
       "repository": "product-workflow",
       "path": "templates/modules/snapshot-plan.json",
-      "inventoryScope": "Local active workflow source; no sibling checkout required.",
       "sha256": "de2dc34cf0d214af07eb02c676cec901408baae637741ac31ca305b492b48b7a",
       "bytes": 391,
       "lines": 17,
-      "headings": []
+      "headings": [],
+      "inventoryScope": "Local active workflow source; no sibling checkout required."
     },
     {
       "repository": "product-workflow",
@@ -845,7 +960,6 @@
     {
       "repository": "product-workflow",
       "path": "templates/shared/team-interview.md",
-      "inventoryScope": "Local active workflow source; no sibling checkout required.",
       "sha256": "858cfbde06e71aca80d361605e6912210b214e23ae5d9d6a0e46c0a150c74c23",
       "bytes": 2193,
       "lines": 29,
@@ -853,7 +967,8 @@
         "گفت‌وگوی QA یا فنی",
         "سؤال و پاسخ",
         "ادامه و موارد باز"
-      ]
+      ],
+      "inventoryScope": "Local active workflow source; no sibling checkout required."
     },
     {
       "repository": "product-workflow",
@@ -1061,9 +1176,9 @@
     {
       "repository": "product-workflow",
       "path": "workflows/00-node-contract.md",
-      "sha256": "e98affc60cb66ffa077dbb121a8aacb65c4bdf0c522ed93299c5f214356aab9a",
-      "bytes": 7860,
-      "lines": 44,
+      "sha256": "0c5037ccdded1e0c81a5106d83f21b8213c22160976461065f9d9dd62ed92891",
+      "bytes": 8396,
+      "lines": 46,
       "headings": [
         "قرارداد مشترک اجرای هر node",
         "پیش و پس از node",
@@ -1077,9 +1192,9 @@
     {
       "repository": "product-workflow",
       "path": "workflows/00-team-entry.md",
-      "sha256": "a68b1d493700e094359e24f21928c5b882483f1b7ce43d135404620a7d530056",
-      "bytes": 11868,
-      "lines": 74,
+      "sha256": "17b386031f5fe75c1b2e3085ec085a8d78380f402cbbca354d976cb97352d5c8",
+      "bytes": 13314,
+      "lines": 80,
       "headings": [
         "شروع کار با انتخاب تیم",
         "گام اول: تیم",
@@ -1127,8 +1242,8 @@
     {
       "repository": "product-workflow",
       "path": "workflows/03-qa.md",
-      "sha256": "e586f39f858a842dd6184217dc5d9521d1de2852f07ec8dbf63f63cba741ec05",
-      "bytes": 12834,
+      "sha256": "f998a560cc55ab585bff9d0181d32a8d02a4f7f0de94d95b87ae0530b52b8bc2",
+      "bytes": 13159,
       "lines": 194,
       "headings": [
         "طراحی QA پیش از طراحی فنی",
@@ -1146,8 +1261,8 @@
     {
       "repository": "product-workflow",
       "path": "workflows/04-technical.md",
-      "sha256": "5646311dd60a7387bc63c8d45663ff7d4a469d78553ecb741c61bbbc8cd2a250",
-      "bytes": 26889,
+      "sha256": "1e1d633d5c82694a95b00e962f15ca372610ea037cf26f3ecb4167e2707818cc",
+      "bytes": 27214,
       "lines": 279,
       "headings": [
         "طراحی فنی مطابق Backend",
@@ -1257,8 +1372,8 @@
     {
       "repository": "product-workflow",
       "path": "workflows/graph.json",
-      "sha256": "4a1b3e379d0ce28539a624f3b8e5bace53108b0c6bb929b9c5d22f13464072c0",
-      "bytes": 98808,
+      "sha256": "964fb9a7c745b1b9e249ccce45fc074c6eea1f37cae11bf9d093bc6d778c606c",
+      "bytes": 99458,
       "lines": 1498,
       "headings": [],
       "inventoryScope": "Local active workflow source; no sibling checkout required."

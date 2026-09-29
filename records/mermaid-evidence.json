@@ -35,7 +35,7 @@
     {
       "path": "workflows/00-team-entry.md",
       "diagram": 1,
-      "sha256": "602761670a5b20eaf76c1b96c15ca668be3a44036783fa00eac2b7b9a4abdc61"
+      "sha256": "c538f6dc53db79160c1fd662461cd06cd6c21de269a0d22bba2318fc45311d1a"
     },
     {
       "path": "workflows/01-intake.md",
@@ -79,23 +79,23 @@
     }
   ],
   "command": [
-    "/tmp/product-workflow-mermaid-v1.7-AtUord/node_modules/.bin/mmdc",
+    "/private/tmp/product-workflow-mermaid-20260928/node_modules/.bin/mmdc",
     "-i",
-    "/private/tmp/product-workflow-mermaid-v1.8-render/all-diagrams.md",
+    "/private/tmp/product-workflow-mermaid-v1.9-render-final/all-diagrams.md",
     "-o",
-    "/private/tmp/product-workflow-mermaid-v1.8-render/rendered.md",
+    "/private/tmp/product-workflow-mermaid-v1.9-render-final/rendered.md",
     "-p",
-    "/private/tmp/product-workflow-mermaid-v1.8-render/puppeteer.json",
+    "/private/tmp/product-workflow-mermaid-v1.9-render-final/puppeteer.json",
     "-e",
     "svg"
   ],
-  "stdout": "Found 15 mermaid charts in Markdown input\n ✅ ./rendered-5.svg\n ✅ ./rendered-4.svg\n ✅ ./rendered-7.svg\n ✅ ./rendered-3.svg\n ✅ ./rendered-2.svg\n ✅ ./rendered-1.svg\n ✅ ./rendered-6.svg\n ✅ ./rendered-12.svg\n ✅ ./rendered-8.svg\n ✅ ./rendered-9.svg\n ✅ ./rendered-15.svg\n ✅ ./rendered-10.svg\n ✅ ./rendered-11.svg\n ✅ ./rendered-14.svg\n ✅ ./rendered-13.svg\n ✅ /private/tmp/product-workflow-mermaid-v1.8-render/rendered.md\n",
+  "stdout": "Found 15 mermaid charts in Markdown input\n ✅ ./rendered-5.svg\n ✅ ./rendered-6.svg\n ✅ ./rendered-7.svg\n ✅ ./rendered-8.svg\n ✅ ./rendered-9.svg\n ✅ ./rendered-10.svg\n ✅ ./rendered-11.svg\n ✅ ./rendered-4.svg\n ✅ ./rendered-13.svg\n ✅ ./rendered-14.svg\n ✅ ./rendered-15.svg\n ✅ ./rendered-12.svg\n ✅ ./rendered-3.svg\n ✅ ./rendered-2.svg\n ✅ ./rendered-1.svg\n ✅ /private/tmp/product-workflow-mermaid-v1.9-render-final/rendered.md\n",
   "stderr": "",
   "schemaVersion": 1,
-  "date": "2026-09-28",
+  "date": "2026-09-29",
   "tool": "@mermaid-js/mermaid-cli",
   "version": "12.0.0",
   "renderer": "headless Google Chrome",
-  "nodeVersion": "22.22.0",
+  "nodeVersion": "26.5.0",
   "scope": "All current Mermaid blocks parsed and rendered to SVG; no claim of visual inspection of every diagram."
 }
