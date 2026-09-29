@@ -32,14 +32,14 @@ requests/<request-id>/
   baselines/                  # manifestهای immutable هر مرحله
   approvals/                  # تصمیم‌های انسانی append-only
   receipts/                   # اعلام دریافت بسته
-  reviews/                    # یافته‌ها و حل آن‌ها
+  reviews/                    # گزارش subagent و رأی reviewer انسانی در رکوردهای جدا، یافته و حل
   runs/                       # journal nodeها و evidence امن
   changes/                    # تغییر scope، نسخه یا defect مرتبط
 ```
 
 آخرین طرح کامل مصوب هر ماژول در `modules/<slug>/revisions/<revision-id>/` همین مخزن است؛ `current.json` نسخهٔ جاری را مشخص می‌کند. در هر درخواست change-spec فقط delta است و `technical/modules/<slug>/snapshot/` وضعیت کامل پیشنهادی را دارد؛ این candidate تا G-T جاری نمی‌شود. T09 همان bytes مصوب را منتشر و T08 تحویل می‌دهد. اسناد کنار کد Backend و وضعیت پیاده‌سازی با revision/evidence خودشان شناخته می‌شوند؛ [قرارداد کتابخانه](10-module-library.md) رابطهٔ مرجع طراحی، شاهد کد و مالکیت را تعیین می‌کند.
 
-[برد JSON مشترک](../requests/board.json) تنها محل وضعیت جاری کارت‌هاست؛ [قالب کارت](../templates/shared/board-card.json) و [قرارداد فیلدها](07-board-json.md) نحوهٔ نگهداری را تعیین می‌کنند. tracking فقط تاریخچه است. board، tracking، journal، approval و receipt فایل‌های کنترلی بیرون manifest محتوای تحویلی هستند تا حرکت کارت hash بسته را تغییر ندهد؛ نسخه و علت هر حرکت در تاریخچه محفوظ می‌ماند.
+[برد JSON مشترک](../requests/board.json) تنها محل وضعیت جاری کارت‌هاست؛ [قالب کارت](../templates/shared/board-card.json) و [قرارداد فیلدها](07-board-json.md) نحوهٔ نگهداری را تعیین می‌کنند. tracking فقط تاریخچه است. board، tracking، journal، review، approval و receipt فایل‌های کنترلی بیرون manifest محتوای تحویلی هستند تا حرکت کارت hash بسته را تغییر ندهد؛ نسخه و علت هر حرکت در تاریخچه محفوظ می‌ماند.
 
 [جدول مالکیت فایل‌ها](08-team-file-ownership.md) تعیین می‌کند چه تیمی هر مسیر را می‌نویسد. اشتراک یک پرونده به معنی اختیار مشترک ویرایش همهٔ فایل‌ها نیست؛ فایل‌های کنترلی با Coordinator و محتوای هر مرحله با همان تیم است.
 
@@ -47,7 +47,7 @@ requests/<request-id>/
 
 | مرحله | همیشه لازم | فقط در صورت ارتباط |
 |---|---|---|
-| مشترک | کارت در board.json، request، tracking، decisions، applicability، traceability، manifest، approval و receipt مرحله | interview اگر سؤال، impact اگر تغییر، finding اگر review نقص دارد |
+| مشترک | کارت در board.json، request، tracking، decisions، applicability، traceability، manifest، approval و receipt مرحله؛ گزارش subagent و رأی reviewer انسانی برای مستندات محصول/QA/فنی | interview اگر سؤال، impact اگر تغییر، finding اگر review نقص دارد |
 | محصول | contract، شرح مستقل UC/operation، acceptance، handover | questionnaire و پاسخ‌ها برای new/feature/change تازه؛ feature-impact برای feature؛ flows/data/تعاملات متناسب؛ N/A صریح در applicability |
 | QA | interview با پاسخ‌ها یا دلیل کفایت، plan، scenarioهای دارای oracle، coverage، handover | performance/security/recovery/migration برای ریسک موجود؛ UI در صورت وجود کلاینت |
 | فنی | index، impact-map، cross-module-flows، بسته change-spec/test-mapping هر ماژول متأثر، implementation plan و handover؛ snapshot کامل تجمعی هر ماژول و plan نسخهٔ انتشار؛ ارجاع به قواعد و revision Backend | domain، data/migration، communication/message، recording، deployment/ADR متناسب با اثر |

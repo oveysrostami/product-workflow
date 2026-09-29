@@ -7,9 +7,9 @@
 | workflow | nodeها | ورودی → خروجی |
 |---|---|---|
 | [ورود درخواست و تشخیص مسیر](01-intake.md) | I01 تا I04 | ورودی درخواست تازه پس از انتخاب تیم محصول و دریافت شرح آزاد است. QA و فنی برای پرونده‌های موجود از صف تیم خود وارد Q01/T01 یا checkpoint می‌شوند. درخواست چندماژولی یک پرونده و مالکیت روشن دارد؛ تشخیص AI تأیید محصول نیست. |
-| [جمع‌آوری نیاز، مصاحبه و قرارداد محصول](02-product.md) | P01 تا P11 | شرح کلی، پرسش‌نامهٔ کامل ماژول تازه، فیچر یا change، دریافت پاسخ‌ها، سپس interview هدفمند و قرارداد محصول؛ باگ و technical-only فقط interview مربوط دارند. |
-| [طراحی QA پیش از طراحی فنی](03-qa.md) | Q01 تا Q08 | دریافت محصول مصوب، گفت‌وگوی QA با AI، تهیه و review اسناد، تأیید انسانی و handover فنی؛ ابهام محصول با اصلاحیه برمی‌گردد. |
-| [طراحی فنی مطابق Backend](04-technical.md) | T01 تا T11 | دریافت محصول و QA مصوب، گفت‌وگوی فنی با AI و طراحی مطابق Backend؛ پس از G-T، انتشار modules در T09 و تحویل آمادهٔ پیاده‌سازی در T08. |
+| [جمع‌آوری نیاز، مصاحبه و قرارداد محصول](02-product.md) | P01 تا P12 | شرح کلی، پرسش‌نامهٔ کامل ماژول تازه، فیچر یا change، دریافت پاسخ‌ها، سپس interview هدفمند و قرارداد محصول؛ باگ و technical-only فقط interview مربوط دارند. |
+| [طراحی QA پیش از طراحی فنی](03-qa.md) | Q01 تا Q09 | دریافت محصول مصوب، گفت‌وگوی QA با AI، تهیه و review اسناد، تأیید انسانی و handover فنی؛ ابهام محصول با اصلاحیه برمی‌گردد. |
+| [طراحی فنی مطابق Backend](04-technical.md) | T01 تا T12 | دریافت محصول و QA مصوب، گفت‌وگوی فنی با AI و طراحی مطابق Backend؛ پس از G-T، انتشار modules در T09 و تحویل آمادهٔ پیاده‌سازی در T08. |
 | [اجرای AI توسعه‌دهنده](05-implementation.md) | D01 تا D06 | یک vertical slice کوچک را کامل کن و سپس slice بعدی را بساز. تست هر لایه همراه همان لایه است؛ هیچ مرحله‌ای تضمین‌های لازم را به بعد از تحویل موکول نمی‌کند. |
 | [review، اجرای QA و تحویل](06-review-and-acceptance.md) | V01 تا V07 | review مستقل پیش از پذیرش نهایی است. کد و شواهد بعد از تغییر باید دوباره متناسب بررسی شوند. نبود یافتهٔ AI جای پذیرش QA/فنی/محصول نیست. |
 | [تغییر، باگ و بازگشت هدفمند](07-change-and-bug.md) | C01 تا B07 | C nodeها نسخه و scope را مدیریت می‌کنند؛ B nodeها گزارش خلاف قرارداد را. مسیر کوتاه باگ قرارداد محصول را دوباره اختراع نمی‌کند و دریافت فنی با رفع نهایی فرق دارد. |
@@ -27,32 +27,35 @@
 | [P02](02-product.md#p02) | انتخاب ابهام و ساخت batch | AI | Product interviewer |
 | [P03](02-product.md#p03) | پاسخ و حل تعارض محصول | Human | درخواست‌کننده / Product owner در حدود نقش |
 | [P04](02-product.md#p04) | نگارش رفتار و پذیرش | AI | Product writer |
-| [P05](02-product.md#p05) | بازبینی مستقل نیاز و سند | AI | Reviewer مستقل یا reviewer انسانی جایگزین |
+| [P05](02-product.md#p05) | بازبینی مستقل نیاز و سند | AI | Subagent reviewer مستقل محصول؛ ثبت گزارش توسط Coordinator |
 | [P06](02-product.md#p06) | بررسی لینک، نمودار و پوشش | Tool | Check runner با تفسیر Coordinator |
 | [P07](02-product.md#p07) | تأیید نسخهٔ محصول | Human | همان درخواست‌کننده |
 | [P08](02-product.md#p08) | تحویل محصول به QA | AI | Coordinator |
 | [P09](02-product.md#p09) | طراحی و ذخیرهٔ کل پرسش‌نامهٔ اولیه | AI | Product writer |
 | [P10](02-product.md#p10) | دریافت پاسخ‌های پرسش‌نامه و checkpoint | Human | درخواست‌کننده / Product owner در حدود نقش |
 | [P11](02-product.md#p11) | بررسی مستنداتی ماژول‌های فیچر با subagent | AI | Product analyst با subagent فقط خواندنی |
+| [P12](02-product.md#p12) | تأیید reviewer انسانی بستهٔ محصول | Human | Reviewer انسانی مستقل محصول با مرجع انتصاب |
 | [Q01](03-qa.md#q01) | پذیرش دریافت محصول | Human | QA owner |
 | [Q02](03-qa.md#q02) | تحلیل ریسک و راهبرد آزمون | AI | QA analyst |
 | [Q03](03-qa.md#q03) | سناریو و دادهٔ آزمون مستقل | AI | QA analyst |
-| [Q04](03-qa.md#q04) | چالش پوشش و oracle | AI | QA reviewer مستقل یا reviewer انسانی |
+| [Q04](03-qa.md#q04) | چالش پوشش و oracle | AI | Subagent reviewer مستقل QA؛ ثبت گزارش توسط Coordinator |
 | [Q05](03-qa.md#q05) | تأیید طراحی QA | Human | QA owner |
 | [Q06](03-qa.md#q06) | تحویل QA به فنی | AI | Coordinator |
 | [Q07](03-qa.md#q07) | پرسش‌های تصمیم QA | AI | QA interviewer |
 | [Q08](03-qa.md#q08) | پاسخ انسان QA | Human | QA owner یا صاحب تصمیم منصوب در QA |
+| [Q09](03-qa.md#q09) | تأیید reviewer انسانی بستهٔ QA | Human | Reviewer انسانی مستقل QA با مرجع انتصاب |
 | [T01](04-technical.md#t01) | دریافت بسته توسط فنی | Human | Tech lead |
 | [T02](04-technical.md#t02) | کشف فنی و نقشهٔ اثر ماژولی | AI | Technical designer |
 | [T03](04-technical.md#t03) | مدل، مالکیت و قرارداد اولیه | AI | Technical designer |
 | [T04](04-technical.md#t04) | طراحی تغییر هر ماژول و برنامهٔ مشترک | AI | Technical designer |
 | [T05](04-technical.md#t05) | بازبینی قابلیت آزمون | Human | QA owner با تحلیل QA agent |
-| [T06](04-technical.md#t06) | review طراحی ماژول‌ها و کل درخواست | AI | Technical reviewer مستقل یا reviewer انسانی |
+| [T06](04-technical.md#t06) | review طراحی ماژول‌ها و کل درخواست | AI | Subagent reviewer مستقل فنی؛ ثبت گزارش توسط Coordinator |
 | [T07](04-technical.md#t07) | تصویب طرح و دامنهٔ اجرا | Human | Tech lead و مسئولان فنی ماژول‌های متأثر؛ owner زیرساخت برای انتخاب عملیاتی |
 | [T08](04-technical.md#t08) | تحویل بستهٔ اجرایی | AI | Coordinator |
 | [T09](04-technical.md#t09) | انتشار وضعیت مصوب ماژول‌ها | AI | Technical publisher؛ تیم فعال فنی |
 | [T10](04-technical.md#t10) | پرسش‌های تصمیم فنی | AI | Technical interviewer |
 | [T11](04-technical.md#t11) | پاسخ انسان فنی | Human | Tech lead یا مسئول فنی منصوب؛ owner عملیاتی برای انتخاب خودش |
+| [T12](04-technical.md#t12) | تأیید reviewer انسانی بستهٔ فنی | Human | Reviewer انسانی مستقل فنی با مرجع انتصاب |
 | [D01](05-implementation.md#d01) | دریافت task ماژولی و preflight | AI | Developer |
 | [D02](05-implementation.md#d02) | Domain و Application با تست | AI | Developer |
 | [D03](05-implementation.md#d03) | adapter، persistence و durability | AI | Developer |

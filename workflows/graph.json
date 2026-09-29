@@ -186,11 +186,11 @@
           "id": "P05",
           "title": "بازبینی مستقل نیاز و سند",
           "actor": "AI",
-          "role": "Reviewer مستقل یا reviewer انسانی جایگزین",
+          "role": "Subagent reviewer مستقل محصول؛ ثبت گزارش توسط Coordinator",
           "inputs": "درخواست و مصاحبه، تمام اسناد product، منابع و scope؛ پرسش‌نامه و history/پاسخ‌ها و feature-impact در صورت الزام",
-          "action": "هر rule را به پاسخ/قرارداد معتبر وصل کن؛ ناسازگاری عدد/زمان/مالکیت و رفتار مخفی در ضمیمه را پیدا کن. عمق را با OTP مقایسه کن، نه قوانینش را. یافته با محل، شاهد، اثر و owner بده. کامل‌بودن مسیر پرسش‌نامه، سهمیهٔ سؤال مرتبط/متمایز و پاسخ واقعی و اتصال تصمیم به question/answer را بررسی کن؛ count ابزار جای کیفیت سؤال نیست.",
-          "outputs": "review product با blocker/major/minor و مقصد اصلاح",
-          "done": "همهٔ یافته‌های مسدودکننده بسته یا صریح برای تصمیم ارجاع شده‌اند.",
+          "action": "طبق docs/14-document-review.md بدون درخواست اجازهٔ تکراری، یک subagent مستقل از نویسنده برای بازبینی کامل همین بسته اجرا کن؛ مأموریت فقط خواندنی، تمام اسناد/مراجع/نسخه‌ها و دامنهٔ review را بده. هویت و استقلال بازبین، منابع/digest، حوزهٔ بررسی‌شده/نشده و یافته‌ها ثبت شوند. خود بازبین فایل یا کنترل‌فایل نمی‌نویسد؛ Coordinator گزارش را در reviews ثبت و اصلاح به تیم مالک ارجاع می‌شود. نبود قابلیت/اختیار واقعی محیط، blocked است و با reviewer انسانی جایگزین نمی‌شود. هر rule را به پاسخ/قرارداد معتبر وصل کن؛ ناسازگاری عدد/زمان/مالکیت و رفتار مخفی در ضمیمه را پیدا کن. عمق را با OTP مقایسه کن، نه قوانینش را. یافته با محل، شاهد، اثر و owner بده. کامل‌بودن مسیر پرسش‌نامه، سهمیهٔ سؤال مرتبط/متمایز و پاسخ واقعی و اتصال تصمیم به question/answer را بررسی کن؛ count ابزار جای کیفیت سؤال نیست. پس از رفع یافته‌ها، نسخهٔ اصلاحی باید دوباره توسط subagent بررسی شود؛ فقط نتیجهٔ کامل همین نسخه به P12 برای تأیید reviewer انسانی می‌رود.",
+          "outputs": "review product با blocker/major/minor و مقصد اصلاح؛ گزارش subagent با identity/independence، منابع و digest ثابت در reviews",
+          "done": "بازبینی کامل subagent واقعی روی نسخهٔ مشخص ثبت شده و یافتهٔ مسدودکننده برای ارائه باقی نیست؛ رأی انسانی هنوز در node بعد لازم است.",
           "transitions": [
             {
               "condition": "شکاف تصمیم محصول",
@@ -201,8 +201,8 @@
               "target": "P04"
             },
             {
-              "condition": "آماده بررسی ساختاری",
-              "target": "P06"
+              "condition": "بازبینی کامل subagent و رفع یافته‌ها؛ آمادهٔ reviewer انسانی",
+              "target": "P12"
             }
           ]
         },
@@ -231,7 +231,7 @@
           "title": "تأیید نسخهٔ محصول",
           "actor": "Human",
           "role": "همان درخواست‌کننده",
-          "inputs": "قرارداد اصلی، خلاصه تصمیم و موارد باز، review، manifest candidate",
+          "inputs": "قرارداد اصلی، خلاصه تصمیم و موارد باز، review، manifest candidate؛ رأی reviewer انسانی P12 و گزارش subagent روی نسخهٔ منطبق",
           "action": "نسخهٔ مشخص را approve یا با دلیل رد کن؛ کاهش scope باید صریح باشد. open item مؤثر در scope مانع approve است. AI فقط پاسخ و مرجع انسانی را در approval جدا ثبت می‌کند.",
           "outputs": "G-P approval مرتبط با digest manifest یا feedback",
           "done": "تصمیم صریح همان درخواست‌کننده روی همان bytes وجود دارد.",
@@ -329,6 +329,30 @@
               "target": "P09"
             }
           ]
+        },
+        {
+          "id": "P12",
+          "title": "تأیید reviewer انسانی بستهٔ محصول",
+          "actor": "Human",
+          "role": "Reviewer انسانی مستقل محصول با مرجع انتصاب",
+          "inputs": "بستهٔ ثابت، گزارش کامل subagent در P05، یافته‌ها و شواهد رفع، نسخه/digest و مرجع انتصاب reviewer",
+          "action": "طبق docs/14-document-review.md ابتدا بستهٔ قابل مشاهده، گزارش subagent و خلاصهٔ اصلاح‌ها را به reviewer انسانی معرفی‌شده ارائه کن؛ اگر نقش/انتصاب مجهول است، اکنون معرفی واقعی لازم است. همان نسخه و گزارش را بررسی و تأیید یا با دلیل برای اصلاح رد کن. AI فقط رأی واقعی انسان، هویت/نقش/مرجع انتصاب، متن/مرجع پیام و digest بسته و گزارش را در رکورد جدا و append-only در reviews ثبت می‌کند؛ executor تصمیم Human است. تا پاسخ، waiting-human و resumeNode=P12؛ سؤال اجازهٔ subagent یا انتخاب بین AI و انسان مطرح نشود. در تغییر bytes، بازبینی subagent و رأی انسانی نسخهٔ تازه لازم‌اند. تأیید review جای gate نهایی یا receipt نیست.",
+          "outputs": "رکورد تأیید/رد reviewer انسانی محصول در reviews با decisionReference واقعی، نسخه/digest و گزارش subagent مرتبط",
+          "done": "رأی واقعی reviewer انسانی روی همان نسخه و گزارش، با نقش/اختیار معتبر ثبت شده؛ معرفی فرد یا گزارش AI رأی نیست.",
+          "transitions": [
+            {
+              "condition": "reviewer انسانی همان نسخه را تأیید کرد",
+              "target": "P06"
+            },
+            {
+              "condition": "اصلاح متن لازم است",
+              "target": "P04"
+            },
+            {
+              "condition": "تصمیم رفتاری لازم است",
+              "target": "P02"
+            }
+          ]
         }
       ]
     },
@@ -409,11 +433,11 @@
           "id": "Q04",
           "title": "چالش پوشش و oracle",
           "actor": "AI",
-          "role": "QA reviewer مستقل یا reviewer انسانی",
+          "role": "Subagent reviewer مستقل QA؛ ثبت گزارش توسط Coordinator",
           "inputs": "plan/scenarios، قرارداد محصول و coverage",
-          "action": "یک بار از rule به scenario و یک بار از scenario به source بررسی کن. false positive، تست صرفاً happy-path، زمان/مرز نامعین و omitted failure را پیدا کن. performance/security claim بی‌معیار رد شود. تصمیم‌های qa/interview.md و پاسخ‌های جزئی را با اسناد تطبیق بده؛ مورد باز مؤثر مانع ارائه برای G-Q است. مصاحبهٔ همین نسخه نیز در manifest Q freeze شود.",
-          "outputs": "QA review، gap list و پوشش هر risk؛ manifest immutable Q candidate شامل handover پس از رفع یافته‌ها",
-          "done": "هیچ oracle ساختگی، AC بی‌پوشش یا critical risk بی‌تصمیم نمانده.",
+          "action": "طبق docs/14-document-review.md بدون درخواست اجازهٔ تکراری، یک subagent مستقل از نویسنده برای بازبینی کامل همین بسته اجرا کن؛ مأموریت فقط خواندنی، تمام اسناد/مراجع/نسخه‌ها و دامنهٔ review را بده. هویت و استقلال بازبین، منابع/digest، حوزهٔ بررسی‌شده/نشده و یافته‌ها ثبت شوند. خود بازبین فایل یا کنترل‌فایل نمی‌نویسد؛ Coordinator گزارش را در reviews ثبت و اصلاح به تیم مالک ارجاع می‌شود. نبود قابلیت/اختیار واقعی محیط، blocked است و با reviewer انسانی جایگزین نمی‌شود. یک بار از rule به scenario و یک بار از scenario به source بررسی کن. false positive، تست صرفاً happy-path، زمان/مرز نامعین و omitted failure را پیدا کن. performance/security claim بی‌معیار رد شود. تصمیم‌های qa/interview.md و پاسخ‌های جزئی را با اسناد تطبیق بده؛ مورد باز مؤثر مانع ارائه برای G-Q است. مصاحبهٔ همین نسخه نیز در manifest Q freeze شود. پس از رفع یافته‌ها، نسخهٔ اصلاحی باید دوباره توسط subagent بررسی شود؛ فقط نتیجهٔ کامل همین نسخه به Q09 برای تأیید reviewer انسانی می‌رود.",
+          "outputs": "QA review، gap list و پوشش هر risk؛ manifest immutable Q candidate شامل handover پس از رفع یافته‌ها؛ گزارش subagent با identity/independence، منابع و digest ثابت در reviews",
+          "done": "بازبینی کامل subagent واقعی روی نسخهٔ مشخص ثبت شده و یافتهٔ مسدودکننده برای ارائه باقی نیست؛ رأی انسانی هنوز در node بعد لازم است.",
           "transitions": [
             {
               "condition": "نقص سناریو",
@@ -424,8 +448,8 @@
               "target": "C01"
             },
             {
-              "condition": "آماده تأیید QA",
-              "target": "Q05"
+              "condition": "بازبینی کامل subagent و رفع یافته‌ها؛ آمادهٔ reviewer انسانی",
+              "target": "Q09"
             },
             {
               "condition": "انتخاب QA نیازمند پاسخ انسان",
@@ -438,7 +462,7 @@
           "title": "تأیید طراحی QA",
           "actor": "Human",
           "role": "QA owner",
-          "inputs": "نسخه سناریو و coverage، review و manifest Q candidate",
+          "inputs": "نسخه سناریو و coverage، review و manifest Q candidate؛ رأی reviewer انسانی Q09 و گزارش subagent روی نسخهٔ منطبق",
           "action": "scope، اولویت، oracle، environment نیازمند تهیه و شرط entry/exit execution را تصویب کن. حالت همه تست‌ها not-run است؛ پذیرش برنامه، pass آزمون نیست. پاسخ‌های مصاحبه، رأی این gate نیستند؛ رأی صریح روی manifest نامزد لازم است.",
           "outputs": "G-Q approval با baseline محصول مرتبط",
           "done": "QA owner کیفیت برنامه را پذیرفته و blocker oracle باقی نیست.",
@@ -522,6 +546,34 @@
             {
               "condition": "پاسخ نیازمند تصمیم محصول است",
               "target": "C01"
+            }
+          ]
+        },
+        {
+          "id": "Q09",
+          "title": "تأیید reviewer انسانی بستهٔ QA",
+          "actor": "Human",
+          "role": "Reviewer انسانی مستقل QA با مرجع انتصاب",
+          "inputs": "بستهٔ ثابت، گزارش کامل subagent در Q04، یافته‌ها و شواهد رفع، نسخه/digest و مرجع انتصاب reviewer",
+          "action": "طبق docs/14-document-review.md ابتدا بستهٔ قابل مشاهده، گزارش subagent و خلاصهٔ اصلاح‌ها را به reviewer انسانی معرفی‌شده ارائه کن؛ اگر نقش/انتصاب مجهول است، اکنون معرفی واقعی لازم است. همان نسخه و گزارش را بررسی و تأیید یا با دلیل برای اصلاح رد کن. AI فقط رأی واقعی انسان، هویت/نقش/مرجع انتصاب، متن/مرجع پیام و digest بسته و گزارش را در رکورد جدا و append-only در reviews ثبت می‌کند؛ executor تصمیم Human است. تا پاسخ، waiting-human و resumeNode=Q09؛ سؤال اجازهٔ subagent یا انتخاب بین AI و انسان مطرح نشود. در تغییر bytes، بازبینی subagent و رأی انسانی نسخهٔ تازه لازم‌اند. تأیید review جای gate نهایی یا receipt نیست.",
+          "outputs": "رکورد تأیید/رد reviewer انسانی QA در reviews با decisionReference واقعی، نسخه/digest و گزارش subagent مرتبط",
+          "done": "رأی واقعی reviewer انسانی روی همان نسخه و گزارش، با نقش/اختیار معتبر ثبت شده؛ معرفی فرد یا گزارش AI رأی نیست.",
+          "transitions": [
+            {
+              "condition": "reviewer انسانی همان نسخه را تأیید کرد",
+              "target": "Q05"
+            },
+            {
+              "condition": "اصلاح plan/scenario لازم است",
+              "target": "Q03"
+            },
+            {
+              "condition": "نیاز به تصمیم محصول",
+              "target": "C01"
+            },
+            {
+              "condition": "انتخاب QA نیازمند پاسخ",
+              "target": "Q07"
             }
           ]
         }
@@ -668,11 +720,11 @@
           "id": "T06",
           "title": "review طراحی ماژول‌ها و کل درخواست",
           "actor": "AI",
-          "role": "Technical reviewer مستقل یا reviewer انسانی",
+          "role": "Subagent reviewer مستقل فنی؛ ثبت گزارش توسط Coordinator",
           "inputs": "تمام technical docs، Backend rules، P/Q baseline و testability",
-          "action": "POM/import/SQL و call/event/recovery graph را بررسی کن. owner-local transaction، replay auth، privacy، migration، failure و capability gaps را بسنج. canonical location و عدم وجود دو نسخه مرجع editable را کنترل کن. ابتدا هر target را در workUnit مستقل review کن، سپس قراردادهای مشترک و consistency کل درخواست را بسنج. یافتهٔ edge به producer و consumer و QA مشترک متصل شود؛ manifest T شامل تمام بسته‌های ماژولی و طرح مشترک است. snapshot کامل هر ماژول و baseRevision و منشأ رفتارهای بدون تغییر نیز review شوند؛ manifest T باید plan و تک‌تک bytes snapshotها را freeze کند. wrapper انتشار پس از G-T ساخته می‌شود و داخل manifest T نیست. تصمیم‌ها و موارد باز technical/interview.md نیز بررسی و همان نسخه در manifest T freeze شود؛ پاسخ مصاحبه جانشین G-T نیست.",
-          "outputs": "review فنی، ADRهای لازم و manifest immutable T candidate شامل handover توسعه",
-          "done": "تمام blocking findingها بسته و انحراف بی‌ADR/اختیار باقی نیست.",
+          "action": "طبق docs/14-document-review.md بدون درخواست اجازهٔ تکراری، یک subagent مستقل از نویسنده برای بازبینی کامل همین بسته اجرا کن؛ مأموریت فقط خواندنی، تمام اسناد/مراجع/نسخه‌ها و دامنهٔ review را بده. هویت و استقلال بازبین، منابع/digest، حوزهٔ بررسی‌شده/نشده و یافته‌ها ثبت شوند. خود بازبین فایل یا کنترل‌فایل نمی‌نویسد؛ Coordinator گزارش را در reviews ثبت و اصلاح به تیم مالک ارجاع می‌شود. نبود قابلیت/اختیار واقعی محیط، blocked است و با reviewer انسانی جایگزین نمی‌شود. POM/import/SQL و call/event/recovery graph را بررسی کن. owner-local transaction، replay auth، privacy، migration، failure و capability gaps را بسنج. canonical location و عدم وجود دو نسخه مرجع editable را کنترل کن. ابتدا هر target را در workUnit مستقل review کن، سپس قراردادهای مشترک و consistency کل درخواست را بسنج. یافتهٔ edge به producer و consumer و QA مشترک متصل شود؛ manifest T شامل تمام بسته‌های ماژولی و طرح مشترک است. snapshot کامل هر ماژول و baseRevision و منشأ رفتارهای بدون تغییر نیز review شوند؛ manifest T باید plan و تک‌تک bytes snapshotها را freeze کند. wrapper انتشار پس از G-T ساخته می‌شود و داخل manifest T نیست. تصمیم‌ها و موارد باز technical/interview.md نیز بررسی و همان نسخه در manifest T freeze شود؛ پاسخ مصاحبه جانشین G-T نیست. پس از رفع یافته‌ها، نسخهٔ اصلاحی باید دوباره توسط subagent بررسی شود؛ فقط نتیجهٔ کامل همین نسخه به T12 برای تأیید reviewer انسانی می‌رود.",
+          "outputs": "review فنی، یافته‌های نیازمند ADR برای تیم فنی و manifest immutable T candidate شامل handover توسعه؛ گزارش subagent با identity/independence، منابع و digest ثابت در reviews",
+          "done": "بازبینی کامل subagent واقعی روی نسخهٔ مشخص ثبت شده و یافتهٔ مسدودکننده برای ارائه باقی نیست؛ رأی انسانی هنوز در node بعد لازم است.",
           "transitions": [
             {
               "condition": "اصلاح طراحی",
@@ -683,8 +735,8 @@
               "target": "C01"
             },
             {
-              "condition": "همه reviewهای targetها و review کل درخواست آماده‌اند",
-              "target": "T07"
+              "condition": "بازبینی کامل subagent و رفع یافته‌ها؛ آمادهٔ reviewer انسانی",
+              "target": "T12"
             },
             {
               "condition": "review واحد فعلی ثبت شده و review target یا جمع‌بندی کل باقی است",
@@ -705,7 +757,7 @@
           "title": "تصویب طرح و دامنهٔ اجرا",
           "actor": "Human",
           "role": "Tech lead و مسئولان فنی ماژول‌های متأثر؛ owner زیرساخت برای انتخاب عملیاتی",
-          "inputs": "طرح کامل، review، testability، gap، هزینه/ریسک و T manifest",
+          "inputs": "طرح کامل، review، testability، gap، هزینه/ریسک و T manifest؛ رأی reviewer انسانی T12 و گزارش‌های subagent روی نسخهٔ منطبق",
           "action": "طراحی و ترتیب sliceها را approve کن؛ انتخاب topology/profile و prerequisiteهای واقعی را مشخص کن. تأیید طراحی را از اختیار پیاده‌سازی جدا ثبت کن. برای درخواست مستندات، نبود اختیار پیاده‌سازی مانع تصویب طرح نیست؛ اجرای کد فقط با دستور صریح scope در request یا تصمیم جدا مجاز است. تأیید سند به‌تنهایی مجوز اجرا یا deploy نیست. رأی مسئول فنی هر target و رأی نهایی Tech lead برای کل درخواست روی همان manifest ثبت شوند؛ یک انسان منصوب می‌تواند چند نقش را پوشش دهد. G-T با local-ready چند ماژول و dependency باز عبور نمی‌کند. رأی همان manifest شامل snapshotهای کامل ماژول‌هاست؛ approval نسخه یا scope متفاوت برای انتشار قابل استفاده نیست.",
           "outputs": "G-T approval و وضعیت مستقل اختیار پیاده‌سازی؛ reference دستور فقط در صورت وجود",
           "done": "G-P/G-Q معتبر، QA testability پذیرفته و تصمیم اجرایی لازم روشن است.",
@@ -817,6 +869,34 @@
             {
               "condition": "پاسخ مستلزم اصلاح محصول یا QA است",
               "target": "C01"
+            }
+          ]
+        },
+        {
+          "id": "T12",
+          "title": "تأیید reviewer انسانی بستهٔ فنی",
+          "actor": "Human",
+          "role": "Reviewer انسانی مستقل فنی با مرجع انتصاب",
+          "inputs": "بستهٔ ثابت، گزارش کامل subagent در T06، یافته‌ها و شواهد رفع، نسخه/digest و مرجع انتصاب reviewer",
+          "action": "طبق docs/14-document-review.md ابتدا بستهٔ قابل مشاهده، گزارش subagent و خلاصهٔ اصلاح‌ها را به reviewer انسانی معرفی‌شده ارائه کن؛ اگر نقش/انتصاب مجهول است، اکنون معرفی واقعی لازم است. همان نسخه و گزارش را بررسی و تأیید یا با دلیل برای اصلاح رد کن. AI فقط رأی واقعی انسان، هویت/نقش/مرجع انتصاب، متن/مرجع پیام و digest بسته و گزارش را در رکورد جدا و append-only در reviews ثبت می‌کند؛ executor تصمیم Human است. تا پاسخ، waiting-human و resumeNode=T12؛ سؤال اجازهٔ subagent یا انتخاب بین AI و انسان مطرح نشود. در تغییر bytes، بازبینی subagent و رأی انسانی نسخهٔ تازه لازم‌اند. تأیید review جای gate نهایی یا receipt نیست.",
+          "outputs": "رکورد تأیید/رد reviewer انسانی فنی در reviews با decisionReference واقعی، نسخه/digest و گزارش subagent مرتبط",
+          "done": "رأی واقعی reviewer انسانی روی همان نسخه و گزارش، با نقش/اختیار معتبر ثبت شده؛ معرفی فرد یا گزارش AI رأی نیست.",
+          "transitions": [
+            {
+              "condition": "reviewer انسانی همان نسخه را تأیید کرد",
+              "target": "T07"
+            },
+            {
+              "condition": "اصلاح طرح یا بستهٔ ماژول لازم است",
+              "target": "T04"
+            },
+            {
+              "condition": "تعارض محصول یا نقص QA",
+              "target": "C01"
+            },
+            {
+              "condition": "تصمیم فنی باز است",
+              "target": "T10"
             }
           ]
         }

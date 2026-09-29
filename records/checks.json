@@ -1,14 +1,14 @@
 {
   "status": "passed",
   "checks": {
-    "markdownFiles": 89,
-    "localLinks": 582,
+    "markdownFiles": 91,
+    "localLinks": 613,
     "diagrams": 15,
-    "nodes": 66,
-    "walkthroughs": 50,
+    "nodes": 69,
+    "walkthroughs": 56,
     "boardCards": 0,
     "publishedModules": 0,
-    "localSourceFiles": 107
+    "localSourceFiles": 109
   },
   "errors": [],
   "scope": "repository-local links/anchors, graph, generated cards, walkthrough edges, JSON/CSV syntax, board card structure/references, module publication sources/digests, local source inventory and design baseline hashes; Mermaid must be checked separately"

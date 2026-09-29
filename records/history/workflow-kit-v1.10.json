@@ -1,0 +1,9 @@
+{
+  "baselineId": "workflow-kit-v1.10",
+  "archivePath": "records/history/workflow-kit-v1.10.zip",
+  "archiveSha256": "4a1894019e787096856d6ab94536b83076ffe371df0cf5017466bf188bfdc044",
+  "manifestSha256": "bfa5430fe933efe824f18888765186286a9cd097047bd15cae8f4aa71636f860",
+  "approvalSha256": "dfbb1da37596044e21805b87a6da0675bf6db12c9261f5e5e181630970ec0efc",
+  "approvalStatus": "pending",
+  "note": "Preserves v1.10 before making subagent review followed by human reviewer confirmation mandatory for documentation packages."
+}

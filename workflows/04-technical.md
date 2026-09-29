@@ -17,6 +17,7 @@ flowchart TD
     T09["T09 · AI · انتشار وضعیت مصوب ماژول‌ها"]
     T10["T10 · AI · پرسش‌های تصمیم فنی"]
     T11["T11 · Human · پاسخ انسان فنی"]
+    T12["T12 · Human · تأیید reviewer انسانی بستهٔ فنی"]
     C01["C01 · ادامه در مسیر مربوط"]
     D01["D01 · ادامه در مسیر مربوط"]
     HOLD["HOLD · ادامه در مسیر مربوط"]
@@ -42,7 +43,7 @@ flowchart TD
     T05 -->|"نقص برنامه QA بدون تغییر رفتار"| Q03
     T06 -->|"اصلاح طراحی"| T04
     T06 -->|"تعارض نیاز"| C01
-    T06 -->|"همه reviewهای targetها و review کل درخواست آماده‌اند"| T07
+    T06 -->|"بازبینی کامل subagent و رفع یافته‌ها؛ آمادهٔ reviewer انسانی"| T12
     T06 -->|"review واحد فعلی ثبت شده و review target یا جمع‌بندی کل باقی است"| T06
     T06 -->|"تصمیم فنی مؤثر نیازمند گفت‌وگو با انسان"| T10
     T06 -->|"نقص QA با رفتار محصول ثابت"| C01
@@ -61,6 +62,10 @@ flowchart TD
     T11 -->|"تصمیم‌های لازم روشن است"| T03
     T11 -->|"پایان مصاحبه؛ جمع‌بندی با موارد باز"| T04
     T11 -->|"پاسخ مستلزم اصلاح محصول یا QA است"| C01
+    T12 -->|"reviewer انسانی همان نسخه را تأیید کرد"| T07
+    T12 -->|"اصلاح طرح یا بستهٔ ماژول لازم است"| T04
+    T12 -->|"تعارض محصول یا نقص QA"| C01
+    T12 -->|"تصمیم فنی باز است"| T10
 ```
 
 <a id="t01"></a>
@@ -164,21 +169,21 @@ flowchart TD
 <a id="t06"></a>
 ## T06 — review طراحی ماژول‌ها و کل درخواست
 
-**مجری:** AI — Technical reviewer مستقل یا reviewer انسانی
+**مجری:** AI — Subagent reviewer مستقل فنی؛ ثبت گزارش توسط Coordinator
 
 **ورودی:** تمام technical docs، Backend rules، P/Q baseline و testability
 
-**کار دقیق:** POM/import/SQL و call/event/recovery graph را بررسی کن. owner-local transaction، replay auth، privacy، migration، failure و capability gaps را بسنج. canonical location و عدم وجود دو نسخه مرجع editable را کنترل کن. ابتدا هر target را در workUnit مستقل review کن، سپس قراردادهای مشترک و consistency کل درخواست را بسنج. یافتهٔ edge به producer و consumer و QA مشترک متصل شود؛ manifest T شامل تمام بسته‌های ماژولی و طرح مشترک است. snapshot کامل هر ماژول و baseRevision و منشأ رفتارهای بدون تغییر نیز review شوند؛ manifest T باید plan و تک‌تک bytes snapshotها را freeze کند. wrapper انتشار پس از G-T ساخته می‌شود و داخل manifest T نیست. تصمیم‌ها و موارد باز technical/interview.md نیز بررسی و همان نسخه در manifest T freeze شود؛ پاسخ مصاحبه جانشین G-T نیست.
+**کار دقیق:** طبق docs/14-document-review.md بدون درخواست اجازهٔ تکراری، یک subagent مستقل از نویسنده برای بازبینی کامل همین بسته اجرا کن؛ مأموریت فقط خواندنی، تمام اسناد/مراجع/نسخه‌ها و دامنهٔ review را بده. هویت و استقلال بازبین، منابع/digest، حوزهٔ بررسی‌شده/نشده و یافته‌ها ثبت شوند. خود بازبین فایل یا کنترل‌فایل نمی‌نویسد؛ Coordinator گزارش را در reviews ثبت و اصلاح به تیم مالک ارجاع می‌شود. نبود قابلیت/اختیار واقعی محیط، blocked است و با reviewer انسانی جایگزین نمی‌شود. POM/import/SQL و call/event/recovery graph را بررسی کن. owner-local transaction، replay auth، privacy، migration، failure و capability gaps را بسنج. canonical location و عدم وجود دو نسخه مرجع editable را کنترل کن. ابتدا هر target را در workUnit مستقل review کن، سپس قراردادهای مشترک و consistency کل درخواست را بسنج. یافتهٔ edge به producer و consumer و QA مشترک متصل شود؛ manifest T شامل تمام بسته‌های ماژولی و طرح مشترک است. snapshot کامل هر ماژول و baseRevision و منشأ رفتارهای بدون تغییر نیز review شوند؛ manifest T باید plan و تک‌تک bytes snapshotها را freeze کند. wrapper انتشار پس از G-T ساخته می‌شود و داخل manifest T نیست. تصمیم‌ها و موارد باز technical/interview.md نیز بررسی و همان نسخه در manifest T freeze شود؛ پاسخ مصاحبه جانشین G-T نیست. پس از رفع یافته‌ها، نسخهٔ اصلاحی باید دوباره توسط subagent بررسی شود؛ فقط نتیجهٔ کامل همین نسخه به T12 برای تأیید reviewer انسانی می‌رود.
 
-**خروجی:** review فنی، ADRهای لازم و manifest immutable T candidate شامل handover توسعه
+**خروجی:** review فنی، یافته‌های نیازمند ADR برای تیم فنی و manifest immutable T candidate شامل handover توسعه؛ گزارش subagent با identity/independence، منابع و digest ثابت در reviews
 
-**شرط پایان:** تمام blocking findingها بسته و انحراف بی‌ADR/اختیار باقی نیست.
+**شرط پایان:** بازبینی کامل subagent واقعی روی نسخهٔ مشخص ثبت شده و یافتهٔ مسدودکننده برای ارائه باقی نیست؛ رأی انسانی هنوز در node بعد لازم است.
 
 | نتیجه | node بعدی |
 |---|---|
 | اصلاح طراحی | [T04](04-technical.md#t04) |
 | تعارض نیاز | [C01](07-change-and-bug.md#c01) |
-| همه reviewهای targetها و review کل درخواست آماده‌اند | [T07](04-technical.md#t07) |
+| بازبینی کامل subagent و رفع یافته‌ها؛ آمادهٔ reviewer انسانی | [T12](04-technical.md#t12) |
 | review واحد فعلی ثبت شده و review target یا جمع‌بندی کل باقی است | [T06](04-technical.md#t06) |
 | تصمیم فنی مؤثر نیازمند گفت‌وگو با انسان | [T10](04-technical.md#t10) |
 | نقص QA با رفتار محصول ثابت | [C01](07-change-and-bug.md#c01) |
@@ -188,7 +193,7 @@ flowchart TD
 
 **مجری:** Human — Tech lead و مسئولان فنی ماژول‌های متأثر؛ owner زیرساخت برای انتخاب عملیاتی
 
-**ورودی:** طرح کامل، review، testability، gap، هزینه/ریسک و T manifest
+**ورودی:** طرح کامل، review، testability، gap، هزینه/ریسک و T manifest؛ رأی reviewer انسانی T12 و گزارش‌های subagent روی نسخهٔ منطبق
 
 **کار دقیق:** طراحی و ترتیب sliceها را approve کن؛ انتخاب topology/profile و prerequisiteهای واقعی را مشخص کن. تأیید طراحی را از اختیار پیاده‌سازی جدا ثبت کن. برای درخواست مستندات، نبود اختیار پیاده‌سازی مانع تصویب طرح نیست؛ اجرای کد فقط با دستور صریح scope در request یا تصمیم جدا مجاز است. تأیید سند به‌تنهایی مجوز اجرا یا deploy نیست. رأی مسئول فنی هر target و رأی نهایی Tech lead برای کل درخواست روی همان manifest ثبت شوند؛ یک انسان منصوب می‌تواند چند نقش را پوشش دهد. G-T با local-ready چند ماژول و dependency باز عبور نمی‌کند. رأی همان manifest شامل snapshotهای کامل ماژول‌هاست؛ approval نسخه یا scope متفاوت برای انتشار قابل استفاده نیست.
 
@@ -277,3 +282,23 @@ flowchart TD
 | تصمیم‌های لازم روشن است | [T03](04-technical.md#t03) |
 | پایان مصاحبه؛ جمع‌بندی با موارد باز | [T04](04-technical.md#t04) |
 | پاسخ مستلزم اصلاح محصول یا QA است | [C01](07-change-and-bug.md#c01) |
+
+<a id="t12"></a>
+## T12 — تأیید reviewer انسانی بستهٔ فنی
+
+**مجری:** Human — Reviewer انسانی مستقل فنی با مرجع انتصاب
+
+**ورودی:** بستهٔ ثابت، گزارش کامل subagent در T06، یافته‌ها و شواهد رفع، نسخه/digest و مرجع انتصاب reviewer
+
+**کار دقیق:** طبق docs/14-document-review.md ابتدا بستهٔ قابل مشاهده، گزارش subagent و خلاصهٔ اصلاح‌ها را به reviewer انسانی معرفی‌شده ارائه کن؛ اگر نقش/انتصاب مجهول است، اکنون معرفی واقعی لازم است. همان نسخه و گزارش را بررسی و تأیید یا با دلیل برای اصلاح رد کن. AI فقط رأی واقعی انسان، هویت/نقش/مرجع انتصاب، متن/مرجع پیام و digest بسته و گزارش را در رکورد جدا و append-only در reviews ثبت می‌کند؛ executor تصمیم Human است. تا پاسخ، waiting-human و resumeNode=T12؛ سؤال اجازهٔ subagent یا انتخاب بین AI و انسان مطرح نشود. در تغییر bytes، بازبینی subagent و رأی انسانی نسخهٔ تازه لازم‌اند. تأیید review جای gate نهایی یا receipt نیست.
+
+**خروجی:** رکورد تأیید/رد reviewer انسانی فنی در reviews با decisionReference واقعی، نسخه/digest و گزارش subagent مرتبط
+
+**شرط پایان:** رأی واقعی reviewer انسانی روی همان نسخه و گزارش، با نقش/اختیار معتبر ثبت شده؛ معرفی فرد یا گزارش AI رأی نیست.
+
+| نتیجه | node بعدی |
+|---|---|
+| reviewer انسانی همان نسخه را تأیید کرد | [T07](04-technical.md#t07) |
+| اصلاح طرح یا بستهٔ ماژول لازم است | [T04](04-technical.md#t04) |
+| تعارض محصول یا نقص QA | [C01](07-change-and-bug.md#c01) |
+| تصمیم فنی باز است | [T10](04-technical.md#t10) |

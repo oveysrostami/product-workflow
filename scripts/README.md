@@ -59,3 +59,7 @@ python3 -m unittest discover -s scripts -p 'test_*.py'
 ## انتشار و بررسی snapshot ماژول
 
 [قرارداد کتابخانه](../docs/10-module-library.md) و [راهنمای modules](../modules/README.md) مبنا هستند. scripts/publish_module.py با plan/manifest/approval پیش‌فرض فقط preview می‌کند؛ --apply تنها در writeScope فنی T09 و با G-T معتبر اجرا می‌شود. این ابزار engine یا تصمیم‌گیر gate نیست. validator نسخه‌ها، digest و اتصال bytes به G-T را می‌سنجد؛ اعتبار معنایی snapshot و authority انسان با review/gate است. آزمون‌های regression، انتشار/preview/retry، حفظ تاریخچه، pending approval، تغییر bytes و base منقضی را نیز پوشش می‌دهند.
+
+## ترتیب بازبینی مستندات
+
+[review دومرحله‌ای](../docs/14-document-review.md) در graph به P05→P12→P06، Q04→Q09→Q05 و T06→T12→T07 متصل است. record_progress گذار خارج graph را رد می‌کند؛ تکمیل node انسانی به executor=Human و decisionReference غیرخالی نیاز دارد و node منتظر پاسخ فقط از همان node ادامه می‌یابد. آزمون‌های skill این گذارها و رد تکمیل توسط AI/بدون مرجع را روی fixture موقت می‌سنجند. این کنترل‌ها صحت هویت/انتصاب، مطالعهٔ کامل یا dispatch واقعی subagent و تطبیق معنایی review را اثبات نمی‌کنند؛ آن‌ها طبق قرارداد در اجرای پرونده بررسی می‌شوند.

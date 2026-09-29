@@ -248,6 +248,62 @@ class WorkflowTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'Transition'):
             rp.record(self.root, second, self.repos, True)
 
+    def review_event(self, node, team, next_node=None, human=False, reference=None):
+        """A synthetic resumable review checkpoint; no real review or approval."""
+        card = self.card()
+        card.update(team=team, currentNode=node, nextNode=None, resumeNode=node,
+                    journalPath=f'requests/{card["requestId"]}/runs/MOVE-fixture.json',
+                    lastMovementId='MOVE-fixture', action='continue')
+        self.write(card['journalPath'], {'requestId': card['requestId'], 'nodeId': node,
+                   'nextNode': None, 'resumeNode': node, 'status': 'running'})
+        self.put_card(card)
+        event = self.event(card)
+        event['activeTeam'] = team
+        event['card'].update(currentNode=node, nextNode=next_node,
+                             resumeNode=None if next_node else node)
+        event['journal'].update(nodeId=node, status='completed' if next_node else 'waiting-human',
+                                nextNode=next_node, resumeNode=None if next_node else node,
+                                executor={'type': 'Human' if human else 'AI',
+                                          'role': 'Fixture reviewer', 'identity': 'Synthetic reviewer', 'team': team},
+                                decisionReference=reference)
+        return event
+
+    def test_document_review_cannot_skip_human_review(self):
+        for ai, human, after, team in [('P05', 'P12', 'P06', 'product'),
+                                       ('Q04', 'Q09', 'Q05', 'qa'),
+                                       ('T06', 'T12', 'T07', 'tech')]:
+            with self.subTest(node=ai):
+                event = self.review_event(ai, team, after)
+                with self.assertRaisesRegex(ValueError, 'Transition'):
+                    rp.build(self.root, event, self.repos)
+                event['card']['nextNode'] = human
+                event['journal']['nextNode'] = human
+                rp.build(self.root, event, self.repos)
+
+    def test_human_review_needs_human_executor_and_decision(self):
+        for node, after, team in [('P12', 'P06', 'product'), ('Q09', 'Q05', 'qa'),
+                                  ('T12', 'T07', 'tech')]:
+            with self.subTest(node=node):
+                event = self.review_event(node, team, after, reference='Fixture decision only')
+                with self.assertRaisesRegex(ValueError, 'actual human decision reference'):
+                    rp.build(self.root, event, self.repos)
+                event['journal']['executor']['type'] = 'Human'
+                event['journal']['decisionReference'] = None
+                with self.assertRaisesRegex(ValueError, 'actual human decision reference'):
+                    rp.build(self.root, event, self.repos)
+                event['journal']['decisionReference'] = 'Synthetic actual decision reference; fixture only'
+                rp.build(self.root, event, self.repos)
+
+    def test_waiting_human_review_preserves_checkpoint(self):
+        for node, team in [('P12', 'product'), ('Q09', 'qa'), ('T12', 'tech')]:
+            with self.subTest(node=node):
+                event = self.review_event(node, team)
+                rp.build(self.root, event, self.repos)
+                event['card']['resumeNode'] = 'P04'
+                event['journal']['resumeNode'] = 'P04'
+                with self.assertRaisesRegex(ValueError, 'same node'):
+                    rp.build(self.root, event, self.repos)
+
     def test_approval_files_never_written_by_recorder(self):
         event = self.event(); rp.record(self.root, event, self.repos, True)
         request = self.root/'requests/REQ-test'

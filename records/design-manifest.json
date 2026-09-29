@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "baselineId": "workflow-kit-v1.10",
-  "version": "1.10",
+  "baselineId": "workflow-kit-v1.11",
+  "version": "1.11",
   "requestId": "workflow-design-2026-09-28",
   "status": "ready-for-requester-review",
   "snapshotDate": "2026-09-29",
-  "supersedes": "workflow-kit-v1.9",
-  "history": "records/history/workflow-kit-v1.9.json",
+  "supersedes": "workflow-kit-v1.10",
+  "history": "records/history/workflow-kit-v1.10.json",
   "artifacts": [
     {
       "path": ".gitignore",
@@ -14,27 +14,27 @@
     },
     {
       "path": "AGENTS.md",
-      "sha256": "e0a2bd86e7351f8da0f895011e6e7d78019567f89846a257605d4fc6e9a770c7"
+      "sha256": "5b564ef503c9e9c33ccae6005abacaae6af4b355064ea4157c3a86268fe38a0c"
     },
     {
       "path": "README.md",
-      "sha256": "0cce7dde9834ce78f6b7917ce18b8eeb70ce3121de06d853b36bd75db48fa868"
+      "sha256": "2519135eecc9352d4505ef86be4df91e6695d462273b6652f0f0c451bf453a63"
     },
     {
       "path": "docs/01-principles-and-roles.md",
-      "sha256": "c4114effcfbc74416c5ec8bb60dc53d8e4b634eab3bc9d77a3f6b0a999f55045"
+      "sha256": "9ea51a3b66ba76d13db7b522a0b203e18a61ee0a373614eb63f4c57e9a909295"
     },
     {
       "path": "docs/02-state-and-versioning.md",
-      "sha256": "84561b36b4738998e241f071af4a01d1d7dd340f632a8812bfe00895b1c62d1a"
+      "sha256": "cd92f3d2468b32617c6ed97ce9a93cd6e415476eb6c8181cca5daf979e28fc0e"
     },
     {
       "path": "docs/03-artifact-map.md",
-      "sha256": "898f36222b0a8ea4d41ca1f2869fdaa4906fd63c6480248ec2e46aa19c438ef6"
+      "sha256": "fb1168f0093919781425d19752c9838281f8a839446d34ffc39de5622be0e2b5"
     },
     {
       "path": "docs/04-gates.md",
-      "sha256": "84ff05abea045bf42a04c8e19247e52152da2088d1a813c3a17165c29183eeb1"
+      "sha256": "b293295fff6acd037120bb1b90f18af32f72edfdbf9f15cc9f27da10b7ebe601"
     },
     {
       "path": "docs/05-backend-binding.md",
@@ -50,11 +50,11 @@
     },
     {
       "path": "docs/08-team-file-ownership.md",
-      "sha256": "d24dd5d285234b35212e2e6a412072ad840cff959b60fb568d15d49283a3de4d"
+      "sha256": "9c27075352904c18528434d913408df316b19f3e881b9f2747ef7f626bf9cbe2"
     },
     {
       "path": "docs/09-product-authoring.md",
-      "sha256": "8fd7e264d01f0779ea7c8a9ecdc89450d65f0cbace74bdd64488ebb194332bff"
+      "sha256": "fb56ead0e4044babc1e9af1c7eba06fc0edceed887a8f95697e32292778144bc"
     },
     {
       "path": "docs/10-module-library.md",
@@ -62,15 +62,19 @@
     },
     {
       "path": "docs/11-documentation-cycle.md",
-      "sha256": "c544525a8741120aa575d3340776487b05ca73fbcdc317fc97233497a7b2e031"
+      "sha256": "6cf010ff642310a9e2c65c8826c64cb5739c4c6625fd0836a7afdef1f24309f7"
     },
     {
       "path": "docs/12-request-onboarding.md",
-      "sha256": "ac2a8b580581820ba7ebae0c503ba754135cb87332d90832c9565b0cad78e3cc"
+      "sha256": "556411ebee4569cee112f761afdc1682aded8c915b420dbe3a6593e6b93fe962"
     },
     {
       "path": "docs/13-product-questionnaire.md",
       "sha256": "46cbf41765064e9c0c479f3c66dbee2e2f2bb1e7c4e094b97aa1b4ecd80d8f6d"
+    },
+    {
+      "path": "docs/14-document-review.md",
+      "sha256": "c72e6e2c1b23fbb734adf97e35edfe10e51becb376b8acd86a86a68e1e2eaad4"
     },
     {
       "path": "examples/module-impact.md",
@@ -118,11 +122,11 @@
     },
     {
       "path": "examples/otp-issue/walkthroughs.md",
-      "sha256": "bfb23db926a1d415243007044d752ba4d599d0431d4370f931adea695fdf4e2e"
+      "sha256": "9eabea5ba3223948038c8a38f855be1016bdd7ba000b063a83da6b3236a4678a"
     },
     {
       "path": "examples/team-entry.md",
-      "sha256": "c6287e299fa2b597d3da49e71e991d73d58ff86228b2a6456427e980a94e4566"
+      "sha256": "384df2c3b137d0e8f8e26d7d66f51a588272a69d251922e9adac20f7ad8a6abc"
     },
     {
       "path": "modules/README.md",
@@ -130,11 +134,11 @@
     },
     {
       "path": "records/checks.json",
-      "sha256": "47200f1cd7db90467d53c45fa4bc9dc37353bf8eb12ed907f3b9ada784a8db2b"
+      "sha256": "633d1970fa386d26700d459565b3546698f016e1d0cffb9c96bb25c6db22696b"
     },
     {
       "path": "records/design-review.md",
-      "sha256": "669dd260e9a005fe97e7e490909622441fc03bbd4f712dfb8b07a16bbd93e767"
+      "sha256": "fe9ef967c812cd75054594de103c40726721c9fb8b6a5d703c46685c55ad2aa6"
     },
     {
       "path": "records/history/workflow-kit-v1.1.json",
@@ -143,6 +147,14 @@
     {
       "path": "records/history/workflow-kit-v1.1.zip",
       "sha256": "2b4698dd135ac587e2cd2a426c36bcd4af9a2e6e6c03fa8d3c91771e19fed88b"
+    },
+    {
+      "path": "records/history/workflow-kit-v1.10.json",
+      "sha256": "19c786b7d04914ae045a7e01824480f389cfaf98ef7b6a9dac438ec1abe65ee2"
+    },
+    {
+      "path": "records/history/workflow-kit-v1.10.zip",
+      "sha256": "4a1894019e787096856d6ab94536b83076ffe371df0cf5017466bf188bfdc044"
     },
     {
       "path": "records/history/workflow-kit-v1.2.json",
@@ -210,11 +222,11 @@
     },
     {
       "path": "records/mermaid-evidence.json",
-      "sha256": "3742e1fc4e1f69cea36b60c1dc8cf10d98c2fff25d8eaa194440af7b2dbcea2a"
+      "sha256": "46184435aa0a1109d8c23fc72113a1ae9efc7419e5a6b3bd08591c558577fa1b"
     },
     {
       "path": "records/validation.md",
-      "sha256": "415d6a1129417755bda39a5351f63389863504ba9835bba3f6439cdcf26aa6e2"
+      "sha256": "8fa0cca258526cc7901379990ccb915b682ec003d351e2ba2eb6aa779b62ebe9"
     },
     {
       "path": "requests/README.md",
@@ -222,7 +234,7 @@
     },
     {
       "path": "research/source-inventory.json",
-      "sha256": "44ac7cb3e354d9cf88fed1d2b5a43fa178d21c8ac2648b045aa2851b61362bc0"
+      "sha256": "634515f75ac613c2ad2d800a191bdac06cddc334d00ac1e1fea9913a5bd28c8c"
     },
     {
       "path": "research/source-review.md",
@@ -230,7 +242,7 @@
     },
     {
       "path": "scripts/README.md",
-      "sha256": "3536d2aae4da5f6d1b8a2a72e2a370d182c899105cae7f0bd72a8d323fd6e1cc"
+      "sha256": "6e1604e664abd6f7e770c2d1876454440fcb03d89e217d6465e04cc65e78ec3c"
     },
     {
       "path": "scripts/check_mermaid.py",
@@ -254,7 +266,7 @@
     },
     {
       "path": "skill/product-workflow/SKILL.md",
-      "sha256": "166e127e1cf2b122b3108ea8d44262dd43c9dc2f07426c8569631736e58d740a"
+      "sha256": "6b6dff7f0c93cccd6916d4e3cab471c85f7c609ba002bed94dc72ff029af6c43"
     },
     {
       "path": "skill/product-workflow/agents/openai.yaml",
@@ -266,19 +278,23 @@
     },
     {
       "path": "skill/product-workflow/references/product.md",
-      "sha256": "411bb0310e0c33ec23d53f44a09ac7ca03ee02b835fad8f1c897f6422cb1becb"
+      "sha256": "167a96551f455f213a4cf769aff1d3ea14d94ad58a5d415e333e4c0b76561497"
     },
     {
       "path": "skill/product-workflow/references/qa.md",
-      "sha256": "64a766ced3c33c2802ebb4c828c50cf9ba5996130fb238749360e467cb06afdd"
+      "sha256": "568df9030ba50080457680498ff95e3bfba705a6eb3c601fa34824ca4e309978"
     },
     {
       "path": "skill/product-workflow/references/questionnaire.md",
       "sha256": "bd12ef5278b9c3e5f2ba24e674f8c17f584cfdd79a57523292e6525206e79b68"
     },
     {
+      "path": "skill/product-workflow/references/review.md",
+      "sha256": "daf14692b09fdba93603f9081f39fd6bc1b489ce6ecf74ded4e2906ef68a6335"
+    },
+    {
       "path": "skill/product-workflow/references/tech.md",
-      "sha256": "ecd697c34e181391dac5af3caa5ecc0a51c7538210c893a50be5484884e28183"
+      "sha256": "c30ae1499f43e39813cdfa8e65783b37d4a5e9f80f6bb249ae93c83781b1b84b"
     },
     {
       "path": "skill/product-workflow/scripts/check_questionnaire.py",
@@ -298,11 +314,11 @@
     },
     {
       "path": "skill/product-workflow/scripts/tests/test_workflow.py",
-      "sha256": "4ba1cd07fac119f6437f4775690c83a358e25b1d28c59eec1230fa69ab633ceb"
+      "sha256": "fd7ebfc5de7107c80cdc152dabd708235b6be9385255e2f6b84929c85f6f2b4c"
     },
     {
       "path": "templates/README.md",
-      "sha256": "0646aa2b87e3575ed33614213ce99a926f70c21905495f8f0a9339575bf051e6"
+      "sha256": "7ec047dfcbb5619b2d88bcbbcb660b7191fb209801c9a87b679ec17e5227e6c5"
     },
     {
       "path": "templates/development/delivery.md",
@@ -426,7 +442,7 @@
     },
     {
       "path": "templates/shared/review.md",
-      "sha256": "e0a21ea052c2f903daa58d5ec4514c0943c812c52e72feafdfe9c00f51188b4c"
+      "sha256": "9ff2ec952718d57fc511c6d00a53abc586821c131842a5af8cd5596895019205"
     },
     {
       "path": "templates/shared/team-interview.md",
@@ -490,11 +506,11 @@
     },
     {
       "path": "workflows/00-node-contract.md",
-      "sha256": "0c5037ccdded1e0c81a5106d83f21b8213c22160976461065f9d9dd62ed92891"
+      "sha256": "a05fa410a5f9bd62c63ab03f9d89471380f9f19dd40cbdb2111c8403963a39ac"
     },
     {
       "path": "workflows/00-team-entry.md",
-      "sha256": "71341e204bbc5b0b235d7b180771b73aa616bd99f75a4f2df07affb5dbd2b9ed"
+      "sha256": "6e2b3c4d713db6ca71901d572b2da7d98d5de3e03c084469ee5f5f132aefbb00"
     },
     {
       "path": "workflows/01-intake.md",
@@ -502,15 +518,15 @@
     },
     {
       "path": "workflows/02-product.md",
-      "sha256": "91123dfd8b4e9373c47bcbf113e0d597239fad0a11f0c5ec170d3383b17fa9f5"
+      "sha256": "342a3c19ab358a6d304cd9568dd301eb5fbac29fa6cd42385ae7c55c065c5204"
     },
     {
       "path": "workflows/03-qa.md",
-      "sha256": "f998a560cc55ab585bff9d0181d32a8d02a4f7f0de94d95b87ae0530b52b8bc2"
+      "sha256": "31671016225631d8fce42412472c747e3c74519d3f4fc7a5c16391f96408f3b3"
     },
     {
       "path": "workflows/04-technical.md",
-      "sha256": "f66cd24691014c8cbf678b00a22533a50135ab538997c1133bec2ef9862505f0"
+      "sha256": "2b17c38c3e1cc79b7805d93e642a241e6443ec6de2dfc2012df42b66c655d130"
     },
     {
       "path": "workflows/05-implementation.md",
@@ -530,11 +546,11 @@
     },
     {
       "path": "workflows/README.md",
-      "sha256": "dfeae78e1c1f8dcb4ff4483d9bee06d30accbc3448ef2a9d2e99a0eed6cc01d9"
+      "sha256": "e75a72a3231be1f610837b4bed7afc5da7338c3f9a882702c65625fc37528e10"
     },
     {
       "path": "workflows/graph.json",
-      "sha256": "56ea44b00d0980f61158932093fcd75b00d7a99400d931f3080ec4be6f4efa85"
+      "sha256": "9b6fef820d118d275de2e92859d9f2d940d3dae7ba79a3ceb92bfdb96597e7bf"
     }
   ],
   "openBlockers": [],

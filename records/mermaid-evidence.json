@@ -45,17 +45,17 @@
     {
       "path": "workflows/02-product.md",
       "diagram": 1,
-      "sha256": "7fb3826edfcb4da7f4ff5d726ce57b54f9614f1cc2355236ed2bfd7782f39c6a"
+      "sha256": "c8ad11df423bf4869183273a9df3daea7cedabed0afa22cb4c74c4b5bb433933"
     },
     {
       "path": "workflows/03-qa.md",
       "diagram": 1,
-      "sha256": "f00ef845792e06bd3d4d9c0f0a9fa2bca5ccdafa408a8ac0bbd8821d32ec5ca9"
+      "sha256": "305a76240c5f2bcfcc4c66e0e9ca5474860dc6a1cb738b1db2e57e472d7a8a7d"
     },
     {
       "path": "workflows/04-technical.md",
       "diagram": 1,
-      "sha256": "1c244132100d9ebd792abb9a8975fdb9c3934d7761c5fe3e6fba752acfc9da94"
+      "sha256": "b622a74fbbb2b58d6709e75d79b0c75d5b398115db319df7078c774abd045ca4"
     },
     {
       "path": "workflows/05-implementation.md",
@@ -81,21 +81,20 @@
   "command": [
     "/private/tmp/product-workflow-mermaid-20260928/node_modules/.bin/mmdc",
     "-i",
-    "/private/tmp/product-workflow-mermaid-v1.10-final-render/all-diagrams.md",
+    "/private/tmp/product-workflow-mermaid-v1.11-render/all-diagrams.md",
     "-o",
-    "/private/tmp/product-workflow-mermaid-v1.10-final-render/rendered.md",
+    "/private/tmp/product-workflow-mermaid-v1.11-render/rendered.md",
     "-p",
-    "/private/tmp/product-workflow-mermaid-v1.10-final-render/puppeteer.json",
+    "/private/tmp/product-workflow-mermaid-v1.11-render/puppeteer.json",
     "-e",
     "svg"
   ],
-  "stdout": "Found 15 mermaid charts in Markdown input\n ✅ ./rendered-5.svg\n ✅ ./rendered-6.svg\n ✅ ./rendered-7.svg\n ✅ ./rendered-4.svg\n ✅ ./rendered-9.svg\n ✅ ./rendered-10.svg\n ✅ ./rendered-11.svg\n ✅ ./rendered-3.svg\n ✅ ./rendered-1.svg\n ✅ ./rendered-2.svg\n ✅ ./rendered-8.svg\n ✅ ./rendered-15.svg\n ✅ ./rendered-14.svg\n ✅ ./rendered-13.svg\n ✅ ./rendered-12.svg\n ✅ /private/tmp/product-workflow-mermaid-v1.10-final-render/rendered.md\n",
+  "stdout": "Found 15 mermaid charts in Markdown input\n ✅ ./rendered-5.svg\n ✅ ./rendered-6.svg\n ✅ ./rendered-7.svg\n ✅ ./rendered-8.svg\n ✅ ./rendered-9.svg\n ✅ ./rendered-10.svg\n ✅ ./rendered-4.svg\n ✅ ./rendered-12.svg\n ✅ ./rendered-13.svg\n ✅ ./rendered-14.svg\n ✅ ./rendered-11.svg\n ✅ ./rendered-15.svg\n ✅ ./rendered-3.svg\n ✅ ./rendered-2.svg\n ✅ ./rendered-1.svg\n ✅ /private/tmp/product-workflow-mermaid-v1.11-render/rendered.md\n",
   "stderr": "",
   "schemaVersion": 1,
   "date": "2026-09-29",
-  "tool": "@mermaid-js/mermaid-cli",
+  "tool": "mermaid-cli",
   "version": "12.0.0",
-  "renderer": "headless Google Chrome",
-  "nodeVersion": "26.5.0",
-  "scope": "All current Mermaid blocks parsed and rendered to SVG; no claim of visual inspection of every diagram."
+  "renderer": "Google Chrome headless",
+  "nodeVersion": "26.5.0"
 }
