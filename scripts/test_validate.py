@@ -53,6 +53,48 @@ class ValidatorFixture(unittest.TestCase):
 
 
 class RequestStateValidationTests(ValidatorFixture):
+    def bind_backend(self):
+        backend = self.root.parent/'core_backend'
+        backend.mkdir()
+        (backend/'AGENTS.md').write_text('# Synthetic read-only Backend\n')
+        result = subprocess.run([sys.executable, str(self.root/'skill/product-workflow-setup/scripts/setup_project.py'),
+                                 '--root', str(self.root), '--backend-name', 'core_backend',
+                                 '--source-reference', 'Synthetic fixture only', '--apply'],
+                                capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        return backend
+
+    def test_project_binding_is_mutable_state_with_read_only_access(self):
+        manifest = (self.root/'records/design-manifest.json').read_bytes()
+        backend = self.bind_backend()
+        before = (backend/'AGENTS.md').read_bytes()
+        self.assertEqual(self.validate()['errors'], [])
+        binding = self.read_json('project/backend.json')
+        binding['sourceReference'] = 'Another synthetic control reference'
+        self.write_json('project/backend.json', binding)
+        self.assertEqual(self.validate()['errors'], [])
+        self.assertEqual((self.root/'records/design-manifest.json').read_bytes(), manifest)
+        self.assertEqual((backend/'AGENTS.md').read_bytes(), before)
+        binding['access'] = 'read-write'
+        self.write_json('project/backend.json', binding)
+        self.assertTrue(any('Invalid project Backend binding' in e for e in self.validate()['errors']))
+
+    def test_project_binding_cannot_enter_frozen_design_or_inventory(self):
+        self.bind_backend()
+        entry = {'path': 'project/backend.json', 'sha256': hashlib.sha256((self.root/'project/backend.json').read_bytes()).hexdigest()}
+        manifest = self.read_json('records/design-manifest.json')
+        manifest['artifacts'].append(entry)
+        self.write_json('records/design-manifest.json', manifest)
+        approval = self.read_json('records/design-approval.json')
+        approval['manifestSha256'] = hashlib.sha256((self.root/'records/design-manifest.json').read_bytes()).hexdigest()
+        self.write_json('records/design-approval.json', approval)
+        inventory = self.read_json('research/source-inventory.json')
+        inventory['files'].append(dict(entry, repository='product-workflow'))
+        self.write_json('research/source-inventory.json', inventory)
+        errors = self.validate()['errors']
+        self.assertIn('Operational file in design baseline: project/backend.json', errors)
+        self.assertIn('Operational file in local source inventory: project/backend.json', errors)
+
     def test_new_card_and_valid_movement_preserve_design_baseline(self):
         frozen = (self.root/'records/design-manifest.json').read_bytes()
         board = self.add_draft_card()

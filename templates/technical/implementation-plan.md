@@ -32,6 +32,8 @@ impact-map و cross-module-flows مرجع تقسیم‌اند. برای هر tas
 
 ## آماده‌سازی اجرای AI
 
+این برنامه برای گیرندهٔ مستقل Backend است. agent product-workflow هیچ ابزار یا فایل Backend را اجرا/تغییر نمی‌دهد؛ آماده‌سازی آزمون، ایجاد/activation Spec/Plan/tasks.json و verification در scope مستقل همان مخزن انجام می‌شوند. در این مرحله فقط مسیرها، dependencyها، نگاشت پذیرش و دستورهای آینده داخل technical/ نوشته می‌شوند.
+
 اختیار عمل/محدوده نوشتن، branch یا snapshot base، preserve changes، doctor/explain، scaffold dry-run، work record، ممنوعیت‌ها، reviewer مستقل و مسیر توقف: {{...}}.
 
 ## اختتام

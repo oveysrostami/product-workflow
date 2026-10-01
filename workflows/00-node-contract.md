@@ -12,7 +12,9 @@
 
 قبل اجرا، Coordinator اعتبار input baseline، اختیار actor، prerequisite و نبود writer متعارض را کنترل و attempt را در [node-run](../templates/shared/node-run.json) ثبت می‌کند. بعد اجرا، output/ref/digest، نتیجه، evidence و next node را ثبت می‌کند. فقط یکی از transitionهای همان کارت انتخاب می‌شود. نتیجه‌ای که در کارت نیست success فرض نمی‌شود؛ `blocked` با owner و دلیل ثبت می‌شود.
 
-پس از ثبت journal، [tracking](../templates/shared/tracking.md) و نمای برد به‌روز می‌شوند. اگر next node متعلق به تیم دیگر است، پرونده در صف آن تیم منتظر انتخاب و ورودی واقعی می‌ماند؛ تعیین nextNode به معنی اجرا نیست. پس از G-T، تیم فنی در T09 snapshotهای مصوب ماژول‌ها را منتشر می‌کند؛ Coordinator حق نوشتن snapshot ندارد. در درخواست مستندسازی فنی، T08 خروجی مستندات و نسخه‌های منتشرشده را کامل ثبت می‌کند و ادامهٔ توسعه بدون اختیار صریح به HOLD با resumeNode=D01 می‌رود.
+در nodeهای فنی/توسعهٔ متصل به Backend، [baseline setup و معماری](../docs/15-setup-bound-architecture.md) جزو ورودی معتبر است. تصمیم‌های ثبت‌شدهٔ setup با پرسش آزاد جایگزین نشوند؛ تعارض یا drift قبل از کار وابسته تحلیل اثر می‌خواهد. Spec/Plan/Task محصول داخل Backend به گیرندهٔ مستقل با preflight معتبر تحویل می‌شوند؛ agent این workflow هیچ فایل/ابزار Backend را تغییر/اجرا نمی‌کند. node آماده‌سازی سند یا تصویب طرح، اختیار نوشتن آزمون، implementation یا تغییر baseline تولید نمی‌کند.
+
+پس از ثبت journal، [tracking](../templates/shared/tracking.md) و نمای برد به‌روز می‌شوند. اگر next node متعلق به تیم دیگر است، پرونده در صف آن تیم منتظر انتخاب و ورودی واقعی می‌ماند؛ تعیین nextNode به معنی اجرا نیست. پس از G-T، تیم فنی در T09 snapshotهای مصوب ماژول‌ها را منتشر می‌کند؛ Coordinator حق نوشتن snapshot ندارد. در درخواست مستندسازی فنی، T08 خروجی مستندات و نسخه‌های منتشرشده را کامل ثبت می‌کند و agent product-workflow پس از تحویل به HOLD با resumeNode=D01 برای اجرای مستقل گیرنده می‌رود.
 
 `AI` نگارش/تحلیل می‌کند، `Human` تصمیم یا دریافت را انجام می‌دهد، `Tool` checker/test را اجرا می‌کند. AI می‌تواند متن تصمیم انسان را ثبت کند ولی نقش اجراکنندهٔ تصمیم همچنان Human است. «review مستقل» نیازمند reviewer متفاوت است؛ session جدید همان نویسنده بدون استقلال، کافی نیست.
 
@@ -46,3 +48,7 @@ handover باید خلاصهٔ scope، ترتیب مطالعه، rule/UC/AC و �
 T04 برای هر target متأثر یک workUnit نگارش دارد؛ T09 برای هر ماژول متأثر یک workUnit انتشار با کنترل baseRevision و retry بی‌اثر دارد؛ T06 و V01 برای review هر target و سپس review کل درخواست workUnit جدا دارند. self-loop فقط تا تکمیل فهرست محدود impact-map و جمع‌بندی مشترک ادامه می‌یابد؛ هر عبور output و وضعیت واحد را ثبت می‌کند. تغییر فهرست targetها از C01 می‌گذرد، نه افزودن واحد پنهان.
 
 D01 task بعدی آماده را با dependencyهای بسته‌شده انتخاب می‌کند و D02–D05 آن واحد را اجرا می‌کنند. nodeهای لایهٔ نامرتبط با خروجی N/A مستدل طی می‌شوند؛ target صرفاً سازگاری کد مصنوعی نمی‌گیرد. D05 پس از taskهای محلی، کار آزمون مشترک را ثبت می‌کند و فقط پس از تکمیل evidence لازم به D06 می‌رود. journal شامل workUnit و attempt است؛ تعدد واحدها به معنی مجوز spawn/parallel نیست.
+
+## پایان scope فقط خواندنی Backend
+
+طبق [setup پروژه](../docs/16-project-setup.md)، Backend از project/backend.json در ../BackendName خوانده می‌شود. مستندسازی فنی و snapshotها داخل همین workflow هستند. T08 در اجرای skill مستندسازی همیشه HOLD است؛ edge آن به D01 فقط اجرای مستقل گیرنده را توصیف می‌کند. هیچ node یا انتقال نقش scope نوشتن Backend را به agent product-workflow نمی‌دهد. helper ثبت پیشرفت نیز تکمیل T08 با nextNode=D01 را رد می‌کند.

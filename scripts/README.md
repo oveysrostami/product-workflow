@@ -42,13 +42,25 @@ python3 skill/product-workflow/scripts/check_questionnaire.py --root WORKFLOW_RO
 
 برد عملیاتی در [board.json](../requests/board.json) است. validator ساختار columns/cards، یکتایی requestId، فیلدها و مقادیر وضعیت/تیم/node، وجود مسیرهای ارجاعی و پیش‌نیازهای ساختاری ستون آماده را نیز بررسی می‌کند. این بررسی به‌تنهایی اعتبار gate یا hash پروندهٔ واقعی را اثبات نمی‌کند.
 
-فایل‌های عملیاتی `requests/` و `modules/` به‌جز راهنماهای ثابت README همان مسیرها بیرون manifest طراحی و فهرست منابع ثابت مجموعه‌اند؛ validator ثبت آن‌ها در این دو بسته را رد می‌کند. برای آزمون regression جدایی وضعیت جاری از طراحی و حفظ کنترل کارت نامعتبر و hash اسناد ثابت اجرا کنید:
+فایل‌های عملیاتی `requests/`، `modules/` و `project/` به‌جز راهنماهای ثابت README همان مسیرها بیرون manifest طراحی و فهرست منابع ثابت مجموعه‌اند؛ validator ثبت آن‌ها در این دو بسته را رد می‌کند. برای آزمون regression جدایی وضعیت جاری از طراحی و حفظ کنترل کارت نامعتبر و hash اسناد ثابت اجرا کنید:
 
 ```sh
 python3 -m unittest discover -s scripts -p 'test_*.py'
 ```
 
 این آزمون‌ها در کپی موقت اجرا می‌شوند و برد واقعی را تغییر نمی‌دهند.
+
+## Setup اتصال Backend
+
+[skill setup](../skill/product-workflow-setup/SKILL.md) و [قرارداد](../docs/16-project-setup.md) نام Backend همسایه را در project/backend.json ثبت می‌کنند؛ مثال `core_backend` انتخاب واقعی این checkout نیست. ابزار پیش‌فرض preview، تنها نویسندهٔ این کنترل‌فایل محلی است و هیچ code/command Backend را اجرا/import نمی‌کند. source/plan انتخاب‌شده با config مؤثر یا runtime verified یکی نیست.
+
+```sh
+python3 skill/product-workflow-setup/scripts/setup_project.py --root WORKFLOW_ROOT --backend-name BACKEND_NAME --source-reference MESSAGE_REFERENCE
+python3 skill/product-workflow-setup/scripts/setup_project.py --root WORKFLOW_ROOT --inspect
+python3 -m unittest discover -s skill/product-workflow-setup/scripts/tests -v
+```
+
+در setup واقعی پس از preview، --apply فقط اتصال محلی را ثبت می‌کند. validator اتصال اختیاری را از نظر schema، read-only بودن، مسیر همسایه و دسترسی بررسی می‌کند؛ نبود اتصال مانع validation خود کیت نیست. project/backend.json همانند وضعیت requests/modules از baseline/inventory ثابت بیرون است؛ project/README.md راهنمای ثابت باقی می‌ماند. آزمون‌های fixture مسیر/symlink، retry، عدم تغییر Backend و عدم اجرای کد/کپی secret را می‌سنجند. record_progress تحویل T08 به D01 را در scope مستندسازی رد می‌کند؛ اجرای مستقل Backend از این helper آغاز نمی‌شود.
 
 محدودیت [مالکیت تیمی فایل‌ها](../docs/08-team-file-ownership.md) با بررسی scope و diff توسط agent/reviewer اعمال می‌شود؛ validator فعلی sandbox یا کنترل دسترسی فایل نیست و از pass آن رعایت همهٔ writeها استنتاج نمی‌شود.
 

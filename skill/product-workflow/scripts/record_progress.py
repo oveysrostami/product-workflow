@@ -57,6 +57,8 @@ def check_gate(root, card, journal, repo_map):
     if journal['status'] != 'completed':
         return
     node = journal['nodeId']
+    if node == 'T08':
+        require(journal['nextNode'] == 'HOLD', 'Documentation handover must HOLD; Backend execution is a separate scope')
     if node == 'P09' and journal['nextNode'] == 'P10':
         check_questionnaire(root, card['requestId'])
     if node == 'P10' and journal['nextNode'] == 'P02':

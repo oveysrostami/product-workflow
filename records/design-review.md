@@ -1,6 +1,6 @@
-# ثبت طراحی نسخهٔ ۱٫۸
+# ثبت طراحی نسخهٔ ۱٫۱۳
 
-وضعیت: مجموعه تکمیل‌شده و آمادهٔ بازبینی درخواست‌کننده؛ تأیید سازمانی ثبت نشده است. این سند گزارش طراحی فرآیند است، نه اجرای آن برای یک قابلیت واقعی.
+وضعیت: درخواست‌کننده نگارش فنی در product-workflow و Backend همسایهٔ فقط خواندنی را انتخاب کرد؛ skill setup اتصال در نسخهٔ ۱٫۱۳ آماده شده است. تأیید سازمانی ثبت نشده است. این سند گزارش طراحی فرآیند است، نه اجرای آن برای یک قابلیت واقعی.
 
 ## ورودی قطعی
 
@@ -160,3 +160,28 @@ P05/Q04/T06 بازبینی کامل subagent مستقل از نویسنده را
 نسخهٔ نصب‌شدهٔ شخصی skill در مسیر ~/.codex/skills/product-workflow پیش از همگام‌سازی با HEAD مقایسه شد؛ تغییر محلی نداشت. فایل‌های تغییرکرده و راهنمای review تازه با منبع مخزن همگام شدند؛ سایر skillها دست‌نخورده‌اند.
 
 بازبین مستقل نگهداری `/root/review_review_sequence` مسیرهای graph/نسخه/مالکیت و راهنمای skill را خواند؛ bypass یا یافتهٔ blocking/major پیدا نشد. سه مورد تکمیل (skill نصب‌شده، نتیجهٔ قالب review، عبارت اصلاح نگارشی) اصلاح و با بازخوانی همان subagent رفع آن‌ها تأیید شد. این بررسی جای تصویب انسانی کل مجموعه نیست.
+
+## چارچوب معماری پس از setup در نسخهٔ ۱٫۱۲
+
+منبع قطعی: درخواست کاربر در ۲۰۲۶-۱۰-۰۱ برای اجرای تکمیل اتصال workflow به SDD و الزام به اینکه پرسش‌ها و اسناد معماری پس از initial project/setup از ساختار Backend خارج نشوند. کاربر انتخاب محل معماری در Backend یا product-workflow را نیز باز گذاشت؛ پیشنهاد مدل Backend به‌عنوان تصمیم انسانی ثبت نشده است.
+
+تیم فعال نگهداری workflow است. محدودهٔ نوشتن در [رکورد مرزبندی](technical-boundary-decision.md) ثبت شد؛ Backend، requests و modules عملیاتی خواندنی باقی ماندند. نسخهٔ دقیق ۱٫۱۱ و approval pending پیش از تغییر با تمام hashها در [آرشیو](history/workflow-kit-v1.11.zip) و [رکورد](history/workflow-kit-v1.11.json) محفوظ شدند.
+
+[قرارداد setup-bound architecture](../docs/15-setup-bound-architecture.md)، baseline و digest در index، پرسش‌های مجاز T10 و حفظ پاسخ مخالف baseline با owner، و کنترل انطباق T03/T04/T06/T07/T08/D01/B06 اضافه شدند. AGENTS، gate، چرخهٔ مصاحبه، قرارداد node، اتصال Backend و راهنمای فنی skill به همین محدودیت متصل‌اند. graph و کارت‌ها هم‌زمان به‌روز شدند و transitionها تغییر نکردند. طرح مصوب، فایل/method واقعی acceptance test، activation SDD و اختیار implementation جدا هستند؛ runner یا تست Backend در این مرحله اجرا نشده است.
+
+این نسخه فقط بخش مستقل از انتخاب محل canonical را اعمال می‌کند. انتقال معماری، اصلاح چندمخزنی ابزارها، adapter نگاشت SDD، کنترل‌های اجرایی تازه و پایلوت پس از انتخاب مدل ادامه می‌یابند؛ تکمیل کل پیشنهاد قبلی یا تصویب سازمانی ادعا نمی‌شود. ابزارهای فعلی همچنان enforcement کامل مالکیت، setup یا معنای پاسخ انسان ندارند.
+
+
+## Setup اتصال Backend و انتخاب محل معماری در نسخهٔ ۱٫۱۳
+
+منبع قطعی: پیام کاربر در ۲۰۲۶-۱۰-۰۱ دربارهٔ skill setup، دریافت نام دایرکتوری Backend و قاعدهٔ ../BackendName، مستندسازی فنی داخل product-workflow و منع صریح تغییر Backend. مدل B انتخاب شد؛ پیشنهاد قبلی AI به مدل A تبدیل به تصمیم انسان نشد. [تصمیم مرزبندی](technical-boundary-decision.md) این انتخاب را ثبت می‌کند و approval سازمانی مستقل pending است.
+
+تیم فعال نگهداری workflow و writeScope در رکورد مرزبندی مشخص است. نسخهٔ ۱٫۱۲ با تمام ۱۴۰ artifact و approval pending در [آرشیو](history/workflow-kit-v1.12.zip) و [hashها](history/workflow-kit-v1.12.json) حفظ شد. Backend، برد، پرونده‌ها و modules عملیاتی نوشته نشدند؛ اسم نمونه core_backend به اتصال واقعی این checkout تبدیل نشد.
+
+skill product-workflow-setup و helper محلی project/backend.json را با basename واقعی و مسیر همسایه ثبت می‌کنند. preview/inspect فقط خواندنی‌اند؛ apply فقط این کنترل‌فایل workflow را ایجاد می‌کند و retry همان نام مرجع اولیه را حفظ می‌کند. traversal، symlink و تغییر read-only بودن رد می‌شوند. helper هیچ کد Backend اجرا/import نمی‌کند؛ انتخاب plan با فعال/verified بودن runtime متفاوت گزارش می‌شود و secret/environment به خروجی کپی نمی‌شود.
+
+قرارداد setup، چارچوب معماری، AGENTS، README، مالکیت، gate، onboarding، چرخهٔ مصاحبه، nodeها و قالب‌های index/handover به مدل منتخب متصل شدند. مسیر فنی در technical/ و انتشار snapshot در modules/ همین workflow است. T08 برای agent مستندسازی همیشه HOLD؛ edge D01 و کارت‌های توسعه/release قرارداد اجرای مستقل گیرنده را توصیف می‌کنند. recorder تحویل T08 به اجرای مستقیم Backend را رد می‌کند. validator اتصال اختیاری و جدایی project/backend.json از بستهٔ طراحی را کنترل می‌کند؛ sandbox عمومی agent ایجاد نشده است.
+
+skill setup در ~/.codex/skills/product-workflow-setup نصب شد. skill اجرای workflow فقط پس از تطبیق تمام فایل‌های نصب‌شده با HEAD و اطمینان از نبود override محلی، از منبع این repository همگام شد؛ سایر skillها تغییر نکردند. بررسی ساختاری هر دو skill با quick_validate و Python/PyYAML موجود انجام شد؛ dependency نصب نشد.
+
+یک preview روی Backend قبلاً معرفی‌شدهٔ backend-spring فقط فایل‌ها را خواند؛ ۱۳ منبع و نام ۵ ماژول یافت شد، setup record مشاهده نشد و runtime/preflight unknown/not-executed ماند. هیچ project/backend.json واقعی ایجاد نشد. این مشاهده آزمون runtime یا پایلوت قابلیت محصول نیست.

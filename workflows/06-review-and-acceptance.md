@@ -1,6 +1,6 @@
 # review، اجرای QA و تحویل
 
-review مستقل پیش از پذیرش نهایی است. کد و شواهد بعد از تغییر باید دوباره متناسب بررسی شوند. نبود یافتهٔ AI جای پذیرش QA/فنی/محصول نیست.
+قرارداد اجرای مستقل آینده در Backend؛ خارج scope agent product-workflow/setup که Backend را فقط می‌خواند. review مستقل پیش از پذیرش نهایی است. کد و شواهد بعد از تغییر باید دوباره متناسب بررسی شوند. نبود یافتهٔ AI جای پذیرش QA/فنی/محصول نیست.
 
 > کارت‌ها از [graph.json](graph.json) تولید می‌شوند. توقف، انتظار و retry مشترک در [قرارداد node](00-node-contract.md) اعمال می‌شود.
 
@@ -46,7 +46,7 @@ flowchart TD
 
 **ورودی:** candidate، P/Q/T، diff، Backend rules و reports
 
-**کار دقیق:** به ترتیب invariant/contract، Domain، Application، adapter، entrypoint/composition و recovery review کن. POM/import/SQL و graphها را ببین؛ evidence freshness را بسنج. finding با خط/شاهد/اثر و مسیر برگشت بده. workUnit review هر target را جدا ثبت کن و پس از آن review request را برای قراردادها، wiring، ترتیب migration/rollout و outcome سرتاسری انجام بده. جمع local-readyها بدون review کل کافی نیست.
+**کار دقیق:** این کارت قرارداد اجرای مستقل آینده در Backend است؛ agent product-workflow/setup آن را برای تغییر/اجرای ابزار Backend ادامه نمی‌دهد و در T08/HOLD تحویل می‌دهد. به ترتیب invariant/contract، Domain، Application، adapter، entrypoint/composition و recovery review کن. POM/import/SQL و graphها را ببین؛ evidence freshness را بسنج. finding با خط/شاهد/اثر و مسیر برگشت بده. workUnit review هر target را جدا ثبت کن و پس از آن review request را برای قراردادها، wiring، ترتیب migration/rollout و outcome سرتاسری انجام بده. جمع local-readyها بدون review کل کافی نیست.
 
 **خروجی:** code review report مستقل و وضعیت هر finding
 
@@ -67,7 +67,7 @@ flowchart TD
 
 **ورودی:** candidate ثابت، سناریوهای G-Q و test mapping، environment آماده
 
-**کار دقیق:** برنامه QA را اجرا یا report معتبر همان candidate را مستقلاً بررسی کن؛ exploratory/دستی لازم را به QA owner بسپار. pass/fail/blocked/not-run را جدا ثبت؛ mismatch را defect با actual/expected/source کن. گزارش باید نتیجهٔ QAهای module و integration و end-to-end لازم را از هم جدا کند و targetها و IMPACT/EDGE/FLOW و candidate مشترک را برای هر evidence نشان دهد.
+**کار دقیق:** این کارت قرارداد اجرای مستقل آینده در Backend است؛ agent product-workflow/setup آن را برای تغییر/اجرای ابزار Backend ادامه نمی‌دهد و در T08/HOLD تحویل می‌دهد. برنامه QA را اجرا یا report معتبر همان candidate را مستقلاً بررسی کن؛ exploratory/دستی لازم را به QA owner بسپار. pass/fail/blocked/not-run را جدا ثبت؛ mismatch را defect با actual/expected/source کن. گزارش باید نتیجهٔ QAهای module و integration و end-to-end لازم را از هم جدا کند و targetها و IMPACT/EDGE/FLOW و candidate مشترک را برای هر evidence نشان دهد.
 
 **خروجی:** qa execution report و defectها؛ counts و artifact references
 
@@ -85,7 +85,7 @@ flowchart TD
 
 **ورودی:** execution، coverage، defectها و evidence candidate
 
-**کار دقیق:** پوشش، flaky/skip، critical risk و regression را بررسی کن. blocker یا تست ضروری blocked پذیرش ندارد. minor residual با owner/موعد قابل ثبت است.
+**کار دقیق:** این کارت قرارداد اجرای مستقل آینده در Backend است؛ agent product-workflow/setup آن را برای تغییر/اجرای ابزار Backend ادامه نمی‌دهد و در T08/HOLD تحویل می‌دهد. پوشش، flaky/skip، critical risk و regression را بررسی کن. blocker یا تست ضروری blocked پذیرش ندارد. minor residual با owner/موعد قابل ثبت است.
 
 **خروجی:** QA acceptance همان candidate یا درخواست اصلاح
 
@@ -103,7 +103,7 @@ flowchart TD
 
 **ورودی:** code review، QA verdict، evidence، docs و migration/runbook
 
-**کار دقیق:** سلامت طراحی/کد، محدودیت runtime، compatibility و recovery را بررسی کن؛ اگر candidate عوض شده approval قبلی کافی نیست. merge مجزا از این رأی است. رأی فنی هر target و جمع‌بندی outcome کل درخواست را روی همان candidate ثبت کن؛ یک فرد با انتساب صریح می‌تواند چند مسئولیت داشته باشد.
+**کار دقیق:** این کارت قرارداد اجرای مستقل آینده در Backend است؛ agent product-workflow/setup آن را برای تغییر/اجرای ابزار Backend ادامه نمی‌دهد و در T08/HOLD تحویل می‌دهد. سلامت طراحی/کد، محدودیت runtime، compatibility و recovery را بررسی کن؛ اگر candidate عوض شده approval قبلی کافی نیست. merge مجزا از این رأی است. رأی فنی هر target و جمع‌بندی outcome کل درخواست را روی همان candidate ثبت کن؛ یک فرد با انتساب صریح می‌تواند چند مسئولیت داشته باشد.
 
 **خروجی:** technical acceptance candidate
 
@@ -121,7 +121,7 @@ flowchart TD
 
 **ورودی:** نمایش نتیجه/شواهد AC، خلاصهٔ scope و محدودیت، رأی QA/فنی
 
-**کار دقیق:** تحقق رفتار scope را روی همین candidate بپذیر. خواستهٔ تازه change است؛ رفتار خلاف قرارداد defect است. نمونهٔ UI لازم می‌تواند توسط QA ارائه شود؛ فرض وجود frontend نکن.
+**کار دقیق:** این کارت قرارداد اجرای مستقل آینده در Backend است؛ agent product-workflow/setup آن را برای تغییر/اجرای ابزار Backend ادامه نمی‌دهد و در T08/HOLD تحویل می‌دهد. تحقق رفتار scope را روی همین candidate بپذیر. خواستهٔ تازه change است؛ رفتار خلاف قرارداد defect است. نمونهٔ UI لازم می‌تواند توسط QA ارائه شود؛ فرض وجود frontend نکن.
 
 **خروجی:** product acceptance و G-D کامل یا feedback دسته‌بندی‌شده
 
@@ -140,7 +140,7 @@ flowchart TD
 
 **ورودی:** G-D، candidate، reports و docs
 
-**کار دقیق:** delivery record بنویس: چه تغییر کرد، چرا، evidence، residual، migration/runbook، وضعیت دقیق ready-to-merge/merged/deployed با شاهد. manifest نهایی و read order گیرنده را ثبت کن. Coordinator از G-D و evidence همان candidate، رکورد implementation/observations هر ماژول و pointer کنترل اجرای آن را ثبت می‌کند؛ designRevision/digest صریح است و snapshot طرح یا وضعیت deployed بدون شاهد تغییر نمی‌کند.
+**کار دقیق:** این کارت قرارداد اجرای مستقل آینده در Backend است؛ agent product-workflow/setup آن را برای تغییر/اجرای ابزار Backend ادامه نمی‌دهد و در T08/HOLD تحویل می‌دهد. delivery record بنویس: چه تغییر کرد، چرا، evidence، residual، migration/runbook، وضعیت دقیق ready-to-merge/merged/deployed با شاهد. manifest نهایی و read order گیرنده را ثبت کن. Coordinator از G-D و evidence همان candidate، رکورد implementation/observations هر ماژول و pointer کنترل اجرای آن را ثبت می‌کند؛ designRevision/digest صریح است و snapshot طرح یا وضعیت deployed بدون شاهد تغییر نمی‌کند.
 
 **خروجی:** development/delivery و final manifest خلاصهٔ تحویل هر ماژول و تحقق جریان مشترک؛ target بدون تغییر کد با evidence سازگاری.؛ metadata اجرای واقعی در modules/<slug>/implementation/ طبق docs/10-module-library.md
 
@@ -157,7 +157,7 @@ flowchart TD
 
 **ورودی:** delivery و candidate قابل دسترسی
 
-**کار دقیق:** دریافت بسته را ثبت کن. اگر scope فقط پیاده‌سازی/review بوده پرونده پایان می‌یابد. اگر انتشار صریحاً خواسته شده، اختیار و target در مسیر R بررسی می‌شود.
+**کار دقیق:** این کارت قرارداد اجرای مستقل آینده در Backend است؛ agent product-workflow/setup آن را برای تغییر/اجرای ابزار Backend ادامه نمی‌دهد و در T08/HOLD تحویل می‌دهد. دریافت بسته را ثبت کن. اگر scope فقط پیاده‌سازی/review بوده پرونده پایان می‌یابد. اگر انتشار صریحاً خواسته شده، اختیار و target در مسیر R بررسی می‌شود.
 
 **خروجی:** delivery receipt و وضعیت accepted/closed یا release-pending
 

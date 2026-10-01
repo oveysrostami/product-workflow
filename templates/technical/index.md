@@ -3,13 +3,18 @@
 > قالب است؛ `{{...}}` را با تصمیم و شاهد واقعیِ غیرحساس جایگزین کنید. وجود این فایل به معنی approval یا اجرای تست نیست.
 
 - request / Tech lead / P-Q baseline و digest: {{...}}
-- مخزن Backend هدف / مسیر checkout / مسیر AGENTS و قواعد هدف: {{...}}
+- اتصال project/backend.json و digest / BackendName / مسیر ../BackendName و resolve واقعی / access=read-only / مسیر AGENTS و قواعد هدف: {{...}}
 - Backend revision، adopted edition/profile، local decisions: {{...}}
+- setup recorded-state / مسیر و digest record و plan منتخب / محدودیت مشاهده و نتیجهٔ preflight خارجی فقط اگر evidence واقعی وجود دارد؛ در این workflow اجرا نمی‌شود: {{...}}
+- baseline معماری: مسیر و digest AGENTS/قواعد/تصمیم‌های محلی و setup، source revision و dirty/diff؛ مقادیر secret/environment کپی نشوند: {{...}}
+- تصمیم‌های ثابت setup، انتخاب‌های بازِ مجاز و تعارض‌های نیازمند تغییر baseline با owner/مرجع: {{...}}
 - workflow اصلی Backend و workflowهای وابسته: {{...}}
 - discovery commandها و نتیجه واقعی doctor/explain: {{...}}
 - گفت‌وگوی فنی: technical/interview.md با پاسخ‌های T10/T11 یا دلیل کفایت اطلاعات؛ انتخاب‌های باز و صاحب اختیار: {{...}}
 
 این اطلاعات در T02 توسط تیم فنی در `technical/index.md` همین پرونده ثبت می‌شوند؛ `request.md` محصول فقط خواندنی است.
+
+[قرارداد چارچوب setup](../../docs/15-setup-bound-architecture.md) و [setup پروژه](../../docs/16-project-setup.md) برای T02 تا تحویل لازم‌اند. معماری و طرح درخواست داخل همین workflow نوشته می‌شوند؛ Backend فقط خواندنی است و هیچ ابزار آن اجرا نمی‌شود. تصمیم‌های ثبت‌شدهٔ setup دوباره سؤال آزاد نمی‌شوند. طرح مصوب، آزمون واقعی موجود، activation SDD و اختیار اجرای مستقل گیرنده جدا ثبت شوند؛ آماده‌سازی آزمون آینده در Backend توسط agent این workflow انجام نمی‌شود.
 
 ## بسته‌های ماژولی و جریان مشترک
 
@@ -20,6 +25,14 @@
 | targetType / targetId | IMPACT-ID و نوع اثر | مسئول فنی | change-spec | test-mapping | review ماژول / blocker |
 |---|---|---|---|---|---|
 | {{...}} | {{...}} | {{...}} | {{...}} | {{...}} | {{...}} |
+
+## انتخاب setup و فعال‌بودن قابلیت
+
+| capability | موجود در source / انتخاب setup / config معلوم / verified-runtime / unknown | مسیر و hash شاهد | revision/environment شاهد، اگر موجود | override/محدودیت | gap و مالک اقدام مستقل Backend |
+|---|---|---|---|---|---|
+| {{...}} | {{...}} | {{...}} | {{...}} | {{...}} | {{...}} |
+
+وجود implementation یا state=completed setup به‌تنهایی فعال/verified بودن قابلیت را اثبات نمی‌کند. raw environment، credential و payload به این سند کپی نشوند.
 
 ## مرجع canonical
 

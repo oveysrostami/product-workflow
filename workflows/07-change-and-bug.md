@@ -267,13 +267,13 @@ flowchart TD
 
 **مجری:** AI — Technical designer / Developer در نقش investigation
 
-**ورودی:** گزارش، regression، Backend bug workflow و source
+**ورودی:** گزارش، regression، Backend bug workflow و source؛ منابع setup و baseline معماری هدف طبق docs/15-setup-bound-architecture.md
 
-**کار دقیق:** source→failure و caller/contract/data impact را trace کن؛ fact را از hypothesis جدا. برای fix، plan و test mapping متناسب تهیه و T02 را برای review delta ادامه بده؛ کد بدون scope/طراحی معتبر تغییر نکند. حتی fix تک‌ماژولی یک impact-map کوچک دارد؛ dependencyهای باگ از بررسی حذف نمی‌شوند.
+**کار دقیق:** source→failure و caller/contract/data impact را trace کن؛ fact را از hypothesis جدا. برای fix، plan و test mapping متناسب تهیه و T02 را برای review delta ادامه بده؛ کد بدون scope/طراحی معتبر تغییر نکند. حتی fix تک‌ماژولی یک impact-map کوچک دارد؛ dependencyهای باگ از بررسی حذف نمی‌شوند. برای investigation خواندنی setup لازم نیست؛ طراحی درخواست فقط در workflow نوشته می‌شود؛ Spec/Plan/Task و توسعه در Backend به گیرندهٔ مستقل پس از preflight همان مخزن تحویل می‌شوند و در این scope انجام نمی‌شوند. طرح اصلاح نیز در چارچوب setup و قواعد هدف است؛ تغییر baseline به تصمیم صریح صاحب اختیار برمی‌گردد.
 
 **خروجی:** bug investigation با root cause یا unknown، fix proposal و affected IDs
 
-**شرط پایان:** نتیجه به شاهد متصل؛ existing design کافی بودن مستدل، نه gate bypass.
+**شرط پایان:** نتیجه به شاهد متصل؛ existing design کافی بودن مستدل، نه gate bypass. طرح اصلاح با baseline setup و معماری منطبق است.
 
 | نتیجه | node بعدی |
 |---|---|

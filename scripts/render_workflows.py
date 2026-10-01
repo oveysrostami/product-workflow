@@ -37,7 +37,7 @@ def documents(graph):
         result[f'workflows/{flow["id"]}.md'] = '\n'.join(lines).rstrip() + '\n'
     lines = ['# نقشهٔ workflowها و nodeها', '',
              'شروع هر کار از [انتخاب تیم و پرونده](00-team-entry.md) است. **I01** ورودی درخواست تازه است؛ QA از Q01، فنی از T01 و پروندهٔ موجود از checkpoint معتبر ادامه می‌یابد. چهار gate اصلی G-P، G-Q، G-T و G-D طبق [معیارها](../docs/04-gates.md) اجرا می‌شوند؛ G-R فقط برای انتشار خواسته‌شده است.', '',
-             'قرارداد ورودی/خروجی و توقف همهٔ nodeها در [00](00-node-contract.md) مشترک است. شاخه‌های شکست، نقص و بازگشت در کارت همان node آمده‌اند. مسیر مستقیم تا پیاده‌سازی فقط وقتی مجاز است که baselineهای معتبر پیشین وجود داشته باشند.', '',
+             'قرارداد ورودی/خروجی و توقف همهٔ nodeها در [00](00-node-contract.md) مشترک است. شاخه‌های شکست، نقص و بازگشت در کارت همان node آمده‌اند. در scope agent product-workflow، Backend فقط خواندنی و پایان T08/HOLD است؛ مسیر توسعه برای گیرندهٔ مستقل با قرارداد و اختیار Backend توصیف می‌شود.', '',
              '| workflow | nodeها | ورودی → خروجی |', '|---|---|---|']
     for f in graph['workflows']:
         lines.append(f'| [{f["title"]}]({f["id"]}.md) | {f["nodes"][0]["id"]} تا {f["nodes"][-1]["id"]} | {f["description"]} |')

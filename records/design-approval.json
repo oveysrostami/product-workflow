@@ -1,17 +1,17 @@
 {
   "schemaVersion": 1,
-  "approvalId": "design-v1.11-requester-approval",
+  "approvalId": "design-v1.13-requester-approval",
   "requestId": "workflow-design-2026-09-28",
   "gate": "framework-adoption",
-  "baselineId": "workflow-kit-v1.11",
+  "baselineId": "workflow-kit-v1.13",
   "manifestPath": "design-manifest.json",
-  "manifestSha256": "4f540205053c1dedee640b24de181631193ee7faf00e2e2169f1718069e78504",
+  "manifestSha256": "2ecca729c1e36ca0dc934250a27108ac7187116d9d138fc46347d981fe4f9986",
   "status": "pending",
   "requiredRoles": [
     "requester"
   ],
   "requesterReference": "درخواست‌کنندهٔ طراحی در همین گفت‌وگو، ۲۰۲۶-۰۹-۲۸",
   "decisions": [],
-  "supersedes": "design-v1.10-requester-approval",
-  "changeAuthorizationReference": "درخواست کاربر در ۲۰۲۶-۰۹-۲۹: پس از interview، ابتدا subagent بازبینی کامل بسته را انجام دهد و سپس reviewer انسانی هم تأیید کند؛ انتخاب بین این دو یا اجازهٔ تکراری حذف شود. مجوز اصلاح این مسیر، تصویب انسانی کل نسخه نیست."
+  "supersedes": "design-v1.12-requester-approval",
+  "changeAuthorizationReference": "پیام کاربر در ۲۰۲۶-۱۰-۰۱: skill setup نام دایرکتوری Backend را بگیرد؛ مسیر همیشه ../BackendName، مستندسازی فنی داخل product-workflow و Backend فقط خواندنی بدون اجازهٔ تغییر. انتخاب مرزبندی، تصویب کل نسخه نیست."
 }

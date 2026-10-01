@@ -8,10 +8,12 @@
 
 | فایل یا محدوده | مالک نوشتن | رفتار سایر تیم‌ها |
 |---|---|---|
+| تمام مسیرهای Backend همسایهٔ ثبت‌شده در project/backend.json | خارج اختیار نوشتن همهٔ agentهای product-workflow/setup | فقط منابع غیرحساس خوانده شوند؛ هیچ command/import Backend اجرا نشود؛ اختیار آیندهٔ implementation این مرز را لغو نمی‌کند |
+| project/backend.json در ریشهٔ workflow | setup/Coordinator؛ فقط ثبت اتصال انتخاب‌شدهٔ انسانی با helper محلی | وضعیت عملیاتی، خارج manifest طراحی و inventory؛ access فقط read-only؛ overwrite خودکار ممنوع |
 | product/، request.md، interview.md، decisions.md | محصول؛ decisions اینجا تصمیم‌های محصول است | فقط خواندن و ثبت اصلاحیه؛ تصمیم فنی در technical ثبت می‌شود |
 | qa/، شامل سناریو، coverage، plan و execution | QA | فقط خواندن؛ فنی test-mapping خودش را می‌نویسد و توسعه evidence خودش را می‌دهد |
 | technical/ و اسناد طراحی canonical معرفی‌شده در index | فنی | فقط خواندن؛ کدزن برای اصلاح طراحی به فنی بازمی‌گرداند |
-| development/ و مسیرهای کد/تستِ صریحاً مجاز در task و Backend | توسعه، پس از اختیار پیاده‌سازی | فنی مشخصات task را در implementation-plan می‌نویسد؛ فایل task اجرایی را توسعه می‌سازد |
+| development/ داخل workflow | توسعه/هماهنگی اجرای مستقل، در scope ثبت محلی | کد/تست Backend خارج اختیار این workflow است؛ فنی مشخصات task را در implementation-plan می‌نویسد |
 | modules/<slug>/README.md، current.json و revisions/ در ریشهٔ مجموعه | فنی؛ انتشار bytes مصوب فقط در T09 پس از G-T | سایر تیم‌ها فقط خواندن/یافته؛ نگارش candidate در technical/ همان درخواست |
 | modules/<slug>/implementation/ در ریشهٔ مجموعه | Coordinator؛ فقط metadata و evidence واقعی اجرای کد | تغییر معنا یا طرح ماژول مجاز نیست؛ رکوردهای observation append-only |
 | modules/README.md در ریشهٔ مجموعه | نگهداری workflow | راهنمای ثابت کتابخانه، نه وضعیت ماژول واقعی |
@@ -19,7 +21,7 @@
 | requests/board.json در ریشه؛ tracking.md، applicability.md، traceability.csv، baselines/، approvals/، receipts/، reviews/، runs/ و changes/ | هماهنگ‌کنندهٔ workflow؛ ثبت کنترل و ارجاع | خروجی و بازخورد تیم‌ها ورودی ثبت است؛ این محل مجوز ویرایش محتوای product/qa/technical/development نیست |
 | AGENTS.md، docs/، workflows/، templates/، scripts/، skill/، records/ و examples/ در ریشهٔ مجموعه | نگهداری workflow با درخواست صریح تغییر همین مجموعه | تیم پرونده برای عبور از محدودیت، قواعد و قالب‌های عمومی را تغییر نمی‌دهد |
 
-مالکیت فایل‌های canonical بیرون این مجموعه نیز برقرار است: مسیر `backend/.../docs/` که در index مرجع طراحی معرفی شده، متعلق به فنی است؛ مجوز توسعهٔ کد، اجازهٔ اصلاح آن سند نیست. AGENTS و اختیار همان مخزن نیز باید رعایت شوند. دربارهٔ فایل تازه یا قدیمی که مالک آن از این جدول و مدارک معلوم نیست، پیش از نوشتن مالک تعیین شود؛ آن را خودکار «مشترک» ننام.
+اسناد canonical طراحی درخواست در technical/ و snapshotهای مصوب در modules/ همین مجموعه‌اند. `backend/.../docs/` شاهد قرارداد کنار کد است و برای agent این scope فقط خواندنی می‌ماند؛ تغییر نقش فنی/توسعه نیز اجازهٔ نوشتن آن نیست. گیرندهٔ مستقل Backend مالکیت و AGENTS همان مخزن را بررسی می‌کند. دربارهٔ فایل تازه یا قدیمی با مالک نامعلوم، پیش از نوشتن مالک تعیین شود؛ آن را خودکار «مشترک» ننام.
 
 ## فایل‌های کنترلی مشترک
 

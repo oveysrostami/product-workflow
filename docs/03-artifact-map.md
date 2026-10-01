@@ -1,5 +1,7 @@
 # ساختار و مرجع اسناد
 
+[اتصال پروژه](16-project-setup.md) در project/backend.json ریشه ثبت می‌شود: BackendName، ../BackendName، access=read-only و مرجع انتخاب انسانی. این کنترل‌فایل متعلق به setup/Coordinator و بیرون manifest طراحی مجموعه است. Backend فقط شاهد خواندنی است؛ اسناد فنی canonical در technical/ و modules/ همین workflow نوشته می‌شوند.
+
 ```text
 requests/<request-id>/
   request.md                  # شرح و routing، stakeholder و owner

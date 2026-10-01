@@ -1,0 +1,4 @@
+interface:
+  display_name: "Product Workflow Setup"
+  short_description: "Bind a sibling Backend for read-only technical discovery"
+  default_prompt: "با $product-workflow-setup نام پوشهٔ Backend را بگیر و اتصال فقط خواندنی این پروژه را تنظیم کن."

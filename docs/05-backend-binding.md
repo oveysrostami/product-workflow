@@ -2,9 +2,13 @@
 
 این صفحه قرارداد داخلی اتصال به مخزن کد هدف و یک adapter نمونه برای ساختار بررسی‌شدهٔ Backend است. برای استفاده از workflow و قالب‌ها نیازی به checkout همسایه نیست. در شروع هر اجرای واقعی، revision و قواعد جاری دوباره خوانده می‌شوند. این صفحه راهنماست و authority موازی با `AGENTS.md` (AGENTS Backend) نمی‌سازد.
 
-## انتخاب مخزن کد هدف
+## اتصال فقط خواندنی Backend
 
-در T01 ورودی مخزن هدف دریافت و در T02 مسیر checkout، repository، revision، مسیر `AGENTS.md` و محل قواعد کدِ هدف توسط تیم فنی در `requests/<request-id>/technical/index.md` ثبت می‌شوند. [قالب index فنی](../templates/technical/index.md) محل این اطلاعات است؛ `request.md` متعلق به محصول است و تیم فنی آن را ویرایش نمی‌کند. محل نصب ثابت یا checkout همسایه فرض نمی‌شود. مسیرهای کد و commandهای زیر نسبت به همان checkout معرفی‌شده‌اند؛ در این پروژه اجرا نمی‌شوند. اگر ابزار یا قابلیت نمونه در هدف وجود ندارد، فنی معادل واقعی یا prerequisite را مشخص می‌کند؛ غیبت آن با نتیجهٔ ساختگی پوشانده نمی‌شود. طراحی اولیه می‌تواند با قالب‌های محلی آماده شود؛ تأیید انطباق با کد و اجرای تغییر نیاز به ورودی واقعی همان مخزن دارد.
+طبق [setup پروژه](16-project-setup.md)، skill product-workflow-setup نام واقعی دایرکتوری Backend را در project/backend.json ثبت می‌کند. Backend همیشه `WORKFLOW_ROOT/../<BackendName>` است؛ نام موجود دوباره پرسیده یا با checkout دیگری جایگزین نمی‌شود. در T02 اتصال، path/hash منابع، revision و وضعیت مشاهده‌شده در [index فنی](../templates/technical/index.md) ثبت می‌شوند؛ request.md محصول فقط خواندنی است. **تمام Backend برای agent این workflow فقط خواندنی است؛ هیچ فایل آن نوشته و هیچ ابزار آن اجرا/import نمی‌شود.**
+
+[چارچوب setup و معماری](15-setup-bound-architecture.md) لازم است: پس از initial setup Backend، قواعد و انتخاب‌های ثبت‌شده baseline پرسش و طراحی‌اند. مستندسازی فنی در product-workflow و snapshotهای مصوب در modules/ همین مخزن انجام می‌شود. [تصمیم مرزبندی](../records/technical-boundary-decision.md) انتخاب واقعی درخواست‌کننده را ثبت می‌کند. setup اتصال، initial setup Backend را اجرا یا ترمیم نمی‌کند؛ capability/config/plan و evidence runtime با منبع و محدودیت جدا گزارش می‌شوند.
+
+قالب‌ها بدون Backend برای نیاز محصول و QA قابل استفاده‌اند. طراحی اولیه با ورودی ناقص draft است؛ آماده‌بودن بستهٔ متصل به Backend نیاز به منابع واقعی، baseline setup مشخص و تحلیل انطباق دارد. path/hash بیرونی در متن/index/manifest ثبت می‌شود؛ لینک Markdown خارج این مخزن ساخته نشود. فقدان پوشهٔ ثبت‌شده یا prerequisite به owner مربوط تحویل می‌شود؛ agent این workflow clone/scaffold یا رفع خودکار در Backend انجام نمی‌دهد.
 
 ## adapter نمونه و محدودهٔ کاربرد
 
@@ -48,9 +52,11 @@ modules/<owner>/docs/
 - migration افزایشی با role و credential جدا، بدون startup DDL serving؛ expand/backfill/contract، mixed version و restore/reconcile با evidence.
 - dependency/POM، policy owner registration، explicit composition، contract exports، config validation و feature off behavior بخشی از تحویل است، نه کار پنهان بعدی.
 
-## دستورها و زمان استفاده
+## دستورهای اجرای مستقل گیرندهٔ Backend
 
-تمام دستورهای زیر **از ریشهٔ Backend** اجرا می‌شوند؛ نوشتن آن‌ها در سند، اجرای این نوبت نیست.
+دستورهای زیر فقط برنامهٔ اجرای مستقل گیرنده **از ریشهٔ Backend** هستند؛ agent product-workflow/setup هیچ‌کدام را اجرا نمی‌کند، حتی dry-run، doctor/verify یا تست. آن‌ها در handover برای محیط Backend ثبت می‌شوند؛ نوشتن command اختیار اجرای آن نیست.
+
+برای محصول واقعی، `./scripts/agent/init-project --check-development` پیش از planning/Spec/Plan/Task یا توسعهٔ کد لازم است. در scope مستقل Backend، ابزار init-project وضعیت و preflight را بررسی می‌کند. در product-workflow فقط record/plan غیرحساس خوانده و setup ناقص برای setup/recovery همان claim به صاحب Backend ارجاع می‌شود. در نگهداری صریح خود boilerplate، مسیر maintenance فقط طبق AGENTS همان هدف قابل استفاده است؛ راه عبور محصول از setup نیست.
 
 ```sh
 ./scripts/agent/doctor
@@ -67,7 +73,7 @@ python3 scripts/check-documentation.py
 ./scripts/agent/verify --full
 ```
 
-`workflow` بر اساس نوع، یکی از `new-app/new-module/feature/edit/bug/integration/durable-workflow/data-change/review-release` است. scaffold فقط در scope نیاز و پس از review dry-run اجرا می‌شود؛ success stub تولید نمی‌کند. app تازه ابتدا profile تصمیم‌گرفتهٔ انسان را لازم دارد:
+`workflow` بر اساس نوع، یکی از `new-app/new-module/feature/edit/bug/integration/durable-workflow/data-change/review-release` است. گیرندهٔ مستقل scaffold را فقط در scope نیاز و پس از review اجرا می‌کند؛ agent product-workflow آن را حتی به‌صورت dry-run اجرا نمی‌کند. app تازه ابتدا profile تصمیم‌گرفتهٔ انسان را لازم دارد:
 
 ```sh
 ./scripts/agent/init-project --profile project-profile.json --dry-run
@@ -97,4 +103,4 @@ syntax را با ابزار جاری تطبیق دهید؛ بعضی نمونه�
 
 `technical/impact-map.md` نام ownerهای واقعی و caller/consumerهای متأثر را به شواهد checkout وصل می‌کند. `technical/modules/<owner>/change-spec.md` delta همین درخواست را نگه می‌دارد؛ snapshot کامل نامزد در همان بسته آماده و فقط پس از G-T در modules/ منتشر می‌شود. revision اسناد `backend/modules/<owner>/docs/` شاهد قواعد و وضعیت کد است؛ تغییر قرارداد عمومی باید test-mapping producer و consumer و cross-module-flows را به‌روز کند. باگ/refactor هم impact-map دارند، حتی اگر فقط یک ردیف لازم باشد.
 
-مسیر taskهای توسعه `development/modules/<owner>/tasks/<task-id>.md` است. migration و contract producer پیش‌نیاز task consumer هستند فقط وقتی dependency واقعی چنین اقتضا کند؛ ترتیب از graph مصوب تعیین می‌شود. تغییر مشترک host/platform با component target و task دارای مسئول مشخص ثبت می‌شود. gate هر ماژول و سپس candidate کل درخواست طبق همان verification policy بررسی می‌شوند.
+مشخصات task آینده در technical/implementation-plan همین workflow است؛ tasks.json اجرایی و evidence توسط گیرندهٔ مستقل Backend ایجاد می‌شوند. packetهای development/modules/<owner>/tasks/<task-id>.md داخل workflow فقط ارجاع/ثبت محلی‌اند؛ مرجع وضعیت اجرایی موازی با SDD نسازید. migration و contract producer پیش‌نیاز task consumer هستند فقط وقتی dependency واقعی چنین اقتضا کند؛ ترتیب از graph مصوب تعیین می‌شود. تغییر مشترک host/platform با component target و task دارای مسئول مشخص ثبت می‌شود. gate هر ماژول و سپس candidate کل درخواست طبق همان verification policy بررسی می‌شوند.

@@ -280,6 +280,14 @@ class WorkflowTests(unittest.TestCase):
                 event['journal']['nextNode'] = human
                 rp.build(self.root, event, self.repos)
 
+    def test_technical_documentation_handover_cannot_launch_backend(self):
+        event = self.review_event('T08', 'tech', 'D01')
+        before = (self.root/'requests/board.json').read_bytes()
+        with self.assertRaisesRegex(ValueError, 'must HOLD'):
+            rp.record(self.root, event, self.repos, True)
+        self.assertEqual((self.root/'requests/board.json').read_bytes(), before)
+        self.assertFalse((self.root/event['card']['journalPath']).exists())
+
     def test_human_review_needs_human_executor_and_decision(self):
         for node, after, team in [('P12', 'P06', 'product'), ('Q09', 'Q05', 'qa'),
                                   ('T12', 'T07', 'tech')]:

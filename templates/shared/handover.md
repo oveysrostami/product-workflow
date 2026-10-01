@@ -37,3 +37,7 @@
 ## شرط دریافت
 
 hashها منطبق، منابع قابل دسترسی، approval لازم موجود، مسئول مرحلهٔ بعد مشخص و blocker در scope صفر. برگشت باید finding، owner و node دقیق داشته باشد. این سند به‌تنهایی ارسال خارجی یا اعلام دریافت نیست.
+
+## مرز تحویل به Backend
+
+Backend معرفی‌شده در project/backend.json با مسیر ../BackendName برای agent product-workflow فقط خواندنی است. طراحی این بسته داخل workflow نوشته شده؛ آماده‌سازی Spec/Plan/Task، آزمون و اجرا در Backend به گیرندهٔ مستقل با قرارداد و اختیار همان محیط تحویل می‌شود. T08 در این scope HOLD است و این handover هیچ اختیار نوشتن Backend به تحویل‌دهنده نمی‌دهد.

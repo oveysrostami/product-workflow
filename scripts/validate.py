@@ -2,6 +2,7 @@
 """Check this documentation kit. Does not certify approvals or backend behavior."""
 import csv
 import hashlib
+import importlib.util
 import json
 import re
 import sys
@@ -18,7 +19,21 @@ def fail(message):
 
 def is_operational_state_file(path):
     return any(path.is_relative_to((ROOT/name).resolve()) and path != (ROOT/name/'README.md').resolve()
-               for name in ('requests', 'modules'))
+               for name in ('requests', 'modules', 'project'))
+
+def check_project_binding():
+    path = ROOT/'project/backend.json'
+    stats['projectBound'] = False
+    if path.exists() or path.is_symlink():
+        spec = importlib.util.spec_from_file_location('workflow_setup_validator', ROOT/'skill/product-workflow-setup/scripts/setup_project.py')
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        try:
+            module.load_binding(ROOT)
+        except (ValueError, OSError) as exc:
+            fail('Invalid project Backend binding: '+str(exc))
+        else:
+            stats['projectBound'] = True
 
 def check_graph():
     g = json.loads((ROOT/'workflows/graph.json').read_text())
@@ -306,10 +321,10 @@ def check_board():
 
 def main():
     try:
-        check_graph();check_markdown();check_json_and_templates();check_board();check_module_library();check_source_inventory();check_design_baseline()
+        check_graph();check_markdown();check_json_and_templates();check_board();check_module_library();check_project_binding();check_source_inventory();check_design_baseline()
     except (KeyError,ValueError,OSError) as exc:
         fail(str(exc))
-    print(json.dumps({'status':'failed' if errors else 'passed','checks':stats,'errors':errors,'scope':'repository-local links/anchors, graph, generated cards, walkthrough edges, JSON/CSV syntax, board card structure/references, module publication sources/digests, local source inventory and design baseline hashes; Mermaid must be checked separately'},ensure_ascii=False,indent=2))
+    print(json.dumps({'status':'failed' if errors else 'passed','checks':stats,'errors':errors,'scope':'repository-local links/anchors, graph, generated cards, walkthrough edges, JSON/CSV syntax, board card structure/references, module publication sources/digests, optional read-only sibling Backend binding, local source inventory and design baseline hashes; Mermaid must be checked separately'},ensure_ascii=False,indent=2))
     return 1 if errors else 0
 
 if __name__ == '__main__':

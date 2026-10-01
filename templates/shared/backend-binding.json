@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "backendName": "{{BackendName}}",
+  "relativePath": "../{{BackendName}}",
+  "access": "read-only",
+  "technicalDocumentation": "product-workflow",
+  "sourceReference": "{{actual-user-message-reference}}"
+}

@@ -1,6 +1,6 @@
 # انتشار و عملیات، در صورت درخواست
 
-این مسیر فقط پس از تحویل و با اختیار صریح انتشار اجرا می‌شود. آماده‌بودن فنی یا approval اسناد به‌تنهایی اختیار merge/deploy نیست.
+قرارداد اجرای مستقل آینده در Backend؛ خارج scope agent product-workflow/setup که Backend را فقط می‌خواند. این مسیر فقط پس از تحویل و با اختیار صریح انتشار اجرا می‌شود. آماده‌بودن فنی یا approval اسناد به‌تنهایی اختیار merge/deploy نیست.
 
 > کارت‌ها از [graph.json](graph.json) تولید می‌شوند. توقف، انتظار و retry مشترک در [قرارداد node](00-node-contract.md) اعمال می‌شود.
 
@@ -40,7 +40,7 @@ flowchart TD
 
 **ورودی:** G-D، artifact candidate، target و release request
 
-**کار دقیق:** release plan و migration/expand-backfill-contract، compatibility، backup/restore، flags، smoke، rollback/roll-forward و operator را آماده کن. secret فقط reference. target واقعی و توان host را بررسی کن.
+**کار دقیق:** این کارت قرارداد اجرای مستقل آینده در Backend است؛ agent product-workflow/setup آن را برای تغییر/اجرای ابزار Backend ادامه نمی‌دهد و در T08/HOLD تحویل می‌دهد. release plan و migration/expand-backfill-contract، compatibility، backup/restore، flags، smoke، rollback/roll-forward و operator را آماده کن. secret فقط reference. target واقعی و توان host را بررسی کن.
 
 **خروجی:** release packet و action list دقیق merge/deploy/rollback
 
@@ -57,7 +57,7 @@ flowchart TD
 
 **ورودی:** release packet، target و اعمال دقیق
 
-**کار دقیق:** اختیار merge/deploy و در صورت نیاز rollback محدوده‌دار را تأیید کن؛ اگر قبلاً صریحاً داده شده، همان مرجع معتبر ثبت و دوباره سؤال نشود. prerequisite و پنجره عملیات را تأیید کن.
+**کار دقیق:** این کارت قرارداد اجرای مستقل آینده در Backend است؛ agent product-workflow/setup آن را برای تغییر/اجرای ابزار Backend ادامه نمی‌دهد و در T08/HOLD تحویل می‌دهد. اختیار merge/deploy و در صورت نیاز rollback محدوده‌دار را تأیید کن؛ اگر قبلاً صریحاً داده شده، همان مرجع معتبر ثبت و دوباره سؤال نشود. prerequisite و پنجره عملیات را تأیید کن.
 
 **خروجی:** authorization با target/actions/حدود و reference
 
@@ -76,7 +76,7 @@ flowchart TD
 
 **ورودی:** candidate دقیق، release plan و محیط واقعی لازم
 
-**کار دقیق:** verify full و تمام الزامات policy release جاری را اجرا؛ current-run reports، artifact/JAR/SBOM و checksum ledger را بررسی کن. بعد merge/rebase تغییر revision نیازمند evidence جدید یا تأیید equivalence مستدل طبق policy است.
+**کار دقیق:** این کارت قرارداد اجرای مستقل آینده در Backend است؛ agent product-workflow/setup آن را برای تغییر/اجرای ابزار Backend ادامه نمی‌دهد و در T08/HOLD تحویل می‌دهد. verify full و تمام الزامات policy release جاری را اجرا؛ current-run reports، artifact/JAR/SBOM و checksum ledger را بررسی کن. بعد merge/rebase تغییر revision نیازمند evidence جدید یا تأیید equivalence مستدل طبق policy است.
 
 **خروجی:** release evidence commit-bound
 
@@ -94,7 +94,7 @@ flowchart TD
 
 **ورودی:** authorization معتبر، artifact verify‌شده و runbook
 
-**کار دقیق:** فقط actionهای مصوب را به ترتیب اجرا؛ migration با principal جدا و serving بدون DDL. نتیجه هر action و readback ثبت؛ timeout اثرنامعلوم را با retry کور جبران نکن. اگر candidate تغییر کرد R03.
+**کار دقیق:** این کارت قرارداد اجرای مستقل آینده در Backend است؛ agent product-workflow/setup آن را برای تغییر/اجرای ابزار Backend ادامه نمی‌دهد و در T08/HOLD تحویل می‌دهد. فقط actionهای مصوب را به ترتیب اجرا؛ migration با principal جدا و serving بدون DDL. نتیجه هر action و readback ثبت؛ timeout اثرنامعلوم را با retry کور جبران نکن. اگر candidate تغییر کرد R03.
 
 **خروجی:** deployment/merge record با target، revision و اثر قطعی
 
@@ -113,7 +113,7 @@ flowchart TD
 
 **ورودی:** deployment record و smoke/monitoring plan
 
-**کار دقیق:** smoke رفتار، migration، health، consumer lag و سیگنال‌های موردنیاز را اجرا؛ نبود metric را صفر خطا ننام. نتیجه و receipt عملیات ثبت شود.
+**کار دقیق:** این کارت قرارداد اجرای مستقل آینده در Backend است؛ agent product-workflow/setup آن را برای تغییر/اجرای ابزار Backend ادامه نمی‌دهد و در T08/HOLD تحویل می‌دهد. smoke رفتار، migration، health، consumer lag و سیگنال‌های موردنیاز را اجرا؛ نبود metric را صفر خطا ننام. نتیجه و receipt عملیات ثبت شود.
 
 **خروجی:** post-release evidence و operational receipt
 
@@ -131,7 +131,7 @@ flowchart TD
 
 **ورودی:** failure evidence، آثار انجام‌شده و rollback/roll-forward plan
 
-**کار دقیق:** بر اساس وضعیت واقعی، rollback/roll-forward/reconcile مجاز را انتخاب و اجرا یا دستور بده. دادهٔ تغییرکرده با rollback binary لزوماً برنمی‌گردد. اگر اختیار موجود نیست انتظار تصمیم ثبت شود.
+**کار دقیق:** این کارت قرارداد اجرای مستقل آینده در Backend است؛ agent product-workflow/setup آن را برای تغییر/اجرای ابزار Backend ادامه نمی‌دهد و در T08/HOLD تحویل می‌دهد. بر اساس وضعیت واقعی، rollback/roll-forward/reconcile مجاز را انتخاب و اجرا یا دستور بده. دادهٔ تغییرکرده با rollback binary لزوماً برنمی‌گردد. اگر اختیار موجود نیست انتظار تصمیم ثبت شود.
 
 **خروجی:** recovery decision و execution/readback evidence
 
@@ -148,7 +148,7 @@ flowchart TD
 
 **ورودی:** recovery evidence و scope آسیب
 
-**کار دقیق:** انتشار را failed/recovered/blocked دقیق ثبت؛ incident و اقدام بعدی را با owner تحویل بده. تحویل پیاده‌سازی قبلی را موفقیت production معرفی نکن. فقط با receipt و evidence واقعی، Coordinator observation انتشار در implementation/ همان ماژول ثبت می‌کند؛ طرح مصوب تغییر نمی‌کند.
+**کار دقیق:** این کارت قرارداد اجرای مستقل آینده در Backend است؛ agent product-workflow/setup آن را برای تغییر/اجرای ابزار Backend ادامه نمی‌دهد و در T08/HOLD تحویل می‌دهد. انتشار را failed/recovered/blocked دقیق ثبت؛ incident و اقدام بعدی را با owner تحویل بده. تحویل پیاده‌سازی قبلی را موفقیت production معرفی نکن. فقط با receipt و evidence واقعی، Coordinator observation انتشار در implementation/ همان ماژول ثبت می‌کند؛ طرح مصوب تغییر نمی‌کند.
 
 **خروجی:** incident handover و reopen/bug reference
 

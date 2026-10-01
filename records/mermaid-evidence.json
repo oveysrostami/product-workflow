@@ -5,7 +5,7 @@
     {
       "path": "README.md",
       "diagram": 1,
-      "sha256": "6ea8f3924ae77f0ab96129a221bd68794651849af24412ad2b9c8079e4eb0d53"
+      "sha256": "c10a120e9ce5f6c76df85b461843aae8561fc81be4267cbbcb1677ce2e71c6c9"
     },
     {
       "path": "docs/02-state-and-versioning.md",
@@ -55,7 +55,7 @@
     {
       "path": "workflows/04-technical.md",
       "diagram": 1,
-      "sha256": "b622a74fbbb2b58d6709e75d79b0c75d5b398115db319df7078c774abd045ca4"
+      "sha256": "6bdffaa70be406cedf200a64ace4291244ed840131faef641ed7c0ad89429979"
     },
     {
       "path": "workflows/05-implementation.md",
@@ -81,20 +81,14 @@
   "command": [
     "/private/tmp/product-workflow-mermaid-20260928/node_modules/.bin/mmdc",
     "-i",
-    "/private/tmp/product-workflow-mermaid-v1.11-render/all-diagrams.md",
+    "/private/tmp/product-workflow-mermaid-v1.13-final/all-diagrams.md",
     "-o",
-    "/private/tmp/product-workflow-mermaid-v1.11-render/rendered.md",
+    "/private/tmp/product-workflow-mermaid-v1.13-final/rendered.md",
     "-p",
-    "/private/tmp/product-workflow-mermaid-v1.11-render/puppeteer.json",
+    "/private/tmp/product-workflow-mermaid-v1.13-final/puppeteer.json",
     "-e",
     "svg"
   ],
-  "stdout": "Found 15 mermaid charts in Markdown input\n ✅ ./rendered-5.svg\n ✅ ./rendered-6.svg\n ✅ ./rendered-7.svg\n ✅ ./rendered-8.svg\n ✅ ./rendered-9.svg\n ✅ ./rendered-10.svg\n ✅ ./rendered-4.svg\n ✅ ./rendered-12.svg\n ✅ ./rendered-13.svg\n ✅ ./rendered-14.svg\n ✅ ./rendered-11.svg\n ✅ ./rendered-15.svg\n ✅ ./rendered-3.svg\n ✅ ./rendered-2.svg\n ✅ ./rendered-1.svg\n ✅ /private/tmp/product-workflow-mermaid-v1.11-render/rendered.md\n",
-  "stderr": "",
-  "schemaVersion": 1,
-  "date": "2026-09-29",
-  "tool": "mermaid-cli",
-  "version": "12.0.0",
-  "renderer": "Google Chrome headless",
-  "nodeVersion": "26.5.0"
+  "stdout": "Found 15 mermaid charts in Markdown input\n ✅ ./rendered-5.svg\n ✅ ./rendered-6.svg\n ✅ ./rendered-7.svg\n ✅ ./rendered-8.svg\n ✅ ./rendered-4.svg\n ✅ ./rendered-10.svg\n ✅ ./rendered-11.svg\n ✅ ./rendered-9.svg\n ✅ ./rendered-13.svg\n ✅ ./rendered-14.svg\n ✅ ./rendered-15.svg\n ✅ ./rendered-12.svg\n ✅ ./rendered-3.svg\n ✅ ./rendered-2.svg\n ✅ ./rendered-1.svg\n ✅ /private/tmp/product-workflow-mermaid-v1.13-final/rendered.md\n",
+  "stderr": ""
 }

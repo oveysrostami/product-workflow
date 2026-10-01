@@ -1,0 +1,9 @@
+{
+  "baselineId": "workflow-kit-v1.12",
+  "archivePath": "records/history/workflow-kit-v1.12.zip",
+  "archiveSha256": "dbd1da6d674c3d0277cbaa2eac3de3875f5c6c25ab226a8622f0afa8855d04d8",
+  "manifestSha256": "41232b1248b41544287dc2c2f80dac5e5d8235e8d03768d23b47d9f4e4b9d31c",
+  "approvalSha256": "5fab8bee167901665bcc391a7f566123ed5f6aee633934534d434873eeeb3a8b",
+  "approvalStatus": "pending",
+  "note": "Preserves v1.12 before the requester selected technical documentation in product-workflow and a read-only sibling Backend binding setup skill."
+}

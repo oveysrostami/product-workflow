@@ -1,0 +1,9 @@
+{
+  "baselineId": "workflow-kit-v1.11",
+  "archivePath": "records/history/workflow-kit-v1.11.zip",
+  "archiveSha256": "4bd433a260fea275063b047f94d170c19dff9b5a9d64b79f5be27b0696bd972b",
+  "manifestSha256": "4f540205053c1dedee640b24de181631193ee7faf00e2e2169f1718069e78504",
+  "approvalSha256": "ac0858fad10e0974dcb665f67f66fa95a0404c41ac1775365f3476f0bddcda15",
+  "approvalStatus": "pending",
+  "note": "Preserves v1.11 before adding setup-bound architecture constraints and reviewing the canonical location of technical SDD artifacts."
+}
